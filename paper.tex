@@ -1422,7 +1422,7 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 \includegraphics[width=0.24\textwidth]{fig/evaluation/test-bed-profit.pdf}}
 \subfigure[Data loss ratio]{
 \includegraphics[width=0.24\textwidth]{fig/evaluation/testbed-data-loss-2.pdf}}
-\caption{A public cloud example. Tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.}
+\caption{A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.}
 \label{e2}
 \end{figure*}
 
@@ -1533,7 +1533,7 @@ We also evaluate FFC \cite{FFC} and TEAVAR \cite{Teavar} to make comparison.
 \subfigure[Events after L3 failure]{
 \includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
 
-\caption{A private cloud example. We deploy three services whose details are shown in Table \ref{testbed-1}.}
+\caption{A private cloud example: we deploy three services whose details are shown in Table \ref{testbed-1}.}
 \label{e1}
 \end{figure*}
 
@@ -1558,7 +1558,8 @@ FFC and TEAVAR with \textit{Fixed} admission control perform slightly better tha
 Figure \ref{e2}(c) shows $\mathsf{TEDAT}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.
 This is because $\mathsf{TEDAT}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.
 Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{TEDAT}$ performs about 8\% worse than FFC.
-FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, $\mathsf{TEDAT}$ can decrease performance loss by quick recovery.
+FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
+while $\mathsf{TEDAT}$ focuses on Monetary gain rather than data loss.
 %, where  FFC-1 and FFC-2 
 %denote FFC with and without Fixed admission control,  respectively.
 %where TEAVAR-1 and TEAVAR-2 are 
@@ -1672,14 +1673,13 @@ Therefore, Service-3 gains redundant bandwidth and affects Service-2 finally.
 %We can see SWAN drops about 33\% bandwidth between 0.2s and 1.1s.
 %The result of service1 is similar.
 Data loss mainly comes from congestion and blackhole, where congestion losses are always link oversubscribed and blackhole losses occur during the time between a link fails and ingress switch rescale.
-Figure \ref{e1}(c) demonstrates $\mathsf{TEDAT}$-1 and FFC performs better than   $\mathsf{TEDAT}$-2  and TEAVAR for data losses ratio.
-Data losses of Service-2 under TEAVAR is high due to Link L4.
-Also, $\mathsf{TEDAT}$-2 ($\mathsf{TEDAT}$ without rescaling) performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails.
+Figure \ref{e1}(c) demonstrates $\mathsf{TEDAT}$ and FFC performs better than   $\mathsf{TEDAT}$-WT  and TEAVAR for data losses ratio.
+Data losses of Service-2 under TEAVAR is high due to Link L4 failings.
+$\mathsf{TEDAT}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{TEDAT}$-WT shown in Figure \ref{e1}(d) just prove this.
 %We can see that $\mathsf{TEDAT}$-1 and FFC performs better than   $\mathsf{TEDAT}$-2  and TEAVAR.
 %The losses of TEAVAR mainly comes from link $L4$ failure which is adopt by Service-2.
-Figure \ref{e1}(d) shows the time of events after link L3 fails.
-When L3 fails, DC1 and DC4 take about 0.4s to detect the failure.
-$\mathsf{TEDAT}$-1 can  rescale traffic with the backup allocation results, therefore, packet losses will stop immediately.
+%When L3 fails, DC1 and DC4 take about 0.4s to detect the failure.
+%$\mathsf{TEDAT}$-1 can  rescale traffic with the backup allocation results, therefore, packet losses will stop immediately.
 %Control messages distributing and switch updating take about 0.3s, while the most time-consuming operation is TE computation which takes about 1s, 
 %therefore, $\mathsf{TEDAT}$-2 performs relatively worse than other schemes.
 %$\mathsf{TEDAT}$ considers link failure probability as well as the diverse demands of services \textit{proactively}, as a result, the time consuming events shown in Figure  \ref{e1}(c) rarely happens.
@@ -1737,7 +1737,7 @@ CERNET2&14&32\\
 %\end{tabular}
 %\vfill
 \subfigure[IBM]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/admit.pdf}}
+\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-admit.pdf}}
 \subfigure[B4 ]{
 \includegraphics[width=0.24\textwidth]{fig/evaluation/att.pdf}}
 \subfigure[ATT]{
@@ -1747,39 +1747,55 @@ CERNET2&14&32\\
 \caption{$\mathsf{TEDAT}$  vs. various TE schemes under different network topologies.}
 \label{availability_fig1}
 \end{figure*}
-\begin{figure*} 
-   \begin{minipage}[t]{0.25\linewidth} 
-    \centering 
-    \includegraphics[width=1.8 in]{fig/evaluation/link-utilization.pdf}
-    \caption{Weight difference.} 
-    \label{fig-weight} 
-  \end{minipage}% 
-   \begin{minipage}[t]{0.25\linewidth} 
-    \centering 
-    \includegraphics[width=1.8 in]{fig/evaluation/admission-control-time.pdf}
-    \caption{Weight difference.} 
-    \label{fig-weight} 
-  \end{minipage}% 
-%  \begin{minipage}[t]{0.24\linewidth} 
+
+
+
+\begin{figure}
+\centering
+\subfigure[Admission control]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/link-utilization.pdf}}
+\subfigure[Measured and demand ratio]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/admission-control-time.pdf}}
+\caption{Benefits of admission control.}
+\label{admission-benefit}
+\end{figure}
+
+
+
+
+%\begin{figure*} 
+%   \begin{minipage}[t]{0.25\linewidth} 
 %    \centering 
-%    \includegraphics[width=1.7 in]{fig/evaluation/weightnumber.pdf} 
-%    \caption{Important profit.} 
-%    \label{fig-weightnumber} 
+%    \includegraphics[width=1.8 in]{fig/evaluation/link-utilization.pdf}
+%    \caption{Weight difference.} 
+%    \label{fig-weight} 
 %  \end{minipage}% 
-   \begin{minipage}[t]{0.25\linewidth} 
-    \centering 
-    \includegraphics[width=1.8 in]{fig/evaluation/error.pdf}
-    \caption{Weight difference.} 
-    \label{fig-weight} 
-  \end{minipage}% 
-     \begin{minipage}[t]{0.25\linewidth} 
-    \centering 
-    \includegraphics[width=1.8 in]{fig/evaluation/optimization_time.pdf}
-    \caption{Weight difference.} 
-    \label{fig-weight} 
-  \end{minipage}% 
-  
-\end{figure*}
+%   \begin{minipage}[t]{0.25\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.8 in]{fig/evaluation/admission-control-time.pdf}
+%    \caption{Weight difference.} 
+%    \label{fig-weight} 
+%  \end{minipage}% 
+%%  \begin{minipage}[t]{0.24\linewidth} 
+%%    \centering 
+%%    \includegraphics[width=1.7 in]{fig/evaluation/weightnumber.pdf} 
+%%    \caption{Important profit.} 
+%%    \label{fig-weightnumber} 
+%%  \end{minipage}% 
+%   \begin{minipage}[t]{0.25\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.8 in]{fig/evaluation/error.pdf}
+%    \caption{Weight difference.} 
+%    \label{fig-weight} 
+%  \end{minipage}% 
+%     \begin{minipage}[t]{0.25\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.8 in]{fig/evaluation/optimization_time.pdf}
+%    \caption{Weight difference.} 
+%    \label{fig-weight} 
+%  \end{minipage}% 
+%  
+%\end{figure*}
 
 \subsection{Simulation evaluation}
 \textbf{Simulation setup.} 
@@ -1807,7 +1823,7 @@ Tenants' demands can arrive at anytime.
 Traffic engineering performs every 10 time slots.
 For traffic engineering part, we compare the performance of $\mathsf{TEDAT}$ against FFC \cite{FFC}, TEAVAR \cite{Teavar}, SWAN \cite{swan}, SMORE \cite{SMORE}, B4 \cite{B4}.
 We change them to adapt service level traffic engineering: 
-FFC tries to maximize the link utilization with considering $l$ faults occur and we choose $l=1$ as its default value.
+FFC tries to maximize the link utilization with considering 1 fault could occur in our evaluation.
 %To fairly compare the ability of the FFC algorithm, we let it
 %send the entire demand at the expense of potential degradation in
 %availability, unless otherwise stated
@@ -1859,6 +1875,16 @@ Our collected traffic data contains the capacity of all links  and the bandwidth
 We generate requests with a Poisson process, the duration of each request is modeled as an exponential distribution with a mean of 1000 time slots.
 %To closely mimic the real traffic matrix, the total bandwidth of generated requests between each node pair equals to that collected from the real traffic matrix.
 
+
+\begin{figure}
+\centering
+\subfigure[Admission control]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/error.pdf}}
+\subfigure[Measured and demand ratio]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/optimization_time.pdf}}
+\caption{Benefits of admission control.}
+\label{admission-benefit}
+\end{figure}
 %\begin{figure*}[t]
 %\centering
 %%\subfigure[Weight differentiation]{
@@ -1910,7 +1936,7 @@ We generate requests with a Poisson process, the duration of each request is mod
 %\label{availability_fig2}
 %\end{figure*}
 
-\subsubsection{$\mathsf{TEDAT}$ vs. state-of-the-art TE schemes}\label{scales}
+\subsubsection{Performance under real network topologies}\label{scales}
 %From the comparison between the scheduled and testbed results, we can see that the scheduled results match the real testbed quite well,
 %so in the following part, we will use trace-driven simulation to evaluate the performance of $\mathsf{TEDAT}$.
 
@@ -2014,27 +2040,39 @@ We generate requests with a Poisson process, the duration of each request is mod
 %(1) Availability satisfaction fraction. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
-Figure \ref{availability_fig1} shows the consistent trend under various topologies:
-$\mathsf{TEDAT}$ performs about 20\%, 25\%, 30\%,  40\% better than TEAVAR, SMORE, SWAN, FFC, respectively.
-%Specially, when traffic scale is 3, more than 70\% applications can satisfy their availability demands, which is at least 30\% better than TEAVAR.
-Specially, the advantage of $\mathsf{TEDAT}$  is more obvious when there are resource competition (e.g., $s=3$).
-%The reason for this is that $\mathsf{TEDAT}$ considers the bandwidth-based availability demand differentiation of applications.
-This picture also demonstrates that the performance of $\mathsf{TEDAT}$ doesn't depend on particular network topology and traffic.
-Next, we take IBM trace as the example and perform the experiments.
+Figure \ref{availability_fig1}(a)  shows $\mathsf{TEDAT}$ has only about 3\% performance gap from the optimal solution and can accept about 50\% more demands than the \textit{Fixed} consistently.
+Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
+%We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
+The sum of scenario probability where demand is fully satisfied reflects the \textit{achieved availability}.
+If a demand's achieved availability is higher than its availability target throughout duration time slots, then the availability defined in SLA is \textit{satisfication}.
+Figure \ref{availability_fig1}(b) demonstrates that $\mathsf{TEDAT}$ can meet the availability SLAs of 40\% more demands than other traffic engineer algorithms.
+The violation of SLA for $\mathsf{TEDAT}$ comes from demands rejection.
+The reason for this is that $\mathsf{TEDAT}$ adopts admission control and it considers the diverse availability targets of different bandwidth demands.
+$\mathsf{TEDAT}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but other schemes are unable differentiate demands.
+To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm and Figure \ref{availability_fig1}(c) shows the comparisons.
+We can see that $\mathsf{TEDAT}$ performs at least 10\% better than other algorithms even under the same admission method.
+%Satisfaction percentage. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
+%Figure \ref{availability_fig1}(b) shows 
+%$\mathsf{TEDAT}$ performs about 20\%, 25\%, 30\%,  40\% better than TEAVAR, SMORE, SWAN, FFC, respectively.
+%%Specially, when traffic scale is 3, more than 70\% applications can satisfy their availability demands, which is at least 30\% better than TEAVAR.
+%Specially, the advantage of $\mathsf{TEDAT}$  is more obvious when there are resource competition (e.g., $s=3$).
+%%The reason for this is that $\mathsf{TEDAT}$ considers the bandwidth-based availability demand differentiation of applications.
+%This picture also demonstrates that the performance of $\mathsf{TEDAT}$ doesn't depend on particular network topology and traffic.
+%Next, we take IBM trace as the example and perform the experiments.
 
  
-Figure \ref{motivatio_fig2}(a) shows total profit comparison between $\mathsf{TEDAT}$ and other schemes.
-We can see that   $\mathsf{TEDAT}$ performs best and its performance is even up to 30\%, 40\%, 50\%, 75\% better than TEAVAR, SMORE, SWAN and FFC when traffic scale is 3.
-Figure \ref{motivatio_fig2}(b) shows the percentage of services whose availability targets are satisfied for different importance levels when traffic scale is 3. 
-In the picture, L, U, N, I, S are abbreviations of Lax, Unimportant, Normal, Important and Significant, and the error bar paints the mean
-and mean $\pm$ standard deviation value.
-We can see $\mathsf{TEDAT}$ performs even worse than other TE schemes for the Lax services, but it performs at least 25\% better for the Important and Significant services.
-%We can see that  40\% more important services (i.e., Important, Significant) under $\mathsf{TEDAT}$ can meet their availability demands.
-%,since the importance of services is taken into consideration under  $\mathsf{TEDAT}$, while most schemes ignore this.
-Specially, we can see that SWAN \cite{swan} also performs well for the importance services, but it allocates bandwidth only in strict precedence across  three coarse priority classes and  $\mathsf{TEDAT}$ is  fine-grained priority and can describe the five level of importance.
- $\mathsf{TEDAT}$ aims to maximize the sum profit of all services, where a service's profit is defined in (\ref{availability}).
-Figure \ref{motivatio_fig2}(c) presents the CDF of achieved availability for different schemes when traffic scale is 3.
-We can see that about 87\%  services's achieved availability are larger than 95\% under  $\mathsf{TEDAT}$, which is at least 30\% better than other schemes.
+%Figure \ref{motivatio_fig2}(a) shows total profit comparison between $\mathsf{TEDAT}$ and other schemes.
+%We can see that   $\mathsf{TEDAT}$ performs best and its performance is even up to 30\%, 40\%, 50\%, 75\% better than TEAVAR, SMORE, SWAN and FFC when traffic scale is 3.
+%Figure \ref{motivatio_fig2}(b) shows the percentage of services whose availability targets are satisfied for different importance levels when traffic scale is 3. 
+%In the picture, L, U, N, I, S are abbreviations of Lax, Unimportant, Normal, Important and Significant, and the error bar paints the mean
+%and mean $\pm$ standard deviation value.
+%We can see $\mathsf{TEDAT}$ performs even worse than other TE schemes for the Lax services, but it performs at least 25\% better for the Important and Significant services.
+%%We can see that  40\% more important services (i.e., Important, Significant) under $\mathsf{TEDAT}$ can meet their availability demands.
+%%,since the importance of services is taken into consideration under  $\mathsf{TEDAT}$, while most schemes ignore this.
+%Specially, we can see that SWAN \cite{swan} also performs well for the importance services, but it allocates bandwidth only in strict precedence across  three coarse priority classes and  $\mathsf{TEDAT}$ is  fine-grained priority and can describe the five level of importance.
+% $\mathsf{TEDAT}$ aims to maximize the sum profit of all services, where a service's profit is defined in (\ref{availability}).
+%Figure \ref{motivatio_fig2}(c) presents the CDF of achieved availability for different schemes when traffic scale is 3.
+%We can see that about 87\%  services's achieved availability are larger than 95\% under  $\mathsf{TEDAT}$, which is at least 30\% better than other schemes.
 %Figure \ref{motivatio_fig2}(a) shows that larger tunnel number can provide slighter higher availability.
 %This is because that more alternative tunnels can be used to meet the bandwidth demands.
 %Our trace doesn't contain application level traffic matrix, so we divide the original WAN traffic into $|J|=30$ parts randomly.
@@ -2148,7 +2186,7 @@ We can see that about 87\%  services's achieved availability are larger than 95\
 %
 %
 %\subsubsection{Solution accuracy}\label{purning}
-Solution error mainly comes from scenario pruning and greedy heuristic algorithm.
+%Solution error mainly comes from scenario pruning and greedy heuristic algorithm.
 Algorithm \ref{pruning} cuts off the scenarios whose probability is smaller than the threshold.
 %Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
 %Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.

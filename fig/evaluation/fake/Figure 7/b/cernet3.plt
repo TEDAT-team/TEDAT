@@ -29,9 +29,9 @@ set ytics nomirror
 # so they're easy to see in small plots in papers.
 
 
-set style line 1 lt rgb "red" lw 2 pt 1 ps 1.5
+set style line 1 lt rgb "#FF0000" lw 2 pt 1 ps 1.5
 set style line 2 lt rgb "#00A000" lw 2 pt 6 ps 1.5
-set style line 3 lt rgb "blue" lw 2 pt 2 ps 1.5
+set style line 3 lt rgb "#0000FF" lw 2 pt 2 ps 1.5
 set style line 4 lt rgb "#F25900" lw 2 pt 9 ps 1.5
 set style line 5 lt rgb "#500050" lw 2 pt 12 ps 1.5
 set style line 6 lt rgb "#000000" lw 2 pt 13 ps 1.5
