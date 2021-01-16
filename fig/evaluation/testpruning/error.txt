@@ -1,0 +1,5 @@
+Topology Cutoff\\\_10^{-3} Cutoff\\\_10^{-4} Cutoff\\\_10^{-5} Cutoff\\\_10^{-6} 
+B4 	7	6.8	5	4.5 	 
+IBM 	5	4.5	3.5	2.8	
+ATT 	9.6	7.8	6.5	5.4 
+Cernet	6	5.8	4.5	4.0 
