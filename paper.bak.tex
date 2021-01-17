@@ -142,8 +142,8 @@ Once a link fails, traffic has to be rescaled and rerouted, resulting in transit
 Such negative impact on inter-DC WAN services will ultimately translate into monetary loss (e.g., refund to customers).
 At the same time, as more business moves to cloud, 
 %bandwidth is becoming a more valuable and congested resource, 
-there are inevitable competitions over the scarce inter-DC WAN bandwidth  \cite{swan,Guaranteeings,calendaring}.
-Therefore, the design and optimization of inter-DC WANs have to take competitions, heterogeneities and economic interests into consideration.
+and there are inevitable competitions over the scarce inter-DC WAN resources  \cite{swan,Guaranteeings,calendaring}.
+Therefore, the design and optimization of inter-DC WANs have to take heterogeneities and competitions into consideration.
 %Therefore,
 %we take both network risk and service competitions into WAN resource optimization and jointly maximize bandwidth-based availability of requests belonging to diverse services in this paper .
 %Operators actually have high insight into applications bandwidth and availability demands.
@@ -157,21 +157,16 @@ Therefore, the design and optimization of inter-DC WANs have to take competition
 %tries to strike the right utilization-availability balance and maximizes the bandwidth of users subject an operator-specified available target.
 %Although some of them, such as FFC\cite{FFC} and TEAVAR\cite{Teavar},  even try to make applications free from congestion when more than one link/node fails simultaneously, 
 
-In this paper, we argue that although existing traffic engineering schemes \cite{FFC,Teavar,jointfailure,R3,Stochastic,Optical,PCF} have already factored in network risks and aimed for network availability guarantee, they can't meet the above objectives due to three limitations:
-% when facing heterogeneous and competing bandwidth demands over inter-DC WAN:
-\textit{First}, most of them \cite{FFC,R3,PCF,Teavar} typically make a conservative bandwidth allocation, so that even if a failure occurs, new paths can be found and the network can still be free from congestion under traffic rerouting.
-%when there are failures, and consequently their bandwidth allocation can often be too conservative \cite{FFC,R3,PCF} and result in inefficient resource usage as well as significant performance gap \cite{failureslarge,Teavar}.
-To prevent congestion, links, including those with negligible failure probabilities, must be kept at low utilization, 
-resulting in significant waste of network bandwidth (and potentially less accommodated users). 
-Such a solution may be fit for existing ISP networks which use over provision to avoid congestion, but for new players, such as content providers that are building their own backbone network (either physically \cite{B4,swan,amazon,evole} or leasing bandwidth from ISPs \cite{cato, aryaka}), this is quite uneconomic \cite{publicore}. 
-%and this method is suited for ISP networks which are designed with worst-case assumptions about failures.
-%However, content providers can't invest so much in their private backbone (e.g., inter-DC WAN) as public backbone to reduce the risk of congestion  \cite{publicore},
+In this paper, we argue that although existing traffic engineering schemes \cite{FFC,Teavar,jointfailure,R3,Stochastic,Optical,PCF} have already factored in network risks and targets for network availability guarantee, they still have three limitations when facing heterogeneous and competing bandwidth demands over inter-DC WAN:
+\textit{Firstly}, some proactive schemes (e.g., FFC \cite{FFC}) need too much bandwidth headroom to guarantee  network is free from congestion when there are failures, and consequently their bandwidth allocation can often be too conservative \cite{FFC,R3,PCF} and result in inefficient resource usage as well as significant performance gap \cite{failureslarge,Teavar}.
+To prevent congestion during rerouting, links, including those with negligible failure probabilities must be kept at low utilization, and this method is suited for ISP networks which are designed with worst-case assumptions about failures.
+However, content providers can't invest so much in their private backbone (e.g., inter-DC WAN) as public backbone to reduce the risk of congestion  \cite{publicore},
 %However, the bandwidth over private backbone (e.g., inter-DC WAN) faces hard provisioning choices, in terms of 
 %faces
 %hard provisioning choices, in terms of how much bandwidth to buy at
 %any particular time: buy too much and they have wasted money; but
 %buy too little and they run the risk of congestion on their backbone \cite{publicore}.
-%therefore, leaving too much capacity unused most of the time when no link fails over inter-DC WAN implies resource wastage.
+therefore, leaving too much capacity unused most of the time when no link fails over inter-DC WAN implies resource wastage.
 %However, bandwidth over inter-DC WAN is expensive and not as sufficient as backbone network \cite{B4, swan,Teavar}, %To prevent congestion when redistributing traffic, links are always kept low utilization.
 %However, some links have negligible failure probability  \cite{failureslarge,Teavar}, and lowing their utilization to protect routing is needless and will degrade application performance.
 %Firstly, most of them only consider \textit{connectivity-based} availability\cite{hong2018b4}, which is conservative.
@@ -180,28 +175,20 @@ Such a solution may be fit for existing ISP networks which use over provision to
 %as a result, user experience might be influenced.
 %Nowadays, with the development of online service, users' expectations of high quality of experience (e.g., high resolution video, low latency) are continuously improving.
 %We show that only considering connectivity in traffic engineering is insufficient since QoE would greatly drop for some online service (e.g., online video) when minimal bandwidth can't be guaranteed (see $\S$\ref{background}). 
-\textit{Second}, existing techniques mainly focus on the availability of network reachability, but have ignored that users not only have diverse demands on bandwidth,  but also ask for different levels of reliability. Providing reliable bandwidth can be a value-added service for many cloud providers, typically in the form 
-%(e.g., TEAVAR \cite{Teavar}) usually emphasize on network service availability rather than the availability targets of applications deployed over networks, i.e., they normally take a \textit{one-size-fit-all} approach and do not differentiate availability requirements of different classes of traffic, which may impair high availability traffic when there are competitions.
+\textit{Secondly}, existing techniques (e.g., TEAVAR \cite{Teavar}) usually emphasize on network service availability rather than the availability targets of applications deployed over networks, i.e., they normally take a \textit{one-size-fit-all} approach and do not differentiate availability requirements of different classes of traffic, which may impair high availability traffic when there are competitions.
 %they don't differentiate diverse service availability demands from different classes of traffic.
-%Availability is one of the main items of 
-Service Level Agreements (SLAs) \cite{amazon,azure}.
-%and cloud providers have to refund customers for any violation of SLAs.
+Availability is one of the main items of Service Level Agreements (SLAs) \cite{amazon,azure} and cloud providers have to refund customers for any violation of SLAs.
 %In reality, availability demands vary with different services.
 %In reality, the refunding functions are often staged and differ depending on the type of service \cite{azure}.
-For example, Microsoft Azure  guarantees at least 99.9\% availability for backup service and 99.95\% availability for ExpressRoute service \cite{azure}.
-If the availability agreement is violated, a 10\% or 25\% refund will be returned to the customers.
-A \textit{one-size-fit-all} approach ignoring these heterogeneities cannot support such SLAs well, and and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
+For example, Microsoft Azure should guarantee at least 99.9\% availability of the backup service and a minimum of 99.95\% availability of ExpressRoute service \cite{azure}.
+If the availability agreement is violated, a 10\% or 25\% refund will return to customers.
 %For example, the availability demand of search index copies is 99\%, while DNS service is 99.99\% over B4\cite{hong2018b4}.
-%TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
+TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
 % that are oblivious of such diverse availability requirements can be either too expensive or insufficient for different services.
-\textit{Third}, 
-such heterogeneities and competitions are also not considered by current failure recovery approaches, especially those who allocate bandwidth aggressively, but may run into congestions when rerouting traffic under network failures \cite{Teavar,swan}. 
-Such violations of SLAs will inevitably cause revenue loss, which should be reduced as much as possible. 
-
-%their failure recovery schemes might cause much monetary loss when network fails.
-%In tunnel-based traffic engineering schemes (e.g., TEAVAR \cite{Teavar}, FFC \cite{FFC}),
-%traffic can be redistributed across the surviving tunnels via rerouting when any tunnel becomes unavailable.
-%Their rerouting mechanisms via surviving tunnels could lead to much revenue loss when services attempt to restore rate after failures.
+\textit{Thirdly}, their failure recovery schemes might cause much monetary loss when network fails.
+In tunnel-based traffic engineering schemes (e.g., TEAVAR \cite{Teavar}, FFC \cite{FFC}),
+traffic can be redistributed across the surviving tunnels via rerouting when any tunnel becomes unavailable.
+Their rerouting mechanisms via surviving tunnels could lead to much revenue loss when services attempt to restore rate after failures.
 
 
 %Although they consider rerouting of data plane, their random re-hashing mechanisms fail to capture link utilization and service importance, which could lead to congestion and monetary loss.
@@ -213,7 +200,7 @@ Such violations of SLAs will inevitably cause revenue loss, which should be redu
 %For instance, the event service and the vRoute service, responsible for communication of critical components,  are of the highest level of importance, while data-backup and data-distribution are services running in the background and are of the lowest level of importance \cite{hanzhang}.\
 %Although some schemes, such as SWAN \cite{swan}, allocate bandwidth in strict precedence across a small number of priority classes,
 %they are too coarse and fine-grained priority description is needed. 
-To solve these challenges, in this paper we make the following  three \textbf{contributions}:
+Facing these challenges, in this paper we make the following  \textbf{contributions}:
 
 
 
@@ -1453,8 +1440,9 @@ Compared with the state-of-the-art traffic engineering algorithms, $\mathsf{TEDA
 
 (3) $\mathsf{TEDAT}$ can retain 30\% more profit when network fails.
 
-(4)  $\mathsf{TEDAT}$ is fast and accuracy.
-The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%. 
+(4)  $\mathsf{TEDAT}$ is fast and accuracy enough to use in large scale network.
+The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%.
+$\mathsf{TEDAT}$ 
 
 % \begin{itemize}
 %  \item \textbf{What is the benefit of  $\mathsf{TEDAT}$ ?}
@@ -2422,7 +2410,6 @@ year={2019}}
 @inproceedings{swan,
 author    = {Chi{-}Yao Hong and Srikanth Kandula and  Ratul Mahajan and  Ming Zhang and Vijay Gill and Mohan Nanduri and Roger Wattenhofer},
 title     = {Achieving high utilization with software-driven {WAN}},
-year = {2013},
 booktitle = {{ACM} {SIGCOMM} 2013 Conference, SIGCOMM'13, Hong Kong, China, August 12-16, 2013}
 }
 
@@ -2481,8 +2468,6 @@ month = apr,
 @inproceedings{riskbased, author = {Alipourfard, Omid and Gao, Jiaqi and Koenig, Jeremie and Harshaw, Chris and Vahdat, Amin and Yu, Minlan}, title = {Risk Based Planning of Network Changes in Evolving Data Centers}, year = {2019}, isbn = {9781450368735}, publisher = {ACM}, address = {New York, NY, USA}, url = {https://doi.org/10.1145/3341301.3359664}, doi = {10.1145/3341301.3359664}, booktitle = {Proceedings of the 27th ACM Symposium on Operating Systems Principles}, pages = {414-429}, numpages = {16}, keywords = {network change planning, network compression, network simulations}, location = {Huntsville, Ontario, Canada}, series = {SOSP '19} }
 
 @inproceedings{analysis-osdi, author = {Alquraan, Ahmed and Takruri, Hatem and Alfatafta, Mohammed and Al-Kiswany, Samer}, title = {An Analysis of Network-Partitioning Failures in Cloud Systems}, year = {2018}, isbn = {9781931971478}, publisher = {USENIX Association}, address = {USA}, booktitle = {Proceedings of the 12th USENIX Conference on Operating Systems Design and Implementation}, pages = {51-68}, numpages = {18}, location = {Carlsbad, CA, USA}, series = {OSDI'18} }
-@Misc{Cato, year = 2020, author = {{cato}}, title = {Cato Managed Services}, howpublished = {\url{https://www.catonetworks.com}}}
-@Misc{Aryaka, year = 2020, author = {{aryaka}}, title = {Aryaka Private WAN}, howpublished = {\url{https://www.aryaka.com}}}
 
 @Misc{amazon, year = 2019, author = {{Amazon}}, title = {Amazon Compute Service Level Agreement (2019)}, howpublished = {\url{https://aws.amazon.com/compute/sla/}}}
 @Misc{azure, year = 2020, author = {{Azure}}, title = {Microsoft Azure Service Level Agreements (2020)}, howpublished = {\url{https://azure.microsoft.com/en-us/support/legal/sla/summary/}}} 
@@ -2499,8 +2484,8 @@ month = apr,
 
 
 
-@Misc{gurobi,year = 2020, author = {{Gurobi}},title = {Gurobi is a powerful mathematical optimization solver}, howpublished = {\url{https://www.gurobi.com}}}
-@Misc{openflow, year = 2020, author = {{Openflow}},title = {sdn and openflow}, howpublished = {\url{https://tools.ietf.org/html/rfc7426\#page-23}}}
+@Misc{gurobi,title = {Gurobi is a powerful mathematical optimization solver}, howpublished = {\url{https://www.gurobi.com}}}
+@Misc{openflow, year = 2020, author = {{openflow}},title = {sdn and openflow}, howpublished = {\url{https://tools.ietf.org/html/rfc7426\#page-23}}}
 
 @Misc{ryu,title = {Ryu}, howpublished = {\url{https://ryu.readthedocs.io/en/latest/ryu_app_api.html}}}
 

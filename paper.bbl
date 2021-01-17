@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{50}
+\begin{thebibliography}{53}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -122,6 +122,15 @@
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{{aryaka}}{{aryaka}}{2020}]%
+        {aryaka}
+\bibfield{author}{\bibinfo{person}{{aryaka}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Aryaka Private WAN}.
+\newblock \bibinfo{howpublished}{\url{https://www.aryaka.com}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{{Azure}}{{Azure}}{2020}]%
         {azure}
 \bibfield{author}{\bibinfo{person}{{Azure}}.} \bibinfo{year}{2020}\natexlab{}.
@@ -158,6 +167,15 @@
 \showISBNx{9781450359566}
 \showDOI{%
 \url{https://doi.org/10.1145/3341302.3342069}}
+
+
+\bibitem[\protect\citeauthoryear{{cato}}{{cato}}{2020}]%
+        {cato}
+\bibfield{author}{\bibinfo{person}{{cato}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Cato Managed Services}.
+\newblock \bibinfo{howpublished}{\url{https://www.catonetworks.com}}.
+  (\bibinfo{year}{2020}).
+\newblock
 
 
 \bibitem[\protect\citeauthoryear{Chekuri, Khanna, and Shepherd}{Chekuri
@@ -274,6 +292,16 @@
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{{gurobi}}{{gurobi}}{2020}]%
+        {gurobi}
+\bibfield{author}{\bibinfo{person}{{gurobi}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Gurobi is a powerful mathematical optimization
+  solver}.
+\newblock \bibinfo{howpublished}{\url{https://www.gurobi.com}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Harchol, Bergemann, Feamster, Friedman,
   Krishnamurthy, Panda, Ratnasamy, Schapira, and Shenker}{Harchol
   et~al\mbox{.}}{2020}]%
@@ -297,12 +325,12 @@
 
 
 \bibitem[\protect\citeauthoryear{Hong, Kandula, Mahajan, Zhang, Gill, Nanduri,
-  and Wattenhofer}{Hong et~al\mbox{.}}{[n. d.]}]%
+  and Wattenhofer}{Hong et~al\mbox{.}}{2013}]%
         {swan}
 \bibfield{author}{\bibinfo{person}{Chi{-}Yao Hong}, \bibinfo{person}{Srikanth
   Kandula}, \bibinfo{person}{Ratul Mahajan}, \bibinfo{person}{Ming Zhang},
   \bibinfo{person}{Vijay Gill}, \bibinfo{person}{Mohan Nanduri}, {and}
-  \bibinfo{person}{Roger Wattenhofer}.} \bibinfo{year}{[n. d.]}\natexlab{}.
+  \bibinfo{person}{Roger Wattenhofer}.} \bibinfo{year}{2013}\natexlab{}.
 \newblock \showarticletitle{Achieving high utilization with software-driven
   {WAN}}. In \bibinfo{booktitle}{{\em {ACM} {SIGCOMM} 2013 Conference,
   SIGCOMM'13, Hong Kong, China, August 12-16, 2013}}.
