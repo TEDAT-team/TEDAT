@@ -53,7 +53,7 @@
 \acmISBN{}
 
 %Conference
-\acmConference[Sigcomm]{}
+\acmConference[Submitted for review to SIGCOMM]{}
 \acmYear{2021}
 %\copyrightyear{}
 
@@ -100,9 +100,9 @@ aims for \textit{bandwidth-based availability} provision, where a service level 
 %For the optimization problem, we prove it is NP-hard and  propose a greedy algorithm to efficiently solve it with only minor profit loss. 
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{TEDAT}$ over inter-DC WAN.
 The three core components of  $\mathsf{TEDAT}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
-They are also extensively compared against state-of-the-art TE schemes, using trace driven simulations as well as real testbed across different topologies, traffic matrices and failure scenarios. 
+They are also extensively compared against state-of-the-art TE schemes, using real testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
 Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{TEDAT}$ can speed up the online admission control by 30 $\times$ at the expense of 5\% higher rejection ratio. 
-On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{TEDAT}$ can meet the availability SLAs for 40\% more bandwidth demands, and when network failure causes SLA violations, it can retain 30\% more profit  under a simple pricing and refunding model.
+On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{TEDAT}$ can meet the availability SLAs for 40\% more bandwidth demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
 %.
 % $\mathsf{TEDAT}$ can 
 %(1) achieve 30 $\times$ speedup in admission control time at the expense of sacrificing 8\% in performance compared to the optimal stragety;
@@ -114,7 +114,7 @@ On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\
 \maketitle
 
 \section{Introduction}
-Nowadays, large scale online services such as finance trading, web search, online game and video streaming are posing stringent requirements on the availability and agility of the underlying network infrastructure, where Inter-DataCenter Wide Area Network (Inter-DC WAN) that
+Nowadays, large scale online services such as finance trading, web search, online shopping, online game and video streaming are posing stringent requirements on the availability and agility of the underlying network infrastructure, where Inter-DataCenter Wide Area Network (Inter-DC WAN) that
 connects geographically distributed data centers has been playing a critical role. 
 Many service providers, including Amazon, Google, Microsoft, etc., are providing various  optimizations for their global WAN, especially with the help of the emerging software-defined networking techniques \cite{swan,hong2018b4,evole,Teavar,calendaring,FFC,bwe,dynamic,SMORE,B4,OWAN}.  
 
@@ -139,7 +139,7 @@ Once a link fails, traffic has to be rescaled and rerouted, resulting in transit
 %However, it takes at least several seconds to update all rules after failures happen\cite{FFC},
 %which is too much for high-availability service as congestion may have already started.
 %The reactive interventions take too much time and the network might have already experienced congestion on failures.
-Such negative impact on inter-DC WAN services will ultimately translate into monetary loss (e.g., refund to customers).
+Such negative impacts on inter-DC WAN services will ultimately translate into monetary loss (e.g., refund to customers).
 At the same time, as more business moves to cloud, 
 %bandwidth is becoming a more valuable and congested resource, 
 there are inevitable competitions over the scarce inter-DC WAN bandwidth  \cite{swan,Guaranteeings,calendaring}.
@@ -157,9 +157,9 @@ Therefore, the design and optimization of inter-DC WANs have to take competition
 %tries to strike the right utilization-availability balance and maximizes the bandwidth of users subject an operator-specified available target.
 %Although some of them, such as FFC\cite{FFC} and TEAVAR\cite{Teavar},  even try to make applications free from congestion when more than one link/node fails simultaneously, 
 
-In this paper, we argue that although existing traffic engineering schemes \cite{FFC,Teavar,jointfailure,R3,Stochastic,Optical,PCF} have already factored in network risks and aimed for network availability guarantee, they can't meet the above objectives due to three limitations:
+In this paper, we argue that although existing traffic engineering schemes \cite{FFC,Teavar,R3,swan,PCF,B4,SMORE} have already factored in network risks and aimed for network availability guarantee, they can't meet the above objectives due to three limitations:
 % when facing heterogeneous and competing bandwidth demands over inter-DC WAN:
-\textit{First}, most of them \cite{FFC,R3,PCF,Teavar} typically make a conservative bandwidth allocation, so that even if a failure occurs, new paths can be found and the network can still be free from congestion under traffic rerouting.
+\textit{First}, most of them \cite{FFC,R3,PCF,Teavar,SMORE} typically make a conservative bandwidth allocation, so that even if a failure occurs, surviving paths are used and the network can still be free from congestion under traffic rerouting.
 %when there are failures, and consequently their bandwidth allocation can often be too conservative \cite{FFC,R3,PCF} and result in inefficient resource usage as well as significant performance gap \cite{failureslarge,Teavar}.
 To prevent congestion, links, including those with negligible failure probabilities, must be kept at low utilization, 
 resulting in significant waste of network bandwidth (and potentially less accommodated users). 
@@ -180,7 +180,7 @@ Such a solution may be fit for existing ISP networks which use over provision to
 %as a result, user experience might be influenced.
 %Nowadays, with the development of online service, users' expectations of high quality of experience (e.g., high resolution video, low latency) are continuously improving.
 %We show that only considering connectivity in traffic engineering is insufficient since QoE would greatly drop for some online service (e.g., online video) when minimal bandwidth can't be guaranteed (see $\S$\ref{background}). 
-\textit{Second}, existing techniques mainly focus on the availability of network reachability, but have ignored that users not only have diverse demands on bandwidth,  but also ask for different levels of reliability. Providing reliable bandwidth can be a value-added service for many cloud providers, typically in the form 
+\textit{Second}, existing techniques mainly focus on the availability of network reachability, but ignore that users not only have diverse demands on bandwidth,  but also ask for different levels of reliability. Providing reliable bandwidth can be a value-added service for many cloud providers, typically in the form 
 %(e.g., TEAVAR \cite{Teavar}) usually emphasize on network service availability rather than the availability targets of applications deployed over networks, i.e., they normally take a \textit{one-size-fit-all} approach and do not differentiate availability requirements of different classes of traffic, which may impair high availability traffic when there are competitions.
 %they don't differentiate diverse service availability demands from different classes of traffic.
 %Availability is one of the main items of 
@@ -190,12 +190,13 @@ Service Level Agreements (SLAs) \cite{amazon,azure}.
 %In reality, the refunding functions are often staged and differ depending on the type of service \cite{azure}.
 For example, Microsoft Azure  guarantees at least 99.9\% availability for backup service and 99.95\% availability for ExpressRoute service \cite{azure}.
 If the availability agreement is violated, a 10\% or 25\% refund will be returned to the customers.
-A \textit{one-size-fit-all} approach ignoring these heterogeneities cannot support such SLAs well, and and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
+A \textit{one-size-fit-all} approach \cite{Teavar} ignoring these heterogeneities cannot support such SLAs well, and and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
 %For example, the availability demand of search index copies is 99\%, while DNS service is 99.99\% over B4\cite{hong2018b4}.
 %TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
 % that are oblivious of such diverse availability requirements can be either too expensive or insufficient for different services.
 \textit{Third}, 
-such heterogeneities and competitions are also not considered by current failure recovery approaches, especially those who allocate bandwidth aggressively, but may run into congestions when rerouting traffic under network failures \cite{Teavar,swan}. 
+such heterogeneities and competitions are also not considered by current failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}. 
+They may run into congestions when rerouting traffic under network failures. 
 Such violations of SLAs will inevitably cause revenue loss, which should be reduced as much as possible. 
 
 %their failure recovery schemes might cause much monetary loss when network fails.
@@ -217,34 +218,38 @@ To solve these challenges, in this paper we make the following  three \textbf{co
 
 
 
-Firstly, we advocate traffic engineering with \textit{bandwidth-based availability guarantee} \cite{hong2018b4}: 
-a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
-It tries to guarantee the bandwidth demands from tenants under network uncertainty.
-We show that state-of-the-art traffic engineering schemes fail to meet services' bandwidth-based availability targets under arbitrarily link failures (see $\S$\ref{background}).
-This is due to the fact that these schemes either ignore the difference in link failure probabilities that can vary by several orders of magnitude in practice or fail to consider the diverse availability targets of services.
+Firstly, we advocate traffic engineering with \textit{bandwidth-based availability} (BA) provision: 
+a BA demand $(d, \beta, \alpha, \gamma)$ means that it requests bandwidth $d$ for a life duration between $\alpha$ and $\gamma$, and should be ensured in at least a fraction $\beta$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
+%a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
+%It tries to guarantee the bandwidth demands from tenants under network uncertainty.
+We show that state-of-the-art traffic engineering schemes fail to the heterogeneous bandwidth-based availability demands in an economic manner, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}).
+%meet services' bandwidth-based availability targets under arbitrarily link failures (see $\S$\ref{background}).
+%This is due to the fact that these schemes either ignore the difference in link failure probabilities that can vary by several orders of magnitude in practice or fail to consider the diverse availability targets of services.
 %The stronger availability can impel network to provide stable services.
 %Compared with the connectivity-based availability, it makes a further step and tries to guarantee the minimal bandwidth demands under network uncertainty after the success of connections.
 %
 %Taking the diverse availability demands from different applications and the application importance into consideration, 
 
-Secondly, we propose $\mathsf{TEDAT}$ (Traffic Engineering under Diverse Availability Targets),
-a novel TE optimization framework that allows network operators to optimize bandwidth-based availability for diverse services over inter-DC WAN (see $\S$\ref{HATE}).
-Compared with other TE schemes (see $\S$\ref{relate}), $\mathsf{TEDAT}$ is the first work to formally guarantee bandwidth-based availability demands from tenants in a unifying framework.
+Secondly, we design $\mathsf{TEDAT}$,
+a novel traffic engineering  framework that aims for bandwidth based availability provision over inter-DC WAN (see $\S$\ref{HATE}).
+$\mathsf{TEDAT}$ is composed of three core components, i.e., admission control, traffic scheduling and failure recovery. 
+The admission control scheme 
 %i.e., intent  "service $j$ is able to gain $d_j$ network bandwidth at least $\beta_j\%$ of the time" can be realized , where $\beta_j\%$ is the availability target promised in the SLA of service $j$.
 %$\mathsf{TEDAT}$ framework contains three parts, i.e., admission control, online scheduling and failure recovery.
-$\mathsf{TEDAT}$ employs a fixed-readmission-combination allocation algorithm for online admission control to strike balance between efficiency and optimality.
+$\mathsf{TEDAT}$ strikes balance between efficiency and optimality, so that new demands can be admitted and guaranteed as much as possible with negligible delay.
 %and our algorithm strikes a good tradeoff between efficiency and optimality.
 %After a tenant submits a demand, the admission control will check whether the request can be admitted or not in near real time fashion. 
-We prove that for demands already admitted by our algorithm, there must exist an allocation scheme to satisfy their bandwidth-based availability targets.
+%We prove that for demands already admitted by our algorithm, there must exist an allocation scheme to satisfy their bandwidth-based availability targets.
 %If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Sched- uler module, while the rejected demands can be resubmitted by the tenants latter. The Online Scheduler module performs traffic
 %After a tenant's demand arriving at the system, it is firstly checked by the admission control part .
 %Tenants' demands can arrive at any time and the  is able to admit as many demands as possible while replying tenants  by a fast rescheduling algorithm.
-We further propose a linear programming scheduling algorithm to allocate bandwidth for the admitted demands periodicly.
-The linear programming complexity increases exponentially with network size and we propose a pruning method which cuts off the scenarios that hardly happen to effectively reduce the size.
-Our online scheduling algorithm is able to guarantee diverse availability targets of services even when network resource is inadequate.
+Then based on a linear programming model, our traffic scheduling algorithm sets up tunnels and allocates bandwidth for the admitted demand.
+To cope with the complexity which increases exponentially with network size,  we further propose a pruning method by ignoring certain failure scenarios that hardly happen.
+At last, based on a mixed-integer linear programming model, the failure recovery procedure pre-computes backup bandwidth allocations and reroute traffic to minimize the revenue loss due to SLA violations, and is proved to be 2-optimal. 
+%Our online scheduling algorithm is able to guarantee diverse availability targets of services even when network resource is inadequate.
 %Compared with TEAVAR \cite{Teavar},  $\mathsf{TEDAT}$ can achieve a more reasonable balance between network utilization and availability when network resource is sufficient, and guarantee diverse availability targets of services when network resource is inadequate.
-$\mathsf{TEDAT}$  also pre-computes backup allocation across each tunnel to maximize revenue when a link fails.
-We model the failure recovery problem as  a 0-1 Mixed-integer linear programming, prove its NP-hardness and propose a 2-approximation algorithm to solve it.
+%$\mathsf{TEDAT}$  also pre-computes backup allocation across each tunnel to maximize revenue when a link fails.
+%We model the failure recovery problem as  a 0-1 Mixed-integer linear programming, prove its NP-hardness and propose a 2-approximation algorithm to solve it.
 %Therefore, $\mathsf{TEDAT}$ can maintain profit even network fails without too much extra bandwidth headroom.
 %Links are maintained ideal utilization level under 
 %The admission control works in the first-come-first-service (FCFS) manner without preemption and we model it as a 0-1 optimization problem when all the admitted demands can be rescheduled. 
@@ -282,12 +287,14 @@ We model the failure recovery problem as  a 0-1 Mixed-integer linear programming
 
 
 Thirdly, 
-we  design and implement $\mathsf{TEDAT}$ system (see $\S$\ref{system}) and conduct extensive experiments through real trace driven simulations and on a small testbed  (see $\S$\ref{evaluation}).
-We compare  $\mathsf{TEDAT}$ with state-of-the-art TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan} and FFC \cite{FFC}, across different scenarios, topologies, traffic matrices.
+we implement $\mathsf{TEDAT}$ as a real system, including a centralized controller and multiple brokers (one for each DC),  together with end-host clients (see $\S$\ref{system}).
+ We conduct extensive experiments using real trace driven simulations as well as  on a small testbed  (see $\S$\ref{evaluation}).
+We compare  $\mathsf{TEDAT}$ with state-of-the-art TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
 Our evaluation demonstrates that $\mathsf{TEDAT}$ can 
-(1) achieve 30 $\times$ speedup in admission control time at the expense of sacrificing 8\% in performance compared to the optimal stragety;
-(2) increase the percentage of demands that satisfy their availability SLAs by up to 40\%;
-(3) hold 30\% more profit for the provider when network fails. 
+(1) speed up the online admission control by 30 $\times $ at the expense of 5\% higher rejection ratio;
+(2) meet the availability SLAs for 40\% more bandwidth demands;
+(3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
+To our knowledge, $\mathsf{TEDAT}$ is the first to tackle bandwidth based availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
  %At last, we show the related works (see $\S$\ref{relate}).
 %Traditionally, links are heavily underutilized to achieve a more rigorous availability target. 
 %However, in reality, the failure probability of a single link can even differ by three orders of magnitude.
@@ -368,7 +375,7 @@ Then we use an example to demonstrate the limitations of state-of-the-art traffi
 \subsection{Availability and inter-DC WAN failures}
 
 How to maintain high performance is a big problem for network operators.
-Frequently network failures can result in SLA violations and eventually loss of revenue to service providers \cite{riskbased,analysis-osdi,amazon,azure}.
+Frequent network failures can result in SLA violations and eventually loss of revenue to service providers \cite{riskbased,analysis-osdi,amazon,azure}.
 
 \begin{figure*}[t]
 \centering
@@ -1901,15 +1908,7 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 %To closely mimic the real traffic matrix, the total bandwidth of generated requests between each node pair equals to that collected from the real traffic matrix.
 
 
-\begin{figure}
-\centering
-\subfigure[Cutoff error]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/error.pdf}}
-\subfigure[Optimization time]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/optimization_time.pdf}}
-\caption{Impact of pruning for traffic scheduling.}
-\label{availability_fig3}
-\end{figure}
+
 %\begin{figure*}[t]
 %\centering
 %%\subfigure[Weight differentiation]{
@@ -2078,7 +2077,15 @@ $\mathsf{TEDAT}$ can make demands with stringent availability requirements pass 
 To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{availability_fig1}(c) shows $\mathsf{TEDAT}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
 Figure \ref{availability_fig1}(d) shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
 We can see $\mathsf{TEDAT}$  is able to retain 30\% more profit than other algorithms when network fails.
-
+\begin{figure}
+\centering
+\subfigure[Cutoff error]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/error.pdf}}
+\subfigure[Optimization time]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/optimization_time.pdf}}
+\caption{Impact of pruning for traffic scheduling.}
+\label{availability_fig3}
+\end{figure}
 We qualify the scalability by measuring the admission control time for each demand.
 The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
 As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{TEDAT}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution under ATT topology.
