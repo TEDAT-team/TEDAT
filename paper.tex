@@ -594,170 +594,6 @@ Hence, both service1 and service2 are not only in line with SLAs, but also gain 
 %We elaborate the details of $\mathsf{TEDAT}$ in the following section.
 
 
-\section{$\mathsf{TEDAT}$ system} \label{system}
-%In this section, we show the design and some implementation details of $\mathsf{TEDAT}$ prototype.
-In this section, we show the design of $\mathsf{TEDAT}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
-$\mathsf{TEDAT}$ system tries to achieve the following objectives:
-
-
- \begin{itemize}
-\item \textbf{High acceptance ratio:}  
-  Tenants' demands might arrive at anytime. 
-  The system should be able to accommodate as many demands as possible under the constraint of availability and bandwidth targets.
-\item \textbf{Maintain high availability:}
-The system must make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
-Therefore, their bandwidth demands can be guaranteed with high probability.
-\item \textbf{Handle failures:}
-When there are link failures, the system can reroute traffic that would go over failed links over the remaining active tunnels with small revenue loss instead.
-\item \textbf{Practical \& scalability:}
-The system must be able to admit or reject tenants' new demands in near real-time fashion and the system needs to scale up to dozens of DCs.
-  
-  
- \end{itemize}
-
-
-
-\subsection{Availability abstraction}
-%Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
-Tenants could deploy diverse service instances over Inter-DC WAN.
-In reality, a tenant could be a customer who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
-%The cloud providers are providing many services and each service contains numerous instances across geo-distributed data centers.
-%For example, a common practice is running MapReduce operations across geo-distributed data centers and many connections from mappers to reducers are maintained.
-Services have different bandwidth demands as well as availability targets.
-However, there exists no interface for tenants to specify them.
-We now present $\mathsf{TEDAT}$ 's availability abstraction, which aims to guarantee the bandwidth-based availability of services.
-
-\textbf{Demand model:}
-We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are the nodes and link sets.
-Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
-DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
-Each tenant's demand can be presented as a tuple $\{\alpha, \theta, \delta, \gamma, \mu\}$,
-where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
-%We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
-Service providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $\mu$ to denote the penalty.
-%The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
-%When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
-
-%If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
-
-
-\textbf{Network  model:} 
-%$\mathsf{TEDAT}$ relies on network operators to provide link failure probabilities.
-%A series of failure events (e.g., power outage, configuration mistakes, firmware bugs) directly lead to link failures.
-%%According to the report of Google \cite{evole}, more than 90\% of the failure events can lead to high packets losses, or blackholes to entire data centers and they might occur anytime.
-%Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
-%For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1min).
-%The link up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
-%Inspired by the site reliability engineering (SRE) technology\cite{jointfailure,overview}, we propose a general failure model.
-A network scenario $\bm{z}=\{z_1,z_2,...\}$ is a vector consisting of each link's state.
-Each element $z_i \in \{0,1\}$ denotes whether link  $i$  is up ($z_i=1$) or down  ($z_i=0$).
-%Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
-For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1 min).
-The up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
-Let $\bm{Z}$ present the network scenario set and $p(\bm{z})$ is the probability of scenario $\bm{z}\in \bm{Z}$.
-%Each link is up with the probability of $p_i$. \cite{Teavar}
-Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
-Similar to TEAVAR \cite{Teavar},  probability of network scenario  $\bm{z}$ is given by:
-
-\begin{eqnarray} \label{state}
-p(\bm{z})&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
-&=&\prod_{i=1}^{|E|}(z_i'p_i+(1-z_i')(1-p_i))
-\end{eqnarray}
-
-For example, an inter-DC WAN contains three links $E=\{e_1,e_2,e_3\}$. 
-Network scenario $\{1,1,0\}$ means $e_1$ ,$e_2$ are available and  $e_3$ fails.
-If the up probability of $e_1,e_2,e_3$ are 0.9, 0.8, 0.85, respectively.
-Then its probability $p(\{1,1,0\}) =0.9\times0.8\times0.15=0.108$.
-
-
-
-\subsection{System design}
-The system contains one controller, multiple brokers and multiple clients.
-Figure \ref{pic-overview} shows the architecture of $\mathsf{TEDAT}$ system.
-It works as follows:
-When a tenant submits a demand to the controller, the Admission Control module will check whether the request can be admitted or not (see $\S$ \ref{admission_control}).
-If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Scheduler module, while the rejected demands can be resubmitted by the tenants latter.
-The Online Scheduler module performs traffic engineering algorithm (see $\S$ \ref{TE}) every  $T$ (e.g., 10) minutes to enforce bandwidth of each demand.
-To prevent much revenue loss, the Online Scheduler module also derives the backup allocation under the assumption that  some fragile links could fail (see $\S$ \ref{backup}) every $T$. 
-Each data center has a broker that manages the hosts inside.
-Brokers track topology and apportions the allocated rate to each host.
-Each host belongs to a service and it maintains a client to enforce bandwidth. 
-
-%The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
-
-% then it limits rate according to the responses from its data center broker.
-
-
-\textbf{Controller} is the brain of the whole system and it has three main modules:
-(1) Offline Routing.
-The controller maintains the WAN level network topology.
-When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
-Tunnel set is then sent to TE Scheduler module as the input;
-(2) Online Scheduler. 
-Every $T$ minutes,  this module will perform traffic engineering algorithm (see $\S$ \ref{TE}).
-In addition to $\mathsf{TEDAT}$, the prototype framework can support other TE algorithms (e.g., SWAN \cite{swan}, FFC \cite{FFC}).
-After deriving TE solution, it apportions the bandwidth allocation results over each tunnel (i.e., $f_{ikt}$) to corresponding brokers; 
-It also some fragile links could fail and derives the backup allocation (see $\S$ \ref{backup}) every $T$.
-(3) Admission Control.
-When a demand is submitted, the Admission Control module would perform admission algorithm (see $\S$ \ref{admission_control}) to reply tenants in near real-time fashion; 
-(4) Communication Module.
-This component is responsible for communication by building long TCP connections with brokers.
-The controller orchestrates all activity with a global view and is responsible for allocating WAN level bandwidth.
-To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
-
- \begin{figure}
-\begin{center}
-\includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
-\caption{ Architecture of $\mathsf{TEDAT}$.}
-\label{pic-overview}
-\end{center}
-\end{figure}
-
-\textbf{Broker} manages the hosts in its data center and it has the following key modules:
-%(1) Demand  Aggregator.
-%After receiving demands from hosts, brokers will aggregate them according to service over each node pair (i.e., $d_{jk}$).
-%They are sent to controller along with the availability targets of each service (i.e., $\beta_j$);
-%%The necessary information includes the application identifier, source address, destination address and expected bandwidth demand.
-%Demand Collector gathers traffic demands and aggregates them on the basis of  flow identifiers (i.e., $ < AppID,Src,Dst >$);
-%(2) \textit{Demand Predictior}.
-%In $\mathsf{Dionysus}$ framework, resources should be able to be dynamic allocated according to the demands of applications.
-%However, future application bandwidth demands can't be known beforehand, which makes it hard to adjust in real-time.
-%The broker keeps the empirical demands collected by Demand Collector.
-%With these history data, 
-%Demand Predictior will predict the future bandwidth demands with data-driven algorithms such as ARIMA\cite{ARMA}, reinforcement learning \cite{Pensieve}; 
-(1) Bandwidth Allocator.
-After deriving the requests' bandwidth allocation results (i.e., $f_{ikt}$) from controller, this module will send them to the corresponding hosts;
-(2) Network Agent.
-It tracks topology and traffic with the aid of switches. 
-It reports news about topology changes to the controller right away.
-It also runs OpenFlow controller (e.g., \cite{floodlight}) to work with commodity OpenFlow switches;
-(3) Communication Module.
-This component is responsible for communication with controller.
-%In reality, many switches are able to detect link failure  \cite{FDT,olfd}.
-%Brokers exploit this and send the failure information to controller after the edge switches detect link failures.
-
-\textbf{Client}  is deployed on each host.
-%A shim in the host OS estimates its demand to each remote DC for the next $T_b$ minutes 
-%and asks the broker for an allocation.
-%Each client has a RPC daemon that submits its SLA to its DC broker every  $T_b$ (e.g., 1) minutes.
-The client will enforce sending rate by the bandwidth enforcement module.
-The bandwidth enforcement module consists of an enforcement kernel module and an enforcement daemon.
-The enforcement daemon interacts with the site brokers to obtain rate limits. 
-The enforcement  kernel module is located between TCP/IP stack and the Linux Traffic Control (TC) module\cite{TCM}. 
-It intercepts all outgoing packets.
-Then these packets are directed to TC for rate limiting. 
-
-$\mathsf{TEDAT}$ system adopts OpenFlow\cite{openflow}  to install and update forwarding rules.
-To reduce forwarding complexity, our prototype uses label-based forwarding.
-%Traditionally,  VLAN header is tagged on the ingress switches and VLAN ID is often used to differentiate tunnels \cite{swan}.
-%We abandon this as VLAN ID only contains 12 bits, which is insufficient to present bandwidth demand between each DC pair.
-%Instead, 
-We adopt VxLAN ID which contains 24 bits, where the first 12 bits to present demands and the remaining 12 bits are used to distinguish tunnels between each node.
-Therefore, $2^{12}=4096$ tenants' demands and $2^{12}=4096$ tunnels can be supported simultaneously.
-Flows are marked with a label at the ingress switch and the remaining switches can just read the labels and forward the packets.
-To implement unequal bandwidth splitting, our prototype uses group table in its OpenFlow pipeline.
-Flow table just maps the packet based on the destination and the group tables consist of bandwidth weight for each label.
-
 \begin{table}[h!]
 \small
 \centering
@@ -821,7 +657,75 @@ $h_i$& \multicolumn{6}{|l}{Profit of demand  $i$}\\
 \end{table}
 
 \section{$\mathsf{TEDAT}$}\label{HATE}
-In this section, we make a full description of $\mathsf{TEDAT}$ framework, which contains three parts, i.e., admission control, traffic engineering and failure recovery.
+In this section, we make a full description of $\mathsf{TEDAT}$ framework, which contains three parts, i.e., admission control, traffic scheduling and failure recovery.
+Table \ref{Notation} shows the main notations.
+The framework intends to achieve the following objectives: 
+ \begin{itemize}
+\item \textbf{High acceptance ratio:}  
+  Tenants' demands might arrive at anytime. 
+  The system should be able to accommodate as many demands as possible under the constraint of availability and bandwidth targets.
+\item \textbf{Maintain high availability:}
+The system must make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
+Therefore, their bandwidth demands can be guaranteed with high probability.
+\item \textbf{Handle failures:}
+When there are link failures, the system can reroute traffic that would go over failed links over the remaining active tunnels with small revenue loss instead.
+%\item \textbf{ \& scalability:}
+%
+\end{itemize}
+
+\subsection{BA abstraction}
+%Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
+Tenants could deploy diverse service instances over Inter-DC WAN.
+In reality, a tenant could be a customer who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
+%The cloud providers are providing many services and each service contains numerous instances across geo-distributed data centers.
+%For example, a common practice is running MapReduce operations across geo-distributed data centers and many connections from mappers to reducers are maintained.
+Services have different bandwidth demands as well as availability targets.
+However, there exists no interface for tenants to specify them.
+We now present $\mathsf{TEDAT}$ 's availability abstraction, which aims to guarantee the bandwidth-based availability of services.
+
+\textbf{BA demand model:}
+We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are the nodes and link sets.
+Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
+DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
+Each tenant's demand can be presented as a tuple $\{\alpha, \theta, \delta, \gamma, \mu\}$,
+where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
+%We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
+Service providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $\mu$ to denote the penalty.
+%The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
+%When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
+
+%If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
+
+
+\textbf{Network  model:} 
+%$\mathsf{TEDAT}$ relies on network operators to provide link failure probabilities.
+%A series of failure events (e.g., power outage, configuration mistakes, firmware bugs) directly lead to link failures.
+%%According to the report of Google \cite{evole}, more than 90\% of the failure events can lead to high packets losses, or blackholes to entire data centers and they might occur anytime.
+%Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
+%For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1min).
+%The link up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
+%Inspired by the site reliability engineering (SRE) technology\cite{jointfailure,overview}, we propose a general failure model.
+A network scenario $\bm{z}=\{z_1,z_2,...\}$ is a vector consisting of each link's state.
+Each element $z_i \in \{0,1\}$ denotes whether link  $i$  is up ($z_i=1$) or down  ($z_i=0$).
+%Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
+For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1 min).
+The up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
+Let $\bm{Z}$ present the network scenario set and $p(\bm{z})$ is the probability of scenario $\bm{z}\in \bm{Z}$.
+%Each link is up with the probability of $p_i$. \cite{Teavar}
+Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
+Similar to TEAVAR \cite{Teavar},  probability of network scenario  $\bm{z}$ is given by:
+
+\begin{eqnarray} \label{state}
+p(\bm{z})&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
+&=&\prod_{i=1}^{|E|}(z_i'p_i+(1-z_i')(1-p_i))
+\end{eqnarray}
+
+For example, an inter-DC WAN contains three links $E=\{e_1,e_2,e_3\}$. 
+Network scenario $\{1,1,0\}$ means $e_1$ ,$e_2$ are available and  $e_3$ fails.
+If the up probability of $e_1,e_2,e_3$ are 0.9, 0.8, 0.85, respectively.
+Then its probability $p(\{1,1,0\}) =0.9\times0.8\times0.15=0.108$.
+
+
 We consider tunnel-based forwarding \cite{FFC,swan,Teavar}, where traffic is carried over a set of tunnels.
 %Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
 For each node pair $k\in K$ of the inter-DC WAN $G=(V,E)$, we are given a set of pre-selected tunnels $T_{k}$, where tunnel set $T_{k}$ can be derived with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}). 
@@ -831,11 +735,7 @@ Each tunnel $t\in T_{k}$ contains a set of links and  $L_{te}$ presents whether 
 $f_{ikt}$ is the bandwidth allocated over tunnel $t \in T_{k}$ for demand $i$ and 
 $I_a$ is the total \textit{admitted} demand set form tenants.
 Let $x_t(\bm{z})$ denote whether tunnel $t$ is available (i.e., $x_t(\bm{z})=1$)  or not  (i.e., $x_t(\bm{z})=0$) under network scenario $\bm{z}$.
-Table \ref{Notation} shows the main notations.
-The framework intends to achieve three goals: 
-(1) Accommodate as many demands as possible subject to network failure model, diverse service availability and bandwidth targets;
-(2) Guarantee the bandwidth-based availability target  for each admitted demand;
-(3) Minimize revenue loss when network fails.
+
 %\begin{enumerate}
 %    \item  How to accommodate as many requests as possible subject to network failure model and diverse service availability targets  (see $\S$ \ref{admission_control}).
 %    \item  How to route all admitted requests with minimum induced network overload under the constraint of network failure model and diverse service availability targets (see $\S$ \ref{TE}).
@@ -1389,6 +1289,100 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 %The greedy algorithm can solve $\mathsf{TEDAT}$  problem in  $O(|J||Z||T_k||E|)$ time.
 %We further explore the accuracy of greedy algorithm in Section \ref{evaluation}.
 
+
+
+\section{$\mathsf{TEDAT}$ system} \label{system}
+%In this section, we show the design and some implementation details of $\mathsf{TEDAT}$ prototype.
+In this section, we show the design of $\mathsf{TEDAT}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
+$\mathsf{TEDAT}$ system tries to achieve the following objectives:
+
+
+
+The system contains one controller, multiple brokers and multiple clients.
+Figure \ref{pic-overview} shows the architecture of $\mathsf{TEDAT}$ system.
+It works as follows:
+When a tenant submits a demand to the controller, the Admission Control module will check whether the request can be admitted or not (see $\S$ \ref{admission_control}).
+If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Scheduler module, while the rejected demands can be resubmitted by the tenants latter.
+The Online Scheduler module performs traffic engineering algorithm (see $\S$ \ref{TE}) every  $T$ (e.g., 10) minutes to enforce bandwidth of each demand.
+To prevent much revenue loss, the Online Scheduler module also derives the backup allocation under the assumption that  some fragile links could fail (see $\S$ \ref{backup}) every $T$. 
+Each data center has a broker that manages the hosts inside.
+Brokers track topology and apportions the allocated rate to each host.
+Each host belongs to a service and it maintains a client to enforce bandwidth. 
+
+%The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
+
+% then it limits rate according to the responses from its data center broker.
+
+
+\textbf{Controller} is the brain of the whole system and it has three main modules:
+(1) Offline Routing.
+The controller maintains the WAN level network topology.
+When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
+Tunnel set is then sent to TE Scheduler module as the input;
+(2) Online Scheduler. 
+Every $T$ minutes,  this module will perform traffic engineering algorithm (see $\S$ \ref{TE}).
+In addition to $\mathsf{TEDAT}$, the prototype framework can support other TE algorithms (e.g., SWAN \cite{swan}, FFC \cite{FFC}).
+After deriving TE solution, it apportions the bandwidth allocation results over each tunnel (i.e., $f_{ikt}$) to corresponding brokers; 
+It also some fragile links could fail and derives the backup allocation (see $\S$ \ref{backup}) every $T$.
+(3) Admission Control.
+When a demand is submitted, the Admission Control module would perform admission algorithm (see $\S$ \ref{admission_control}) to reply tenants in near real-time fashion; 
+(4) Communication Module.
+This component is responsible for communication by building long TCP connections with brokers.
+The controller orchestrates all activity with a global view and is responsible for allocating WAN level bandwidth.
+To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
+
+ \begin{figure}
+\begin{center}
+\includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
+\caption{ Architecture of $\mathsf{TEDAT}$.}
+\label{pic-overview}
+\end{center}
+\end{figure}
+
+\textbf{Broker} manages the hosts in its data center and it has the following key modules:
+%(1) Demand  Aggregator.
+%After receiving demands from hosts, brokers will aggregate them according to service over each node pair (i.e., $d_{jk}$).
+%They are sent to controller along with the availability targets of each service (i.e., $\beta_j$);
+%%The necessary information includes the application identifier, source address, destination address and expected bandwidth demand.
+%Demand Collector gathers traffic demands and aggregates them on the basis of  flow identifiers (i.e., $ < AppID,Src,Dst >$);
+%(2) \textit{Demand Predictior}.
+%In $\mathsf{Dionysus}$ framework, resources should be able to be dynamic allocated according to the demands of applications.
+%However, future application bandwidth demands can't be known beforehand, which makes it hard to adjust in real-time.
+%The broker keeps the empirical demands collected by Demand Collector.
+%With these history data, 
+%Demand Predictior will predict the future bandwidth demands with data-driven algorithms such as ARIMA\cite{ARMA}, reinforcement learning \cite{Pensieve}; 
+(1) Bandwidth Allocator.
+After deriving the requests' bandwidth allocation results (i.e., $f_{ikt}$) from controller, this module will send them to the corresponding hosts;
+(2) Network Agent.
+It tracks topology and traffic with the aid of switches. 
+It reports news about topology changes to the controller right away.
+It also runs OpenFlow controller (e.g., \cite{floodlight}) to work with commodity OpenFlow switches;
+(3) Communication Module.
+This component is responsible for communication with controller.
+%In reality, many switches are able to detect link failure  \cite{FDT,olfd}.
+%Brokers exploit this and send the failure information to controller after the edge switches detect link failures.
+
+\textbf{Client}  is deployed on each host.
+%A shim in the host OS estimates its demand to each remote DC for the next $T_b$ minutes 
+%and asks the broker for an allocation.
+%Each client has a RPC daemon that submits its SLA to its DC broker every  $T_b$ (e.g., 1) minutes.
+The client will enforce sending rate by the bandwidth enforcement module.
+The bandwidth enforcement module consists of an enforcement kernel module and an enforcement daemon.
+The enforcement daemon interacts with the site brokers to obtain rate limits. 
+The enforcement  kernel module is located between TCP/IP stack and the Linux Traffic Control (TC) module\cite{TCM}. 
+It intercepts all outgoing packets.
+Then these packets are directed to TC for rate limiting. 
+
+$\mathsf{TEDAT}$ system adopts OpenFlow\cite{openflow}  to install and update forwarding rules.
+To reduce forwarding complexity, our prototype uses label-based forwarding.
+%Traditionally,  VLAN header is tagged on the ingress switches and VLAN ID is often used to differentiate tunnels \cite{swan}.
+%We abandon this as VLAN ID only contains 12 bits, which is insufficient to present bandwidth demand between each DC pair.
+%Instead, 
+We adopt VxLAN ID which contains 24 bits, where the first 12 bits to present demands and the remaining 12 bits are used to distinguish tunnels between each node.
+Therefore, $2^{12}=4096$ tenants' demands and $2^{12}=4096$ tunnels can be supported simultaneously.
+Flows are marked with a label at the ingress switch and the remaining switches can just read the labels and forward the packets.
+To implement unequal bandwidth splitting, our prototype uses group table in its OpenFlow pipeline.
+Flow table just maps the packet based on the destination and the group tables consist of bandwidth weight for each label.
 
 
 
@@ -2109,6 +2103,33 @@ We can see that even on a large network (e.g., ATT topology), at most  15 second
 %We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
 %While the bruce force algorithm is more than 1000 minutes for each topology and we don't paint them in the picture.
 %We can see the result is fast enough to deploy in practice.
+\begin{figure*} 
+   \begin{minipage}[t]{0.24\linewidth} 
+    \centering 
+    \includegraphics[width=1.6 in]{fig/evaluation/routing.pdf}
+    \caption{Routings.} 
+    \label{routing-version} 
+  \end{minipage}% 
+   \begin{minipage}[t]{0.24\linewidth} 
+    \centering 
+    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
+    \caption{Approximation.} 
+    \label{approximation} 
+  \end{minipage}
+     \begin{minipage}[t]{0.24\linewidth} 
+    \centering 
+    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
+    \caption{Approximation.} 
+    \label{approximation} 
+  \end{minipage}
+       \begin{minipage}[t]{0.24\linewidth} 
+    \centering 
+    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
+    \caption{Approximation.} 
+    \label{approximation} 
+  \end{minipage}
+  
+\end{figure*}
 
 So far, we use K-shortest path as the default tunnel selection scheme.
 There are also other tunnel selection schemes, e.g., edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}.
@@ -2184,21 +2205,6 @@ We can see that the profit loss of greedy algorithm is less than 10\%.
 %\end{center}
 %\end{figure}
 
-\begin{figure} 
-   \begin{minipage}[t]{0.5\linewidth} 
-    \centering 
-    \includegraphics[width=1.8 in]{fig/evaluation/routing.pdf}
-    \caption{Routings.} 
-    \label{routing-version} 
-  \end{minipage}% 
-   \begin{minipage}[t]{0.5\linewidth} 
-    \centering 
-    \includegraphics[width=1.8 in]{fig/evaluation/approximation.pdf}
-    \caption{Approximation.} 
-    \label{approximation} 
-  \end{minipage}
-  
-\end{figure}
 
 
 
