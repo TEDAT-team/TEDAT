@@ -190,7 +190,7 @@ Service Level Agreements (SLAs) \cite{amazon,azure}.
 %In reality, the refunding functions are often staged and differ depending on the type of service \cite{azure}.
 For example, Microsoft Azure  guarantees at least 99.9\% availability for backup service and 99.95\% availability for ExpressRoute service \cite{azure}.
 If the availability agreement is violated, a 10\% or 25\% refund will be returned to the customers.
-A \textit{one-size-fit-all} approach \cite{Teavar} ignoring these heterogeneities cannot support such SLAs well, and and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
+\textit{One-size-fit-all} approaches (e.g., TEAVAR \cite{Teavar})  ignoring these heterogeneities cannot support such SLAs well, and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
 %For example, the availability demand of search index copies is 99\%, while DNS service is 99.99\% over B4\cite{hong2018b4}.
 %TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
 % that are oblivious of such diverse availability requirements can be either too expensive or insufficient for different services.
@@ -219,10 +219,10 @@ To solve these challenges, in this paper we make the following  three \textbf{co
 
 
 Firstly, we advocate traffic engineering with \textit{bandwidth-based availability} (BA) provision: 
-a BA demand $(d, \beta, \alpha, \gamma)$ means that it requests bandwidth $d$ for a life duration between $\alpha$ and $\gamma$, and should be ensured in at least a fraction $\beta$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
+a BA demand $(d, \beta, \alpha, \gamma)$ means that it requests bandwidth $d$ for a life duration between $\alpha$ and $\gamma$, and should be guaranteed at least $\beta\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
-We show that state-of-the-art traffic engineering schemes fail to the heterogeneous bandwidth-based availability demands in an economic manner, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}).
+We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth-based availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}).
 %meet services' bandwidth-based availability targets under arbitrarily link failures (see $\S$\ref{background}).
 %This is due to the fact that these schemes either ignore the difference in link failure probabilities that can vary by several orders of magnitude in practice or fail to consider the diverse availability targets of services.
 %The stronger availability can impel network to provide stable services.
@@ -233,19 +233,20 @@ We show that state-of-the-art traffic engineering schemes fail to the heterogene
 Secondly, we design $\mathsf{TEDAT}$,
 a novel traffic engineering  framework that aims for bandwidth based availability provision over inter-DC WAN (see $\S$\ref{HATE}).
 $\mathsf{TEDAT}$ is composed of three core components, i.e., admission control, traffic scheduling and failure recovery. 
-The admission control scheme 
+%The admission control scheme 
 %i.e., intent  "service $j$ is able to gain $d_j$ network bandwidth at least $\beta_j\%$ of the time" can be realized , where $\beta_j\%$ is the availability target promised in the SLA of service $j$.
 %$\mathsf{TEDAT}$ framework contains three parts, i.e., admission control, online scheduling and failure recovery.
-$\mathsf{TEDAT}$ strikes balance between efficiency and optimality, so that new demands can be admitted and guaranteed as much as possible with negligible delay.
+The admission control strikes a good balance between efficiency and optimality, so that new demands can be admitted and guaranteed as much as possible with negligible delay.
 %and our algorithm strikes a good tradeoff between efficiency and optimality.
 %After a tenant submits a demand, the admission control will check whether the request can be admitted or not in near real time fashion. 
 %We prove that for demands already admitted by our algorithm, there must exist an allocation scheme to satisfy their bandwidth-based availability targets.
 %If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Sched- uler module, while the rejected demands can be resubmitted by the tenants latter. The Online Scheduler module performs traffic
 %After a tenant's demand arriving at the system, it is firstly checked by the admission control part .
 %Tenants' demands can arrive at any time and the  is able to admit as many demands as possible while replying tenants  by a fast rescheduling algorithm.
-Then based on a linear programming model, our traffic scheduling algorithm sets up tunnels and allocates bandwidth for the admitted demand.
+Then based on a Linear Programming (LP) model, our traffic scheduling algorithm allocates bandwidth for the admitted demands over tunnels.
 To cope with the complexity which increases exponentially with network size,  we further propose a pruning method by ignoring certain failure scenarios that hardly happen.
-At last, based on a mixed-integer linear programming model, the failure recovery procedure pre-computes backup bandwidth allocations and reroute traffic to minimize the revenue loss due to SLA violations, and is proved to be 2-optimal. 
+At last, based on a Mixed-Integer Linear Programming (MILP) model, the failure recovery procedure pre-computes backup bandwidth allocations and reroute traffic to minimize the revenue loss due to SLA violations.
+We also propose a 2-approximation algorithm to solve it efficiently.
 %Our online scheduling algorithm is able to guarantee diverse availability targets of services even when network resource is inadequate.
 %Compared with TEAVAR \cite{Teavar},  $\mathsf{TEDAT}$ can achieve a more reasonable balance between network utilization and availability when network resource is sufficient, and guarantee diverse availability targets of services when network resource is inadequate.
 %$\mathsf{TEDAT}$  also pre-computes backup allocation across each tunnel to maximize revenue when a link fails.
