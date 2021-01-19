@@ -1500,7 +1500,6 @@ Controller locates in DC1 and runs the software defined networking framework.
 We add 100ms delay to emulate the WAN environment.
 We start 21 VMs (1 vCPU, 2GB memory, 100GB disk) in each server, where 20 VMs are used to emulate the hosts and 1 VM runs as the broker.
 Each VM belongs to only one customer and will send  \textit{iperf} UDP flows with specified rates to other DCs.
-We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
 %Each VM has a demand and the it varies with a period of 3-minutes pattern just as \cite{swan}.  
 %The importance of services are randomly chosen from \{1,2,3,4,5\} 
 %All services have the same level of importance and availability targets of services are from the SLAs of Azure \cite{azure}.
@@ -1510,7 +1509,7 @@ We start an extra VM in DC1 as the controller.
 %CPU, memory and disk are not the bottleneck in our experiments.
 All switches run link liveness detection protocol, and they report any failures to brokers.
 Every second, we randomly generate an integer $p$ between 0 and 10000 for each link.
-If  $p/10000$ is smaller than the failure probability shown in Figure \ref{testbed}, we disable the network interface to emulate link failure.
+If  $p/10000$ is smaller than the failure threshold shown in Figure \ref{testbed}, we disable the network interface to emulate link failure.
 Then after 3 seconds, we enable the network interface to emulate link repair.
 We also evaluate FFC \cite{FFC} and TEAVAR \cite{Teavar} to make comparisons.
 %We mainly care about the following metrics:
@@ -1581,12 +1580,13 @@ We also evaluate FFC \cite{FFC} and TEAVAR \cite{Teavar} to make comparisons.
 
 
 \subsubsection{A public cloud example}
-We firstly evaluate with a public cloud case.
-Assume tenants arrive with poisson process with arrival rate 2 every minute and the duration of each bandwidth demand is under exponential distribution with a mean of 5 minute.
-Tenant' bandwidth demands between each node pair are under uniform distribution between 10Mbps and 50Mbps.
-The profit of each tenant (i.e., $w_i$) is proportional to his/her total bandwidth demand.
-Tenants' availability targets and refunding ratio are from the SLAs of Azure \cite{azure}.
-We perform each experiment 100 minutes and repeat the process 20 times, where the error bars paints the maximal, minimal and mean value.
+We firstly evaluate a public cloud case.
+Assume tenants arrive at the public cloud under poisson process with mean arrival rate 2 every minute and the duration of each bandwidth demand is under exponential distribution with a mean of 5 minutes.
+Bandwidth demands between each node pair are under uniform distribution between 10Mbps and 50Mbps.
+Every 1Mbps is sold 1$\$$.
+%The profit of each tenant (i.e., $w_i$) is proportional to his/her total bandwidth demand.
+Availability targets and refunding ratio are randomly chosen from Azure SLAs \cite{azure}.
+Each experiment lasts 100 minutes and is repeated 20 times, where the error bars paints the maximal, minimal and mean value.
 
 Figure \ref{e2}(a) demonstrates $\mathsf{TEDAT}$ only performs slightly worse than the optimal solution (about 4\%) and is at least 2 $\times$ better than the \textit{Fixed} admission control.
 This is because $\mathsf{TEDAT}$ fully considers the availability diversity of tenants.
@@ -1595,6 +1595,7 @@ Figure \ref{e2}(b) shows once a tenant's demand is admitted, $\mathsf{TEDAT}$ ca
 FFC and TEAVAR with \textit{Fixed} admission control perform slightly better than when they are without admission control since many tenants' demands are rejected, but they also perform worse than $\mathsf{TEDAT}$, because FFC is too conservative and and TEAVAR ignores the diverse demands.
 Figure \ref{e2}(c) shows $\mathsf{TEDAT}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.
 This is because $\mathsf{TEDAT}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.
+We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
 Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{TEDAT}$ performs about 8\% worse than FFC.
 FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
 while $\mathsf{TEDAT}$ focuses on Monetary gain rather than data loss.
