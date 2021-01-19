@@ -157,9 +157,9 @@ Therefore, the design and optimization of inter-DC WANs have to take competition
 %tries to strike the right utilization-availability balance and maximizes the bandwidth of users subject an operator-specified available target.
 %Although some of them, such as FFC\cite{FFC} and TEAVAR\cite{Teavar},  even try to make applications free from congestion when more than one link/node fails simultaneously, 
 
-In this paper, we argue that although existing traffic engineering schemes \cite{FFC,Teavar,R3,swan,PCF,B4,SMORE} have already factored in network risks and aimed for network availability guarantee, they can't meet the above objectives due to three limitations:
+In this paper, we argue that although existing traffic engineering schemes \cite{FFC,Teavar,R3,swan,PCF,B4,SMORE} have already factored in network risks and aimed for network availability guarantee, they cannot meet the above objectives due to three limitations:
 % when facing heterogeneous and competing bandwidth demands over inter-DC WAN:
-\textit{First}, most of them \cite{FFC,R3,PCF,Teavar,SMORE} typically make a conservative bandwidth allocation, so that even if a failure occurs, surviving paths are used and the network can still be free from congestion under traffic rerouting.
+\textit{First}, most of them \cite{FFC,R3,PCF,Teavar,SMORE} typically make a conservative bandwidth allocation, so that even if a failure occurs, surviving paths could be used and the network can still be free from congestion under traffic rerouting.
 %when there are failures, and consequently their bandwidth allocation can often be too conservative \cite{FFC,R3,PCF} and result in inefficient resource usage as well as significant performance gap \cite{failureslarge,Teavar}.
 To prevent congestion, links, including those with negligible failure probabilities, must be kept at low utilization, 
 resulting in significant waste of network bandwidth (and potentially less accommodated users). 
@@ -180,7 +180,7 @@ Such a solution may be fit for existing ISP networks which use over provision to
 %as a result, user experience might be influenced.
 %Nowadays, with the development of online service, users' expectations of high quality of experience (e.g., high resolution video, low latency) are continuously improving.
 %We show that only considering connectivity in traffic engineering is insufficient since QoE would greatly drop for some online service (e.g., online video) when minimal bandwidth can't be guaranteed (see $\S$\ref{background}). 
-\textit{Second}, existing techniques mainly focus on the availability of network reachability, but ignore that users not only have diverse demands on bandwidth,  but also ask for different levels of reliability. Providing reliable bandwidth can be a value-added service for many cloud providers, typically in the form 
+\textit{Second}, existing techniques mainly focus on the availability of network reachability, but ignore that users not only have diverse demands on bandwidth,  but also ask for different levels of reliability. Providing reliable bandwidth can be a value-added service for many cloud providers, typically in the form of 
 %(e.g., TEAVAR \cite{Teavar}) usually emphasize on network service availability rather than the availability targets of applications deployed over networks, i.e., they normally take a \textit{one-size-fit-all} approach and do not differentiate availability requirements of different classes of traffic, which may impair high availability traffic when there are competitions.
 %they don't differentiate diverse service availability demands from different classes of traffic.
 %Availability is one of the main items of 
@@ -188,15 +188,14 @@ Service Level Agreements (SLAs) \cite{amazon,azure}.
 %and cloud providers have to refund customers for any violation of SLAs.
 %In reality, availability demands vary with different services.
 %In reality, the refunding functions are often staged and differ depending on the type of service \cite{azure}.
-For example, Microsoft Azure  guarantees at least 99.9\% availability for backup service and 99.95\% availability for ExpressRoute service \cite{azure}.
+For example, Microsoft Azure guarantees its customers at least 99.9\% availability for backup service and 99.95\% availability for ExpressRoute service \cite{azure}.
 If the availability agreement is violated, a 10\% or 25\% refund will be returned to the customers.
 \textit{One-size-fit-all} approaches (e.g., TEAVAR \cite{Teavar})  ignoring these heterogeneities cannot support such SLAs well, and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
 %For example, the availability demand of search index copies is 99\%, while DNS service is 99.99\% over B4\cite{hong2018b4}.
 %TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
 % that are oblivious of such diverse availability requirements can be either too expensive or insufficient for different services.
 \textit{Third}, 
-such heterogeneities and competitions are also not considered by current failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}. 
-They may run into congestions when rerouting traffic under network failures. 
+such heterogeneities and competitions are also not considered by current failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}, since they may run into congestions when rerouting traffic under network failures. 
 Such violations of SLAs will inevitably cause revenue loss, which should be reduced as much as possible. 
 
 %their failure recovery schemes might cause much monetary loss when network fails.
@@ -245,8 +244,7 @@ The admission control strikes a good balance between efficiency and optimality, 
 %Tenants' demands can arrive at any time and the  is able to admit as many demands as possible while replying tenants  by a fast rescheduling algorithm.
 Then based on a Linear Programming (LP) model, our traffic scheduling algorithm allocates bandwidth for the admitted demands over tunnels.
 To cope with the complexity which increases exponentially with network size,  we further propose a pruning method by ignoring certain failure scenarios that hardly happen.
-At last, based on a Mixed-Integer Linear Programming (MILP) model, the failure recovery procedure pre-computes backup bandwidth allocations and reroute traffic to minimize the revenue loss due to SLA violations.
-We also propose a 2-approximation algorithm to solve it efficiently.
+At last, based on a Mixed-Integer Linear Programming (MILP) model, the failure recovery procedure pre-computes backup bandwidth allocations and reroutes traffic to minimize the revenue loss due to SLA violations, which is proved to be 2-optimal. 
 %Our online scheduling algorithm is able to guarantee diverse availability targets of services even when network resource is inadequate.
 %Compared with TEAVAR \cite{Teavar},  $\mathsf{TEDAT}$ can achieve a more reasonable balance between network utilization and availability when network resource is sufficient, and guarantee diverse availability targets of services when network resource is inadequate.
 %$\mathsf{TEDAT}$  also pre-computes backup allocation across each tunnel to maximize revenue when a link fails.
@@ -368,15 +366,15 @@ To our knowledge, $\mathsf{TEDAT}$ is the first to tackle bandwidth based availa
 % \end{figure}
 
 \section{Background and Motivation}\label{background}
-In this section, we give an introduction of availability and inter-DC WAN failures.
-Then we use an example to demonstrate the limitations of state-of-the-art traffic engineering schemes.
+In this section, we first briefly introduce network and common availability requirements in inter-DC WAN, then 
+we use an example to demonstrate the limitations of state-of-the-art traffic engineering schemes in fulfilling such requirements.
 %This section first shows the background.
 %We then demonstrate the deficiencies of state-of-the-art traffic engineering schemes.
 
-\subsection{Availability and inter-DC WAN failures}
+\subsection{Network failures and availability requirements}
 
-How to maintain high performance is a big problem for network operators.
-Frequent network failures can result in SLA violations and eventually loss of revenue to service providers \cite{riskbased,analysis-osdi,amazon,azure}.
+%How to maintain high performance is a big problem for network operators.
+%Frequent network failures can result in SLA violations and eventually loss of revenue to service providers \cite{riskbased,analysis-osdi,amazon,azure}.
 
 \begin{figure*}[t]
 \centering
@@ -399,7 +397,7 @@ Frequent network failures can result in SLA violations and eventually loss of re
 \renewcommand{\arraystretch}{1.0}
 \begin{tabular}{|c|l|l|l|l|l|l|l|} \hline
 \setlength{\tabcolsep}{10pt}
-\textbf{Service}&\multicolumn{2}{|c|}{\textbf{Availability(\%)}}&\multicolumn{2}{|c|}{\textbf{Credit}}\\
+\textbf{Service}&\multicolumn{2}{|c|}{\textbf{Availability}}&\multicolumn{2}{|c|}{\textbf{Refund}}\\
 \hline
 {Traffic Manager \cite{azure}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
 \hline
@@ -428,25 +426,33 @@ Frequent network failures can result in SLA violations and eventually loss of re
 \end{tabular}
 \end{table}
 
-\textbf{WAN failures can be frequent and heavy-tailed distribution:}
+\textbf{WAN failures are frequent and follow a heavy-tailed distribution.}
 %Facing the growing scale and complexity of the WAN, how to maintain high availability is a challenge for data center network service providers\cite{evole, riskbased}. 
-Failures could emerge from anywhere across the network, and from control plane to data plane \cite{Teavar}.
-Besides, failure events could be persistent with long durations.
-According to the report of Google, more than 80\% of the failure duration is between 10 mins and 100 mins over B4 \cite{evole,riskbased}.
-For some large failure events, before finding the root cause, they will try to drain services away from affected clusters \cite{evole}.
-The service resumption after such failures can even take one day, leading to severe performance degradation and revenue loss.
-Therefore, \textit{when planning for resource allocation, network risks should proactively be taken into consideration}.
-Moreover, according to the measurement of previous literatures \cite{california,understanding}, most links experience few failures and the failure rate is heavy-tailed distribution.
-Failure probability of a single link differs by even more than three orders of magnitude \cite{failureslarge,Teavar}.
+Failures could occur anywhere, from control plane to data plane across the network \cite{Teavar}.
+They could also last for long durations, 
+%Besides, failure events could be persistent with long durations.
+as Google reports, more than 80\% of the failures last between 10 mins and 100 mins over their B4 network \cite{evole,riskbased}, 
+%For some large failure events, before finding the root cause, they will try to drain services away from affected clusters \cite{evole}.
+%The service resumption after such failures can even take one day, 
+leading to severe performance degradation and revenue loss.
+%Therefore, \textit{when planning for resource allocation, network risks should proactively be taken into consideration}.
+On the other hand, 
+according to the earlier measurements \cite{california,understanding}, failures often follow a \textit{heavy-tailed distribution},
+where a small portion of links contribute to most of the failures, while most links experience only few failures, and the failure rate of
+%Failure probability of 
+a single link can differ by even more than three orders of magnitude \cite{failureslarge,Teavar}.
+Therefore, \textit{network failures, especially their uneven distribution, should be explicitly taken into account by network operators}. 
 
 
-\textbf{Availability directly translates money:}
-Nowadays, providing high availability is one of the main items in SLAs  \cite{amazon,azure,amazon2} and customers are eligible for a credit towards a portion of their service fees if there are SLA violations. 
-We survey the SLA claims of some services from different cloud providers, then Table \ref{target} shows their declared availability targets and  corresponding refunding policies when violated.
-We can see that service providers often use a progressive piecewise function to derive refunding credits for violating availability targets.
-For example, the Microsoft Azure provides 10\% refund between 99.99\% and
-99.0\% availability, 30\% refund for anything below 99.0\% availability for the Traffic Manager service \cite{azure};
-How to offer availability guarantees to traffic under network failure is becoming a big challenge.
+\textbf{Availability directly translates into profit.}
+Nowadays, high availability is nearly always one of the main items in SLAs  \cite{amazon,azure,amazon2}, and customers are eligible for a credit refund  if there are SLA violations. 
+We conduct a survey on the SLA claims of different cloud providers, and Table \ref{target} shows their declared availability targets and  corresponding refunding policies,
+%when violated.
+%We can see that service providers often use a progressive piecewise function to derive refunding credits for violating availability targets. 
+where the refunding credit is typically represented by a simple step function. 
+For example, Microsoft Azure provides 10\% refund if its Traffic Manager service availability falls between 99.99\% and
+99.0\%, and provides 30\% refund for anything below 99.0\% availability \cite{azure};
+Offering high service availability under network failures to retain a good profit is a big challenge.
 
 %Maximizing network utilization and improving application availability are often contradictory.
 %In tunnel-based TE mechanisms, when a failure occurs in a tunnel, the remaining available tunnels can be used to redistribute the traffic.
@@ -502,19 +508,24 @@ How to offer availability guarantees to traffic under network failure is becomin
 
 
 
-\textbf{The one-size-fit-all availability target is not enough:}
+\textbf{A one-size-fit-all network availability target is not enough.}
 %Availability has attracted major attention both in the industry and research community.
 %Firstly, most of them only consider \textit{connectivity-based} availability\cite{hong2018b4}, which is conservative.
 %The connectivity-based availability\cite{hong2018b4} is defined as the service uptime percentage, where a given minute is considered up if the connection is reachable and  it tries to quickly detour failed network devices, but \textit{they only focus on the reachability of networks and do not provide performance guarantees}.
 %as a result, user experience might be influenced.
 %Bandwidth on InterDC-WAN is a valuable resource and Microsoft \cite{swan} even spends millions of dollars on WAN investment.
-In recent years, there has been a rapid increase in deploying online services (online videos, online game, online shopping, live broadcast, etc.) over clouds.
+In recent years, there has been a rapid increase in deploying realtime services (video streaming, online game, instant messaging, live broadcast, etc.) over clouds.
 Many studies have shown that users will quickly abandon sessions if the qualify of service is not guaranteed, leading to significant losses in revenue for content providers \cite{video1,video2,video3}.
-Tenants might launch multiple service instances over different data centers globally at any time.
-Inter-DC WAN bandwidth is a valuable resource and can become bottleneck \cite{swan} when  services \textit{contend} for network resource.
-In reality, availability targets vary with services, as Table \ref{target} shown, the minimal availability demands of Data Transmission\cite{alibaba2} and Short Message Service\cite{alibaba3} are 95\% and 90\%, respectively.
-Therefore, TEAVAR's guarantee such as "Users' bandwidth should be guaranteed at least $\beta\%$ time " \cite{Teavar}  is not enough,
-since it fails to differentiate availability targets of services.
+Multiple services might be simultaneously launched over the global infrastructure operated by the same content provider or cloud provider. 
+They might also pose different availability requirements, and  will contend for the  
+% multiple service instances over different data centers globally at any time.
+inter-DC WAN bandwidth.
+% is a valuable resource and can become bottleneck \cite{swan} when  services \textit{contend} for network resource.
+%In reality, availability targets vary with services, 
+As shown in  Table \ref{target}, the minimal availability demands of the Data Transmission Service \cite{alibaba2} and the Short Message Service\cite{alibaba3} are 95\% and 90\%, respectively.
+\textit{Such heterogeneous availability demands cannot be well captured and handled by a one-size-fit-all approach}, where all users get the same level of availability guarantee (e.g, TEAVAR  \cite{Teavar} only considers guaranteeing all users' bandwidth at least  $\beta\%$  time) . 
+%Therefore, TEAVAR's guarantee such as "Users' bandwidth should be guaranteed at least $\beta\%$ time " \cite{Teavar}  is not enough,
+%since it fails to differentiate availability targets of services.
 
 %Traditionally, the availability is defined as the service uptime percentage, where a given minute is considered up if the connectivity is successful.
 %We call this connectivity-based availability.
@@ -661,9 +672,9 @@ In this section, we make a full description of $\mathsf{TEDAT}$ framework, which
 Table \ref{Notation} shows the main notations.
 The framework intends to achieve the following objectives: 
  \begin{itemize}
-\item \textbf{High acceptance ratio:}  
-  Tenants' demands might arrive at anytime. 
-  The system should be able to accommodate as many demands as possible under the constraint of availability and bandwidth targets.
+\item \textbf{High acceptance ratio and low latency:}  
+  Tenants' BA demands might arrive at anytime. 
+  The system should be able to accommodate as many BA demands as possible under the constraint of availability and bandwidth targets.
 \item \textbf{Maintain high availability:}
 The system must make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
 Therefore, their bandwidth demands can be guaranteed with high probability.
@@ -673,7 +684,7 @@ When there are link failures, the system can reroute traffic that would go over 
 %
 \end{itemize}
 
-\subsection{BA abstraction}
+\subsection{Demands abstraction}
 %Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
 Tenants could deploy diverse service instances over Inter-DC WAN.
 In reality, a tenant could be a customer who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
@@ -2296,7 +2307,7 @@ Network scheduling schemes \cite{calendaring,dynamic,D3} also use SDN technology
 Although these schemes can improve the network utilization, they ignore the \textit{risk} of networks, thus, service availability can't be guaranteed.
 %\cite{,evole,Teavar,,FFC,,dynamic,SMORE,,OWAN}.  
 
-\textbf{Network risk based traffic engineering.}
+\textbf{Network risk based traffic engineering.}
 \cite{evole} studies the network failures and proposes the principles to design robust network, but it doesn't contain any TE framework.
 \cite{Optical} suggests that backbone traffic engineering strategies should consider current and past optical layer performance.
 Neither \cite{evole} nor \cite{Optical} contains TE frameworks.
