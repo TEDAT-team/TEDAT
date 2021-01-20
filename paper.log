@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  20 JAN 2021 17:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  20 JAN 2021 17:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2222,7 +2222,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3074.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3074.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 90E9CAEC82AC15602347605CB71B9759;3502.
+(rerunfilecheck)             Checksum: C7125E278849A2FFCA8971A72384E61D;3464.
 
 
 LaTeX Warning: There were undefined references.
@@ -2265,7 +2265,7 @@ ive/2016/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016
 -dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
 1/public/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1081898 bytes).
+Output written on paper.pdf (16 pages, 1081887 bytes).
 PDF statistics:
  1403 PDF objects out of 1440 (max. 8388607)
  1212 compressed objects within 13 object streams
