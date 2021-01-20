@@ -388,7 +388,7 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 \includegraphics[width=0.24\textwidth]{fig/motivation-teavar.pdf}}
 \subfigure[ $\mathsf{TEDAT}$]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-hate.pdf}}
-\caption{Different schemes comparison. According to their SLAs: service1's (red) minimal bandwidth demand of 6Gbps  from DC1 to DC4 should be guaranteed at least 99\% time and service2's (blue) minimal bandwidth demand of 12Gbps  from DC1 to DC4 should be guaranteed at least 90\% time. Link capacity is 10Gbps everywhere. Neither service gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both services are in line with their SLAs under $\mathsf{TEDAT}$. }
+\caption{Different schemes comparison. According to SLAs: user1's (red) bandwidth demand of 6Gbps from DC1 to DC4 should be guaranteed at least 99\% time and user2's (blue) bandwidth demand of 12Gbps from DC1 to DC4 should be guaranteed at least 90\% time. Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{TEDAT}$. }
 \label{motivatio_fig}
 \end{figure*}
 
@@ -571,8 +571,9 @@ FFC \cite{FFC} ensures the total bandwidth from DC1 to DC4 under at most $l$ con
 Neither of their bandwidth demands can be satisfied. This shows \textit{FFC does not differentiate between the two paths with different availabilities.} The lower path has a much smaller failure probability, and it is wasteful without utilizing it as much as possible. 
 
 On the other hand, TEAVAR \cite{Teavar} exploits the different link failure probabilities and maximizes the network utilization, subject to meeting a \textit{single} desired availability. Figure \ref{motivatio_fig}(c) illustrates the bandwidth allocation result of TEAVAR, where user1 and user2 can get their demanded 6Gbps and 12Gbps bandwidth, both in about 95.9\% time. However, this falls below 
-user1's availability demand, i.e., 99\%, and will cause a SLA violation. This is shows  \textit{TEAVAR does not consider the heterogeneous user demands on availability.} Since user1 requires a higher availability, 
-it should use the path with a lower failure probability. 
+user1's availability demand, i.e., 99\%, and will cause a SLA violation. 
+This shows  \textit{TEAVAR does not consider the heterogeneous user demands on availability.} 
+Since user1 requires a higher availability, it should use the path with a lower failure probability. 
 
 \iffalse
 FFC \cite{FFC} seeks to assign a total bandwidth $f_k$ to each node pair $k$.
