@@ -218,7 +218,7 @@ To solve these challenges, in this paper we make the following  three \textbf{co
 
 
 Firstly, we advocate traffic engineering with \textit{bandwidth availability} (\textit{BA}) provision: 
-a \textit{BA} demand $(d, \beta, \alpha, \gamma)$ means that it requests bandwidth $d$ for a life duration between $\alpha$ and $\gamma$, and should be guaranteed at least $\beta\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
+a \textit{BA} demand $d=(b, \beta, t_s, t_e)$ means that it requests bandwidth $b$ for a life duration between $t_s$ and $t_e$, and should be guaranteed at least $\beta\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
 We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{hong2018b4,bwe, B4}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., the ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
@@ -380,15 +380,15 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 
 \begin{figure*}[t]
 \centering
-\subfigure[Link failure probability]{
+\subfigure[Capacity and failure probability]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-link.pdf}}
-\subfigure[FFC (with one failure)]{
+\subfigure[FFC (with one failure) ]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-ffc.pdf}}
 \subfigure[TEAVAR]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-teavar.pdf}}
 \subfigure[ $\mathsf{TEDAT}$]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-hate.pdf}}
-\caption{Different schemes comparison. According to SLAs: user1's (red) bandwidth demand of 6Gbps from DC1 to DC4 should be guaranteed at least 99\% time and user2's (blue) bandwidth demand of 12Gbps from DC1 to DC4 should be guaranteed at least 90\% time. Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{TEDAT}$. }
+\caption{A simple example where user1 (red) requires 6Gbps bandwidth for at least 99\% time and user2 (blue) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. %Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{TEDAT}$. }
 \label{motivatio_fig}
 \end{figure*}
 
@@ -563,17 +563,17 @@ Now we use a simple example to illustrate why existing traffic engineering algor
 meet the heterogeneous bandwidth availability demands well. The toy topology we use is depicted 
 in Figure \ref{motivatio_fig}(a), where there are 4 data centers and the links connecting them 
 are annotated with their corresponding capacities and failure probabilities. Suppose we have two 
-bandwidth demands for inter-DC transfer from DC1 to DC4, i.e., user1 (red) requires 6Gbps bandwidth 
+bandwidth demands for inter-DC transmission from DC1 to DC4, i.e., user1 (red) requires 6Gbps bandwidth 
 with at least 99\% availability, and user2 (blue) requires 12Gbps bandwidth with at least 90\% availability. 
 There are two paths from DC1 to DC4, i.e., DC1$\to$ DC2 $\to$ DC4, and DC1 $\to$ DC3 $\to$ DC4, whose available probabilities are $(1-4\%) \times (1-0.0001\%)=95.999904\%$ and $(1-0.1\%) \times (1-0.0001\%) = 99.8999001\%$, respectively. We apply FFC \cite{FFC} and TEAVAR \cite{Teavar}, two latest WAN traffic engineering schemes that take network failures into account, to this scenario. 
 
-FFC \cite{FFC} ensures the total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. In Figure \ref{motivatio_fig}(b), we can see FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904\%) \times (1-99.8999001\%) = 0.004004092096\%$). Since user1 and user2 can get 3.34Gbps and 6.66Gbps, respectively, 
-Neither of their bandwidth demands can be satisfied. This shows \textit{FFC does not differentiate between the two paths with different availabilities.} The lower path has a much smaller failure probability, and it is wasteful without utilizing it as much as possible. 
+FFC \cite{FFC} guarantees a total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. Figure \ref{motivatio_fig}(b) shows FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904\%) \times (1-99.8999001\%) = 0.004004092096\%$). Since user1 and user2 can get respectively 3.34Gbps and 6.66Gbps, which are evenly distributed on the two paths from DC1 to DC4, 
+and neither of their bandwidth demands can be satisfied. This shows \textit{FFC does not differentiate between paths with different availabilities.} The lower path has a much smaller failure probability, and it is wasteful without utilizing it as much as possible. 
 
 On the other hand, TEAVAR \cite{Teavar} exploits the different link failure probabilities and maximizes the network utilization, subject to meeting a \textit{single} desired availability. Figure \ref{motivatio_fig}(c) illustrates the bandwidth allocation result of TEAVAR, where user1 and user2 can get their demanded 6Gbps and 12Gbps bandwidth, both in about 95.9\% time. However, this falls below 
 user1's availability demand, i.e., 99\%, and will cause a SLA violation. 
 This shows  \textit{TEAVAR does not consider the heterogeneous user demands on availability.} 
-Since user1 requires a higher availability, it should use the path with a lower failure probability. 
+Since user1 requires a higher availability, it is better to use a path with a lower failure probability. 
 
 \iffalse
 FFC \cite{FFC} seeks to assign a total bandwidth $f_k$ to each node pair $k$.
@@ -628,37 +628,41 @@ satisfying both of their bandwidth demands.
 \begin{table}[h!]
 \small
 \centering
-\caption{Key Notations for $\mathsf{TEDAT}$ framework. }\label{Notation}
+\caption{Key Notations for $\mathsf{TEDAT}$}\label{Notation}
 \renewcommand{\arraystretch}{1.0}
 \begin{tabular}{ccccccc}  \toprule \toprule 
 \setlength{\tabcolsep}{5pt}
 &\textbf{Input Variables}\\
 \hline
-$G(V,E)$ &\multicolumn{6}{|l}{Inter-DC WAN with nodes $V$ and Links $E$}\\
+$G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
-$k\in K$ &\multicolumn{6}{|l}{A node pair }\\
+$c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
 \hline
- $c_e$ &\multicolumn{6}{|l}{Remaining capacity of link $e$}\\
-  \hline
- $L_{te}$ &\multicolumn{6}{|l}{Whether tunnel $t$ passes link $e$}\\
+$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in the set of all s-d pairs}\\
 \hline
- $j\in J$ &\multicolumn{6}{|l}{A service }\\
- \hline
- $i\in I_a$ &\multicolumn{6}{|l}{A demand from tenant}\\
+$T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
-$d_{ik}$ &\multicolumn{6}{|l}{Bandwidth demand through node pair $k$ of $i$}\\
+$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 \hline
-$\gamma_{i}$ &\multicolumn{6}{|l}{Service type (i.e., $j$) of demand $i$}\\
+$D, D_a$ &\multicolumn{6}{|l}{the set of all arrived demands and admitted demands}\\
+%\hline
+% $j\in J$ &\multicolumn{6}{|l}{the $j$-th availability target in the level set}\\
+%\hline
+%$d_{ik}$ &\multicolumn{6}{|l}{Bandwidth demand through node pair $k$ of $i$}\\
+%\hline
+%$\gamma_{i}$ &\multicolumn{6}{|l}{Service type (i.e., $j$) of demand $i$}\\
+%\hline
+%$ \beta_{j}$ &\multicolumn{6}{|l}{Bandwidth-based availability target of service $j$}\\
 \hline
-$ \beta_{j}$ &\multicolumn{6}{|l}{Bandwidth-based availability target of service $j$}\\
+$t$ &\multicolumn{6}{|l}{a tunnel for transmitting traffic\footnote{Multiple tunnels may exist for a single s-d pair.}}\\
 \hline
-$T_{k}$ &\multicolumn{6}{|l}{Tunnel set through node pair $k$}\\
+$u_t^e$ &\multicolumn{6}{|l}{whether tunnel $t$ passes link $e \in E$}\\
 \hline
-$\bm{z}\in \bm{Z}$ &\multicolumn{6}{|l}{A network scenario}\\
+$\bm{z}\in \bm{Z}$ &\multicolumn{6}{|l}{a failure scenario in the scenario set}\\
 \hline
-$x_t(\bm{z})$ &\multicolumn{6}{|l}{Whether tunnel $t$ is available under $\bm{z}$}\\
+$p_\bm{z}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\bm{z}$ occurs}\\
 \hline
- $p(\bm{z})$ &\multicolumn{6}{|l}{Probability for network scenario $\bm{z}$}\\
+$v_t^\bm{z}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under a failure scenario $\bm{z}$}\\
 % \hline
 % $\{1,\beta_j^1,\beta_j^2....\}$ &\multicolumn{6}{|l}{The availability target list for service $j$}\\
 %  \hline
@@ -668,11 +672,12 @@ $x_t(\bm{z})$ &\multicolumn{6}{|l}{Whether tunnel $t$ is available under $\bm{z}
 
 &\textbf{Output Variables}\\
 \hline
-$f_{ikt}$& \multicolumn{6}{|l}{ Bandwidth of demand $i$ over tunnel $t \in T_{k}$ }\\
+$g_i$& \multicolumn{6}{|l}{whether demand $i$ is admitted}\\
 \hline
-$g_i$& \multicolumn{6}{|l}{Whether demand $i$ can be admitted or not}\\
+%$f_{ikt}$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t \in T_{k}$ }\\
+$f_i^t$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t$}\\
 \hline
-$h_i$& \multicolumn{6}{|l}{Profit of demand  $i$}\\
+$h_i$& \multicolumn{6}{|l}{profit (after refunding) from providing service for demand $i$}\\
 %\hline
 %\hline
 %&\textbf{Auxiliary Output Variables}\\
