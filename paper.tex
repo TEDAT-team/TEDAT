@@ -42,8 +42,10 @@
 \usepackage{color}
 \usepackage{amsmath,bm}
 \usepackage{enumerate}
+\usepackage{footnote}
+\makesavenoteenv{table}
 
-
+%\newcommand{\ballnumber}[1]{\tikz[baseline=(myanchor.base)] \node[circle,fill=.,inner sep=1pt] (myanchor) {\color{-.}\bfseries\footnotesize #1};}
 \settopmatter{printacmref=false, printccs=false, printfolios=true}
 
 % DOI
@@ -388,7 +390,7 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 \includegraphics[width=0.24\textwidth]{fig/motivation-teavar.pdf}}
 \subfigure[ $\mathsf{TEDAT}$]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-hate.pdf}}
-\caption{A simple example where user1 (red) requires 6Gbps bandwidth for at least 99\% time and user2 (blue) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. %Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{TEDAT}$. }
+\caption{A simple example where user1 (red) requires 6Gbps bandwidth for at least 99\% time and user2 (blue) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. }%Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{TEDAT}$. }
 \label{motivatio_fig}
 \end{figure*}
 
@@ -638,13 +640,19 @@ $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
 $c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
 \hline
-$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in the set of all s-d pairs}\\
+$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in s-d pair set}\\
 \hline
 $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
-$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
+%\multirow{3}{*}{VM Instances}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}&\multirow{3}{*}{Azure}\\
+%&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%}& \\
+%&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}& \\
+\multirow{3}{*}{$d_i=(\mathbf{b_i}, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with }\\
+&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$}\\
+&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}} \\
+%$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 \hline
-$D, D_a$ &\multicolumn{6}{|l}{the set of all arrived demands and admitted demands}\\
+$D, D_a$ &\multicolumn{6}{|l}{the set of arrived demands and admitted demands}\\
 %\hline
 % $j\in J$ &\multicolumn{6}{|l}{the $j$-th availability target in the level set}\\
 %\hline
@@ -660,14 +668,13 @@ $u_t^e$ &\multicolumn{6}{|l}{whether tunnel $t$ passes link $e \in E$}\\
 \hline
 $\bm{z}\in \bm{Z}$ &\multicolumn{6}{|l}{a failure scenario in the scenario set}\\
 \hline
-$p_\bm{z}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\bm{z}$ occurs}\\
+$p_{\bm{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\bm{z}$ occurs}\\
 \hline
-$v_t^\bm{z}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under a failure scenario $\bm{z}$}\\
-% \hline
+$v_t^{\bm{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenario $\bm{z}$}\\
+ \hline
 % $\{1,\beta_j^1,\beta_j^2....\}$ &\multicolumn{6}{|l}{The availability target list for service $j$}\\
 %  \hline
 % $\{1,\alpha_j^1,\alpha_j^2...\}$ &\multicolumn{6}{|l}{The profit list for service $j$}\\
-\hline
 \hline
 
 &\textbf{Output Variables}\\
@@ -675,9 +682,9 @@ $v_t^\bm{z}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under a failur
 $g_i$& \multicolumn{6}{|l}{whether demand $i$ is admitted}\\
 \hline
 %$f_{ikt}$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t \in T_{k}$ }\\
-$f_i^t$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t$}\\
+$f_i^t$& \multicolumn{6}{|l}{bandwidth allocated for demand $i$ over tunnel $t$}\\
 \hline
-$h_i$& \multicolumn{6}{|l}{profit (after refunding) from providing service for demand $i$}\\
+$h_i$& \multicolumn{6}{|l}{profit (after refunding)  for demand $i$}\\
 %\hline
 %\hline
 %&\textbf{Auxiliary Output Variables}\\
@@ -2580,9 +2587,9 @@ month = apr,
   
 @inproceedings{jointfailure, author = {Suchara, Martin and Xu, Dahai and Doverspike, Robert and Johnson, David and Rexford, Jennifer}, title = {Network Architecture for Joint Failure Recovery and Traffic Engineering}, year = {2011}, isbn = {9781450308144}, publisher = {ACM}, address = {New York, NY, USA}, url = {https://doi.org/10.1145/1993744.1993756}, doi = {10.1145/1993744.1993756}, booktitle = {Proceedings of the ACM SIGMETRICS Joint International Conference on Measurement and Modeling of Computer Systems}, pages = {97-108}, numpages = {12}, keywords = {traffic engineering, network architecture, failure recovery, simulation, optimization}, location = {San Jose, California, USA}, series = {SIGMETRICS '11} }
 
-  @article{overview, author = {Kuipers, F. A.}, title = {An Overview of Algorithms for Network Survivability}, year = {2012}, issue_date = {January 2012}, publisher = {Hindawi Limited}, address = {London, GBR}, volume = {2012}, issn = {2090-4355}, url = {https://doi.org/10.5402/2012/932456}, doi = {10.5402/2012/932456}, journal = {CN}, month = jan, articleno = {24}, numpages = {1} }
-  
-  }
+%  @article{overview, author = {Kuipers, F. A.}, title = {An Overview of Algorithms for Network Survivability}, year = {2012}, issue_date = {January 2012}, publisher = {Hindawi Limited}, address = {London, GBR}, volume = {2012}, issn = {2090-4355}, url = {https://doi.org/10.5402/2012/932456}, doi = {10.5402/2012/932456}, journal = {CN}, month = jan, articleno = {24}, numpages = {1} }
+%  
+%  }
 
 
 
