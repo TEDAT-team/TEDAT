@@ -221,7 +221,7 @@ Firstly, we advocate traffic engineering with \textit{bandwidth availability} (\
 a \textit{BA} demand $(d, \beta, \alpha, \gamma)$ means that it requests bandwidth $d$ for a life duration between $\alpha$ and $\gamma$, and should be guaranteed at least $\beta\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
-We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been considered in some TE works \cite{Google BwE, B4-after}, their methodologies and evaluations are actually targeting only a soft guarantee, i.e., the ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
+We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{Google BwE, B4-after}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., the ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
 
 
 %meet services' bandwidth-based availability targets under arbitrarily link failures (see $\S$\ref{background}).
@@ -382,7 +382,7 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 \centering
 \subfigure[Link failure probability]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-link.pdf}}
-\subfigure[FFC ]{
+\subfigure[FFC (with one failure)]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-ffc.pdf}}
 \subfigure[TEAVAR]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-teavar.pdf}}
@@ -558,8 +558,22 @@ As shown in  Table \ref{target}, the minimal availability demands of the Data Tr
 
 
 
-\subsection{Motivating $\mathsf{TEDAT}$}
-Recently, some traffic engineering algorithms have already proactively considered availability in traffic engineering. 
+\subsection{A simple motivating example for \textit{TEDAT}}
+Now we use a simple example to illustrate why existing traffic engineering algorithms cannot 
+meet the heterogeneous bandwidth availability demands well. The toy topology we use is depicted 
+in Figure \ref{motivatio_fig}(a), where there are 4 datacenters and the links connecting them 
+are annotated with their corresponding capacities and failure probabilities. Suppose we have two 
+bandwidth demands for Inter-DC tranfer from DC1 to DC4, i.e., user1 (red) requires 6Gbps bandwidth 
+with at least 99\% availability, and user2 (blue) requires 12Gbps bandwidth with at least 90\% availability. There are two paths from DC1 to DC4, i.e., DC1$\to$ DC2 $\to$ DC4, and DC1 $\to$ DC3 $\to$ DC4, whose available probabilities are $(1-4%) \times (1-0.0001%)=95.999904%$ and $(1-0.1%) \times (1-0.0001%) = 99.8999001%$, respectively. We apply FFC\cite{FFC} and TEAVAR \cite{Teavar}, two latest WAN traffic engineering schemes that take network failures into account, to this scenario. 
+
+FFC\cite{FFC} ensures the total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. In Figure \ref{motivatio_fig}(b), we can see FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904%) \times (1-99.8999001%) = 0.004004092096%$). Since user1 and user2 can get 3.34Gbps and 6.66Gbps, respectively, 
+nither of their bandwidth demands can be satisfied. This shows \textit{FFC does not differentiate between the two paths with differnt availabilities.} The lower path has a much smaller failure probability, and it is wasterful without utilizing it as much as possible. 
+
+On the other hand, TEAVAR \cite{Teavar} exploits the different link failure probabilities and maximizes the network utilization, subject to meeting a \textit{single} desired availability. Figure \ref{motivatio_fig}(c) illustrates the bandwidth allocation result of TEAVAR, where user1 and user2 can get their demanded 6Gbps and 12Gbps bandwidth, both in about 95.9\% time. However, this falls below 
+user1's availability demand, i.e., 99\%, and will cause a SLA violation. This is shows \textit{TEAVAR does not consider the heterogeneous user demands on availability.} Since user1 requires a higher availability, 
+it should use the path with a lower failure probability. 
+
+\iffalse
 FFC\cite{FFC} seeks to assign a total bandwidth $f_k$ to each node pair $k$.
 It achieves this by reserving bandwidth on each tunnel between $k$ and ensuring the total bandwidth of all tunnels is larger than $f_k$ under $l$ concurrent node/link failure scenarios.
 TEAVAR \cite{Teavar} ensures that all scenarios meeting bandwidth demand $d_k$ has a total probability no less than the required availability target.
@@ -595,13 +609,15 @@ TEAVAR's solution, shown in Figure \ref{motivatio_fig}(c), can guarantee service
 TEAVAR fails to satisfy availability target of service1, since it allocates network resources under a single availability target and ignores the different expectations of the two services.
 As a result, it can't meet service1's availability demand.
 %This suggests that TEAVAR ignores demands of different applications, as a result,  applications with higher availability demands might be unable 
-
+\fi
 
 \textbf{Our approach:}
 %$\mathsf{TEDAT}$ exploits network failure probability and attempts to satisfy applications'  bandwidth-based availability demands.
-Observe that the bandwidth allocation of our method $\mathsf{TEDAT}$ is shown in Figure \ref{motivatio_fig}(d), where service1 can derive 6Gbps over 99\% time (i.e., 99.9\% $\times$ 99.9999\%) and service2 can obtain 12Gbps over 95.9\% time (i.e., 99.9\% $\times$ 99.9999\%  $\times$ 96\% $\times$ 99.9999\%). 
-$\mathsf{TEDAT}$ assigns service1 to path (2), while the higher failure probability path (1) is only used by service2.
-Hence, both service1 and service2 are not only in line with SLAs, but also gain enough bandwidth.
+Taking into account the diverse link failure probabilities and user bandwidth availability demands, 
+Figure \ref{motivatio_fig}(d) shows a better bandwidth allocation, 
+where user1 can get 6Gbps over 99.8999001\% time (via the lower path that has a lower failure probability) and user2 can get 12Gbps over 95.999904\% time (via both the upper and the lower path), 
+satisfying both of their bandwidth demands. 
+
 %The minimal bandwidth demands of applications are able to be met with high probability under $\mathsf{TEDAT}$.
 %Low failure probability links are fully utilized to satisfy the high availability demands of applications.
 %We elaborate the details of $\mathsf{TEDAT}$ in the following section.
