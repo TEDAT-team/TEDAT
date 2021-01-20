@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{53}
+\begin{thebibliography}{52}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -75,21 +75,6 @@
 \showISBNx{9781450368735}
 \showDOI{%
 \url{https://doi.org/10.1145/3341301.3359664}}
-
-
-\bibitem[\protect\citeauthoryear{Alquraan, Takruri, Alfatafta, and
-  Al-Kiswany}{Alquraan et~al\mbox{.}}{2018}]%
-        {analysis-osdi}
-\bibfield{author}{\bibinfo{person}{Ahmed Alquraan}, \bibinfo{person}{Hatem
-  Takruri}, \bibinfo{person}{Mohammed Alfatafta}, {and} \bibinfo{person}{Samer
-  Al-Kiswany}.} \bibinfo{year}{2018}\natexlab{}.
-\newblock \showarticletitle{An Analysis of Network-Partitioning Failures in
-  Cloud Systems}. In \bibinfo{booktitle}{{\em Proceedings of the 12th USENIX
-  Conference on Operating Systems Design and Implementation}} {\em
-  (\bibinfo{series}{OSDI'18})}. \bibinfo{publisher}{USENIX Association},
-  \bibinfo{address}{USA}, \bibinfo{pages}{51--68}.
-\newblock
-\showISBNx{9781931971478}
 
 
 \bibitem[\protect\citeauthoryear{{Amazon}}{{Amazon}}{2019}]%
@@ -234,7 +219,7 @@
 
 \bibitem[\protect\citeauthoryear{Ghobadi and Mahajan}{Ghobadi and
   Mahajan}{2016a}]%
-        {Optical}
+        {failureslarge}
 \bibfield{author}{\bibinfo{person}{Monia Ghobadi} {and} \bibinfo{person}{Ratul
   Mahajan}.} \bibinfo{year}{2016}\natexlab{a}.
 \newblock \showarticletitle{Optical Layer Failures in a Large Backbone}. In
@@ -249,7 +234,7 @@
 
 \bibitem[\protect\citeauthoryear{Ghobadi and Mahajan}{Ghobadi and
   Mahajan}{2016b}]%
-        {failureslarge}
+        {Optical}
 \bibfield{author}{\bibinfo{person}{Monia Ghobadi} {and} \bibinfo{person}{Ratul
   Mahajan}.} \bibinfo{year}{2016}\natexlab{b}.
 \newblock \showarticletitle{Optical Layer Failures in a Large Backbone}. In
@@ -292,9 +277,9 @@
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{{gurobi}}{{gurobi}}{2020}]%
+\bibitem[\protect\citeauthoryear{{Gurobi}}{{Gurobi}}{2020}]%
         {gurobi}
-\bibfield{author}{\bibinfo{person}{{gurobi}}.} \bibinfo{year}{2020}\natexlab{}.
+\bibfield{author}{\bibinfo{person}{{Gurobi}}.} \bibinfo{year}{2020}\natexlab{}.
 \newblock \bibinfo{title}{Gurobi is a powerful mathematical optimization
   solver}.
 \newblock \bibinfo{howpublished}{\url{https://www.gurobi.com}}.
@@ -662,9 +647,9 @@
 \url{https://doi.org/10.1109/TNET.2005.845527}}
 
 
-\bibitem[\protect\citeauthoryear{{openflow}}{{openflow}}{2020}]%
+\bibitem[\protect\citeauthoryear{{Openflow}}{{Openflow}}{2020}]%
         {openflow}
-\bibfield{author}{\bibinfo{person}{{openflow}}.}
+\bibfield{author}{\bibinfo{person}{{Openflow}}.}
   \bibinfo{year}{2020}\natexlab{}.
 \newblock \bibinfo{title}{sdn and openflow}.
 \newblock
