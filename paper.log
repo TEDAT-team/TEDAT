@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  20 JAN 2021 17:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  20 JAN 2021 17:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2012,10 +2012,13 @@ Package pdftex.def Info: fig/evaluation/fake-failure.pdf  used on input line 15
 91.
 (pdftex.def)             Requested size: 121.51358pt x 87.50601pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1348) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 7.0pt on input line 1667.
+
+Underfull \vbox (badness 5622) has occurred while \output is active []
+
  [9.9 <./fig/evaluation/testbed-admit.pdf> <./fig/evaluation/testbed-public-2.p
 df
 
@@ -2068,7 +2071,7 @@ Package pdftex.def Info: fig/evaluation/admission-control-time.pdf  used on inp
 ut line 1817.
 (pdftex.def)             Requested size: 116.44568pt x 80.06102pt.
 
-Underfull \vbox (badness 1953) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 <fig/evaluation/error.pdf, id=828, 704.6325pt x 487.8225pt>
 File: fig/evaluation/error.pdf Graphic file (type pdf)
@@ -2265,7 +2268,7 @@ ive/2016/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016
 -dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
 1/public/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1081887 bytes).
+Output written on paper.pdf (16 pages, 1081736 bytes).
 PDF statistics:
  1403 PDF objects out of 1440 (max. 8388607)
  1212 compressed objects within 13 object streams
