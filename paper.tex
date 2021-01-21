@@ -1373,7 +1373,7 @@ For each user demand, the normal bandwidth and backup bandwidth allocated over e
 In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{TEAVAR}.
 (4) Communication Channel.
 This module is responsible for communication with brokers, where we use long-lived TCP connections to avoid unnecessary delay. 
-In addition, controller failure can be avoided by using multiple replications, 
+In addition, controller failures can be remedied by using multiple replications, 
 where the master controller is elected by the Paxos \cite{lamport1998the} algorithm.
 %To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
 
@@ -1385,7 +1385,7 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 \end{center}
 \end{figure}
 
-\textbf{Broker} is take cares of the corresponding data center. It consists of  two modules:
+\textbf{Broker} takes cares of the corresponding data center. It consists of  three modules:
 %(1) Demand  Aggregator.
 %After receiving demands from hosts, brokers will aggregate them according to service over each node pair (i.e., $d_{jk}$).
 %They are sent to controller along with the availability targets of each service (i.e., $\beta_j$);
