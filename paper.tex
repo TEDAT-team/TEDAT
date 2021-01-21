@@ -220,7 +220,7 @@ To solve these challenges, in this paper we make the following  three \textbf{co
 
 
 Firstly, we advocate traffic engineering with \textit{bandwidth availability} (\textit{BA}) provision: 
-a \textit{BA} demand $d=(b, \beta, t_s, t_e)$ means that it requests bandwidth $b$ for a life duration between $t_s$ and $t_e$, and should be guaranteed at least $\beta\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
+a \textit{BA} demand $(b_d, \beta_d, t_d^s, t_d^e)$ means that it requests bandwidth $b_d$ for a life duration between $ t_d^s$ and $t_d^e$, and should be guaranteed at least $\beta_d\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
 We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{hong2018b4,bwe, B4}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., the ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
@@ -648,12 +648,12 @@ $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 %\multirow{3}{*}{VM Instances}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}&\multirow{3}{*}{Azure}\\
 %&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%}& \\
 %&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}& \\
-\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
-&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
+\multirow{3}{*}{$(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{a BA demand, requiring bandwidth $\mathbf{b}_d$ with }\\
+&\multicolumn{6}{|l}{ availability $\beta_d$, where $\mathbf{b}_d$ is a vector $<\mathbf{b}^1_d, \mathbf{b}^2_d, ...>$}\\
 &\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 \hline
-$D, D_a$\footnote{$D_a$ will update every time slot and an admitted demand will be removed if it finishes.} &\multicolumn{6}{|l}{the set of arrived demands and admitted demands}\\
+$D, D_a$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{$D_a$ will update every time slot and an admitted demand will be removed if it finishes.} }\\
 %\hline
 % $j\in J$ &\multicolumn{6}{|l}{the $j$-th availability target in the level set}\\
 %\hline
@@ -737,8 +737,8 @@ Let $K$ denote the a source and destination DC pair.
 %\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
 %&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
 %&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
-The BA demand of user $i$, i.e., $d_i$, can be presented as $(\mathbf{b}_i, \beta_i,t_s,t_e)$,
-where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$ of bandwidth demands over all s-d pairs.
+A  bandwidth availability demand can be presented as $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
+where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ...>$ of bandwidth demands over all s-d pairs.
 %where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
 %We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
 Network providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $h_d$ to denote the profit (after refunding) for demand $d$.
@@ -825,14 +825,14 @@ Let $v_t^{\bm{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\bm{z}}=1
 %To this end, we introduce the problem formulation of $\mathsf{BATE}$ problem and 
 
 \subsection {Admission control} \label{admission_control}
-Tenants' demands come in the first-come-first-service (FCFS) manner and \textit {no preemption} is allowed.
-The new arrival demand, together with the admitted ones (i.e., $I_a$), constitute demand set $I$.
+Users' demands arrive in the first-come-first-service (FCFS) manner and \textit {no preemption} is allowed.
+The new arrival demand, together with the admitted ones (i.e., $D_a$), constitute demand set $D$.
 %The Admission control  \textit{determines whether availability target of $\forall i \in I$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new arrival demand can be admitted, otherwise, it is rejected.
-If every element in $I$ can meet its availability target, the new arrival demand can be admitted, otherwise, it is rejected.
-To accommodate as many demands as possible, we can model the admission control as a 0-1 Mixed-integer linear programming and maximize the number of demands that satisfy availability targets.
+If every element in $D$ can meet its availability target, the new arrival demand can be admitted, otherwise, it is rejected.
+To accommodate as many demands as possible, we can model the admission control as a 0-1 Mixed-Integer Linear Programming (MILP) and maximize the number of demands that satisfy availability targets.
 Appendix \ref{admission_problem} shows the optimization formulation.
-The admission control optimization problem can be proven as NP-hard problem by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
+The admission control optimization problem can be proven as a NP-hard problem by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
 We omit the details for brevity.
 %If availability target of $\forall i \in I$ can be supported simultaneously subject to network failure model, the new arrival demand can be admitted, otherwise, it is rejected.
 %If , we can model the 
@@ -840,15 +840,16 @@ We omit the details for brevity.
 
 %Solving the optimization problem shown in Appendix \ref{admission_problem} can determine whether the new coming tenant's demand can be admitted.
 %However,  the large size of network scenarios and 
-In reality, tenants' demands can arrive at anytime and admission control should reply to the tenants in near real time.
-There is a \textit{tradeoff} between efficiency and optimal solution:
+In reality, 
+%tenants' demands can arrive at anytime and admission control should reply to the tenants in near real time.
+there is a \textit{tradeoff} between efficiency and optimal solution:
 If we assume all the admitted demands are fixed and can't be rescheduled, then we can derive the solution fast but the new arrival one might be unable to be accommodated;
 If we derive the optimal solution  by solving the optimization problem shown in Appendix \ref{admission_problem}, then we can accommodate more demands, however, this is time-consuming.
 To achieve a tradeoff, we would like to address the following three steps:
 
 \begin{enumerate}
-    \item When a new demand $i$ arrives, we assume that all admitted demands are \textit{fixed} and check whether the remaining network capacity and the corresponding links' up probability can support it. If this is true, then go to step (3), otherwise, go to step (2).
-    \item Run Algorithm \ref{greedy-1}  and check whether all admitted demands can be rescheduled to accommodate the new arrival demand $i$. If this is true, then go to step (3), otherwise, the system will reject the demand, which can be resubmitted by tenants again latter.
+    \item When a new demand $d$ arrives, we assume that all admitted demands are \textit{fixed} and check whether the remaining network capacity and the corresponding links' up probability can support it. If this is true, then go to step (3), otherwise, go to step (2).
+    \item Run Algorithm \ref{greedy-1}  and check whether all admitted demands can be rescheduled to accommodate the new arrival demand $d$. If this is true, then go to step (3), otherwise, the system will reject the demand, which can be resubmitted by tenants again latter.
     \item Pre-allocate bandwidth to the demand with remaining network capacity and pass all the admitted demands to the traffic engineering algorithm.
 \end{enumerate}
 
@@ -858,12 +859,12 @@ To achieve a tradeoff, we would like to address the following three steps:
 To derive the solution when all the admitted demands can be rescheduled, we propose  Algorithm \ref{greedy-1}, which is able to gain the solution in a fast manner.
 %Therefore, we propose Algorithm \ref{greedy-1}, which gains the solution in a fast manner.
 %The key idea of the algorithm is to place requests with small bandwidth and availability demands to tunnels with small remaining capacity and availability , the algorithm chooses demand with probability.
-The algorithm will choose demand with small bandwidth and availability targets each iteration (Line 4).
+The algorithm will choose demand with smallest bandwidth times availability targets each iteration (Line 4).
 Then it checks whether the remaining network capacity can satisfy its bandwidth demand.
 If this is false, then the network is unable to support the request (Line 6-8), otherwise,  it prioritizes tunnels with small remaining capacity and up probability (Line 10).
 It allocates bandwidth with the remaining capacity of the tunnel until bandwidth demand between the node pair is fulfilled (Line 11-13).
-The algorithm will return true when all demands' bandwidth-based availability targets in $I$ are satisfied (Line 19).
-Algorithm \ref{greedy-1} is able to derive allocation results in $O(I*K*max(|T_k|))$.
+The algorithm will return true when all demands' bandwidth availability targets in $D$ are satisfied (Line 19).
+Algorithm \ref{greedy-1} is able to derive allocation results in $O(D*K*max(|T_k|))$.
 Algorithm \ref{greedy-1} can derive a tight solution:
 
 
@@ -874,21 +875,21 @@ Algorithm \ref{greedy-1} can derive a tight solution:
 
  \begin{algorithm}
 \KwIn{Input parameters shown in Table \ref{Notation}} 
-\KwOut{  $\{g_1, g_2,..,g_i,....\},\{f_{ikt}\}$\\}
-$g_i=0, s_i=1, \forall i \in I$; \\
-$f_{ikt} = 0, \forall i \in I ,  k\in K,   t\in T_{k}$;\\
+\KwOut{  $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}$\\}
+$g_d=0, s_d=1, \forall d \in D$; \\
+$f_{d}^t = 0, \forall d \in D ,  k\in K: t\in T_{k}$;\\
 \While{$true$}{
-$i=\arg_{i\in I}min\{\sum_{k\in K}d_{ik}\times \beta_{\gamma_i}\}$;\\
+$d=\arg_{d'\in D}min\{\sum_{k\in K}b_{d'}^k\times \beta_{d'}\}$;\\
 \For{$k\in K$}{
-\If{$d_{ik}> Capacity(T_k)$}{
-    $g_i=0;$\\
-    \Return $\{g_1, g_2,..,g_i,....\},\{f_{ikt}\}, False$;\\
+\If{$b_{d}^k> Capacity(T_k)$}{
+    $g_d=0;$\\
+    \Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, False$;\\
 }
-\While{$d_{ik}>0$}{
+\While{$b_{d}^k>0$}{
 $t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
- $f_{ikt}=Allocation(t, d_{ik})$;\\
- $s_i=s_i*p_t$;\\
- $d_{ik} = d_{ik}- f_{ikt};$\\
+ $f_{d}^t=Allocation(t, b_{d}^k)$;\\
+ $s_d=s_d*p_t$;\\
+ $b_{d}^k = b_{d}^k- f_{d}^t;$\\
 }
 %\For{$t\in T_k$}{
 %   $f_{ikt}=Allocation(t, d_{ik})$;\\
@@ -901,16 +902,16 @@ $t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
 %   }
 %}
 }
-  \If{$s_i <   \beta_{\gamma_{i}}$}{
-  $g_i=0$;\\
-      \Return $\{g_1, g_2,..,g_i,....\},\{f_{ikt}\}, False$;\\
+  \If{$s_d <   \beta_{d}$}{
+  $g_d=0$;\\
+      \Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, False$;\\
   }
-  $g_i=1$;\\
-  $I=I\setminus i$;\\
+  $g_d=1$;\\
+  $D=D\setminus d$;\\
 }
 
-\Return $\{g_1, g_2,..,g_i,....\},\{f_{ikt}\}, True$;\\
-\caption{Readmission control algorithm}
+\Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, True$;\\
+\caption{Rescheduling algorithm}
 \label{greedy-1}
 \end{algorithm}
 
@@ -1060,7 +1061,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 
 
 
-\subsection{Online scheduling} \label{TE}
+\subsection{Traffic scheduling} \label{TE}
 
 For each \textit{admitted} demand, the online scheduling determines bandwidth allocation over each tunnel every $T$ (e.g., 10 mins).
 The goal of online scheduling is to satisfy each demand's bandwidth-based availability target.
@@ -1493,6 +1494,42 @@ Flow table just maps the packet based on the destination and the group tables co
 \caption{A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.}
 \label{e2}
 \end{figure*}
+
+\section{Evaluation} \label{evaluation}
+In this section, we evaluate the performance of $\mathsf{BATE}$  in both real trace driven simulation and testbed.
+Our main results are as follows.
+
+%We begin by describing the experimental framework ($\S$ \ref{setting}). 
+%We show the performance of $\mathsf{BATE}$ through answering the following specific questions:
+(1)  The admission control of $\mathsf{BATE}$ can achieve a reasonable tradeoff. $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of 5\% higher rejection ratio. 
+
+%compared with the latest TE schemes like FFC and TEAVAR, BATE can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
+(2) $\mathsf{BATE}$ has consistent performance under various topologies and traffic.
+Compared with the state-of-the-art traffic engineering algorithms, $\mathsf{BATE}$ is able to make  40\% more bandwidth demands meet availability SLAs.
+
+(3) $\mathsf{BATE}$ can retain 30\% more profit when network fails.
+
+(4)  $\mathsf{BATE}$ is fast and accuracy.
+The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%. 
+
+% \begin{itemize}
+%  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
+%  In $\S$ \ref{testbedresults}, we show $\mathsf{BATE}$ proactively considers link failure probability as well as the diverse demands of services proactively and it increases the percentage of services that satisfy their availability SLAs by up to 40\%. 
+%  \item \textbf{How does $\mathsf{BATE}$ compare with the state-of-the-art traffic engineering TE schemes?} In $\S$ \ref{scales}, we show the consistent performance of  $\mathsf{BATE}$ under various topologies and traffic. $\mathsf{BATE}$ performs  up to 30\%, 40\%, 50\%, 75\% better than TEAVAR\cite{Teavar}, SMORE\cite{SMORE}, SWAN\cite{swan} and FFC\cite{FFC} on bandwidth-availability guarantee, respectively.
+% \item \textbf{ How effect is  $\mathsf{BATE}$ under different parameter settings ?} In  $\S$ \ref{settings}, we show the stable performance of $\mathsf{BATE}$  framework. It doesn't depend on specific profit function, routing schemes, etc.
+% \item \textbf{ How robust is the solution? } In $\S$ \ref{purning}, we evaluate the accuracy and efficiency of the solutions. The average error between the optimal and approximate solutions is within 8\% and we also show the algorithm is fast and accuracy enough to use in large scale network. 
+% \end{itemize}
+
+
+
+%\begin{description}
+%  
+%\item[fread] 
+%
+%\item[Fred] a person's name, e.g., there once was a dude named Fred
+%  who separated usenix.sty from this file to allow for easy
+%  inclusion.
+%\end{description}
 
 \section{Evaluation} \label{evaluation}
 In this section, we evaluate the performance of $\mathsf{BATE}$  in both real trace driven simulation and testbed.
