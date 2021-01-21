@@ -1371,7 +1371,7 @@ The results are sent to the corresponding brokers.
 Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in an expected manner. 
 It also pre-computes backup allocation (see $\S$ \ref{backup}) for some potential link failures.
 For each user demand, the normal bandwidth and backup bandwidth allocated over each tunnel (i.e., $f_i^t$) are then sent to the corresponding brokers. 
-In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{TEAVAR}.
+In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{Teavar}.
 (4) Communication Channel.
 This module is responsible for communication with brokers, where we use long-lived TCP connections to avoid unnecessary delay. 
 In addition, controller failures can be remedied by using multiple replications, 
@@ -1386,7 +1386,7 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 \end{center}
 \end{figure}
 
-\textbf{Broker} takes cares of the corresponding data center. It consists of  three modules:
+\textbf{Broker} takes care of the data center it resides in. It consists of three modules:
 %(1) Demand  Aggregator.
 %After receiving demands from hosts, brokers will aggregate them according to service over each node pair (i.e., $d_{jk}$).
 %They are sent to controller along with the availability targets of each service (i.e., $\beta_j$);
