@@ -1340,19 +1340,11 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 %In this section, we show the design and some implementation details of $\mathsf{TEDAT}$ prototype.
 %In this section, we show the design of $\mathsf{TEDAT}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
 %$\mathsf{TEDAT}$ system tries to achieve the following objectives:
-
-
-
-The system contains one controller, multiple brokers and multiple clients.
-Figure \ref{pic-overview} shows the architecture of $\mathsf{TEDAT}$ system.
+We have implemented $\mathsf{BATE}$ on the Linux platform. Figure \ref{pic-overview} shows the whole system architecture, which contains one controller, multiple brokers (one for each DC) and multiple clients (one for each host). The controller is responsible for most decision work of $\mathsf{BATE}$, including admission control, traffic scheduling, and failure recovery, while the brokers and clients are responsible for bandwidth enforcement.
 It works as follows:
-When a tenant submits a demand to the controller, the Admission Control module will check whether the request can be admitted or not (see $\S$ \ref{admission_control}).
-If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Scheduler module, while the rejected demands can be resubmitted by the tenants latter.
-The Online Scheduler module performs traffic engineering algorithm (see $\S$ \ref{TE}) every  $T$ (e.g., 10) minutes to enforce bandwidth of each demand.
-To prevent much revenue loss, the Online Scheduler module also derives the backup allocation under the assumption that  some fragile links could fail (see $\S$ \ref{backup}) every $T$. 
-Each data center has a broker that manages the hosts inside.
-Brokers track topology and apportions the allocated rate to each host.
-Each host belongs to a service and it maintains a client to enforce bandwidth. 
+When a user submits a demand to the controller, the admission control module determines whether the demand can be admitted or not (see $\S$ \ref{admission_control}).
+If the demand is admitted, this module will also allocate its demanded bandwidth on appropriate paths for the first time, and notify the brokers for enforcement. The online scheduler module performs traffic engineering (see $\S$ \ref{TE}) periodically  (e.g., every 10 minutes) to further optimize the availability expectation of all active demands. In addition, 
+for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are also distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask clients to implement appropriate rate limit on end hosts. 
 
 %The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
 
@@ -1379,7 +1371,7 @@ To handle controller failure, the controller also replicate controllers and plac
  \begin{figure}
 \begin{center}
 \includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
-\caption{ Architecture of $\mathsf{TEDAT}$.}
+\caption{System architecture of $\mathsf{TEDAT}$.}
 \label{pic-overview}
 \end{center}
 \end{figure}
