@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  21 JAN 2021 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  22 JAN 2021 00:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1796,6 +1796,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [1.1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
+Overfull \hbox (2.39467pt too wide) in paragraph at lines 222--227
+\T1/LinuxLibertineT-TLF/m/it/10 (-20) avail-abil-ity \T1/LinuxLibertineT-TLF/m/
+n/10 (-20) (\T1/LinuxLibertineT-TLF/m/it/10 (-20) BA\T1/LinuxLibertineT-TLF/m/n
+/10 (-20) ) pro-vi-sion: a \T1/LinuxLibertineT-TLF/m/it/10 (-20) BA \T1/LinuxLi
+bertineT-TLF/m/n/10 (-20) de-mand $\LMS/ntxsy/m/n/10 ¹\OML/nxlmi/m/it/10 b[]; ^
+^L[]; t[]; t[]\LMS/ntxsy/m/n/10 º$ \T1/LinuxLibertineT-TLF/m/n/10 (-20) means
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 <fig/motivation-link.pdf, id=182, 341.275pt x 280.04625pt>
@@ -2250,11 +2259,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 31232 strings out of 492985
- 544728 string characters out of 6132585
- 638699 words of memory out of 5000000
+ 31229 strings out of 492985
+ 544653 string characters out of 6132585
+ 638697 words of memory out of 5000000
  33090 multiletter control sequences out of 15000+600000
- 374369 words of font info for 756 fonts, out of 8000000 for 9000
+ 373998 words of font info for 754 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  60i,23n,94p,1770b,740s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exi
@@ -2291,7 +2300,7 @@ xlive/2016/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/20
 mf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/
 fonts/type1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
 pe1/public/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1156710 bytes).
+Output written on paper.pdf (16 pages, 1156627 bytes).
 PDF statistics:
  1419 PDF objects out of 1440 (max. 8388607)
  1226 compressed objects within 13 object streams

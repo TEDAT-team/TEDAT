@@ -220,7 +220,7 @@ To solve these challenges, in this paper we make the following  three \textbf{co
 
 
 Firstly, we advocate traffic engineering with \textit{bandwidth availability} (\textit{BA}) provision: 
-a \textit{BA} demand $d=(b_d, \beta_d, t_d^s, t_d^e)$ means that it requests bandwidth $b_d$ for a life duration between $ t_d^s$ and $t_d^e$, and should be guaranteed at least $\beta_d\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
+a \textit{BA} demand $(b_d, \beta_d, t_d^s, t_d^e)$ means that it requests bandwidth $b_d$ for a life duration between $ t_d^s$ and $t_d^e$, and should be guaranteed at least $\beta_d\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
 We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{hong2018b4,bwe, B4}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., the ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
@@ -648,7 +648,7 @@ $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 %\multirow{3}{*}{VM Instances}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}&\multirow{3}{*}{Azure}\\
 %&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%}& \\
 %&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}& \\
-\multirow{3}{*}{$d=(\mathbf{b}, \beta)$}&\multicolumn{6}{|l}{a BA demand, requiring bandwidth $\mathbf{b}_d$ with }\\
+\multirow{3}{*}{$(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{a BA demand, requiring bandwidth $\mathbf{b}_d$ with }\\
 &\multicolumn{6}{|l}{ availability $\beta_d$, where $\mathbf{b}_d$ is a vector $<\mathbf{b}^1_d, \mathbf{b}^2_d, ...>$}\\
 &\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
@@ -737,7 +737,7 @@ Let $K$ denote the a source and destination DC pair.
 %\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
 %&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
 %&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
-A  bandwidth availability demand $d$ can be presented as $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
+A  bandwidth availability demand can be presented as $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
 where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ...>$ of bandwidth demands over all s-d pairs.
 %where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
 %We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
