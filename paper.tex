@@ -653,7 +653,7 @@ $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 &\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 \hline
-$D, D_a$ &\multicolumn{6}{|l}{the set of arrived demands and admitted demands}\\
+$D, D_a$\footnote{$D_a$ will update every time slot and an admitted demand will be removed if it finishes.} &\multicolumn{6}{|l}{the set of arrived demands and admitted demands}\\
 %\hline
 % $j\in J$ &\multicolumn{6}{|l}{the $j$-th availability target in the level set}\\
 %\hline
