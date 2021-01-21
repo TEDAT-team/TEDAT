@@ -1350,7 +1350,7 @@ We have implemented $\mathsf{BATE}$ on the Linux platform. Figure \ref{pic-overv
 It works as follows:
 When a user submits a demand to the controller, the admission control module determines whether the demand can be admitted or not (see $\S$ \ref{admission_control}).
 If the demand is admitted, this module will also allocate its demanded bandwidth on appropriate paths for the first time, and notify the brokers for enforcement. The online scheduler module performs traffic scheduling (see $\S$ \ref{TE}) periodically  (e.g., every 10 minutes) to further optimize the availability expectation of all active demands. In addition, 
-for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask clients to implement appropriate rate limit on end hosts. 
+for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask the clients to implement appropriate rate limit on end hosts. 
 
 %The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
 
@@ -1385,7 +1385,7 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 \end{center}
 \end{figure}
 
-\textbf{Broker} manages the hosts in its data center and it has the following key modules:
+\textbf{Broker} is take cares of the corresponding data center. It consists of  two modules:
 %(1) Demand  Aggregator.
 %After receiving demands from hosts, brokers will aggregate them according to service over each node pair (i.e., $d_{jk}$).
 %They are sent to controller along with the availability targets of each service (i.e., $\beta_j$);
@@ -1397,28 +1397,35 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 %The broker keeps the empirical demands collected by Demand Collector.
 %With these history data, 
 %Demand Predictior will predict the future bandwidth demands with data-driven algorithms such as ARIMA\cite{ARMA}, reinforcement learning \cite{Pensieve}; 
-(1) Bandwidth Allocator.
-After deriving the requests' bandwidth allocation results (i.e., $f_{ikt}$) from controller, this module will send them to the corresponding hosts;
+(1) Bandwidth Enforcer.
+It receives the bandwidth allocation results (i.e., $f_i^t$) from controller, sends them to the corresponding hosts, and limits the actual traffic rate in each tunnel in case something is wrong on the end hosts;
 (2) Network Agent.
-It tracks topology and traffic with the aid of switches. 
-It reports news about topology changes to the controller right away.
-It also runs OpenFlow controller (e.g., \cite{floodlight}) to work with commodity OpenFlow switches;
-(3) Communication Module.
-This component is responsible for communication with controller.
+We use commodity SDN switches at data center edges to connect DCs into an Inter-DC WAN.
+The network agent runs in a SDN controller (we use floodlight \cite{floodlight}), 
+and uses the OpenFlow \cite{openflow} protocol to installs and updates forwarding rules 
+on the switches in the same DC. 
+To reduce rule complexity, our system uses a label-based forwarding scheme, 
+where the first 12 bits of a VxLAN ID represent different demands, 
+and the last 12 bits represent different tunnels.
+Therefore, 4096 demands and 4096 tunnels can be supported simultaneously, 
+which can be further expanded if necessary. 
+In this way, a flow (i.e., traffic corresponding to a BA demand) is marked with a label at the ingress switch, and the succeeding switches use this label for forwarding.
+Group tables in the switch pipelines are used for flow splitting (i.e., traffic corresponding to a BA demand 
+can be split into multiple sub-flows and transmitted in multiple tunnels).
+%Flow table just maps the packet based on the destination and the group tables consist of bandwidth weight for each label.
+Besides, the network agent also tracks the network topology, reports any change or failure to the central Controller module, and monitors the actual traffic rate. 
+(3) Communication Channel.
+This component is responsible for communication with the central Controller.
 %In reality, many switches are able to detect link failure  \cite{FDT,olfd}.
 %Brokers exploit this and send the failure information to controller after the edge switches detect link failures.
 
-\textbf{Client}  is deployed on each host.
+\textbf{Client} sits on each host to carry out rate limiting. 
 %A shim in the host OS estimates its demand to each remote DC for the next $T_b$ minutes 
 %and asks the broker for an allocation.
 %Each client has a RPC daemon that submits its SLA to its DC broker every  $T_b$ (e.g., 1) minutes.
-The client will enforce sending rate by the bandwidth enforcement module.
-The bandwidth enforcement module consists of an enforcement kernel module and an enforcement daemon.
-The enforcement daemon interacts with the site brokers to obtain rate limits. 
-The enforcement  kernel module is located between TCP/IP stack and the Linux Traffic Control (TC) module\cite{TCM}. 
-It intercepts all outgoing packets.
-Then these packets are directed to TC for rate limiting. 
+It consists of a daemon and a kernel module. The former recieves bandwidth allocation results from the site broker, while the latter sits between the TCP/IP stack and the Linux Traffic Control (TC) module to control outbound traffic rate. 
 
+\iffalse
 $\mathsf{BATE}$ system adopts OpenFlow\cite{openflow}  to install and update forwarding rules.
 To reduce forwarding complexity, our prototype uses label-based forwarding.
 %Traditionally,  VLAN header is tagged on the ingress switches and VLAN ID is often used to differentiate tunnels \cite{swan}.
@@ -1429,7 +1436,7 @@ Therefore, $2^{12}=4096$ tenants' demands and $2^{12}=4096$ tunnels can be suppo
 Flows are marked with a label at the ingress switch and the remaining switches can just read the labels and forward the packets.
 To implement unequal bandwidth splitting, our prototype uses group table in its OpenFlow pipeline.
 Flow table just maps the packet based on the destination and the group tables consist of bandwidth weight for each label.
-
+\fi
 
 
 %In reality, service providers often use a piecewise function to derive refunding credits for violating availability targets (see $\S$\ref{background}) and we can modify profit function to model this.
