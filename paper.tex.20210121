@@ -627,7 +627,6 @@ satisfying both of their bandwidth demands.
 %We elaborate the details of $\mathsf{BATE}$ in the following section.
 
 
-
 \begin{table}[h!]
 \small
 \centering
@@ -1029,7 +1028,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %The input includes two parts:
 %(1) Network states and topology.
 %For a given inter-DC WAN,  $c_e$ is the capacity of link $e$.
-%The network state $\bm{z}\in \bm{Z}$ is an uncertainty parameter with probability $p(\bm{z})$; 
+%The network state $\bm{z}\in \bm{Z}$ is an uncertainty parameter with probability $p_{\bm{z}}$; 
 %(2) Application level traffic matrix (TM) and tunnel sets for each flow pair.
 %In traditional TE, a traffic matrix is a two dimensional array that describes the bandwidth demands from one point to another over the network.
 %$\mathsf{BATE}$ extends this from two aspects:
@@ -1040,7 +1039,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %Given the network topology, we can derive the tunnel sets between site pair in advance. 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes (e.g., k-shortest paths, edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}) on performance.
 %Let $L_{te}$ present whether tunnel $t \in T_j$ passes link $e$ or not.
-%We use $x_t(\bm{z})$ to denote whether tunnel $t$ is available ($x_t(\bm{z})=1$)  or not  ($x_t(\bm{z})=0$) under network state $\bm{z}$.
+%We use $v_t^{\bm{z}}$ to denote whether tunnel $t$ is available ($v_t^{\bm{z}}=1$)  or not  ($v_t^{\bm{z}}=0$) under network state $\bm{z}$.
 
 % \begin{figure}
 %\begin{center}
@@ -1091,20 +1090,20 @@ To provider high availability with minimum induced overload, we restrict each de
 $R_{ik}(\bm{z})$ is the ratio of total reserved bandwidth to demand through pair $k$ for $i$ under network scenario $\bm{z}$ and it is defined as:
 
  \begin{eqnarray} \label{R2}
-R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}}, \quad \forall  i \in I, \bm{z}\in \bm{Z}, k \in K.
+R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}v_t^{\bm{z}} }{d_{ik}}, \quad \forall  i \in I, \bm{z}\in \bm{Z}, k \in K.
 \end{eqnarray}
 
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
 $R_{ik}(\bm{z})$ describes the allocation return under network scenario $\bm{z}$.
-In reality, tunnel $t$ might be unavailable (i.e., $x_t(\bm{z}) =0$), and if the total reserved bandwidth through all the available tunnels is larger than $d_{ik}, \forall k \in K$,  then bandwidth demand can still be satisfied and network scenario $\bm{z}$ can be regarded as \textit{qualified}, i.e., 
+In reality, tunnel $t$ might be unavailable (i.e., $v_t^{\bm{z}} =0$), and if the total reserved bandwidth through all the available tunnels is larger than $d_{ik}, \forall k \in K$,  then bandwidth demand can still be satisfied and network scenario $\bm{z}$ can be regarded as \textit{qualified}, i.e., 
 $R_{ik}(\bm{z}) \ge 1, \forall k \in K$.
 To guarantee the availability target of a demand, we should make its total probability of qualified scenario larger than availability target, i.e., 
-$\sum_{\forall k: R_{ik}(\bm{z}) \ge 1} p(\bm{z}) \ge \beta_i, \forall i \in I_a$.
+$\sum_{\forall k: R_{ik}(\bm{z}) \ge 1} p_{\bm{z}} \ge \beta_i, \forall i \in I_a$.
 %This is a step function and we define the following potential function:
 % 
 %  \begin{eqnarray} \label{B3}
-%\sum_{R_{ik}(\bm{z}) \ge 1} p(\bm{z}) \ge \beta_i, \forall i \in I_a
+%\sum_{R_{ik}(\bm{z}) \ge 1} p_{\bm{z}} \ge \beta_i, \forall i \in I_a
 %\end{eqnarray}
 %$R_{ik}(\bm{z})$ is the ratio of allocated bandwidth to  demand over node pair $k$ under network scenario $\bm{z}$.
 Let $B_i(\bm{z})$ denote the lower bound of $R_{ik}(\bm{z})$ over the $k$ pairs for  $i$ under network scenario $\bm{z}$,  i.e.,
@@ -1114,11 +1113,11 @@ B_i(\bm{z}) \le R_{ik}(\bm{z}), \quad  \forall  i \in I_a, \bm{z}\in \bm{Z}, k \
 \end{eqnarray}
 
 It is obvious  $B_i(\bm{z}) \le 1$ and $B_i(\bm{z})=1$ presents scenario $\bm{z}$ is qualified, therefore, 
-we can define $B_i(\bm{z})\times p(\bm{z})$  as the potential achieved availability of $i$ under network scenario  $\bm{z}$.
+we can define $B_i(\bm{z})\times p_{\bm{z}}$  as the potential achieved availability of $i$ under network scenario  $\bm{z}$.
 To satisfy diverse availability targets, the achieved availability should be larger than availability target, i.e., 
  
  \begin{eqnarray} \label{Achieved}
-\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},  \quad {\forall i \in I_a}
+\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}} \ge \beta_{\gamma_{i}},  \quad {\forall i \in I_a}
 \end{eqnarray}
 
 
@@ -1130,14 +1129,14 @@ We want to maximize the overall achieved availability of all admitted demands,  
 \begin{equation}
 \small
 \begin{aligned} \label{BATE-TE}
- &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
+ &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}}\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved})
 %\begin{cases}
 % \sum_{i \in I_a}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}L_{te} \le c_e, &\text{$\forall e \in E $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}v_t^{\bm{z}} }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
 %R_{ik}(\bm{z})>=B_i(\bm{z}),&{\forall i \in I_a, \bm{z} \in Z, k\in K.} \\
-%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
+%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
 % \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, &{  \forall i \in I_a, k \in K}.\\
 %f_{ikt} \ge 0,&{\forall i \in I_a , \forall k\in K,\forall t\in T_{k}}.\\
 %\end{cases}\\
@@ -1179,14 +1178,14 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 %\begin{equation}
 %\small
 %\begin{aligned} \label{BATE-TE}
-% &maximize  \sum_{i\in I} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
+% &maximize  \sum_{i\in I} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}}\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
 %\begin{cases}
 % \sum_{i \in I}\ \sum_{\forall k\in K: t\in T_{k}}f_{ikt}L_{te} \le c_e, &\text{$\forall e \in E $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{ik}(\bm{z})=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}v_t^{\bm{z}} }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
 %R_{ik}(\bm{z})>=B_i(\bm{z}),&{\forall i \in I_a, \bm{z} \in Z, k\in K.} \\
-%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
+%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
 % \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, &{  \forall i \in I_a, k \in K}.\\
 %f_{ikt} \ge 0,&{\forall i \in I_a , \forall k\in K: t\in T_{k}}.\\
 %\end{cases}\\
@@ -1249,14 +1248,14 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 %\begin{equation}
 %\small
 %\begin{aligned} \label{BATE-recovery}
-% &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
+% &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}}\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
 %\begin{cases}
 %\sum_{i\in I_a}\sum_{k\in K}\sum_{t\in Q_{h}} f'_{ikt}L_{te}+ \sum_{i\in I_a}\sum_{k\in K}\sum_{t'\in Q_{h}} f''_{ikt'}L_{t'e} \le c_e, &\text{$\forall e \in E \setminus e' $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{ik}(\bm{z})=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}v_t^{\bm{z}} }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
 %R_{ik}(\bm{z})>=B_i(\bm{z}),&{\forall i \in I_a, \bm{z} \in Z, k\in K.} \\
-%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
+%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
 % \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, &{  \forall i \in I_a, k \in K}.\\
 %f_{ikt} \ge 0,&{\forall i \in I_a , \forall k\in K,\forall t\in T_{k}}.\\
 %\end{cases}\\
@@ -1346,41 +1345,46 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 %In this section, we show the design and some implementation details of $\mathsf{BATE}$ prototype.
 %In this section, we show the design of $\mathsf{BATE}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
 %$\mathsf{BATE}$ system tries to achieve the following objectives:
-We have implemented $\mathsf{BATE}$ on the Linux platform. Figure \ref{pic-overview} shows the whole system architecture, which contains one controller, multiple brokers (one for each DC) and multiple clients (one for each host). The controller is responsible for most decision work of $\mathsf{BATE}$, including admission control, traffic scheduling, and failure recovery, while the brokers and clients are responsible for bandwidth enforcement.
+
+
+
+The system contains one controller, multiple brokers and multiple clients.
+Figure \ref{pic-overview} shows the architecture of $\mathsf{BATE}$ system.
 It works as follows:
-When a user submits a demand to the controller, the admission control module determines whether the demand can be admitted or not (see $\S$ \ref{admission_control}).
-If the demand is admitted, this module will also allocate its demanded bandwidth on appropriate paths for the first time, and notify the brokers for enforcement. The online scheduler module performs traffic scheduling (see $\S$ \ref{TE}) periodically  (e.g., every 10 minutes) to further optimize the availability expectation of all active demands. In addition, 
-for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask clients to implement appropriate rate limit on end hosts. 
+When a tenant submits a demand to the controller, the Admission Control module will check whether the request can be admitted or not (see $\S$ \ref{admission_control}).
+If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Scheduler module, while the rejected demands can be resubmitted by the tenants latter.
+The Online Scheduler module performs traffic engineering algorithm (see $\S$ \ref{TE}) every  $T$ (e.g., 10) minutes to enforce bandwidth of each demand.
+To prevent much revenue loss, the Online Scheduler module also derives the backup allocation under the assumption that  some fragile links could fail (see $\S$ \ref{backup}) every $T$. 
+Each data center has a broker that manages the hosts inside.
+Brokers track topology and apportions the allocated rate to each host.
+Each host belongs to a service and it maintains a client to enforce bandwidth. 
 
 %The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
 
 % then it limits rate according to the responses from its data center broker.
 
 
-\textbf{Controller} is the brain of the whole system. It is responsible for allocating WAN level bandwidth, and orchestrates all activities with a global view. The four main components in Controller are as follows.
+\textbf{Controller} is the brain of the whole system and it has three main modules:
 (1) Offline Routing.
-This module maintains the WAN level network topology, and computes TE tunnels between each node pair
- (i.e., $T_k,\forall \text{s-d pair} k \in K$), using certain routing algorithms (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.). 
- %When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
-These tunnels are used by the admission control module and the online scheduler module as input variables;
-(2) Admission Control.
-When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwith over the tunnels in nearly real-time.
-The results are sent to the corresponding brokers.
-(3) Online Scheduler. 
-Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in an expected manner. 
-It also pre-computes backup allocation (see $\S$ \ref{backup}) for some potential link failures.
-For each user demand, the normal bandwidth and backup bandwidth allocated over each tunnel (i.e., $f_i^t$) are then sent to the corresponding brokers. 
-In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{TEAVAR}.
-(4) Communication Channel.
-This module is responsible for communication with brokers, where we use long-lived TCP connections to avoid unnecessary delay. 
-In addition, controller failure can be avoided by using multiple replications, 
-where the master controller is elected by the Paxos \cite{lamport1998the} algorithm.
-%To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
+The controller maintains the WAN level network topology.
+When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
+Tunnel set is then sent to TE Scheduler module as the input;
+(2) Online Scheduler. 
+Every $T$ minutes,  this module will perform traffic engineering algorithm (see $\S$ \ref{TE}).
+In addition to $\mathsf{BATE}$, the prototype framework can support other TE algorithms (e.g., SWAN \cite{swan}, FFC \cite{FFC}).
+After deriving TE solution, it apportions the bandwidth allocation results over each tunnel (i.e., $f_{ikt}$) to corresponding brokers; 
+It also some fragile links could fail and derives the backup allocation (see $\S$ \ref{backup}) every $T$.
+(3) Admission Control.
+When a demand is submitted, the Admission Control module would perform admission algorithm (see $\S$ \ref{admission_control}) to reply tenants in near real-time fashion; 
+(4) Communication Module.
+This component is responsible for communication by building long TCP connections with brokers.
+The controller orchestrates all activity with a global view and is responsible for allocating WAN level bandwidth.
+To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
 
-\begin{figure}
+ \begin{figure}
 \begin{center}
 \includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
-\caption{System architecture of $\mathsf{BATE}$.}
+\caption{ Architecture of $\mathsf{BATE}$.}
 \label{pic-overview}
 \end{center}
 \end{figure}
@@ -2711,12 +2715,12 @@ Then total traffic through link $e$ should not be larger than its capacity $c_e$
 $R_{ik}(\bm{z})$ is the ratio of total reserved bandwidth to demand through pair $k$ for request $i$ under network scenario $\bm{z}$ and it is  defined as:
 
  \begin{eqnarray} \label{R}
-R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}}, \quad \forall  i \in I, \bm{z}\in \bm{Z}, k \in K.
+R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}v_t^{\bm{z}} }{d_{ik}}, \quad \forall  i \in I, \bm{z}\in \bm{Z}, k \in K.
 \end{eqnarray}
 
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
-Under network scenario $\bm{z}$, tunnel $t$ might be unavailable (i.e., $x_t(\bm{z}) =0$).
+Under network scenario $\bm{z}$, tunnel $t$ might be unavailable (i.e., $v_t^{\bm{z}} =0$).
 If the total reserved bandwidth through all the available tunnels is larger than $d_{ik}, \forall k \in K$,  then bandwidth demand can be satisfied even tunnel $t$ fails and network scenario $\bm{z}$ can be regarded as \textit{safe} .
 Let $A_i(\bm{z})$ denote whether scenario $\bm{z}$ is safe (i.e., $A_i(\bm{z})=1$) or not (i.e., $A_i(\bm{z})=0$) for request $i$:
 
@@ -2755,7 +2759,7 @@ where $M$ is a big integer that is at least larger than the upper bound of $R_{i
 It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
 The achieved bandwidth-based availability of request $i$ is the sum of all safe network scenarios' probability: 
  \begin{eqnarray} \label{S}
-S_i=\sum_{\bm{z}\in \bm{Z}}A_i(\bm{z})\times p(\bm{z}),  \quad \forall  i \in I.
+S_i=\sum_{\bm{z}\in \bm{Z}}A_i(\bm{z})\times p_{\bm{z}},  \quad \forall  i \in I.
 \end{eqnarray}
 
 We use $g_i$ to present whether the availability target of $i$ can be satisfied: 
@@ -2830,8 +2834,8 @@ s.t.
 (\ref{constraint-f}), (\ref{constraint-e}), (\ref{R}), (\ref{A-z2}), (\ref{S}), (\ref{g-2})
 %\begin{cases}
 % \sum_{i \in I}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}L_{te} \le c_e, &\text{$\forall e \in E $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I, \bm{z}\in \bm{Z},  k \in K$.}\\
-%S_i=\sum_{\bm{z}\in \bm{Z}}A_i(\bm{z})\times p(\bm{z}) , & {\forall  i \in I.}\\
+%R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}v_t^{\bm{z}} }{d_{ik}} , &\text{$\forall  i \in I, \bm{z}\in \bm{Z},  k \in K$.}\\
+%S_i=\sum_{\bm{z}\in \bm{Z}}A_i(\bm{z})\times p_{\bm{z}} , & {\forall  i \in I.}\\
 %R_{ik}(\bm{z}) < 1- A_i(\bm{z})+M\times A_i(\bm{z}),&{\forall i \in I, \bm{z} \in Z, k\in K.} \\
 %R_{ik}(\bm{z})>=A_i(\bm{z}),&{\forall i \in I, \bm{z} \in Z, k\in K.} \\
 %S_i <  \beta_{\gamma_{i}}\times  (1-g_i)+g_i,& \forall i \in I. \\
@@ -2900,7 +2904,7 @@ proof.
 %We can rewrite (\ref{S}) as:
 %
 % \begin{eqnarray} \label{S-2}
-%\forall  j \in J :  S_j=\sum_{z\in \bm{z}}A_j(\bm{z})\times p(\bm{z})
+%\forall  j \in J :  S_j=\sum_{z\in \bm{z}}A_j(\bm{z})\times p_{\bm{z}}
 %\end{eqnarray}
 %$A(\bm{z})$ is defined as:
 %

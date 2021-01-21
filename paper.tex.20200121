@@ -64,7 +64,7 @@
 
 
 \begin{document}
-\title{\bf $\mathsf{BATE}$: Boosting Bandwidth Availability Over Inter-DC WAN}
+\title{\bf $\mathsf{TEDAT}$: Boosting Bandwidth Availability Over Inter-DC WAN}
 
 %\titlenote{Produces the permission block, and copyright information}
 %\subtitle{Extended Abstract}
@@ -91,26 +91,26 @@ Inter-DataCenter Wide Area Network (Inter-DC WAN) that connects geographically d
 Due to the limited bandwidth resources and inevitable link failures, it is highly challenging to guarantee network availability for services, especially those with stringent bandwidth demands, over inter-DC WAN.
 %While modern datacenter services increasingly call for high availability, network failures in WANs remain a fairly common phenomenon.
 %Most traffic engineering schemes only consider connectivity-based availability and this severely degrades quality of service, thus revenue.
-We present $\mathsf{BATE}$,
+We present $\mathsf{TEDAT}$,
 a novel Traffic Engineering (TE)  framework that 
 %contains admission control, online scheduling and failure recovery.
 aims for \textit{bandwidth availability} provision, where a service level agreement (SLA) defines that a demand on certain bandwidth should be satisfied with a stipulated probability,  when subjected to the network capacity and possible failures of the inter-DC WAN.
-%Also, $\mathsf{BATE}$ is able to maximize revenue when network fails.
-%$\mathsf{BATE}$ tries to guarantee the bandwidth-based availability of demands . 
-%$\mathsf{BATE}$ generates a probabilistic failure model from empirical data and maximizes the profit that can be achieved under certain constrains on  bandwidth-based availability. 
+%Also, $\mathsf{TEDAT}$ is able to maximize revenue when network fails.
+%$\mathsf{TEDAT}$ tries to guarantee the bandwidth-based availability of demands . 
+%$\mathsf{TEDAT}$ generates a probabilistic failure model from empirical data and maximizes the profit that can be achieved under certain constrains on  bandwidth-based availability. 
 %For the failure model, we propose a pruning algorithm to reduce the problem size.
 %For the optimization problem, we prove it is NP-hard and  propose a greedy algorithm to efficiently solve it with only minor profit loss. 
-%We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
-The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
+%We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{TEDAT}$ over inter-DC WAN.
+The three core components of  $\mathsf{TEDAT}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
 They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of a 5\% higher rejection ratio. 
-On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
+Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{TEDAT}$ can speed up the online admission control by 30 $\times$ at the expense of a 5\% higher rejection ratio. 
+On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{TEDAT}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
 %.
-% $\mathsf{BATE}$ can 
+% $\mathsf{TEDAT}$ can 
 %(1) achieve 30 $\times$ speedup in admission control time at the expense of sacrificing 8\% in performance compared to the optimal stragety;
 %(2) increase the percentage of demands that satisfy their availability SLAs by up to 40\%;
 %(3) hold 30\% more profit for the provider when network fails. 
-%The evaluation results demonstrate that $\mathsf{BATE}$ can make 20\%, 25\%, 30\%, 40\% more flows satisfy their bandwidth-based availability demands  than TEAVAR, SMORE, SWAN and FFC, respectively.
+%The evaluation results demonstrate that $\mathsf{TEDAT}$ can make 20\%, 25\%, 30\%, 40\% more flows satisfy their bandwidth-based availability demands  than TEAVAR, SMORE, SWAN and FFC, respectively.
 \end{abstract}
 
 \maketitle
@@ -233,12 +233,12 @@ We show that state-of-the-art traffic engineering schemes fail to meet the heter
 %
 %Taking the diverse availability demands from different applications and the application importance into consideration, 
 
-Secondly, we design $\mathsf{BATE}$,
+Secondly, we design $\mathsf{TEDAT}$,
 a novel traffic engineering  framework that aims for bandwidth availability provision over inter-DC WAN (see $\S$\ref{HATE}).
-$\mathsf{BATE}$ is composed of three core components, i.e., admission control, traffic scheduling and failure recovery. 
+$\mathsf{TEDAT}$ is composed of three core components, i.e., admission control, traffic scheduling and failure recovery. 
 %The admission control scheme 
 %i.e., intent  "service $j$ is able to gain $d_j$ network bandwidth at least $\beta_j\%$ of the time" can be realized , where $\beta_j\%$ is the availability target promised in the SLA of service $j$.
-%$\mathsf{BATE}$ framework contains three parts, i.e., admission control, online scheduling and failure recovery.
+%$\mathsf{TEDAT}$ framework contains three parts, i.e., admission control, online scheduling and failure recovery.
 The admission control step strikes a balance between efficiency and optimality, so that new demands can be admitted and guaranteed as much as possible with negligible delay.
 %and our algorithm strikes a good tradeoff between efficiency and optimality.
 %After a tenant submits a demand, the admission control will check whether the request can be admitted or not in near real time fashion. 
@@ -250,70 +250,70 @@ Then based on a Linear Programming (LP) model, our traffic scheduling algorithm 
 To cope with the complexity which increases exponentially with the network size,  we also propose a pruning method by ignoring certain failure scenarios that hardly happen.
 At last, based on a Mixed-Integer Linear Programming (MILP) model, the failure recovery procedure pre-computes backup bandwidth allocations and reroutes traffic to minimize the revenue loss due to SLA violations, which is proved to be 2-optimal. 
 %Our online scheduling algorithm is able to guarantee diverse availability targets of services even when network resource is inadequate.
-%Compared with TEAVAR \cite{Teavar},  $\mathsf{BATE}$ can achieve a more reasonable balance between network utilization and availability when network resource is sufficient, and guarantee diverse availability targets of services when network resource is inadequate.
-%$\mathsf{BATE}$  also pre-computes backup allocation across each tunnel to maximize revenue when a link fails.
+%Compared with TEAVAR \cite{Teavar},  $\mathsf{TEDAT}$ can achieve a more reasonable balance between network utilization and availability when network resource is sufficient, and guarantee diverse availability targets of services when network resource is inadequate.
+%$\mathsf{TEDAT}$  also pre-computes backup allocation across each tunnel to maximize revenue when a link fails.
 %We model the failure recovery problem as  a 0-1 Mixed-integer linear programming, prove its NP-hardness and propose a 2-approximation algorithm to solve it.
-%Therefore, $\mathsf{BATE}$ can maintain profit even network fails without too much extra bandwidth headroom.
+%Therefore, $\mathsf{TEDAT}$ can maintain profit even network fails without too much extra bandwidth headroom.
 %Links are maintained ideal utilization level under 
 %The admission control works in the first-come-first-service (FCFS) manner without preemption and we model it as a 0-1 optimization problem when all the admitted demands can be rescheduled. 
 %We propose a reschedule algorithm to accommodate as many tenants' demands as possible in polynomial time.
 %The traffic engineering models bandwidth allocation as a linear programming problem and is able to guarantee availability targets of admitted demands.
 %Our traffic engineering algorithm 
-%$\mathsf{BATE}$ is motivated by the observation that empirical link failure traces available to the network operators allow us to estimate link failure probabilities and to reason availability under different network states.
+%$\mathsf{TEDAT}$ is motivated by the observation that empirical link failure traces available to the network operators allow us to estimate link failure probabilities and to reason availability under different network states.
 %%is the first formal TE framework that optimizes bandwidth-based availability.
 %%We refer the readers to Section \ref{relate} for a discussion of related work on TE, bandwidth guarantee, and other
 %%risk-aware approaches to networking.
-%%Operators actually have empirical link failures traces of inter-DC WAN and $\mathsf{BATE}$ can estimate the failure probability of links from these data.
+%%Operators actually have empirical link failures traces of inter-DC WAN and $\mathsf{TEDAT}$ can estimate the failure probability of links from these data.
 %%Also, the probability of different failure scenarios can be  explicitly reasoned with link failure probability.
-%%We define $\mathsf{BATE}$ optimization problem which aims to maximize total profit subject to bandwidth-based availability demands. 
-%We define $\mathsf{BATE}$ optimization problem to maximize SLA-aware total profit subject to bandwidth-based availability demands.
-%$\mathsf{BATE}$ problem is a 0-1 mixed-integer linear program and  it is proven to be NP-hard.
-%$\mathsf{BATE}$  aims for bandwidth-based availability provision, where a set of demands on transmission bandwidth in inter-DC WAN should be satisfied with their expected probabilities.
-%%$\mathsf{BATE}$ generates a probabilistic failure model from empirical data and maximizes the profit that can be achieved under certain constrains on bandwidth-based availability. 
+%%We define $\mathsf{TEDAT}$ optimization problem which aims to maximize total profit subject to bandwidth-based availability demands. 
+%We define $\mathsf{TEDAT}$ optimization problem to maximize SLA-aware total profit subject to bandwidth-based availability demands.
+%$\mathsf{TEDAT}$ problem is a 0-1 mixed-integer linear program and  it is proven to be NP-hard.
+%$\mathsf{TEDAT}$  aims for bandwidth-based availability provision, where a set of demands on transmission bandwidth in inter-DC WAN should be satisfied with their expected probabilities.
+%%$\mathsf{TEDAT}$ generates a probabilistic failure model from empirical data and maximizes the profit that can be achieved under certain constrains on bandwidth-based availability. 
 %For the failure model, we propose a pruning algorithm to reduce the problem size. 
 %For the optimization problem, we propose a greedy algorithm to efficiently solve it with only minor profit loss.
-% $\mathsf{BATE}$ defines Weighted Availability Profit Maximization (WAPM) problem which optimizes applications' total availability profit.
-%Input of $\mathsf{BATE}$ contains two parts: (1) Network states and its corresponding probability reasoned from the empirical data of WAN link/node failure; (2) Application level traffic matrix which is composed of bandwidth and availability demands.
+% $\mathsf{TEDAT}$ defines Weighted Availability Profit Maximization (WAPM) problem which optimizes applications' total availability profit.
+%Input of $\mathsf{TEDAT}$ contains two parts: (1) Network states and its corresponding probability reasoned from the empirical data of WAN link/node failure; (2) Application level traffic matrix which is composed of bandwidth and availability demands.
 %We define an application's achieved availability as the percentage of network states in which the allocated resource is larger than its demand.
 %The availability profit function is positively biased over the achieved availability.
 %%If an application's achieved availability is larger than availability threshold, we regard it as eligibility.
-%$\mathsf{BATE}$ optimizes the total availability profit.
+%$\mathsf{TEDAT}$ optimizes the total availability profit.
 %TeaVaR
 %enables formulating guarantees such as “user i is guaranteed bi network bandwidth at least β% of the time,” and computing bandwidth
 %assignments that achieve these guarantees for a operator-specified
 %value of β
-%$\mathsf{BATE}$ problem is a 0-1 mixed-integer linear program and we prove it is NP-hard.
+%$\mathsf{TEDAT}$ problem is a 0-1 mixed-integer linear program and we prove it is NP-hard.
 %We propose network scenario pruning algorithm to reduce problem scale  and a greedy algorithm to attain the approximate solution.
 
-%Under $\mathsf{BATE}$, services are very likely free from congestion, while maintaining high network utilization.
+%Under $\mathsf{TEDAT}$, services are very likely free from congestion, while maintaining high network utilization.
 %Compared with other TE schemes (see $\S$\ref{relate}),  it achieves better tradeoff between network utilization and availability.
 
 
 Thirdly, 
-we implement $\mathsf{BATE}$ as a real system, including a centralized controller and multiple brokers (one for each DC),  together with end-host clients (see $\S$\ref{system}).
+we implement $\mathsf{TEDAT}$ as a real system, including a centralized controller and multiple brokers (one for each DC),  together with end-host clients (see $\S$\ref{system}).
  We conduct extensive experiments using a small testbed as well as trace driven large scale simulations (see $\S$\ref{evaluation}).
-We compare  $\mathsf{BATE}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
-Our evaluation demonstrates that $\mathsf{BATE}$ can 
+We compare  $\mathsf{TEDAT}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
+Our evaluation demonstrates that $\mathsf{TEDAT}$ can 
 (1) speed up the online admission control by 30 $\times $ at the expense of a rejection ratio that is 5\% higher than the optimal strategy;
 (2) meet the bandwidth availability SLAs for 40\% more demands;
 (3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
-To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
+To our knowledge, $\mathsf{TEDAT}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
  %At last, we show the related works (see $\S$\ref{relate}).
 %Traditionally, links are heavily underutilized to achieve a more rigorous availability target. 
 %However, in reality, the failure probability of a single link can even differ by three orders of magnitude.
 %Therefore, some link failure can be negligible and it makes no sense to reduce the utilization of these links.
-%With the link Under BATE, links can maintain high utilization.
+%With the link Under TEDAT, links can maintain high utilization.
 
 %In summary, we make four key contributions:
 %
 %\begin{itemize}
 %\item We analyze deficiency of state-of-the-art availability traffic engineering schemes and  advocate bandwidth-based availability traffic engineering.
-%\item We propose $\mathsf{BATE}$
+%\item We propose $\mathsf{TEDAT}$
 %a novel TE framework that defines WAPM problem to maximize total profit subject to application availability demands with network failure probability.
 %We prove WAPM is NP-hard and propose a heuristic algorithm to solve it efficiently.
-%\item  We design an SDN-based system named $\mathsf{Dionysus}$ which works in the centralized way to implement  $\mathsf{BATE}$.
-%\item We evaluate the performance of $\mathsf{BATE}$ in both real trace driven simulation as well as real testbed. 
-%Evaluation  results show  $\mathsf{BATE}$ can make 20\%, 25\%, 30\%, 40\% more flows satisfy their bandwidth-based availability demands than TEAVAR\cite{Teavar}, SMORE\cite{SMORE}, SWAN\cite{swan} and FFC\cite{FFC}, respectively.
+%\item  We design an SDN-based system named $\mathsf{Dionysus}$ which works in the centralized way to implement  $\mathsf{TEDAT}$.
+%\item We evaluate the performance of $\mathsf{TEDAT}$ in both real trace driven simulation as well as real testbed. 
+%Evaluation  results show  $\mathsf{TEDAT}$ can make 20\%, 25\%, 30\%, 40\% more flows satisfy their bandwidth-based availability demands than TEAVAR\cite{Teavar}, SMORE\cite{SMORE}, SWAN\cite{swan} and FFC\cite{FFC}, respectively.
 %\end{itemize}
 
 %\begin{table}
@@ -388,9 +388,9 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 \includegraphics[width=0.24\textwidth]{fig/motivation-ffc.pdf}}
 \subfigure[TEAVAR]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-teavar.pdf}}
-\subfigure[ $\mathsf{BATE}$]{
+\subfigure[ $\mathsf{TEDAT}$]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-hate.pdf}}
-\caption{A simple example where user1 (red) requires 6Gbps bandwidth for at least 99\% time and user2 (blue) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. }%Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{BATE}$. }
+\caption{A simple example where user1 (red) requires 6Gbps bandwidth for at least 99\% time and user2 (blue) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. }%Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{TEDAT}$. }
 \label{motivatio_fig}
 \end{figure*}
 
@@ -560,7 +560,7 @@ As shown in  Table \ref{target}, the minimal availability demands of the Data Tr
 
 
 
-\subsection{A motivating example for $\mathsf{BATE}$}
+\subsection{A motivating example for $\mathsf{TEDAT}$}
 Now we use a simple example to illustrate why existing traffic engineering algorithms cannot 
 meet the heterogeneous bandwidth availability demands well. The toy topology we use is depicted 
 in Figure \ref{motivatio_fig}(a), where there are 4 data centers and the links connecting them 
@@ -616,22 +616,21 @@ As a result, it can't meet service1's availability demand.
 \fi
 
 \textbf{Our approach:}
-%$\mathsf{BATE}$ exploits network failure probability and attempts to satisfy applications'  bandwidth-based availability demands.
+%$\mathsf{TEDAT}$ exploits network failure probability and attempts to satisfy applications'  bandwidth-based availability demands.
 Taking into account the diverse link failure probabilities and user bandwidth availability demands, 
 Figure \ref{motivatio_fig}(d) shows a better bandwidth allocation, 
 where user1 can get 6Gbps over 99.8999001\% time (via the lower path that has a lower failure probability) and user2 can get 12Gbps over 95.999904\% time (via both the upper and the lower path), 
 satisfying both of their bandwidth demands. 
 
-%The minimal bandwidth demands of applications are able to be met with high probability under $\mathsf{BATE}$.
+%The minimal bandwidth demands of applications are able to be met with high probability under $\mathsf{TEDAT}$.
 %Low failure probability links are fully utilized to satisfy the high availability demands of applications.
-%We elaborate the details of $\mathsf{BATE}$ in the following section.
-
+%We elaborate the details of $\mathsf{TEDAT}$ in the following section.
 
 
 \begin{table}[h!]
 \small
 \centering
-\caption{Key Notations for $\mathsf{BATE}$}\label{Notation}
+\caption{Key Notations for $\mathsf{TEDAT}$}\label{Notation}
 \renewcommand{\arraystretch}{1.0}
 \begin{tabular}{ccccccc}  \toprule \toprule 
 \setlength{\tabcolsep}{5pt}
@@ -641,15 +640,15 @@ $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
 $c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
 \hline
-$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in the set of s-d pairs}\\
+$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in s-d pair set}\\
 \hline
 $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
 %\multirow{3}{*}{VM Instances}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}&\multirow{3}{*}{Azure}\\
 %&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%}& \\
 %&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}& \\
-\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
-&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
+\multirow{3}{*}{$d_i=(\mathbf{b_i}, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with }\\
+&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
 &\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 \hline
@@ -700,48 +699,42 @@ $h_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
 \end{tabular}
 \end{table}
 
-\section{$\mathsf{BATE}$ framework}\label{HATE}
-In this section, we discuss the details of $\mathsf{BATE}$, which contains three parts, i.e., admission control, traffic scheduling and failure recovery, using notations summarized in Table \ref{Notation}. 
+\section{$\mathsf{TEDAT}$}\label{HATE}
+In this section, we make a full description of $\mathsf{TEDAT}$ framework, which contains three parts, i.e., admission control, traffic scheduling and failure recovery.
+Table \ref{Notation} shows the main notations.
 The framework intends to achieve the following objectives: 
  \begin{itemize}
-\item \textbf{High admission ratio and low admission latency:}  
-  Bandwidth availability demands might arrive at anytime. 
-  The system should be able to efficiently accommodate as many BA demands as possible under the constraint of network capacity and failure probabilities, as this would increase service agility and bring more revenue. %availability and bandwidth targets.
-\item \textbf{High availability for allocated bandwidth:}
-The system should be able to optimize its achieved availability in a probabilistic manner, 
-as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with low failure probability.
-%make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
-%Therefore, their bandwidth demands can be guaranteed with high probability.
-\item \textbf{Automatic and economical failure recovery:}
-If any link failure really happens, the system should reroute traffic away from that link, 
-while minimizing any possible collateral damage to normal traffic, i.e., congestion and lower bandwidth availability due to rerouting.
+\item \textbf{High acceptance ratio and low latency:}  
+  Tenants' BA demands might arrive at anytime. 
+  The system should be able to accommodate as many BA demands as possible under the constraint of availability and bandwidth targets.
+  Also, 
+\item \textbf{Maintain high availability:}
+The system must make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
+Therefore, their bandwidth demands can be guaranteed with high probability.
+\item \textbf{Handle failures:}
+When there are link failures, the system can reroute traffic that would go over failed links over the remaining active tunnels with small revenue loss instead.
 %\item \textbf{ \& scalability:}
 %
 \end{itemize}
 
-\subsection{Abstraction of bandwidth availability demands}
+\subsection{Demands abstraction}
 %Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
-%Tenants could deploy diverse service instances over Inter-DC WAN.
-In reality, a customer could be a tenant who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
+Tenants could deploy diverse service instances over Inter-DC WAN.
+In reality, a tenant could be a customer who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
 %The cloud providers are providing many services and each service contains numerous instances across geo-distributed data centers.
 %For example, a common practice is running MapReduce operations across geo-distributed data centers and many connections from mappers to reducers are maintained.
-%Services have different bandwidth demands as well as availability targets.
-However, there exists no interface for tenants to specify bandwidth availability.
-We now present $\mathsf{BATE}$ 's availability abstraction.
+Services have different bandwidth demands as well as availability targets.
+However, there exists no interface for tenants to specify them.
+We now present $\mathsf{TEDAT}$ 's availability abstraction, which aims to guarantee the bandwidth-based availability of services.
 
 \textbf{BA demand model:}
-We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are nodes and link sets.
-Let $K$ denote the a source and destination DC pair.
-%Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
-%DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
-%\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
-%&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
-%&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
-The BA demand of user $i$, i.e., $d_i$, can be presented as $(\mathbf{b}_i, \beta_i,t_s,t_e)$,
-where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$ of bandwidth demands over all s-d pairs.
-%where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
+We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are the nodes and link sets.
+Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
+DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
+Each tenant's demand can be presented as a tuple $\{\alpha, \theta, \delta, \gamma, \mu\}$,
+where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
 %We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
-Network providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $h_d$ to denote the profit (after refunding) for demand $d$.
+Service providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $\mu$ to denote the penalty.
 %The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
 %When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
 
@@ -749,7 +742,7 @@ Network providers will offer refunding for any violating availability targets (s
 
 
 \textbf{Network  model:} 
-%$\mathsf{BATE}$ relies on network operators to provide link failure probabilities.
+%$\mathsf{TEDAT}$ relies on network operators to provide link failure probabilities.
 %A series of failure events (e.g., power outage, configuration mistakes, firmware bugs) directly lead to link failures.
 %%According to the report of Google \cite{evole}, more than 90\% of the failure events can lead to high packets losses, or blackholes to entire data centers and they might occur anytime.
 %Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
@@ -761,13 +754,13 @@ Each element $z_i \in \{0,1\}$ denotes whether link  $i$  is up ($z_i=1$) or dow
 %Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
 For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1 min).
 The up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
-Let $\bm{Z}$ present the network scenario set and $p_{\bm{z}}$ is the probability of scenario $\bm{z}\in \bm{Z}$.
+Let $\bm{Z}$ present the network scenario set and $p(\bm{z})$ is the probability of scenario $\bm{z}\in \bm{Z}$.
 %Each link is up with the probability of $p_i$. \cite{Teavar}
 Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
 Similar to TEAVAR \cite{Teavar},  probability of network scenario  $\bm{z}$ is given by:
 
 \begin{eqnarray} \label{state}
-p_{\bm{z}}&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
+p(\bm{z})&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
 &=&\prod_{i=1}^{|E|}(z_i'p_i+(1-z_i')(1-p_i))
 \end{eqnarray}
 
@@ -779,19 +772,21 @@ Then its probability $p(\{1,1,0\}) =0.9\times0.8\times0.15=0.108$.
 
 We consider tunnel-based forwarding \cite{FFC,swan,Teavar}, where traffic is carried over a set of tunnels.
 %Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
-For each node pair $k\in K$ of the inter-DC WAN, we are given a set of pre-selected tunnels $T_{k}$, where tunnel set $T_{k}$ can be derived with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}). 
+For each node pair $k\in K$ of the inter-DC WAN $G=(V,E)$, we are given a set of pre-selected tunnels $T_{k}$, where tunnel set $T_{k}$ can be derived with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}). 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes  on performance.
-Each tunnel $t\in T_{k}$ contains a set of links and  $u_t^e$ presents whether tunnel $t$ contains link $e\in E$ or not.
-%The network scenario set is $\bm{Z}$ and the corresponding probability is $p_{\bm{z}}, \forall \bm{z}\in \bm{Z} $.
-$f_d^t$ is the bandwidth allocated over tunnel $t$ for demand $d$ and 
-$D_a$ is the total \textit{admitted} demand set.
-Let $v_t^{\bm{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\bm{z}}=1$)  or not  (i.e., $v_t^{\bm{z}}=0$) under network scenario $\bm{z}$.
+Each tunnel $t\in T_{k}$ contains a set of links and  $L_{te}$ presents whether tunnel $t$ contains link $e\in E$ or not.
+%The network scenario set is $\bm{Z}$ and the corresponding probability is $p(\bm{z}), \forall \bm{z}\in \bm{Z} $.
+$f_{ikt}$ is the bandwidth allocated over tunnel $t \in T_{k}$ for demand $i$ and 
+$I_a$ is the total \textit{admitted} demand set form tenants.
+Let $x_t(\bm{z})$ denote whether tunnel $t$ is available (i.e., $x_t(\bm{z})=1$)  or not  (i.e., $x_t(\bm{z})=0$) under network scenario $\bm{z}$.
 
 %\begin{enumerate}
 %    \item  How to accommodate as many requests as possible subject to network failure model and diverse service availability targets  (see $\S$ \ref{admission_control}).
 %    \item  How to route all admitted requests with minimum induced network overload under the constraint of network failure model and diverse service availability targets (see $\S$ \ref{TE}).
 %    \item  How to reroute requests with minimum cost when network fails (see $\S$ \ref{backup}).
 %\end{enumerate}
+
+
 
 %\subsection {Modeling network scenarios}
 %%We now discuss how to model network failure scenarios.
@@ -820,9 +815,9 @@ Let $v_t^{\bm{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\bm{z}}=1
 %Consider all events will not happen, we can also derive the available probability of link $e$: $p(\{0,0,0,0\})=0.8\times0.7\times0.6\times 0.5=0.168$.
 
 
-%\subsection {Traffic Engineering for Diverse Availability Targets }\label{BATE}
+%\subsection {Traffic Engineering for Diverse Availability Targets }\label{TEDAT}
 %Based on the the network scenarios, we design our traffic engineering algorithm that optimizes bandwidth-based availability for diverse services.
-%To this end, we introduce the problem formulation of $\mathsf{BATE}$ problem and 
+%To this end, we introduce the problem formulation of $\mathsf{TEDAT}$ problem and 
 
 \subsection {Admission control} \label{admission_control}
 Tenants' demands come in the first-come-first-service (FCFS) manner and \textit {no preemption} is allowed.
@@ -1004,13 +999,13 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %  $g_i=1;$\\
 %}
 %    \Return  $g_i$;
-%  \caption{Fixed admission control for $\mathsf{BATE}$}
+%  \caption{Fixed admission control for $\mathsf{TEDAT}$}
 %  \label{admission}
 % \end{algorithm}
  
  
 
-%We now describe Traffic Engineering for Diverse Availability Targets ($\mathsf{BATE}$) in details.
+%We now describe Traffic Engineering for Diverse Availability Targets ($\mathsf{TEDAT}$) in details.
 
 
 %Like other WAN TE schemes,  we model the inter-DC WAN as a  graph $G=(V,E)$, where the node set $V$ represents data center site and
@@ -1032,11 +1027,11 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %The network state $\bm{z}\in \bm{Z}$ is an uncertainty parameter with probability $p(\bm{z})$; 
 %(2) Application level traffic matrix (TM) and tunnel sets for each flow pair.
 %In traditional TE, a traffic matrix is a two dimensional array that describes the bandwidth demands from one point to another over the network.
-%$\mathsf{BATE}$ extends this from two aspects:
+%$\mathsf{TEDAT}$ extends this from two aspects:
 %Firstly, it adds a dimension to identify applications.
 %Let $J$ denote the flow identifiers and $j \in J$ is a three tuple $<AppID, Src,Dst>$, where $AppID, Src, Dst$ are  application identifier, source data center and destination data center, respectively.
 %Secondly, each item in the traffic matrix contains minimal bandwidth demand $d_j$ , desired availability target vector $\bm{\beta}_j$ with size $u$, profit vector $\bm{\alpha}_j$ and importance $w_j$.
-%In $\mathsf{BATE}$ framework,  each flow's tunnels set $T_j$ is also part of the input.
+%In $\mathsf{TEDAT}$ framework,  each flow's tunnels set $T_j$ is also part of the input.
 %Given the network topology, we can derive the tunnel sets between site pair in advance. 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes (e.g., k-shortest paths, edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}) on performance.
 %Let $L_{te}$ present whether tunnel $t \in T_j$ passes link $e$ or not.
@@ -1129,7 +1124,7 @@ We want to maximize the overall achieved availability of all admitted demands,  
 
 \begin{equation}
 \small
-\begin{aligned} \label{BATE-TE}
+\begin{aligned} \label{TEDAT-TE}
  &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved})
@@ -1160,7 +1155,7 @@ We can see that although the traffic engineering module is LP problem, it consid
 %Each link has $2^5=32$ states and the network includes $32^3=32768$ states in total. 
 %In reality, network scale is much larger and  the states volume will increase exponentially.
 For instance, B4 \cite{B4}  topology has 12 nodes and 38 links, then there are $2^{38}-1$ network failure scenarios in total.
-%The explosive network scenarios make it impossible to solve $\mathsf{BATE}$ problem.
+%The explosive network scenarios make it impossible to solve $\mathsf{TEDAT}$ problem.
 Therefore,  an important question is  \textit{how to effectively reduce the size of  traffic engineering problem?} 
 
 
@@ -1178,7 +1173,7 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 %Network scenarios (red) located in layer 3, 4 are pruned (the root node is regarded as layer 0).
 %\begin{equation}
 %\small
-%\begin{aligned} \label{BATE-TE}
+%\begin{aligned} \label{TEDAT-TE}
 % &maximize  \sum_{i\in I} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
@@ -1194,12 +1189,12 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 %\end{aligned}
 %\end{equation}
 
-%When all demands have the same availability targets , similar to TEAVAR \cite{Teavar},  $\mathsf{BATE}$ is also able to strike a good balance between network utilization and availability.
-%Compared with TEAVAR,  $\mathsf{BATE}$ has the following two advantages:
-%Firstly, $\mathsf{BATE}$  is not as aggressive as TEAVAR. 
-%Flows can gain more bandwidth than their needs under TEAVAR \cite{Teavar}, while they can't exceed demands under  $\mathsf{BATE}$.
+%When all demands have the same availability targets , similar to TEAVAR \cite{Teavar},  $\mathsf{TEDAT}$ is also able to strike a good balance between network utilization and availability.
+%Compared with TEAVAR,  $\mathsf{TEDAT}$ has the following two advantages:
+%Firstly, $\mathsf{TEDAT}$  is not as aggressive as TEAVAR. 
+%Flows can gain more bandwidth than their needs under TEAVAR \cite{Teavar}, while they can't exceed demands under  $\mathsf{TEDAT}$.
 %Therefore, a more reasonable balance between network utilization and availability can be achieved when network is much over-provisioned.
-%Secondly, when network is under-provisioned, $\mathsf{BATE}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but TEAVAR is unable differentiate demands from tenants.
+%Secondly, when network is under-provisioned, $\mathsf{TEDAT}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but TEAVAR is unable differentiate demands from tenants.
 %Compared with TEAVAR \cite{Teavar}, our traffic engineering has the following two advantages:
 %(1)
 
@@ -1207,12 +1202,12 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 
 
 \subsection{Failure recovery} \label{backup}
-In $\mathsf{BATE}$,  traffic can also be redistributed across the surviving tunnels via rerouting when any tunnel becomes unavailable.
+In $\mathsf{TEDAT}$,  traffic can also be redistributed across the surviving tunnels via rerouting when any tunnel becomes unavailable.
 %Previous tunnel-based traffic engineering schemes (such as FFC) keep link utilization low to prevent congestion when there are failures.
-%Different from them, links have less vacant capacity under $\mathsf{BATE}$, therefore, when there are failures, re-routing might cause congestion.
+%Different from them, links have less vacant capacity under $\mathsf{TEDAT}$, therefore, when there are failures, re-routing might cause congestion.
 %When a link $e'$ fails, all tunnels through this link  fails.
 In reality, service providers have to derive refunding credits for violating availability targets (see $\S$\ref{background}).
-$\mathsf{BATE}$ proactively considers failure scenarios and pre-computes backup allocation to maximize total revenue, and the surviving tunnels can be used immediately to support tenants.
+$\mathsf{TEDAT}$ proactively considers failure scenarios and pre-computes backup allocation to maximize total revenue, and the surviving tunnels can be used immediately to support tenants.
 %Each tunnel belongs to one flow pair.
 %We can divide all node pairs into two groups, i.e.,  victim node pairs and normal node pairs, which is similar to \cite{sentinel}.
 %Let $H$ denote all the victim node pairs when link $e'$ fails.
@@ -1248,7 +1243,7 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 \end{figure}
 %\begin{equation}
 %\small
-%\begin{aligned} \label{BATE-recovery}
+%\begin{aligned} \label{TEDAT-recovery}
 % &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
@@ -1314,7 +1309,7 @@ The goal of failure recovery is to maximize profits of all the admitted demands,
 
 \begin{equation}
 \small
-\begin{aligned} \label{BATE-recovery}
+\begin{aligned} \label{TEDAT-recovery}
  &maximize  \sum_{i\in I_a} w_i\times h_i\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t.  (\ref{constraint-f3}), (\ref{B-constraint}), (\ref{B-return}), (\ref{A-SSS2})
@@ -1337,50 +1332,55 @@ As the failure recovery problem is NP-hard and one important question is \textit
 In this case,  we propose a greedy algorithm to attain an approximate solution whose pseudocode is shown in Appendix \ref{B}.
 The key idea of the greedy algorithm is to give priority to demands in non-decreasing order by the ratio of profit to its efficient bandwidth demands.
 \textit{We also prove the approximation of the greedy algorithm is 2  in Appendix \ref{B}}. 
-%The greedy algorithm can solve $\mathsf{BATE}$  problem in  $O(|J||Z||T_k||E|)$ time.
+%The greedy algorithm can solve $\mathsf{TEDAT}$  problem in  $O(|J||Z||T_k||E|)$ time.
 %We further explore the accuracy of greedy algorithm in Section \ref{evaluation}.
 
 
 
-\section{system implementation} \label{system}
-%In this section, we show the design and some implementation details of $\mathsf{BATE}$ prototype.
-%In this section, we show the design of $\mathsf{BATE}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
-%$\mathsf{BATE}$ system tries to achieve the following objectives:
-We have implemented $\mathsf{BATE}$ on the Linux platform. Figure \ref{pic-overview} shows the whole system architecture, which contains one controller, multiple brokers (one for each DC) and multiple clients (one for each host). The controller is responsible for most decision work of $\mathsf{BATE}$, including admission control, traffic scheduling, and failure recovery, while the brokers and clients are responsible for bandwidth enforcement.
+\section{$\mathsf{TEDAT}$ system} \label{system}
+%In this section, we show the design and some implementation details of $\mathsf{TEDAT}$ prototype.
+%In this section, we show the design of $\mathsf{TEDAT}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
+%$\mathsf{TEDAT}$ system tries to achieve the following objectives:
+
+
+
+The system contains one controller, multiple brokers and multiple clients.
+Figure \ref{pic-overview} shows the architecture of $\mathsf{TEDAT}$ system.
 It works as follows:
-When a user submits a demand to the controller, the admission control module determines whether the demand can be admitted or not (see $\S$ \ref{admission_control}).
-If the demand is admitted, this module will also allocate its demanded bandwidth on appropriate paths for the first time, and notify the brokers for enforcement. The online scheduler module performs traffic scheduling (see $\S$ \ref{TE}) periodically  (e.g., every 10 minutes) to further optimize the availability expectation of all active demands. In addition, 
-for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask clients to implement appropriate rate limit on end hosts. 
+When a tenant submits a demand to the controller, the Admission Control module will check whether the request can be admitted or not (see $\S$ \ref{admission_control}).
+If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Scheduler module, while the rejected demands can be resubmitted by the tenants latter.
+The Online Scheduler module performs traffic engineering algorithm (see $\S$ \ref{TE}) every  $T$ (e.g., 10) minutes to enforce bandwidth of each demand.
+To prevent much revenue loss, the Online Scheduler module also derives the backup allocation under the assumption that  some fragile links could fail (see $\S$ \ref{backup}) every $T$. 
+Each data center has a broker that manages the hosts inside.
+Brokers track topology and apportions the allocated rate to each host.
+Each host belongs to a service and it maintains a client to enforce bandwidth. 
 
 %The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
 
 % then it limits rate according to the responses from its data center broker.
 
 
-\textbf{Controller} is the brain of the whole system. It is responsible for allocating WAN level bandwidth, and orchestrates all activities with a global view. The four main components in Controller are as follows.
+\textbf{Controller} is the brain of the whole system and it has three main modules:
 (1) Offline Routing.
-This module maintains the WAN level network topology, and computes TE tunnels between each node pair
- (i.e., $T_k,\forall \text{s-d pair} k \in K$), using certain routing algorithms (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.). 
- %When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
-These tunnels are used by the admission control module and the online scheduler module as input variables;
-(2) Admission Control.
-When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwith over the tunnels in nearly real-time.
-The results are sent to the corresponding brokers.
-(3) Online Scheduler. 
-Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in an expected manner. 
-It also pre-computes backup allocation (see $\S$ \ref{backup}) for some potential link failures.
-For each user demand, the normal bandwidth and backup bandwidth allocated over each tunnel (i.e., $f_i^t$) are then sent to the corresponding brokers. 
-In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{TEAVAR}.
-(4) Communication Channel.
-This module is responsible for communication with brokers, where we use long-lived TCP connections to avoid unnecessary delay. 
-In addition, controller failure can be avoided by using multiple replications, 
-where the master controller is elected by the Paxos \cite{lamport1998the} algorithm.
-%To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
+The controller maintains the WAN level network topology.
+When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
+Tunnel set is then sent to TE Scheduler module as the input;
+(2) Online Scheduler. 
+Every $T$ minutes,  this module will perform traffic engineering algorithm (see $\S$ \ref{TE}).
+In addition to $\mathsf{TEDAT}$, the prototype framework can support other TE algorithms (e.g., SWAN \cite{swan}, FFC \cite{FFC}).
+After deriving TE solution, it apportions the bandwidth allocation results over each tunnel (i.e., $f_{ikt}$) to corresponding brokers; 
+It also some fragile links could fail and derives the backup allocation (see $\S$ \ref{backup}) every $T$.
+(3) Admission Control.
+When a demand is submitted, the Admission Control module would perform admission algorithm (see $\S$ \ref{admission_control}) to reply tenants in near real-time fashion; 
+(4) Communication Module.
+This component is responsible for communication by building long TCP connections with brokers.
+The controller orchestrates all activity with a global view and is responsible for allocating WAN level bandwidth.
+To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
 
-\begin{figure}
+ \begin{figure}
 \begin{center}
 \includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
-\caption{System architecture of $\mathsf{BATE}$.}
+\caption{ Architecture of $\mathsf{TEDAT}$.}
 \label{pic-overview}
 \end{center}
 \end{figure}
@@ -1419,7 +1419,7 @@ The enforcement  kernel module is located between TCP/IP stack and the Linux Tra
 It intercepts all outgoing packets.
 Then these packets are directed to TC for rate limiting. 
 
-$\mathsf{BATE}$ system adopts OpenFlow\cite{openflow}  to install and update forwarding rules.
+$\mathsf{TEDAT}$ system adopts OpenFlow\cite{openflow}  to install and update forwarding rules.
 To reduce forwarding complexity, our prototype uses label-based forwarding.
 %Traditionally,  VLAN header is tagged on the ingress switches and VLAN ID is often used to differentiate tunnels \cite{swan}.
 %We abandon this as VLAN ID only contains 12 bits, which is insufficient to present bandwidth demand between each DC pair.
@@ -1452,7 +1452,7 @@ Flow table just maps the packet based on the destination and the group tables co
 %\label{availability}
 %\end{equation}
 %
-%Table \ref{target} shows how to explicitly model the availability targets of services under $\mathsf{BATE}$.
+%Table \ref{target} shows how to explicitly model the availability targets of services under $\mathsf{TEDAT}$.
 %For example, the profit for Microsoft Azure Traffic Manager service \cite{azure} shown in the first line of Table \ref{target}, can be modeled as:
 %\begin{equation}
 %g=
@@ -1488,27 +1488,27 @@ Flow table just maps the packet based on the destination and the group tables co
 \end{figure*}
 
 \section{Evaluation} \label{evaluation}
-In this section, we evaluate the performance of $\mathsf{BATE}$  in both real trace driven simulation and testbed.
+In this section, we evaluate the performance of $\mathsf{TEDAT}$  in both real trace driven simulation and testbed.
 Our main results are as follows.
 
 %We begin by describing the experimental framework ($\S$ \ref{setting}). 
-%We show the performance of $\mathsf{BATE}$ through answering the following specific questions:
-(1)  The admission control of $\mathsf{BATE}$ can achieve a reasonable tradeoff. $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of 5\% higher rejection ratio. 
+%We show the performance of $\mathsf{TEDAT}$ through answering the following specific questions:
+(1)  The admission control of $\mathsf{TEDAT}$ can achieve a reasonable tradeoff. $\mathsf{TEDAT}$ can speed up the online admission control by 30 $\times$ at the expense of 5\% higher rejection ratio. 
 
-%compared with the latest TE schemes like FFC and TEAVAR, BATE can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
-(2) $\mathsf{BATE}$ has consistent performance under various topologies and traffic.
-Compared with the state-of-the-art traffic engineering algorithms, $\mathsf{BATE}$ is able to make  40\% more bandwidth demands meet availability SLAs.
+%compared with the latest TE schemes like FFC and TEAVAR, TEDAT can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
+(2) $\mathsf{TEDAT}$ has consistent performance under various topologies and traffic.
+Compared with the state-of-the-art traffic engineering algorithms, $\mathsf{TEDAT}$ is able to make  40\% more bandwidth demands meet availability SLAs.
 
-(3) $\mathsf{BATE}$ can retain 30\% more profit when network fails.
+(3) $\mathsf{TEDAT}$ can retain 30\% more profit when network fails.
 
-(4)  $\mathsf{BATE}$ is fast and accuracy.
+(4)  $\mathsf{TEDAT}$ is fast and accuracy.
 The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%. 
 
 % \begin{itemize}
-%  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
-%  In $\S$ \ref{testbedresults}, we show $\mathsf{BATE}$ proactively considers link failure probability as well as the diverse demands of services proactively and it increases the percentage of services that satisfy their availability SLAs by up to 40\%. 
-%  \item \textbf{How does $\mathsf{BATE}$ compare with the state-of-the-art traffic engineering TE schemes?} In $\S$ \ref{scales}, we show the consistent performance of  $\mathsf{BATE}$ under various topologies and traffic. $\mathsf{BATE}$ performs  up to 30\%, 40\%, 50\%, 75\% better than TEAVAR\cite{Teavar}, SMORE\cite{SMORE}, SWAN\cite{swan} and FFC\cite{FFC} on bandwidth-availability guarantee, respectively.
-% \item \textbf{ How effect is  $\mathsf{BATE}$ under different parameter settings ?} In  $\S$ \ref{settings}, we show the stable performance of $\mathsf{BATE}$  framework. It doesn't depend on specific profit function, routing schemes, etc.
+%  \item \textbf{What is the benefit of  $\mathsf{TEDAT}$ ?}
+%  In $\S$ \ref{testbedresults}, we show $\mathsf{TEDAT}$ proactively considers link failure probability as well as the diverse demands of services proactively and it increases the percentage of services that satisfy their availability SLAs by up to 40\%. 
+%  \item \textbf{How does $\mathsf{TEDAT}$ compare with the state-of-the-art traffic engineering TE schemes?} In $\S$ \ref{scales}, we show the consistent performance of  $\mathsf{TEDAT}$ under various topologies and traffic. $\mathsf{TEDAT}$ performs  up to 30\%, 40\%, 50\%, 75\% better than TEAVAR\cite{Teavar}, SMORE\cite{SMORE}, SWAN\cite{swan} and FFC\cite{FFC} on bandwidth-availability guarantee, respectively.
+% \item \textbf{ How effect is  $\mathsf{TEDAT}$ under different parameter settings ?} In  $\S$ \ref{settings}, we show the stable performance of $\mathsf{TEDAT}$  framework. It doesn't depend on specific profit function, routing schemes, etc.
 % \item \textbf{ How robust is the solution? } In $\S$ \ref{purning}, we evaluate the accuracy and efficiency of the solutions. The average error between the optimal and approximate solutions is within 8\% and we also show the algorithm is fast and accuracy enough to use in large scale network. 
 % \end{itemize}
 
@@ -1600,7 +1600,7 @@ We also evaluate FFC \cite{FFC} and TEAVAR \cite{Teavar} to make comparisons.
 %\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
 \subfigure[Data loss ratio]{
 \includegraphics[width=0.24\textwidth]{fig/evaluation/data-loss.pdf}}
-%\subfigure[After L4 failure ($\mathsf{BATE}$-1)]{
+%\subfigure[After L4 failure ($\mathsf{TEDAT}$-1)]{
 %\includegraphics[width=0.24\textwidth]{fig/evaluation/time2.pdf}}
 \subfigure[Events after L3 failure]{
 \includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
@@ -1623,28 +1623,28 @@ Every 1Mbps is sold 1$\$$.
 Availability targets and refunding ratio are randomly chosen from Azure SLAs \cite{azure}.
 Each experiment lasts 100 minutes and is repeated 20 times, where the error bars paints the maximal, minimal and mean value.
 
-Figure \ref{e2}(a) demonstrates $\mathsf{BATE}$ only performs slightly worse than the optimal solution (about 4\%) and is at least 2 $\times$ better than the \textit{Fixed} admission control.
-This is because $\mathsf{BATE}$ fully considers the availability diversity of tenants.
+Figure \ref{e2}(a) demonstrates $\mathsf{TEDAT}$ only performs slightly worse than the optimal solution (about 4\%) and is at least 2 $\times$ better than the \textit{Fixed} admission control.
+This is because $\mathsf{TEDAT}$ fully considers the availability diversity of tenants.
 In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
-Figure \ref{e2}(b) shows once a tenant's demand is admitted, $\mathsf{BATE}$ can guarantee bandwidth.
-FFC and TEAVAR with \textit{Fixed} admission control perform slightly better than when they are without admission control since many tenants' demands are rejected, but they also perform worse than $\mathsf{BATE}$, because FFC is too conservative and and TEAVAR ignores the diverse demands.
-Figure \ref{e2}(c) shows $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.
-This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.
+Figure \ref{e2}(b) shows once a tenant's demand is admitted, $\mathsf{TEDAT}$ can guarantee bandwidth.
+FFC and TEAVAR with \textit{Fixed} admission control perform slightly better than when they are without admission control since many tenants' demands are rejected, but they also perform worse than $\mathsf{TEDAT}$, because FFC is too conservative and and TEAVAR ignores the diverse demands.
+Figure \ref{e2}(c) shows $\mathsf{TEDAT}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.
+This is because $\mathsf{TEDAT}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.
 We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
-Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{BATE}$ performs about 8\% worse than FFC.
+Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{TEDAT}$ performs about 8\% worse than FFC.
 FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
-while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
+while $\mathsf{TEDAT}$ focuses on Monetary gain rather than data loss.
 %, where  FFC-1 and FFC-2 
 %denote FFC with and without Fixed admission control,  respectively.
 %where TEAVAR-1 and TEAVAR-2 are 
 %denote TEAVAR with and without Fixed admission control, 
 %We can see that 
-%Specially, more than 85\% services achieve  95\% availability under $\mathsf{BATE}$, while only about 73\% and 60\%  services achieve this target under TEAVAR and FFC.
+%Specially, more than 85\% services achieve  95\% availability under $\mathsf{TEDAT}$, while only about 73\% and 60\%  services achieve this target under TEAVAR and FFC.
 %Figure \ref{e2}(c) illustrates three schemes have similar performance for services with small availability target (i.e., $<95\%$).
-%However, for services with large availability targets (i.e., $>=99\%)$,  $\mathsf{BATE}$ performs up to  20\% and 30\% better than TEAVAR and FFC.
-%The reason for this is that $\mathsf{BATE}$ considers the diverse availability demands, so services with large targets can plunder
+%However, for services with large availability targets (i.e., $>=99\%)$,  $\mathsf{TEDAT}$ performs up to  20\% and 30\% better than TEAVAR and FFC.
+%The reason for this is that $\mathsf{TEDAT}$ considers the diverse availability demands, so services with large targets can plunder
 %bandwidth from others.
-%Compared with TEAVAR, 20\% more applications satisfy their bandwidth demand with $\mathsf{BATE}$.
+%Compared with TEAVAR, 20\% more applications satisfy their bandwidth demand with $\mathsf{TEDAT}$.
 %Figure  \ref{e2}(c) shows the scheduled results with the same parameters.
 %We can see the results approximate to that shown in Figure \ref{e2}(b).
 %The gap is narrow, about 5\% on average.
@@ -1677,7 +1677,7 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
 
 \subsubsection{A private cloud example}\label{testbedresults}
 
-%In this part we will perform experiments on our testbed to evaluate the performance of  $\mathsf{BATE}$.
+%In this part we will perform experiments on our testbed to evaluate the performance of  $\mathsf{TEDAT}$.
  \begin{table}
 \scriptsize
 \centering
@@ -1685,7 +1685,7 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
 \renewcommand{\arraystretch}{1.0}
 \begin{tabular}{|c|l|l|l|l|ll} \hline
 \setlength{\tabcolsep}{10pt}
-{Service}&\multicolumn{1}{|c|}{paths}&\multicolumn{1}{|c|}{$\mathsf{BATE}$}&\multicolumn{1}{|c|}{TEAVAR}&\multicolumn{1}{|c|}{FFC}\\
+{Service}&\multicolumn{1}{|c|}{paths}&\multicolumn{1}{|c|}{$\mathsf{TEDAT}$}&\multicolumn{1}{|c|}{TEAVAR}&\multicolumn{1}{|c|}{FFC}\\
 \hline
 &{DC1$\to$DC2$\to$DC3}&0&500&0\\
 {Service-1}&{DC1$\to$DC4$\to$DC3}&1000&500&250\\
@@ -1709,13 +1709,13 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
 %&&\multirow{2}{*}{{SWAN}}&{DC1$\to$DC2$\to$DC3}&{1000}\\
 %&&&{DC1$\to$DC4$\to$DC3}&{500}\\
 %\hline
-%&\multirow{6}{*}{500}&\multirow{2}{*}{{$\mathsf{BATE}$}}&{DC1$\to$DC4}&{250}\\
+%&\multirow{6}{*}{500}&\multirow{2}{*}{{$\mathsf{TEDAT}$}}&{DC1$\to$DC4}&{250}\\
 %&&&{DC1$\to$DC2$\to$DC3$\to$DC4}&{250}\\
 %{service-2}&&\multirow{2}{*}{{TEAVAR}}&{DC1$\to$DC4}&{250}\\
 %(99.99\%)&&&{DC1$\to$DC6$\to$DC5$\to$DC4}&{250}\\
 %&&{{SWAN}}&{DC1$\to$DC4}&{500}\\
 %\hline
-%&\multirow{4}{*}{500}&{{$\mathsf{BATE}$}}&{DC1$\to$DC6$\to$DC5}&{500}\\
+%&\multirow{4}{*}{500}&{{$\mathsf{TEDAT}$}}&{DC1$\to$DC6$\to$DC5}&{500}\\
 %{service-3}&&\multirow{2}{*}{{TEAVAR}}&{DC1$\to$DC6$\to$DC5}&{250}\\
 %(90\%)&&&{DC1$\to$DC2$\to$DC5}&{250}\\
 %&&{{SWAN}}&{DC1$\to$DC6$\to$DC5}&{500}\\
@@ -1727,13 +1727,13 @@ Service-1 is from DC1 to DC3, Service-2 is from DC1 to DC4 and Service-3 is from
 Their bandwidth demands are 1000Mbps, 500Mbps and 1500Mbps, respectively.
 Assume the availability targets of Service-1 , Service-2 and Service-3 are  99.5\%, 99.9\% and 95\%, respectively.
 All services last 100s and each experiment repeats 100 times,  where the error bars paints the maximal, minimal and mean value.
-$\mathsf{BATE}$-WT refers $\mathsf{BATE}$ without failure recovery.
+$\mathsf{TEDAT}$-WT refers $\mathsf{TEDAT}$ without failure recovery.
 
 Figure \ref{e1}(a) shows the bandwidth-based availability which is measured as the time qualification ratio. A second is regarded as qualified if the gap between total measured bandwidth and bandwidth demand is less than 1\%.
-We can see that all services can reach their availability targets under $\mathsf{BATE}$, while Service-1 fails under FFC and Service-2 fails under both TEAVAR and FFC.
+We can see that all services can reach their availability targets under $\mathsf{TEDAT}$, while Service-1 fails under FFC and Service-2 fails under both TEAVAR and FFC.
 To explore the reason, we show the scheduled results of the three schemes in TABLE \ref{testbed-1}:  
 (1) FFC reserves too much bandwidth to protect routing and service1 is unable to gain enough bandwidth;
-(2) $\mathsf{BATE}$ abandons link L4 for Service-2, while TEAVAR adopts it.
+(2) $\mathsf{TEDAT}$ abandons link L4 for Service-2, while TEAVAR adopts it.
 According to the link failure times shown in Figure \ref{e1}(b), we can see that most failures are from link L4 in our experiment.
 Although TEAVAR considers link failure probability, it ignores the availability targets of different services.
 Therefore, Service-3 gains redundant bandwidth and affects Service-2 finally.
@@ -1747,30 +1747,30 @@ Therefore, Service-3 gains redundant bandwidth and affects Service-2 finally.
 %We can see SWAN drops about 33\% bandwidth between 0.2s and 1.1s.
 %The result of service1 is similar.
 Data loss mainly comes from congestion and blackhole, where congestion losses are always link oversubscribed and blackhole losses occur during the time between a link fails and ingress switch rescale.
-Figure \ref{e1}(c) demonstrates $\mathsf{BATE}$ and FFC performs better than   $\mathsf{BATE}$-WT  and TEAVAR for data losses ratio.
+Figure \ref{e1}(c) demonstrates $\mathsf{TEDAT}$ and FFC performs better than   $\mathsf{TEDAT}$-WT  and TEAVAR for data losses ratio.
 Data losses of Service-2 under TEAVAR is high due to Link L4 failings.
-$\mathsf{BATE}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{BATE}$-WT shown in Figure \ref{e1}(d) just prove this.
-%We can see that $\mathsf{BATE}$-1 and FFC performs better than   $\mathsf{BATE}$-2  and TEAVAR.
+$\mathsf{TEDAT}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{TEDAT}$-WT shown in Figure \ref{e1}(d) just prove this.
+%We can see that $\mathsf{TEDAT}$-1 and FFC performs better than   $\mathsf{TEDAT}$-2  and TEAVAR.
 %The losses of TEAVAR mainly comes from link $L4$ failure which is adopt by Service-2.
 %When L3 fails, DC1 and DC4 take about 0.4s to detect the failure.
-%$\mathsf{BATE}$-1 can  rescale traffic with the backup allocation results, therefore, packet losses will stop immediately.
+%$\mathsf{TEDAT}$-1 can  rescale traffic with the backup allocation results, therefore, packet losses will stop immediately.
 %Control messages distributing and switch updating take about 0.3s, while the most time-consuming operation is TE computation which takes about 1s, 
-%therefore, $\mathsf{BATE}$-2 performs relatively worse than other schemes.
-%$\mathsf{BATE}$ considers link failure probability as well as the diverse demands of services \textit{proactively}, as a result, the time consuming events shown in Figure  \ref{e1}(c) rarely happens.
+%therefore, $\mathsf{TEDAT}$-2 performs relatively worse than other schemes.
+%$\mathsf{TEDAT}$ considers link failure probability as well as the diverse demands of services \textit{proactively}, as a result, the time consuming events shown in Figure  \ref{e1}(c) rarely happens.
 
 
 
 
 
 
-%We can see that SWAN has largest average link utilization, but for links with small failure probability, $\mathsf{BATE}$ is higher used.
-%This is because some low probability failure links under $\mathsf{BATE}$ are kept high utilized to guarantee bandwidth demands.
+%We can see that SWAN has largest average link utilization, but for links with small failure probability, $\mathsf{TEDAT}$ is higher used.
+%This is because some low probability failure links under $\mathsf{TEDAT}$ are kept high utilized to guarantee bandwidth demands.
 
 %Figure \ref{topologyutilization}(a) shows the average total link utilization for different schemes when traffic scale is 2.
-%We can see that average link utilization of $\mathsf{BATE}$ is about 10\% larger than TEAVAR but 10\% lower than Max-Min.
+%We can see that average link utilization of $\mathsf{TEDAT}$ is about 10\% larger than TEAVAR but 10\% lower than Max-Min.
 %Figure \ref{topologyutilization}(b)  shows the average link utilization for links with low failure probability.
-%We can see that low failure probability links under $\mathsf{BATE}$ are at least 10\% higher utilized than Max-min scheme.
-%This demonstrates that $\mathsf{BATE}$ achieves right balance between link utilization and availability. 
+%We can see that low failure probability links under $\mathsf{TEDAT}$ are at least 10\% higher utilized than Max-min scheme.
+%This demonstrates that $\mathsf{TEDAT}$ achieves right balance between link utilization and availability. 
 %\begin{figure*}[t]
 %\centering
 %\subfigure[IBM]{
@@ -1781,7 +1781,7 @@ $\mathsf{BATE}$-WT performs worse than the other three schemes, because it takes
 %\includegraphics[width=0.24\textwidth]{fig/evaluation/att-admit.pdf}}
 %\subfigure[Cernet]{
 %\includegraphics[width=0.24\textwidth]{fig/evaluation/cernet-admit.pdf}}
-%\caption{$\mathsf{BATE}$ vs. Fixed admission control scheme under different network topologies.  All requests in (a) and (b) arrive with Poisson Process. Requests in (c) arrive with Gaussian Process. Requests in (d) arrive with Poisson Process whose mean arrival rate is 6.  }
+%\caption{$\mathsf{TEDAT}$ vs. Fixed admission control scheme under different network topologies.  All requests in (a) and (b) arrive with Poisson Process. Requests in (c) arrive with Gaussian Process. Requests in (d) arrive with Poisson Process whose mean arrival rate is 6.  }
 %\label{availability_fig1}
 %\end{figure*}
 
@@ -1818,7 +1818,7 @@ CERNET2&14&32\\
 \includegraphics[width=0.24\textwidth]{fig/evaluation/cernet3.pdf}}
 \subfigure[Cernet]{
 \includegraphics[width=0.24\textwidth]{fig/evaluation/sim-monney.pdf}}
-\caption{$\mathsf{BATE}$  vs. various schemes under different network topologies.}
+\caption{$\mathsf{TEDAT}$  vs. various schemes under different network topologies.}
 \label{availability_fig1}
 \end{figure*}
 
@@ -1873,7 +1873,7 @@ CERNET2&14&32\\
 
 \subsection{Simulation evaluation}
 \textbf{Simulation setup.} 
-We evaluate the performance of $\mathsf{BATE}$ under four network topologies: B4 \cite{B4}, ATT \cite{Teavar}, IBM\cite{SMORE}, CERNET2 (China Education and Research Network), where the first three topologies (including their traffic metrics) are obtained from the authors of TEAVAR\cite{Teavar} and CERNET2 is measured by ourselves.
+We evaluate the performance of $\mathsf{TEDAT}$ under four network topologies: B4 \cite{B4}, ATT \cite{Teavar}, IBM\cite{SMORE}, CERNET2 (China Education and Research Network), where the first three topologies (including their traffic metrics) are obtained from the authors of TEAVAR\cite{Teavar} and CERNET2 is measured by ourselves.
 Table \ref{evaluation-topologies} shows the topology details.
 To accommodate the reproducibility of link failures, we make the assumption that link failures fit Weibull distribution, which has been widely used in studying failures over backbones \cite{Characterization} and inter-DC WAN \cite{Teavar}.
 Link failure probability varies each time slot with Weibull distribution.
@@ -1882,7 +1882,7 @@ The Weibull distribution probability density function $f(\lambda,k)$ contains tw
 We choose $f(0.8,0.00001)$ as our default distribution, which is similar to \cite{Teavar}.
 Tenants' demands can arrive at anytime.
 %After a request arriving the system, we run admitted control algorithm to determine whether the request can be accommodated or not.
-%As introduced above, $\mathsf{BATE}$ adopts Algorithm \ref{greedy} as its default option.
+%As introduced above, $\mathsf{TEDAT}$ adopts Algorithm \ref{greedy} as its default option.
 %We compare Algorithm \ref{greedy} (i.e, Greedy) with fixed algorithm and the optimal algorithm
 %The fixed algorithm assumes all admitted requests are fixed and checks whether the remaining network capacity can support the new request.
 %The optimal algorithm determines whether the new request can be admitted by solving (\ref{P8}). 
@@ -1895,7 +1895,7 @@ Tenants' demands can arrive at anytime.
 %In each network state, we record the application level throughput ratio as well as the network state probability.
 %The sum of network state probability in which the allocated bandwidth larger than the demand is regarded as the achieved availability.
 Traffic engineering performs every 10 time slots.
-For traffic engineering part, we compare the performance of $\mathsf{BATE}$ against FFC \cite{FFC}, TEAVAR \cite{Teavar}, SWAN \cite{swan}, SMORE \cite{SMORE}, B4 \cite{B4}.
+For traffic engineering part, we compare the performance of $\mathsf{TEDAT}$ against FFC \cite{FFC}, TEAVAR \cite{Teavar}, SWAN \cite{swan}, SMORE \cite{SMORE}, B4 \cite{B4}.
 We change them to adapt service level traffic engineering: 
 FFC tries to maximize the link utilization with considering 1 fault could occur in our evaluation.
 %To fairly compare the ability of the FFC algorithm, we let it
@@ -1917,10 +1917,10 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %DC4-DC5 link has large failure probability, so the scenario mentioned above is likely to happen.
 %Traditionally,  SDN controller will take reactive interventions when there are failures.
 %This will take too much time and QoS might have already been hurt disastrously. 
-%This demonstrates that $\mathsf{BATE}$ considers failure scenarios \textit{proactively}.
+%This demonstrates that $\mathsf{TEDAT}$ considers failure scenarios \textit{proactively}.
 %Services with large availability target will pass links with low risk probability. 
 %Therefore, the availability target can be guaranteed.
-%$\mathsf{BATE}$ considers the failure probability of links, thus, the availability demand of applications can be guaranteed.
+%$\mathsf{TEDAT}$ considers the failure probability of links, thus, the availability demand of applications can be guaranteed.
 %\begin{figure*}
 %\centering
 %\subfigure[Network state coverage]{
@@ -1932,7 +1932,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %\caption{Impact of pruning and accuracy of solution.}
 %\label{purning_fig2}
 %\end{figure*}
-%As introduced above, $\mathsf{BATE}$ calls for application level volume between each DC pair.
+%As introduced above, $\mathsf{TEDAT}$ calls for application level volume between each DC pair.
 %Our collected traffic data contains the capacity of all links and the  bandwidth demands between each DC pair.
 %We don't have real bandwidth demands of each service.
 %%We assume there are $|J|=30$ application flows in each DC pair.
@@ -1975,7 +1975,7 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 %\textbf{Metrics}.
 %We evaluate a few different metrics.
 %Firstly, we examine request acceptance/reject rate of each request admission control scheme.
-%Secondly, we compare the requests satisfied availability targets fraction between $\mathsf{BATE}$ and other engineering schemes.
+%Secondly, we compare the requests satisfied availability targets fraction between $\mathsf{TEDAT}$ and other engineering schemes.
 %Thirdly,  we report other related metrics such as network link utilization, admitted bandwidth, achieved availability and computation overhead. 
 
 
@@ -2004,7 +2004,7 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 
 \subsubsection{Performance under real network topologies}\label{scales}
 %From the comparison between the scheduled and testbed results, we can see that the scheduled results match the real testbed quite well,
-%so in the following part, we will use trace-driven simulation to evaluate the performance of $\mathsf{BATE}$.
+%so in the following part, we will use trace-driven simulation to evaluate the performance of $\mathsf{TEDAT}$.
 
 
 
@@ -2019,7 +2019,7 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 % \begin{figure}[h]
 %\begin{center}
 %\includegraphics [width=0.8\columnwidth] {fig/evaluation/fake/totalprofit.pdf}
-%\caption{Profit comparison between $\mathsf{BATE}$ and other Traffic engineering schemes.}
+%\caption{Profit comparison between $\mathsf{TEDAT}$ and other Traffic engineering schemes.}
 %\label{sim-profit}
 %\end{center}
 %\end{figure}
@@ -2038,7 +2038,7 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 %\begin{figure}[t]
 %\begin{center}
 %\includegraphics [width=0.9  \columnwidth] {fig/evaluation/fake/availability-cdf.pdf}
-%\caption{ $\mathsf{BATE}$ to various TE schemes when network capacity is over-provisioned.}
+%\caption{ $\mathsf{TEDAT}$ to various TE schemes when network capacity is over-provisioned.}
 %\label{sim-importance2}
 %\end{center}
 %\end{figure}
@@ -2089,7 +2089,7 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 %  \begin{minipage}[t]{0.33\linewidth} 
 %    \centering 
 %    \includegraphics[width=2.4 in]{fig/evaluation/error.pdf} 
-%    \caption{More $\mathsf{BATE}$ versions.} 
+%    \caption{More $\mathsf{TEDAT}$ versions.} 
 %    \label{fig-version} 
 %  \end{minipage} 
 %   \begin{minipage}[t]{0.33\linewidth} 
@@ -2106,19 +2106,19 @@ We generate tenants' bandwidth demands with a Poisson process, the duration of e
 %(1) Availability satisfaction fraction. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
-Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept about 50\% more demands than the \textit{Fixed} consistently.
+Figure \ref{availability_fig1}(a)  shows $\mathsf{TEDAT}$  rejects only about 3\% more demands than the optimal solution and can accept about 50\% more demands than the \textit{Fixed} consistently.
 Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
 %We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
 The sum of scenario probability where demand is fully satisfied reflects the \textit{achieved availability}.
 %If a demand's , then the availability defined in SLA is \textit{satisfaction}.
 The term \textit{satisfaction percentage} refers to the fraction of total arrival demands whose achieved availability are higher than their availability targets throughout duration.
-Figure \ref{availability_fig1}(b) demonstrates that $\mathsf{BATE}$ can make 40\% more demands satisfy SLA availability.
-%Demands SLA violation of  $\mathsf{BATE}$ mainly comes from admission control rejection.
-%The reason for this is that $\mathsf{BATE}$ adopts admission control and it considers the diverse availability targets of different bandwidth demands.
-$\mathsf{BATE}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but other schemes are unable differentiate demands.
-To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{availability_fig1}(c) shows $\mathsf{BATE}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
+Figure \ref{availability_fig1}(b) demonstrates that $\mathsf{TEDAT}$ can make 40\% more demands satisfy SLA availability.
+%Demands SLA violation of  $\mathsf{TEDAT}$ mainly comes from admission control rejection.
+%The reason for this is that $\mathsf{TEDAT}$ adopts admission control and it considers the diverse availability targets of different bandwidth demands.
+$\mathsf{TEDAT}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but other schemes are unable differentiate demands.
+To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{availability_fig1}(c) shows $\mathsf{TEDAT}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
 Figure \ref{availability_fig1}(d) shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
-We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algorithms when network fails.
+We can see $\mathsf{TEDAT}$  is able to retain 30\% more profit than other algorithms when network fails.
 \begin{figure}
 \centering
 \subfigure[Cutoff error]{
@@ -2130,7 +2130,7 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
 \end{figure}
 We qualify the scalability by measuring the admission control time for each demand.
 The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
-As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution under ATT topology.
+As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{TEDAT}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution under ATT topology.
 Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
 %Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
 %Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
@@ -2138,13 +2138,13 @@ Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
 % In Section \ref{solutions}, we show how to derive the solutions for WAPM problem.
 % The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
 %In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
-%Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
-Let $\mathsf{BATE}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
-Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
+%Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{TEDAT}$ problem.
+Let $\mathsf{TEDAT}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
+Then the error can be defined as $\frac{|\mathsf{TEDAT} -OPT|}{|OPT|}$.
 Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
 We can see the error is less than 8\% even the current link failure number is 1.
 Traditionally, TE should update the network state every 5-10 minutes.
-% and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{BATE}$ problem, it might be too slow.
+% and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{TEDAT}$ problem, it might be too slow.
 Figure \ref{availability_fig3} (b) shows the time when solving it with Gurobi \cite{gurobi} on the server (4-core, 2.60GHz processor with 32GB ).
 We can see that even on a large network (e.g., ATT topology), at most  15 seconds are needed when current link failure numbers are 2, which is fast enough in reality.
 %We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
@@ -2181,8 +2181,8 @@ We can see that even on a large network (e.g., ATT topology), at most  15 second
 So far, we use K-shortest path as the default tunnel selection scheme.
 There are also other tunnel selection schemes, e.g., edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}.
 Figure \ref{routing-version} shows the comparison with different tunnel selection methods.
-We can see that (1) $\mathsf{BATE}$ performs well regardless the tunnel selection algorithm.
-This indicates that the success of $\mathsf{BATE}$ doesn't reply on the particular routing scheme;
+We can see that (1) $\mathsf{TEDAT}$ performs well regardless the tunnel selection algorithm.
+This indicates that the success of $\mathsf{TEDAT}$ doesn't reply on the particular routing scheme;
 (2)  Oblivious routing is still slighter better than KSP and edge disjoint paths.
 This is because it is intended to avoid link over-utilization through diverse and low-stretch path selection.
 
@@ -2191,26 +2191,26 @@ Figure \ref{approximation} shows the approximation of the greedy algorithm, wher
 We can see that the profit loss of greedy algorithm is less than 10\%.
 %Satisfaction percentage. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %Figure \ref{availability_fig1}(b) shows 
-%$\mathsf{BATE}$ performs about 20\%, 25\%, 30\%,  40\% better than TEAVAR, SMORE, SWAN, FFC, respectively.
+%$\mathsf{TEDAT}$ performs about 20\%, 25\%, 30\%,  40\% better than TEAVAR, SMORE, SWAN, FFC, respectively.
 %%Specially, when traffic scale is 3, more than 70\% applications can satisfy their availability demands, which is at least 30\% better than TEAVAR.
-%Specially, the advantage of $\mathsf{BATE}$  is more obvious when there are resource competition (e.g., $s=3$).
-%%The reason for this is that $\mathsf{BATE}$ considers the bandwidth-based availability demand differentiation of applications.
-%This picture also demonstrates that the performance of $\mathsf{BATE}$ doesn't depend on particular network topology and traffic.
+%Specially, the advantage of $\mathsf{TEDAT}$  is more obvious when there are resource competition (e.g., $s=3$).
+%%The reason for this is that $\mathsf{TEDAT}$ considers the bandwidth-based availability demand differentiation of applications.
+%This picture also demonstrates that the performance of $\mathsf{TEDAT}$ doesn't depend on particular network topology and traffic.
 %Next, we take IBM trace as the example and perform the experiments.
 
  
-%Figure \ref{motivatio_fig2}(a) shows total profit comparison between $\mathsf{BATE}$ and other schemes.
-%We can see that   $\mathsf{BATE}$ performs best and its performance is even up to 30\%, 40\%, 50\%, 75\% better than TEAVAR, SMORE, SWAN and FFC when traffic scale is 3.
+%Figure \ref{motivatio_fig2}(a) shows total profit comparison between $\mathsf{TEDAT}$ and other schemes.
+%We can see that   $\mathsf{TEDAT}$ performs best and its performance is even up to 30\%, 40\%, 50\%, 75\% better than TEAVAR, SMORE, SWAN and FFC when traffic scale is 3.
 %Figure \ref{motivatio_fig2}(b) shows the percentage of services whose availability targets are satisfied for different importance levels when traffic scale is 3. 
 %In the picture, L, U, N, I, S are abbreviations of Lax, Unimportant, Normal, Important and Significant, and the error bar paints the mean
 %and mean $\pm$ standard deviation value.
-%We can see $\mathsf{BATE}$ performs even worse than other TE schemes for the Lax services, but it performs at least 25\% better for the Important and Significant services.
-%%We can see that  40\% more important services (i.e., Important, Significant) under $\mathsf{BATE}$ can meet their availability demands.
-%%,since the importance of services is taken into consideration under  $\mathsf{BATE}$, while most schemes ignore this.
-%Specially, we can see that SWAN \cite{swan} also performs well for the importance services, but it allocates bandwidth only in strict precedence across  three coarse priority classes and  $\mathsf{BATE}$ is  fine-grained priority and can describe the five level of importance.
-% $\mathsf{BATE}$ aims to maximize the sum profit of all services, where a service's profit is defined in (\ref{availability}).
+%We can see $\mathsf{TEDAT}$ performs even worse than other TE schemes for the Lax services, but it performs at least 25\% better for the Important and Significant services.
+%%We can see that  40\% more important services (i.e., Important, Significant) under $\mathsf{TEDAT}$ can meet their availability demands.
+%%,since the importance of services is taken into consideration under  $\mathsf{TEDAT}$, while most schemes ignore this.
+%Specially, we can see that SWAN \cite{swan} also performs well for the importance services, but it allocates bandwidth only in strict precedence across  three coarse priority classes and  $\mathsf{TEDAT}$ is  fine-grained priority and can describe the five level of importance.
+% $\mathsf{TEDAT}$ aims to maximize the sum profit of all services, where a service's profit is defined in (\ref{availability}).
 %Figure \ref{motivatio_fig2}(c) presents the CDF of achieved availability for different schemes when traffic scale is 3.
-%We can see that about 87\%  services's achieved availability are larger than 95\% under  $\mathsf{BATE}$, which is at least 30\% better than other schemes.
+%We can see that about 87\%  services's achieved availability are larger than 95\% under  $\mathsf{TEDAT}$, which is at least 30\% better than other schemes.
 %Figure \ref{motivatio_fig2}(a) shows that larger tunnel number can provide slighter higher availability.
 %This is because that more alternative tunnels can be used to meet the bandwidth demands.
 %Our trace doesn't contain application level traffic matrix, so we divide the original WAN traffic into $|J|=30$ parts randomly.
@@ -2224,8 +2224,8 @@ We can see that the profit loss of greedy algorithm is less than 10\%.
 
 %Figure \ref{availability_fig2} shows availability satisfaction fraction of applications with different importance.
 %Figure \ref{availability_fig2}(a) demonstrates the total profit.
-%We can see that $\mathsf{BATE}$ gains more 20\% profit than other schemes.
-%The reason for this is that more applications under $\mathsf{BATE}$ could meet their availability demands.
+%We can see that $\mathsf{TEDAT}$ gains more 20\% profit than other schemes.
+%The reason for this is that more applications under $\mathsf{TEDAT}$ could meet their availability demands.
 %Figure \ref{availability_fig2}(b) and Figure \ref{availability_fig2}(c) show the satisfaction fraction and profit details for applications with different level of importance.
 
 
@@ -2272,12 +2272,12 @@ We can see that the profit loss of greedy algorithm is less than 10\%.
 
 
 %\subsubsection{Performance under different settings}\label{settings}
-%%We now evaluate the performance of $\mathsf{BATE}$ under different settings with  IBM topology and trace.
+%%We now evaluate the performance of $\mathsf{TEDAT}$ under different settings with  IBM topology and trace.
 %
 %\textbf{Magnitude of weights.}
 %In the previous experiments, we set weight within \{1,2,3,4,5\} to present the importance of services. 
 %In this part, we evaluate the performance with different magnitude of weights.
-%Figure \ref{fig-weight} shows the satisfaction fraction for the Important and Significant services under $\mathsf{BATE}$, when weight difference between the adjacent levels ranges from 1 to 32 (e.g., if the difference is 2, weight set is \{1,3,5,7,9\}).
+%Figure \ref{fig-weight} shows the satisfaction fraction for the Important and Significant services under $\mathsf{TEDAT}$, when weight difference between the adjacent levels ranges from 1 to 32 (e.g., if the difference is 2, weight set is \{1,3,5,7,9\}).
 %We can see that the satisfaction fraction becomes steady after increasing.
 %This is because when heightening weight gap,  important services can gain more resources and meet their availability targets with high probability.
 %
@@ -2287,21 +2287,21 @@ We can see that the profit loss of greedy algorithm is less than 10\%.
 %%We can see that more than 80\% important applications achieve their availability targets. 
 %%Specially, more important levels can benefit  those important applications.
 %
-%\textbf{More $\mathsf{BATE}$ solutions.}
+%\textbf{More $\mathsf{TEDAT}$ solutions.}
 %%The default  profit is 1 for applications whose availability demands are satisfied, otherwise the profit is $\mu(R_j)=0.01\times R_j$.
-%We denote the $\mathsf{BATE}$ version used in the previous experiment as $\mathsf{BATE}$-A.
-%We now define $\mathsf{BATE}$-B, whose gained profit is 1 for $S_j\ge \beta_j$ and 0.75 for other cases.
-%$\mathsf{BATE}$-C's gained profit  is 1 for $S_j\ge \beta_j$ and $\mu(f_{jtk})=1-(\beta_j-S_j)$.
+%We denote the $\mathsf{TEDAT}$ version used in the previous experiment as $\mathsf{TEDAT}$-A.
+%We now define $\mathsf{TEDAT}$-B, whose gained profit is 1 for $S_j\ge \beta_j$ and 0.75 for other cases.
+%$\mathsf{TEDAT}$-C's gained profit  is 1 for $S_j\ge \beta_j$ and $\mu(f_{jtk})=1-(\beta_j-S_j)$.
 %Figure \ref{fig-version} shows the performance comparison for the three schemes.
 %We can see that the performance gap between the three algorithms is narrow: less than 5\%.
-%This demonstrates $\mathsf{BATE}$ is a general framework that does not depend on the particular profit function.
+%This demonstrates $\mathsf{TEDAT}$ is a general framework that does not depend on the particular profit function.
 %
 %\textbf{Various routing schemes.}
 %So far, we use K-shortest path as the default tunnel selection scheme.
 %There are also other tunnel selection schemes, e.g., edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}.
 %Figure \ref{routing-version} shows the comparison with different tunnel selection methods.
-%We can see that (1) $\mathsf{BATE}$ performs well regardless the tunnel selection algorithm.
-%This indicates that the success of $\mathsf{BATE}$ doesn't reply on the particular routing scheme;
+%We can see that (1) $\mathsf{TEDAT}$ performs well regardless the tunnel selection algorithm.
+%This indicates that the success of $\mathsf{TEDAT}$ doesn't reply on the particular routing scheme;
 %(2)  Oblivious routing is still slighter better than KSP and edge disjoint paths.
 %This is because it is intended to avoid link over-utilization through diverse and low-stretch path selection.
 %
@@ -2309,9 +2309,9 @@ We can see that the profit loss of greedy algorithm is less than 10\%.
 %\textbf{Link failure probability standard deviation.}
 %Weibull distribution is used to generate link failure probability in our simulations.
 %Figure \ref{sim-importance2} presents profit comparison under different link failure probability standard deviation.
-%We can see that $\mathsf{BATE}$ and TEAVAR perform better under higher link failure probability standard deviation.
+%We can see that $\mathsf{TEDAT}$ and TEAVAR perform better under higher link failure probability standard deviation.
 %The reason for this is that they both consider link failure probability in their TE formulation. 
-%%We can see that all schemes degrade with higher failure probability, but $\mathsf{BATE}$ still performs at least 15\% better than other schemes.
+%%We can see that all schemes degrade with higher failure probability, but $\mathsf{TEDAT}$ still performs at least 15\% better than other schemes.
 %%Specially, FFC has the smallest influence, since its bandwidth allocation considering at one link failure beforehand.
 %
 %
@@ -2358,8 +2358,8 @@ FFC \cite{FFC} and TEAVAR\cite{Teavar} are proactive routing protection methods,
 %To relieve this, TEAVAR\cite{Teavar} considers the probability of link failure and tries to maximize link utilization under the particular availability target.
 %Although TEAVAR tries to fully utilize the link capacity, it ignores the availability difference of applications.
 %Moreover, both FFC and TEAVAR uses connectivity-based availability, which can't ensure the resources of applications under network failures.
-$\mathsf{BATE}$ makes a further step and tries to provide service level bandwidth-based availability.
-The availability of $\mathsf{BATE}$ is stronger than them.
+$\mathsf{TEDAT}$ makes a further step and tries to provide service level bandwidth-based availability.
+The availability of $\mathsf{TEDAT}$ is stronger than them.
 
 
 
@@ -2368,9 +2368,9 @@ Up still now, many existing works have already considered to guarantee the bandw
 Deadline-aware schemes such as D$^2$TCP\cite{D2TCP}, LPD \cite{LPD}, Amoeba\cite{Guaranteeings}  try to make flows finish before a fixed time constraints,
 but they can't perform finely grained rate limits.
 Some cloud bandwidth limit technologies such as CloudMirror \cite{appdriven} and EyeQ \cite{EyeQ}, can provide bandwidth guarantees to applications or tenants, while they ignore the network risks and service availability requirements.
-$\mathsf{BATE}$ is different from in two aspects.
-Firstly, $\mathsf{BATE}$ considers the network failures and tries to perform rate limit under the assumption.
-Secondly, $\mathsf{BATE}$ can guarantee bandwidth at a particular level (e.g., 99\%). 
+$\mathsf{TEDAT}$ is different from in two aspects.
+Firstly, $\mathsf{TEDAT}$ considers the network failures and tries to perform rate limit under the assumption.
+Secondly, $\mathsf{TEDAT}$ can guarantee bandwidth at a particular level (e.g., 99\%). 
 
 %\begin{figure}[t]
 %\begin{center}
@@ -2380,11 +2380,11 @@ Secondly, $\mathsf{BATE}$ can guarantee bandwidth at a particular level (e.g., 9
 %\end{center}
 %\end{figure}
 \section{Conclusion Remarks}
-We present $\mathsf{BATE}$, a framework that attempts to guarantee the availability demands of applications.
- $\mathsf{BATE}$ aims to optimize the total profits of service subject availability targets.
+We present $\mathsf{TEDAT}$, a framework that attempts to guarantee the availability demands of applications.
+ $\mathsf{TEDAT}$ aims to optimize the total profits of service subject availability targets.
 We design greedy and network scenario pruning algorithm to derive the solution.
-We evaluate the performance of $\mathsf{BATE}$ in real testbed as well as trace-driven simulations.
-The evaluation results demonstrate that $\mathsf{BATE}$ can improve  bandwidth-based availability performance by up to 50\%.
+We evaluate the performance of $\mathsf{TEDAT}$ in real testbed as well as trace-driven simulations.
+The evaluation results demonstrate that $\mathsf{TEDAT}$ can improve  bandwidth-based availability performance by up to 50\%.
 
 
 
