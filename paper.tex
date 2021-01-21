@@ -640,15 +640,15 @@ $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
 $c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
 \hline
-$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in s-d pair set}\\
+$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in the set of all s-d pairs}\\
 \hline
 $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
 %\multirow{3}{*}{VM Instances}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}&\multirow{3}{*}{Azure}\\
 %&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%}& \\
 %&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}& \\
-\multirow{3}{*}{$d_i=(\mathbf{b_i}, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with }\\
-&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
+\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
+&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
 &\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 \hline
@@ -699,24 +699,26 @@ $h_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
 \end{tabular}
 \end{table}
 
-\section{$\mathsf{TEDAT}$}\label{HATE}
-In this section, we make a full description of $\mathsf{TEDAT}$ framework, which contains three parts, i.e., admission control, traffic scheduling and failure recovery.
-Table \ref{Notation} shows the main notations.
+\section{The $\mathsf{TEDAT}$ framework}\label{HATE}
+In this section, we discuss the details of $\mathsf{TEDAT}$, which contains three parts, i.e., admission control, traffic scheduling and failure recovery, using notations summarized in Table \ref{Notation}. 
 The framework intends to achieve the following objectives: 
  \begin{itemize}
-\item \textbf{High acceptance ratio and low latency:}  
-  Tenants' BA demands might arrive at anytime. 
-  The system should be able to accommodate as many BA demands as possible under the constraint of availability and bandwidth targets.
-\item \textbf{Maintain high availability:}
-The system must make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
-Therefore, their bandwidth demands can be guaranteed with high probability.
-\item \textbf{Handle failures:}
-When there are link failures, the system can reroute traffic that would go over failed links over the remaining active tunnels with small revenue loss instead.
+\item \textbf{High admission ratio and low admission latency:}  
+  Bandwidth availability demands might arrive at anytime. 
+  The system should be able to efficiently accommodate as many BA demands as possible under the constraint of network capacity and failure probabilities, as this would increase service agility and bring more revenue. %availability and bandwidth targets.
+\item \textbf{High availability for allocated bandwidth:}
+The system should be able to optimize its achieved availability in a probabilistic manner, 
+as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with low failure probability.
+%make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
+%Therefore, their bandwidth demands can be guaranteed with high probability.
+\item \textbf{Automatic and economical failure recovery:}
+If any link failure really happens, the system should reroute traffic away from that link, 
+while minimizing any possible collateral damage to normal traffic, i.e., congestion and lower bandwidth availability due to rerouting.
 %\item \textbf{ \& scalability:}
 %
 \end{itemize}
 
-\subsection{Demands abstraction}
+\subsection{Abstraction of bandwidth availability demands}
 %Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
 Tenants could deploy diverse service instances over Inter-DC WAN.
 In reality, a tenant could be a customer who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
@@ -1334,7 +1336,7 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 
 
 
-\section{$\mathsf{TEDAT}$ system} \label{system}
+\section{system implementation} \label{system}
 %In this section, we show the design and some implementation details of $\mathsf{TEDAT}$ prototype.
 %In this section, we show the design of $\mathsf{TEDAT}$ (Traffic Engineering for Diverse Availability Targets) system, which is able to provide high bandwidth-based availability to services.
 %$\mathsf{TEDAT}$ system tries to achieve the following objectives:
