@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  21 JAN 2021 20:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  21 JAN 2021 20:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1900,12 +1900,16 @@ Overfull \hbox (2.4924pt too wide) in paragraph at lines 715--720
 y: \T1/LinuxLibertineT-TLF/m/n/10 (-20) If any
  []
 
-[4.4]
+
+Underfull \vbox (badness 1424) has occurred while \output is active []
+
+ [4.4]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 7.0pt on input line 878.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
 (Font)              scaled to size 10.0pt on input line 918.
- [5.5]
+
+[5.5]
 
 LaTeX Font Warning: Command \small invalid in math mode on input line 1131.
 
@@ -1928,17 +1932,17 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 0.73pt on input line 1146.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 0.55pt on input line 1146.
-<fig/recovery-1.pdf, id=402, 341.275pt x 280.04625pt>
+[6.6]
+<fig/recovery-1.pdf, id=416, 341.275pt x 280.04625pt>
 File: fig/recovery-1.pdf Graphic file (type pdf)
 <use fig/recovery-1.pdf>
 Package pdftex.def Info: fig/recovery-1.pdf  used on input line 1243.
 (pdftex.def)             Requested size: 116.44568pt x 95.55203pt.
-<fig/recovery-2.pdf, id=403, 341.275pt x 280.04625pt>
+<fig/recovery-2.pdf, id=417, 341.275pt x 280.04625pt>
 File: fig/recovery-2.pdf Graphic file (type pdf)
 <use fig/recovery-2.pdf>
 Package pdftex.def Info: fig/recovery-2.pdf  used on input line 1245.
 (pdftex.def)             Requested size: 116.44568pt x 95.55203pt.
-[6.6]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 1293.
 
@@ -1950,35 +1954,35 @@ Package natbib Warning: Citation `TEAVAR' on page 7 undefined on input line 137
 3.
 
 [7.7 <./fig/recovery-1.pdf> <./fig/recovery-2.pdf>]
-<fig/inter-DC-WAN-V3.pdf, id=488, 963.6pt x 542.025pt>
+<fig/inter-DC-WAN-V3.pdf, id=490, 963.6pt x 542.025pt>
 File: fig/inter-DC-WAN-V3.pdf Graphic file (type pdf)
 <use fig/inter-DC-WAN-V3.pdf>
 Package pdftex.def Info: fig/inter-DC-WAN-V3.pdf  used on input line 1382.
 (pdftex.def)             Requested size: 217.03127pt x 122.07442pt.
-<fig/testbed.pdf, id=492, 821.0675pt x 542.025pt>
+<fig/testbed.pdf, id=494, 821.0675pt x 542.025pt>
 File: fig/testbed.pdf Graphic file (type pdf)
 <use fig/testbed.pdf>
 Package pdftex.def Info: fig/testbed.pdf  used on input line 1470.
 (pdftex.def)             Requested size: 192.91872pt x 127.35107pt.
-<fig/evaluation/testbed-admit.pdf, id=493, 697.60625pt x 527.9725pt>
+<fig/evaluation/testbed-admit.pdf, id=495, 697.60625pt x 527.9725pt>
 File: fig/evaluation/testbed-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-admit.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-admit.pdf  used on input line 1
 479.
 (pdftex.def)             Requested size: 121.51358pt x 91.96153pt.
-<fig/evaluation/testbed-public-2.pdf, id=494, 741.77126pt x 520.94624pt>
+<fig/evaluation/testbed-public-2.pdf, id=496, 741.77126pt x 520.94624pt>
 File: fig/evaluation/testbed-public-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-public-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-public-2.pdf  used on input lin
 e 1481.
 (pdftex.def)             Requested size: 121.51358pt x 85.3324pt.
-<fig/evaluation/test-bed-profit.pdf, id=495, 734.745pt x 520.94624pt>
+<fig/evaluation/test-bed-profit.pdf, id=497, 734.745pt x 520.94624pt>
 File: fig/evaluation/test-bed-profit.pdf Graphic file (type pdf)
 <use fig/evaluation/test-bed-profit.pdf>
 Package pdftex.def Info: fig/evaluation/test-bed-profit.pdf  used on input line
  1483.
 (pdftex.def)             Requested size: 121.51358pt x 86.15114pt.
-<fig/evaluation/testbed-data-loss-2.pdf, id=496, 757.83125pt x 507.8975pt>
+<fig/evaluation/testbed-data-loss-2.pdf, id=498, 757.83125pt x 507.8975pt>
 File: fig/evaluation/testbed-data-loss-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-data-loss-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-data-loss-2.pdf  used on input 
@@ -1996,24 +2000,24 @@ T-TLF/m/n/10 (-20) We build a small testbed with 6 servers
 Underfull \vbox (badness 6157) has occurred while \output is active []
 
  [8.8 <./fig/inter-DC-WAN-V3.pdf> <./fig/testbed.pdf>]
-<fig/evaluation/test.pdf, id=707, 704.6325pt x 487.8225pt>
+<fig/evaluation/test.pdf, id=709, 704.6325pt x 487.8225pt>
 File: fig/evaluation/test.pdf Graphic file (type pdf)
 <use fig/evaluation/test.pdf>
 Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1592.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/link-failures.pdf, id=708, 704.6325pt x 487.8225pt>
+<fig/evaluation/link-failures.pdf, id=710, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-failures.pdf Graphic file (type pdf)
 <use fig/evaluation/link-failures.pdf>
 Package pdftex.def Info: fig/evaluation/link-failures.pdf  used on input line 1
 594.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/data-loss.pdf, id=709, 671.50874pt x 481.8pt>
+<fig/evaluation/data-loss.pdf, id=711, 671.50874pt x 481.8pt>
 File: fig/evaluation/data-loss.pdf Graphic file (type pdf)
 <use fig/evaluation/data-loss.pdf>
 Package pdftex.def Info: fig/evaluation/data-loss.pdf  used on input line 1602.
 
 (pdftex.def)             Requested size: 121.51358pt x 87.18341pt.
-<fig/evaluation/fake-failure.pdf, id=710, 706.64pt x 508.90125pt>
+<fig/evaluation/fake-failure.pdf, id=712, 706.64pt x 508.90125pt>
 File: fig/evaluation/fake-failure.pdf Graphic file (type pdf)
 <use fig/evaluation/fake-failure.pdf>
 Package pdftex.def Info: fig/evaluation/fake-failure.pdf  used on input line 16
@@ -2041,35 +2045,35 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/testbed-dat
 a-loss-2.pdf): PDF inclusion: multiple pdfs with page group included in a singl
 e page
 >]
-<fig/evaluation/sim-admit.pdf, id=805, 703.62875pt x 486.81876pt>
+<fig/evaluation/sim-admit.pdf, id=807, 703.62875pt x 486.81876pt>
 File: fig/evaluation/sim-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-admit.pdf>
 Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 1814.
 
 (pdftex.def)             Requested size: 121.51358pt x 84.06546pt.
-<fig/evaluation/att.pdf, id=806, 704.6325pt x 487.8225pt>
+<fig/evaluation/att.pdf, id=808, 704.6325pt x 487.8225pt>
 File: fig/evaluation/att.pdf Graphic file (type pdf)
 <use fig/evaluation/att.pdf>
 Package pdftex.def Info: fig/evaluation/att.pdf  used on input line 1816.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/cernet3.pdf, id=807, 704.6325pt x 487.8225pt>
+<fig/evaluation/cernet3.pdf, id=809, 704.6325pt x 487.8225pt>
 File: fig/evaluation/cernet3.pdf Graphic file (type pdf)
 <use fig/evaluation/cernet3.pdf>
 Package pdftex.def Info: fig/evaluation/cernet3.pdf  used on input line 1818.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/sim-monney.pdf, id=808, 704.6325pt x 487.8225pt>
+<fig/evaluation/sim-monney.pdf, id=810, 704.6325pt x 487.8225pt>
 File: fig/evaluation/sim-monney.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-monney.pdf>
 Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 1820
 .
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/link-utilization.pdf, id=809, 704.6325pt x 487.8225pt>
+<fig/evaluation/link-utilization.pdf, id=811, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-utilization.pdf Graphic file (type pdf)
 <use fig/evaluation/link-utilization.pdf>
 Package pdftex.def Info: fig/evaluation/link-utilization.pdf  used on input lin
 e 1830.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/admission-control-time.pdf, id=810, 703.62875pt x 483.8075pt>
+<fig/evaluation/admission-control-time.pdf, id=812, 703.62875pt x 483.8075pt>
 File: fig/evaluation/admission-control-time.pdf Graphic file (type pdf)
 <use fig/evaluation/admission-control-time.pdf>
 Package pdftex.def Info: fig/evaluation/admission-control-time.pdf  used on inp
@@ -2095,12 +2099,12 @@ df): PDF inclusion: multiple pdfs with page group included in a single page
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/fake-failur
 e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<fig/evaluation/error.pdf, id=907, 704.6325pt x 487.8225pt>
+<fig/evaluation/error.pdf, id=909, 704.6325pt x 487.8225pt>
 File: fig/evaluation/error.pdf Graphic file (type pdf)
 <use fig/evaluation/error.pdf>
 Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2125.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/optimization_time.pdf, id=908, 703.62875pt x 486.81876pt>
+<fig/evaluation/optimization_time.pdf, id=910, 703.62875pt x 486.81876pt>
 File: fig/evaluation/optimization_time.pdf Graphic file (type pdf)
 <use fig/evaluation/optimization_time.pdf>
 Package pdftex.def Info: fig/evaluation/optimization_time.pdf  used on input li
@@ -2110,12 +2114,12 @@ ne 2127.
 
 LaTeX Warning: Reference `pruning' on page 11 undefined on input line 2134.
 
-<fig/evaluation/routing.pdf, id=913, 703.62875pt x 486.81876pt>
+<fig/evaluation/routing.pdf, id=915, 703.62875pt x 486.81876pt>
 File: fig/evaluation/routing.pdf Graphic file (type pdf)
 <use fig/evaluation/routing.pdf>
 Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2156.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
-<fig/evaluation/approximation.pdf, id=914, 703.62875pt x 486.81876pt>
+<fig/evaluation/approximation.pdf, id=916, 703.62875pt x 486.81876pt>
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
@@ -2243,15 +2247,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 31211 strings out of 492985
- 544409 string characters out of 6132585
+ 31224 strings out of 492985
+ 544558 string characters out of 6132585
  638689 words of memory out of 5000000
  33089 multiletter control sequences out of 15000+600000
- 371132 words of font info for 740 fonts, out of 8000000 for 9000
+ 373627 words of font info for 752 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  60i,23n,94p,1770b,740s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
+pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exi
 st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
 
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{
 /usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{/
@@ -2281,10 +2288,10 @@ xlive/2016/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/20
 mf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/
 fonts/type1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
 pe1/public/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1155240 bytes).
+Output written on paper.pdf (16 pages, 1155583 bytes).
 PDF statistics:
- 1413 PDF objects out of 1440 (max. 8388607)
- 1220 compressed objects within 13 object streams
- 210 named destinations out of 1000 (max. 500000)
+ 1416 PDF objects out of 1440 (max. 8388607)
+ 1223 compressed objects within 13 object streams
+ 211 named destinations out of 1000 (max. 500000)
  88387 words of extra memory for PDF output out of 89155 (max. 10000000)
 
