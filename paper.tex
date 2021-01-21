@@ -1343,32 +1343,35 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 We have implemented $\mathsf{BATE}$ on the Linux platform. Figure \ref{pic-overview} shows the whole system architecture, which contains one controller, multiple brokers (one for each DC) and multiple clients (one for each host). The controller is responsible for most decision work of $\mathsf{BATE}$, including admission control, traffic scheduling, and failure recovery, while the brokers and clients are responsible for bandwidth enforcement.
 It works as follows:
 When a user submits a demand to the controller, the admission control module determines whether the demand can be admitted or not (see $\S$ \ref{admission_control}).
-If the demand is admitted, this module will also allocate its demanded bandwidth on appropriate paths for the first time, and notify the brokers for enforcement. The online scheduler module performs traffic engineering (see $\S$ \ref{TE}) periodically  (e.g., every 10 minutes) to further optimize the availability expectation of all active demands. In addition, 
-for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are also distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask clients to implement appropriate rate limit on end hosts. 
+If the demand is admitted, this module will also allocate its demanded bandwidth on appropriate paths for the first time, and notify the brokers for enforcement. The online scheduler module performs traffic scheduling (see $\S$ \ref{TE}) periodically  (e.g., every 10 minutes) to further optimize the availability expectation of all active demands. In addition, 
+for potential link failures, it also pre-computes backup allocation strategies that will be activated if any link failure indeed happens (see $\S$ \ref{backup}). These central decisions are distributed to the brokers for bandwidth enforcement. The brokers in each DC monitor link status and bandwidth consumption, report these statistics to the central controller, and ask clients to implement appropriate rate limit on end hosts. 
 
 %The controller performs traffic engineering algorithm every $T_a$ (e.g., 10) minutes to derive the bandwidth allocation results.
 
 % then it limits rate according to the responses from its data center broker.
 
 
-\textbf{Controller} is the brain of the whole system and it has three main modules:
+\textbf{Controller} is the brain of the whole system. It is responsible for allocating WAN level bandwidth, and orchestrates all activities with a global view. The four main components in Controller are as follows.
 (1) Offline Routing.
-The controller maintains the WAN level network topology.
-When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
-Tunnel set is then sent to TE Scheduler module as the input;
-(2) Online Scheduler. 
-Every $T$ minutes,  this module will perform traffic engineering algorithm (see $\S$ \ref{TE}).
-In addition to $\mathsf{TEDAT}$, the prototype framework can support other TE algorithms (e.g., SWAN \cite{swan}, FFC \cite{FFC}).
-After deriving TE solution, it apportions the bandwidth allocation results over each tunnel (i.e., $f_{ikt}$) to corresponding brokers; 
-It also some fragile links could fail and derives the backup allocation (see $\S$ \ref{backup}) every $T$.
-(3) Admission Control.
-When a demand is submitted, the Admission Control module would perform admission algorithm (see $\S$ \ref{admission_control}) to reply tenants in near real-time fashion; 
-(4) Communication Module.
-This component is responsible for communication by building long TCP connections with brokers.
-The controller orchestrates all activity with a global view and is responsible for allocating WAN level bandwidth.
-To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
+This module maintains the WAN level network topology, and computes TE tunnels between each node pair
+ (i.e., $T_k,\forall \text{s-d pair} k \in K$), using certain routing algorithms (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.). 
+ %When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
+These tunnels are used by the admission control module and the online scheduler module as input variables;
+(2) Admission Control.
+When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwith over the tunnels in nearly real-time.
+The results are sent to the corresponding brokers.
+(3) Online Scheduler. 
+Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in an expected manner. 
+It also pre-computes backup allocation (see $\S$ \ref{backup}) for some potential link failures.
+For each user demand, the normal bandwidth and backup bandwidth allocated over each tunnel (i.e., $f_i^t$) are then sent to the corresponding brokers. 
+In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{TEAVAR}.
+(4) Communication Channel.
+This module is responsible for communication with brokers, where we use long-lived TCP connections to avoid unnecessary delay. 
+In addition, controller failure can be avoided by using multiple replications, 
+where the master controller is elected by the Paxos \cite{lamport1998the} algorithm.
+%To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
 
- \begin{figure}
+\begin{figure}
 \begin{center}
 \includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
 \caption{System architecture of $\mathsf{TEDAT}$.}
