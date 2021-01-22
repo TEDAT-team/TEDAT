@@ -639,8 +639,6 @@ satisfying both of their bandwidth demands.
 \hline
 $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
-$c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
-\hline
 $k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(est) pair in the set of all s-d pairs}\\
 \hline
 $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
@@ -668,6 +666,8 @@ $D, \hat{D}$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands
 $t$ &\multicolumn{6}{|l}{a tunnel for transmitting traffic\footnote{Multiple tunnels may exist for a single s-d pair.}}\\
 \hline
 $u_t^e$ &\multicolumn{6}{|l}{whether tunnel $t$ passes link $e \in E$}\\
+\hline
+$c_e, c_t$ &\multicolumn{6}{|l}{the remaining capacity on link $e$ or a tunnel $t$}\\
 \hline
 $\mathbf{z}\in Z$ &\multicolumn{6}{|l}{a network failure scenario in the scenario set}\\
 \hline
@@ -710,7 +710,7 @@ The framework intends to achieve the following objectives:
   Bandwidth availability demands might arrive at anytime. 
   The system should be able to efficiently accommodate as many BA demands as possible under the constraint of network capacity and failure probabilities, as this would increase service agility and bring more revenue. %availability and bandwidth targets.
 \item \textbf{High availability for allocated bandwidth:}
-The system should be able to optimize its achieved availability in a sense of expectation, 
+The system should be able to optimize its achieved availability in a probabilistic manner, 
 as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with lower failure probability.
 %make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
 %Therefore, their bandwidth demands can be guaranteed with high probability.
@@ -801,7 +801,7 @@ is equal to the bandwidth demand $\mathbf{b}_d^k$ for that pair, and
 its expected availability under all possible network failure scenarios, 
 i.e., $\sum_{\mathbf{z}} \in Z} p_{\mathbf{z}} \times v_t^{\mathbf{z}} $, 
 is no less than the availability demand $\beta_d$, 
-then we say this BA demand is satisfied by this exact allocation result in a sensen of expectation. 
+then we say this BA demand is satisfied by this exact allocation result in a probabilistic sense. 
 If a failure indeed occurs, our traffic engineering scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer (see $\S$\ref{background}), and we use $h_d$ to denote the profit (after refunding) for demand $d$.
 
 
@@ -864,8 +864,9 @@ which can be proved to be NP-hard by reducing the all-or-nothing multi-commodity
 %However,  the large size of network scenarios and 
 However, in order to support agile deployment of new applications and services, 
 user demands should be admitted as soon as possible, 
-while the time needed to exactly sovle this NP-hard problem  may be prohibitive, 
+while the time needed to exactly sovle this NP-hard problem may be prohibitive, 
 Therefore, we need a better tradeoff between efficiency and optimality.
+The final admission control strategy we use is as follows:
 
 \iffalse
 If we assume all the admitted demands are fixed and can't be rescheduled, then we can derive the solution fast but the new arrival one might be unable to be accommodated;
@@ -874,25 +875,36 @@ To achieve a tradeoff, we would like to address the following three steps:
 \fi
 
 \begin{enumerate}
-    \item When a new demand $d$ arrives, we assume that all admitted demands are \textit{fixed} and check whether the remaining network capacity and the corresponding links' up probability can support it. If this is true, then go to step (3), otherwise, go to step (2).
-    \item Run Algorithm \ref{greedy-1}  and check whether all admitted demands can be rescheduled to accommodate the new arrival demand $d$. If this is true, then go to step (3), otherwise, the system will reject the demand, which can be resubmitted by tenants again latter.
-    \item Pre-allocate bandwidth to the demand with remaining network capacity and pass all the admitted demands to the traffic engineering algorithm.
+    \item When a new demand $d$ arrives, we fix the bandwidth allocation for all admitted demands in $\hat{D}$, then we check whether $d$ can be satisfied by the remaining network capacity and failure  probability. If the answer is positive, then admit $d$ and make a first-time bandwidth allocation for it.
+    \item Otherwise, run a greedy algorithm (Algorithm \ref{greedy-1}) to conjecture whether the admitted demands can potentially be rescheduled to accommodate $d$. If the answer is positive, then admit $d$ and make a temporary bandwidth allocation for it, using the remaining network capacity as far as needed \footnote{It's possible that the temporarily allocated bandwidth falls below the demanded bandwidth, but a new allocation strategy satisfying all demands does exist (see Theorem \ref{NP-222}), and will be computed later in our periodical traffic scheduling.}. 
+	\item If $d$ still cannot be accomodated, reject the demand.
+%    \item Pre-allocate bandwidth to the demand with remaining network capacity and pass all the admitted demands to the traffic engineering algorithm.
 \end{enumerate}
 
 %We now introduce the admission control problem when all the admitted demands can be rescheduled.
 %
 %We begin with the constraints.
-To derive the solution when all the admitted demands can be rescheduled, we propose  Algorithm \ref{greedy-1}, which is able to gain the solution in a fast manner.
-%Therefore, we propose Algorithm \ref{greedy-1}, which gains the solution in a fast manner.
+The greedy algorithm tries to conjecture, in an efficient way, whether a allocation strategy satisfying all demands (i.e., including $d$) exists. It works iteratively as follows. In each iteration, 
+It finds the demand which has the smallest product of bandwidth target and availability target (i.e., $\sum_{k \in K}\mathbf{b}_d^k \time \beta_d$) at first (line 4). Then if the remaining network capacity cannot satisfiy this demand, we will give up (line 6$sim$8). 
+Otherwise, it allocate tunnel bandwidth for this demand, where a tunnel with a smaller product of 
+remaining capacity and availability has a higher priority (line 9$sim$13). 
+After this, if the availability target can roughly be satisfied, we go for the next iteration, 
+otherwise, we also give up (line 14$sim$18).
+
+The time complexity of Algorithm \ref{greedy-1} is $O(|D|*|K|*max(|T_k|))$. 
+It is also worth to note that, there is no false positive in conjectures made by Algorithm \ref{greedy-1}, 
+as indicated by the following theorem, whose proof can be found in Appendix \ref{appendix-proof}:
+
+
+\iffalse
+Therefore, we propose Algorithm \ref{greedy-1}, which gains the solution in a fast manner.
 %The key idea of the algorithm is to place requests with small bandwidth and availability demands to tunnels with small remaining capacity and availability , the algorithm chooses demand with probability.
 The algorithm will choose demand with smallest bandwidth times availability targets each iteration (Line 4).
 Then it checks whether the remaining network capacity can satisfy its bandwidth demand.
 If this is false, then the network is unable to support the request (Line 6-8), otherwise,  it prioritizes tunnels with small remaining capacity and up probability (Line 10).
 It allocates bandwidth with the remaining capacity of the tunnel until bandwidth demand between the node pair is fulfilled (Line 11-13).
 The algorithm will return true when all demands' bandwidth availability targets in $D$ are satisfied (Line 19).
-Algorithm \ref{greedy-1} is able to derive allocation results in $O(D*K*max(|T_k|))$.
-Algorithm \ref{greedy-1} can derive a tight solution:
-
+\fi
 
 
 
@@ -937,15 +949,15 @@ $t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
 }
 
 \Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, True$;\\
-\caption{Rescheduling algorithm}
+\caption{Admission Conjecture}
 \label{greedy-1}
 \end{algorithm}
 
 
-\begin{lemma}\label{NP-222}
-There must exist an allocation scheme to satisfy the bandwidth availability targets of all demands admitted by Algorithm \ref{greedy-1}.
-\end{lemma} 
-The proof details can be found in Appendix \ref{appendix-proof}
+\begin{Theorem}\label{NP-222}
+If a new demand $d$ can be admitted by Algorithm \ref{greedy-1}, 
+there must exist an allocation strategy to satisfy the bandwidth availability targets of all demands $D=\hat{D} \cup {d}$.
+\end{Theorem} 
 %\begin{proof}
 %We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth-based availability.
 %There are two cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
@@ -1395,7 +1407,7 @@ These tunnels are used by the admission control module and the online scheduler 
 When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwith over the tunnels in nearly real-time.
 The results are sent to the corresponding brokers.
 (3) Online Scheduler. 
-Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in a sense of expectation. 
+Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in a probabilistic sense. 
 It also pre-computes backup allocation (see $\S$ \ref{backup}) for some potential link failures.
 For each user demand, the normal bandwidth and backup bandwidth allocated over each tunnel (i.e., $f_i^t$) are then sent to the corresponding brokers. 
 In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{Teavar}.
