@@ -127,17 +127,20 @@
 \newlabel{system}{{4}{7}{system implementation}{section.4}{}}
 \citation{floodlight}
 \citation{openflow}
+\citation{Kermel}
+\citation{floodlight}
+\citation{openvswitch}
+\citation{FFC}
+\citation{Teavar}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces System architecture of $\mathsf  {BATE}$.\relax }}{8}{figure.caption.8}}
 \newlabel{pic-overview}{{3}{8}{System architecture of $\mathsf {BATE}$.\relax }{figure.caption.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Testbed topology. Each link has the same capacity 1Gbps but different failure probability.\relax }}{8}{figure.caption.9}}
 \newlabel{testbed}{{4}{8}{Testbed topology. Each link has the same capacity 1Gbps but different failure probability.\relax }{figure.caption.9}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Evaluation}{8}{section.5}}
 \newlabel{evaluation}{{5}{8}{Evaluation}{section.5}{}}
-\citation{Kermel}
-\citation{floodlight}
-\citation{openvswitch}
-\citation{FFC}
-\citation{Teavar}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Testbed evaluation}{8}{subsection.5.1}}
+\newlabel{testbed-evaluation}{{5.1}{8}{Testbed evaluation}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Testbed setup}{8}{subsubsection.5.1.1}}
 \citation{azure}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.\relax }}{9}{figure.caption.10}}
 \newlabel{e2}{{5}{9}{A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.\relax }{figure.caption.10}{}}
@@ -145,12 +148,11 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Measured and demand ratio}}}{9}{figure.caption.10}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Monetary gain after failures}}}{9}{figure.caption.10}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Data loss ratio}}}{9}{figure.caption.10}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Evaluation}{9}{section.6}}
-\newlabel{evaluation}{{6}{9}{Evaluation}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Testbed evaluation}{9}{subsection.6.1}}
-\newlabel{testbed-evaluation}{{6.1}{9}{Testbed evaluation}{subsection.6.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Testbed setup}{9}{subsubsection.6.1.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}A public cloud example}{9}{subsubsection.6.1.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}A public cloud example}{9}{subsubsection.5.1.2}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Scheduled results of different schemes.\relax }}{9}{table.caption.12}}
+\newlabel{testbed-1}{{3}{9}{Scheduled results of different schemes.\relax }{table.caption.12}{}}
+\newlabel{testbedresults}{{5.1.3}{9}{A private cloud example}{subsubsection.5.1.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}A private cloud example}{9}{table.caption.12}}
 \citation{B4}
 \citation{Teavar}
 \citation{SMORE}
@@ -173,15 +175,13 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Link failures}}}{10}{figure.caption.11}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Data loss ratio}}}{10}{figure.caption.11}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Events after L3 failure}}}{10}{figure.caption.11}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Scheduled results of different schemes.\relax }}{10}{table.caption.12}}
-\newlabel{testbed-1}{{3}{10}{Scheduled results of different schemes.\relax }{table.caption.12}{}}
-\newlabel{testbedresults}{{6.1.3}{10}{A private cloud example}{subsubsection.6.1.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}A private cloud example}{10}{table.caption.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Simulation evaluation}{10}{subsection.5.2}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Network topologies used in the simulations\relax }}{10}{table.caption.13}}
 \newlabel{evaluation-topologies}{{4}{10}{Network topologies used in the simulations\relax }{table.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Simulation evaluation}{10}{subsection.6.2}}
 \citation{Teavar}
 \citation{gurobi}
+\citation{Bruno2013Dynamic}
+\citation{SMORE}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces $\mathsf  {BATE}$ vs. various schemes under different network topologies.\relax }}{11}{figure.caption.14}}
 \newlabel{availability_fig1}{{7}{11}{$\mathsf {BATE}$ vs. various schemes under different network topologies.\relax }{figure.caption.14}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {IBM}}}{11}{figure.caption.14}}
@@ -192,14 +192,12 @@
 \newlabel{admission-benefit}{{8}{11}{Scalability of admission control.\relax }{figure.caption.15}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Link utilization}}}{11}{figure.caption.15}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Admission time}}}{11}{figure.caption.15}}
-\newlabel{scales}{{6.2.1}{11}{Performance under real network topologies}{subsubsection.6.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Performance under real network topologies}{11}{subsubsection.6.2.1}}
+\newlabel{scales}{{5.2.1}{11}{Performance under real network topologies}{subsubsection.5.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Performance under real network topologies}{11}{subsubsection.5.2.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Impact of pruning for traffic scheduling.\relax }}{11}{figure.caption.16}}
 \newlabel{availability_fig3}{{9}{11}{Impact of pruning for traffic scheduling.\relax }{figure.caption.16}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Cutoff error}}}{11}{figure.caption.16}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Optimization time}}}{11}{figure.caption.16}}
-\citation{Bruno2013Dynamic}
-\citation{SMORE}
 \citation{OSPF}
 \citation{MATE,Tightrope}
 \citation{swan}
@@ -235,9 +233,17 @@
 \bibcite{azure}{{8}{2020}{{{Azure}}}{{{Azure}}}}
 \bibcite{bi2019uncertainty-aware}{{9}{2019}{{Bi and Tang}}{{Bi and Tang}}}
 \bibcite{Teavar}{{10}{2019}{{Bogle et~al\unhbox \voidb@x \hbox {.}}}{{Bogle, Bhatia, Ghobadi, Menache, Bj\o {}rner, Valadarsky, and Schapira}}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Related work}{12}{section.7}}
-\newlabel{relate}{{7}{12}{Related work}{section.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion Remarks}{12}{section.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Routings.\relax }}{12}{figure.caption.17}}
+\newlabel{routing-version}{{10}{12}{Routings.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Approximation.\relax }}{12}{figure.caption.17}}
+\newlabel{approximation}{{11}{12}{Approximation.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Approximation.\relax }}{12}{figure.caption.17}}
+\newlabel{approximation}{{12}{12}{Approximation.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Approximation.\relax }}{12}{figure.caption.17}}
+\newlabel{approximation}{{13}{12}{Approximation.\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Related work}{12}{section.6}}
+\newlabel{relate}{{6}{12}{Related work}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion Remarks}{12}{section.7}}
 \@writefile{toc}{\contentsline {section}{References}{12}{section*.19}}
 \bibcite{cato}{{11}{2020}{{{cato}}}{{{cato}}}}
 \bibcite{inproceedings2}{{12}{2004}{{Chekuri et~al\unhbox \voidb@x \hbox {.}}}{{Chekuri, Khanna, and Shepherd}}}
@@ -259,14 +265,6 @@
 \bibcite{OWAN}{{28}{2016}{{Jin et~al\unhbox \voidb@x \hbox {.}}}{{Jin, Li, Wei, Li, Gao, Xu, Li, Xu, and Rexford}}}
 \bibcite{Tightrope}{{29}{2005}{{Kandula et~al\unhbox \voidb@x \hbox {.}}}{{Kandula, Katabi, Davie, and Charny}}}
 \bibcite{calendaring}{{30}{2014}{{Kandula et~al\unhbox \voidb@x \hbox {.}}}{{Kandula, Menache, Schwartz, and Babbula}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Routings.\relax }}{13}{figure.caption.17}}
-\newlabel{routing-version}{{10}{13}{Routings.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Approximation.\relax }}{13}{figure.caption.17}}
-\newlabel{approximation}{{11}{13}{Approximation.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Approximation.\relax }}{13}{figure.caption.17}}
-\newlabel{approximation}{{12}{13}{Approximation.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Approximation.\relax }}{13}{figure.caption.17}}
-\newlabel{approximation}{{13}{13}{Approximation.\relax }{figure.caption.17}{}}
 \bibcite{Kermel}{{31}{2020}{{{Kermel}}}{{{Kermel}}}}
 \bibcite{video1}{{32}{2012}{{Krishnan and Sitaraman}}{{Krishnan and Sitaraman}}}
 \bibcite{bwe}{{33}{2015}{{Kumar et~al\unhbox \voidb@x \hbox {.}}}{{Kumar, Jain, Naik, Raghuraman, Kasinadhuni, Zermeno, Gunn, Ai, Carlin, Amarandei-Stavila, Robin, Siganporia, Stuart, and Vahdat}}}
