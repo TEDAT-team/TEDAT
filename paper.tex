@@ -94,7 +94,7 @@ Due to the limited bandwidth resources and inevitable link failures, it is highl
 We present $\mathsf{BATE}$,
 a novel Traffic Engineering (TE)  framework that 
 %contains admission control, online scheduling and failure recovery.
-aims for \textit{bandwidth availability} provision, where a service level agreement (SLA) defines that a demand on certain bandwidth should be satisfied with a stipulated probability,  when subjected to the network capacity and possible failures of the inter-DC WAN.
+aims for \textit{bandwidth availability} (BA) provision, where a service level agreement (SLA) defines that a demand on certain bandwidth should be satisfied with a stipulated probability,  when subjected to the network capacity and possible failures of the inter-DC WAN.
 %Also, $\mathsf{BATE}$ is able to maximize revenue when network fails.
 %$\mathsf{BATE}$ tries to guarantee the bandwidth-based availability of demands . 
 %$\mathsf{BATE}$ generates a probabilistic failure model from empirical data and maximizes the profit that can be achieved under certain constrains on  bandwidth-based availability. 
@@ -220,7 +220,7 @@ To solve these challenges, in this paper we make the following  three \textbf{co
 
 
 Firstly, we advocate traffic engineering with \textit{bandwidth availability} (\textit{BA}) provision: 
- $(b_d, \beta_d, t_d^s, t_d^e)$ means that a BA demand $d$ requests bandwidth $b_d$ for a life duration between $ t_d^s$ and $t_d^e$, and should be guaranteed at least $\beta_d\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
+ a BA demand $d=(b_d, \beta_d, t_d^s, t_d^e)$ means that  $d$ requests bandwidth $b_d$ for a life duration between $ t_d^s$ and $t_d^e$, and should be guaranteed at least $\beta_d\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
 We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{hong2018b4,bwe, B4}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., the ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
@@ -660,7 +660,7 @@ $D, D_a$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\foo
 %\hline
 % $j\in J$ &\multicolumn{6}{|l}{the $j$-th availability target in the level set}\\
 %\hline
-%$d_{ik}$ &\multicolumn{6}{|l}{Bandwidth demand through node pair $k$ of $i$}\\
+%$\mathbf{b}^k_d$ &\multicolumn{6}{|l}{Bandwidth demand through node pair $k$ of $i$}\\
 %\hline
 %$\gamma_{i}$ &\multicolumn{6}{|l}{Service type (i.e., $j$) of demand $i$}\\
 %\hline
@@ -685,7 +685,7 @@ $v_t^{\bm{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenar
 \hline
 $g_d$& \multicolumn{6}{|l}{whether demand $d$ is admitted}\\
 \hline
-%$f_{ikt}$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t \in T_{k}$ }\\
+%$f_{d}^t$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t \in T_{k}$ }\\
 $f_d^t$& \multicolumn{6}{|l}{bandwidth allocated for demand $d$ over tunnel $t$}\\
 \hline
 $h_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
@@ -695,7 +695,7 @@ $h_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
 %\hline
 %% $S_j$ &\multicolumn{6}{|l}{Network service achieved availability of $j$}\\
 %%\hline
-% $A_i(\bm{z})$&\multicolumn{6}{|l}{Whether scenario $\bm{z}$ is safe or not for $i$ }\\
+% $A_d^{\bm{z}}$&\multicolumn{6}{|l}{Whether scenario $\bm{z}$ is safe or not for $i$ }\\
 % \hline
 % $S_i$&\multicolumn{6}{|l}{Achieved availability of $i$ }\\
 \bottomrule
@@ -830,14 +830,14 @@ Let $v_t^{\bm{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\bm{z}}=1
 \subsection {Admission control} \label{admission_control}
 Users' demands arrive in the first-come-first-service (FCFS) manner and \textit {no preemption} is allowed.
 The new arrival demand, together with the admitted ones (i.e., $D_a$), constitute demand set $D$.
-%The Admission control  \textit{determines whether availability target of $\forall i \in I$ can be supported simultaneously subject to network failure model}.
+%The Admission control  \textit{determines whether availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new arrival demand can be admitted, otherwise, it is rejected.
 If every element in $D$ can meet its availability target, the new arrival demand can be admitted, otherwise, it is rejected.
 To accommodate as many demands as possible, we can model the admission control as a 0-1 Mixed-Integer Linear Programming (MILP) and maximize the number of demands that satisfy availability targets.
 Appendix \ref{admission_problem} shows the optimization formulation.
 The admission control optimization problem can be proven as a NP-hard problem by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
 We omit the details for brevity.
-%If availability target of $\forall i \in I$ can be supported simultaneously subject to network failure model, the new arrival demand can be admitted, otherwise, it is rejected.
+%If availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model, the new arrival demand can be admitted, otherwise, it is rejected.
 %If , we can model the 
 %The Admission control part decides whether a new demand submitted by a tenant can be admitted or not.
 
@@ -895,12 +895,12 @@ $t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
  $b_{d}^k = b_{d}^k- f_{d}^t;$\\
 }
 %\For{$t\in T_k$}{
-%   $f_{ikt}=Allocation(t, d_{ik})$;\\
-%   \If{$f_{ikt}>=0$}{
+%   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
+%   \If{$f_{d}^t>=0$}{
 %   $s_i=s_i*p_t$;\\
-%   $d_{ik} = d_{ik}- f_{ikt};$\\
+%   $\mathbf{b}^k_d = \mathbf{b}^k_d- f_{d}^t;$\\
 %   }
-%   \If{$d_{ik}<=0$}{
+%   \If{$\mathbf{b}^k_d<=0$}{
 %   \textbf{break};\\
 %   }
 %}
@@ -920,13 +920,13 @@ $t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
 
 
 \begin{lemma}\label{NP-222}
-There must exist an allocation scheme to satisfy the bandwidth-based availability targets of all demands admitted by Algorithm \ref{greedy-1}.
+There must exist an allocation scheme to satisfy the bandwidth availability targets of all demands admitted by Algorithm \ref{greedy-1}.
 \end{lemma} 
 The proof details can be found in Appendix \ref{appendix-proof}
 %\begin{proof}
 %We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth-based availability.
 %There are two cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
-%Case (i) is impossible, because if bandwidth is insufficient (i.e., $d_{ik}> Capacity (T_k)$) , Algorithm \ref{greedy-1} won't admit the demand (Line 6-8).
+%Case (i) is impossible, because if bandwidth is insufficient (i.e., $\mathbf{b}^k_d> Capacity (T_k)$) , Algorithm \ref{greedy-1} won't admit the demand (Line 6-8).
 %Case (ii) is also impossible, because if the availability is smaller than its target (i.e., $s_i <   \beta_{\gamma_{i}}$) , Algorithm \ref{greedy-1} will reject the demand (Line 14-16).
 %This completes the proof. 
 %\end{proof}
@@ -937,28 +937,28 @@ The proof details can be found in Appendix \ref{appendix-proof}
 % \begin{algorithm}
 %\KwIn{Input parameters shown in Table \ref{Notation}} 
 %\KwOut{ $\{f_{jtk}\}$}
-%Sort $I$ in non-decreasing order with $\sum_{k\in K}d_{ik}\beta_i$;\\
+%Sort $I$ in non-decreasing order with $\sum_{k\in K}\mathbf{b}^k_d\beta_i$;\\
 %Sort all $T_k$ in non-decreasing order with failure probability;\\
-%$g_i=0, s_i=1, \forall i \in I$; \\
-%\For{$i \in I$}{
+%$g_i=0, s_i=1, \forall d \in D$; \\
+%\For{$d \in D$}{
 %\For{$k\in K$}{
-%\If{$d_{ik}> Capacity(T_k)$}{
+%\If{$\mathbf{b}^k_d> Capacity(T_k)$}{
 %    $g_i=0;$\\
 %    \Return $\{g_1, g_2,..,g_i,....\}$;\\
 %}
-%\While{$d_{ik}>0$}{
+%\While{$\mathbf{b}^k_d>0$}{
 %$t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
-% $f_{ikt}=Allocation(t, d_{ik})$;\\
+% $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
 % $s_i=s_i*p_t$;\\
-% $d_{ik} = d_{ik}- f_{ikt};$\\
+% $\mathbf{b}^k_d = \mathbf{b}^k_d- f_{d}^t;$\\
 %}
 %%\For{$t\in T_k$}{
-%%   $f_{ikt}=Allocation(t, d_{ik})$;\\
-%%   \If{$f_{ikt}>=0$}{
+%%   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
+%%   \If{$f_{d}^t>=0$}{
 %%   $s_i=s_i*p_t$;\\
-%%   $d_{ik} = d_{ik}- f_{ikt};$\\
+%%   $\mathbf{b}^k_d = \mathbf{b}^k_d- f_{d}^t;$\\
 %%   }
-%%   \If{$d_{ik}<=0$}{
+%%   \If{$\mathbf{b}^k_d<=0$}{
 %%   \textbf{break};\\
 %%   }
 %%}
@@ -970,7 +970,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %  $g_i=1$;\\
 %}
 %
-%\Return $\{g_1, g_2,..,g_i,....\},\{f_{ikt}\}$;\\
+%\Return $\{g_1, g_2,..,g_i,....\},\{f_{d}^t\}$;\\
 %\caption{Greedy algorithm for admission control}
 %\label{greedy}
 %\end{algorithm}
@@ -990,16 +990,16 @@ The proof details can be found in Appendix \ref{appendix-proof}
 
 
 % \begin{algorithm}
-%\KwIn{$\{d_{ik}\},G, \{\beta_j\}$} 
+%\KwIn{$\{\mathbf{b}^k_d\},G, \{\beta_j\}$} 
 %\KwOut{ $g_i$}
 %$s_i=1;$\\
 %\For{$k \in K$}{
-%\If{$d_{ik}> Capacity(T_k)$}{
+%\If{$\mathbf{b}^k_d> Capacity(T_k)$}{
 %    $g_i=0;$\\
 %    \Return  $g_i$;\\
 %}
 %\Else{
-%$p_k = BandwidthProbability(d_{ik},G);$\\
+%$p_k = BandwidthProbability(\mathbf{b}^k_d,G);$\\
 %$s_i=s_i*p_k;$
 %}
 %}
@@ -1026,14 +1026,14 @@ The proof details can be found in Appendix \ref{appendix-proof}
 
 
 
-%Each request $i \in I$ of service $j \in J$  needs $d_{ijk}$ bandwidth over DC pair $k$ and the availability target for service $j$ is $\beta_{j}\%$.
+%Each request $d \in D$ of service $j \in J$  needs $d_{ijk}$ bandwidth over DC pair $k$ and the availability target for service $j$ is $\beta_{j}\%$.
 %The importance of service $j$ is denoted as $w_j$.
 %As Table \ref{Notation} shown, input includes the following parts:
 %(1) Network topology and network scenarios.
 %The input includes two parts:
 %(1) Network states and topology.
 %For a given inter-DC WAN,  $c_e$ is the capacity of link $e$.
-%The network state $\bm{z}\in \bm{Z}$ is an uncertainty parameter with probability $p(\bm{z})$; 
+%The network state $\bm{z}\in \bm{Z}$ is an uncertainty parameter with probability $p_{\bm{z}}$; 
 %(2) Application level traffic matrix (TM) and tunnel sets for each flow pair.
 %In traditional TE, a traffic matrix is a two dimensional array that describes the bandwidth demands from one point to another over the network.
 %$\mathsf{BATE}$ extends this from two aspects:
@@ -1043,8 +1043,8 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %In $\mathsf{BATE}$ framework,  each flow's tunnels set $T_j$ is also part of the input.
 %Given the network topology, we can derive the tunnel sets between site pair in advance. 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes (e.g., k-shortest paths, edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}) on performance.
-%Let $L_{te}$ present whether tunnel $t \in T_j$ passes link $e$ or not.
-%We use $x_t(\bm{z})$ to denote whether tunnel $t$ is available ($x_t(\bm{z})=1$)  or not  ($x_t(\bm{z})=0$) under network state $\bm{z}$.
+%Let $u_t^e$ present whether tunnel $t \in T_j$ passes link $e$ or not.
+%We use $v_t^{\bm{z}}$ to denote whether tunnel $t$ is available ($v_t^{\bm{z}}=1$)  or not  ($v_t^{\bm{z}}=0$) under network state $\bm{z}$.
 
 % \begin{figure}
 %\begin{center}
@@ -1054,7 +1054,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %\end{center}
 %\end{figure}
 
-% $S_j$ &\multicolumn{6}{|l}{Network service achieved availability of $j$}\\
+% $S_j$ &\multicolumn{6}{|l}{Network service achieved availabitlity of $j$}\\
 %\hline
 
 %Besides whether the new arrival demand can be admitted, Algorithm \ref{greedy-1} also outputs pre-allocation results.
@@ -1066,21 +1066,20 @@ The proof details can be found in Appendix \ref{appendix-proof}
 
 \subsection{Traffic scheduling} \label{TE}
 
-For each \textit{admitted} demand, the online scheduling determines bandwidth allocation over each tunnel every $T$ (e.g., 10 mins).
-The goal of online scheduling is to satisfy each demand's bandwidth-based availability target.
-We model the online scheduling as a linear programming.
+For each \textit{admitted} demand, the traffic scheduling determines bandwidth allocation over each tunnel every $T$ (e.g., 10 mins).
+Traffic scheduling aims to satisfy each BA demand's availability target and we model the traffic scheduling as a linear programming.
 %(2) To provide high availability, networks are over-provisioned,  and the traffic engineering should route requests with route all admitted requests with small induced network overload, so that more network resources could be used to accommodate future requests;
 %(3) The algorithm should be fast enough to derive the routing solution.
 %We begin with the constraints.
-Firstly, the bandwidth allocation results $f_{ikt}$ for demand $i$ over tunnel $t \in T_{k}$ should be non-negative, i.e.,
+Firstly, the bandwidth allocation results $f_{d}^t$ for BA demand $d$ over tunnel $t \in T_{k}$ should be non-negative, i.e.,
 \begin{equation}
-f_{ikt} \ge 0, \quad\forall i \in I ,  k\in K,   t\in T_{k}.
+f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K,   t\in T_{k}.
 \label{constraint-f2}
 \end{equation}
 Then total traffic through link $e$ should not be larger than its capacity $c_e$:
 
 \begin{equation}
- \sum_{i \in I}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}L_{te} \le c_e, \quad \forall e \in E.
+ \sum_{d \in D}\ \sum_{k\in K:t\in T_{k}}f_{d}^tu_t^e \le c_e, \quad \forall e \in E.
 \label{constraint-e2}
 \end{equation}
 
@@ -1088,41 +1087,41 @@ To provider high availability with minimum induced overload, we restrict each de
 
 
 \begin{eqnarray} \label{Smaller}
- \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, \quad  \forall i \in I_a, k \in K
+ \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, \quad  \forall d \in D_a, k \in K
 \end{eqnarray}
 
 
-$R_{ik}(\bm{z})$ is the ratio of total reserved bandwidth to demand through pair $k$ for $i$ under network scenario $\bm{z}$ and it is defined as:
+$R_{dk}^{\bm{z}}$ is the ratio of total reserved bandwidth to demand through pair $k$ for BA demand $d$ under network scenario $\bm{z}$ and it is defined as:
 
  \begin{eqnarray} \label{R2}
-R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}}, \quad \forall  i \in I, \bm{z}\in \bm{Z}, k \in K.
+R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \bm{z}\in \bm{Z}, k \in K.
 \end{eqnarray}
 
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
-$R_{ik}(\bm{z})$ describes the allocation return under network scenario $\bm{z}$.
-In reality, tunnel $t$ might be unavailable (i.e., $x_t(\bm{z}) =0$), and if the total reserved bandwidth through all the available tunnels is larger than $d_{ik}, \forall k \in K$,  then bandwidth demand can still be satisfied and network scenario $\bm{z}$ can be regarded as \textit{qualified}, i.e., 
-$R_{ik}(\bm{z}) \ge 1, \forall k \in K$.
+$R_{dk}^{\bm{z}}$ describes the allocation return under network scenario $\bm{z}$.
+In reality, tunnel $t$ might be unavailable (i.e., $v_t^{\bm{z}} =0$), and if the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d, \forall k \in K$,  then bandwidth demand can still be satisfied and network scenario $\bm{z}$ can be regarded as \textit{qualified}, i.e., 
+$R_{dk}^{\bm{z}} \ge 1, \forall k \in K$.
 To guarantee the availability target of a demand, we should make its total probability of qualified scenario larger than availability target, i.e., 
-$\sum_{\forall k: R_{ik}(\bm{z}) \ge 1} p(\bm{z}) \ge \beta_i, \forall i \in I_a$.
+$\sum_{\forall k: R_{dk}^{\bm{z}} \ge 1} p_{\bm{z}} \ge \beta_d, \forall d \in D_a$.
 %This is a step function and we define the following potential function:
 % 
 %  \begin{eqnarray} \label{B3}
-%\sum_{R_{ik}(\bm{z}) \ge 1} p(\bm{z}) \ge \beta_i, \forall i \in I_a
+%\sum_{R_{dk}^{\bm{z}} \ge 1} p_{\bm{z}} \ge \beta_i, \forall d \in D_a
 %\end{eqnarray}
-%$R_{ik}(\bm{z})$ is the ratio of allocated bandwidth to  demand over node pair $k$ under network scenario $\bm{z}$.
-Let $B_i(\bm{z})$ denote the lower bound of $R_{ik}(\bm{z})$ over the $k$ pairs for  $i$ under network scenario $\bm{z}$,  i.e.,
+%$R_{dk}^{\bm{z}}$ is the ratio of allocated bandwidth to  demand over node pair $k$ under network scenario $\bm{z}$.
+Let $B_d^{\bm{z}}$ denote the lower bound of $R_{dk}^{\bm{z}}$ over the $k$ pairs for  $i$ under network scenario $\bm{z}$,  i.e.,
 
  \begin{eqnarray} \label{B2}
-B_i(\bm{z}) \le R_{ik}(\bm{z}), \quad  \forall  i \in I_a, \bm{z}\in \bm{Z}, k \in K
+B_d^{\bm{z}} \le R_{dk}^{\bm{z}}, \quad  \forall  d \in D_a, \bm{z}\in \bm{Z}, k \in K
 \end{eqnarray}
 
-It is obvious  $B_i(\bm{z}) \le 1$ and $B_i(\bm{z})=1$ presents scenario $\bm{z}$ is qualified, therefore, 
-we can define $B_i(\bm{z})\times p(\bm{z})$  as the potential achieved availability of $i$ under network scenario  $\bm{z}$.
+It is obvious  $B_d^{\bm{z}} \le 1$ and $B_d^{\bm{z}}=1$ presents scenario $\bm{z}$ is qualified, therefore, 
+we can define $B_d^{\bm{z}}\times p_{\bm{z}}$  as the potential achieved availability of $i$ under network scenario  $\bm{z}$.
 To satisfy diverse availability targets, the achieved availability should be larger than availability target, i.e., 
  
  \begin{eqnarray} \label{Achieved}
-\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},  \quad {\forall i \in I_a}
+\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{d},  \quad {\forall d \in D_a}
 \end{eqnarray}
 
 
@@ -1134,16 +1133,16 @@ We want to maximize the overall achieved availability of all admitted demands,  
 \begin{equation}
 \small
 \begin{aligned} \label{BATE-TE}
- &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
+ &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}}\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved})
 %\begin{cases}
-% \sum_{i \in I_a}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}L_{te} \le c_e, &\text{$\forall e \in E $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
-%R_{ik}(\bm{z})>=B_i(\bm{z}),&{\forall i \in I_a, \bm{z} \in Z, k\in K.} \\
-%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
-% \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, &{  \forall i \in I_a, k \in K}.\\
-%f_{ikt} \ge 0,&{\forall i \in I_a , \forall k\in K,\forall t\in T_{k}}.\\
+% \sum_{d \in D_a}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{dk}^{\bm{z}}>=B_d^{\bm{z}},&{\forall d \in D_a, \bm{z} \in Z, k\in K.} \\
+%\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall d \in D_a} .\\
+% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in D_a, k \in K}.\\
+%f_{d}^t \ge 0,&{\forall d \in D_a , \forall k\in K,\forall t\in T_{k}}.\\
 %\end{cases}\\
 \end{array}
 \end{aligned}
@@ -1183,16 +1182,16 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 %\begin{equation}
 %\small
 %\begin{aligned} \label{BATE-TE}
-% &maximize  \sum_{i\in I} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
+% &maximize  \sum_{i\in I} \sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}}\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
 %\begin{cases}
-% \sum_{i \in I}\ \sum_{\forall k\in K: t\in T_{k}}f_{ikt}L_{te} \le c_e, &\text{$\forall e \in E $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
-%R_{ik}(\bm{z})>=B_i(\bm{z}),&{\forall i \in I_a, \bm{z} \in Z, k\in K.} \\
-%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
-% \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, &{  \forall i \in I_a, k \in K}.\\
-%f_{ikt} \ge 0,&{\forall i \in I_a , \forall k\in K: t\in T_{k}}.\\
+% \sum_{d \in D}\ \sum_{\forall k\in K: t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{dk}^{\bm{z}}>=B_d^{\bm{z}},&{\forall d \in D_a, \bm{z} \in Z, k\in K.} \\
+%\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall d \in D_a} .\\
+% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in D_a, k \in K}.\\
+%f_{d}^t \ge 0,&{\forall d \in D_a , \forall k\in K: t\in T_{k}}.\\
 %\end{cases}\\
 %\end{array}
 %\end{aligned}
@@ -1233,7 +1232,7 @@ Figure \ref{recovery}(b) depicts the backup allocation result when we assume the
 Network scenario number is huge for large-scale network and we assume that at any time, only one link in the network could fail. 
 If we assume network scenario $ \bm{z}$ could happen, and let $f^{\bm{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \bm{z}}_k$, where $T^ { \bm{z}}_k$ is the surviving tunnel set under scenario $ \bm{z}$ and it should be non-negative, i.e.,
 \begin{equation}
-f^{\bm{z}}_{ikt} \ge 0, \quad\forall i \in I ,  k\in K,   t\in T^{\bm{z}}_k.
+f^{\bm{z}}_{ikt} \ge 0, \quad\forall d \in D ,  k\in K,   t\in T^{\bm{z}}_k.
 \label{constraint-f3}
 \end{equation}
 
@@ -1253,16 +1252,16 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 %\begin{equation}
 %\small
 %\begin{aligned} \label{BATE-recovery}
-% &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z})\\
+% &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}}\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
 %\begin{cases}
-%\sum_{i\in I_a}\sum_{k\in K}\sum_{t\in Q_{h}} f'_{ikt}L_{te}+ \sum_{i\in I_a}\sum_{k\in K}\sum_{t'\in Q_{h}} f''_{ikt'}L_{t'e} \le c_e, &\text{$\forall e \in E \setminus e' $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I_a, \bm{z}\in \bm{Z},  k \in K$.}\\
-%R_{ik}(\bm{z})>=B_i(\bm{z}),&{\forall i \in I_a, \bm{z} \in Z, k\in K.} \\
-%\sum_{\bm{z}\in \bm{Z}}B_i(\bm{z})\times p(\bm{z}) \ge \beta_{\gamma_{i}},&{\forall i \in I_a} .\\
-% \sum_{t\in T_{k}} f_{ikt} \le d_{ik}, &{  \forall i \in I_a, k \in K}.\\
-%f_{ikt} \ge 0,&{\forall i \in I_a , \forall k\in K,\forall t\in T_{k}}.\\
+%\sum_{i\in I_a}\sum_{k\in K}\sum_{t\in Q_{h}} f'_{ikt}u_t^e+ \sum_{i\in I_a}\sum_{k\in K}\sum_{t'\in Q_{h}} f''_{ikt'}L_{t'e} \le c_e, &\text{$\forall e \in E \setminus e' $.}\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{dk}^{\bm{z}}>=B_d^{\bm{z}},&{\forall d \in D_a, \bm{z} \in Z, k\in K.} \\
+%\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall d \in D_a} .\\
+% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in D_a, k \in K}.\\
+%f_{d}^t \ge 0,&{\forall d \in D_a , \forall k\in K,\forall t\in T_{k}}.\\
 %\end{cases}\\
 %\end{array}
 %\end{aligned}
@@ -1272,14 +1271,14 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 
 \begin{small}
 \begin{eqnarray} \label{B-constraint}
-\sum_{i\in I_a}\sum_{k\in K}\sum_{t\in T^{ \bm{z}}_k} f^{ \bm{z}}_{ikt}L_{te} \le c_e \times A_e^{ \bm{z}}
+\sum_{i\in I_a}\sum_{k\in K}\sum_{t\in T^{ \bm{z}}_k} f^{ \bm{z}}_{ikt}u_t^e \le c_e \times A_e^{ \bm{z}}
 \end{eqnarray}
 \end{small}
 
 The revenue return for $i$ over node pair $k$ can be described:
 \begin{small}
 \begin{eqnarray} \label{B-return}
-R_{ik}=\frac{\sum_{t\in T^{ \bm{z}}_k} f^{ \bm{z}}_{ikt}}{d_{ik}}, \forall  i \in I_a,  k \in K
+R_{ik}=\frac{\sum_{t\in T^{ \bm{z}}_k} f^{ \bm{z}}_{ikt}}{\mathbf{b}^k_d}, \forall  d \in D_a,  k \in K
 \end{eqnarray}
 \end{small}
 
@@ -1292,7 +1291,7 @@ Then, the profit of $i$ is:
 
 
 \begin{equation}
-\forall  i \in I_a : h_i=
+\forall  d \in D_a : h_i=
 \begin{cases}
 1 &\text{$\forall k \in K: R_{ik} \ge 1 $}\\
 \mu_{\gamma_i} &\text{Otherwise}
@@ -1304,10 +1303,10 @@ It is a step function and we can change it to the following linear format and we
 
 \begin{equation}
 \begin{cases}
-h_i=y_i+\mu_{\gamma_i}*(1-y_i),&{\forall i \in I_a.} \\
-R_{ik} < M*y_i+1-y_i,&{\forall i \in I_a,  k\in K.} \\
-R_{ik} >= y_i,&{\forall i \in I_a,  k\in K.} \\
-y_i \in\{0,1\},&{\forall i \in I_a.} \\
+h_i=y_i+\mu_{\gamma_i}*(1-y_i),&{\forall d \in D_a.} \\
+R_{ik} < M*y_i+1-y_i,&{\forall d \in D_a,  k\in K.} \\
+R_{ik} >= y_i,&{\forall d \in D_a,  k\in K.} \\
+y_i \in\{0,1\},&{\forall d \in D_a.} \\
 \end{cases}
 \label{A-SSS2}
 \end{equation}
@@ -1498,22 +1497,8 @@ Flow table just maps the packet based on the destination and the group tables co
 \label{e2}
 \end{figure*}
 
-\section{Evaluation} \label{evaluation}
-In this section, we evaluate the performance of $\mathsf{BATE}$  in both real trace driven simulation and testbed.
-Our main results are as follows.
 
-%We begin by describing the experimental framework ($\S$ \ref{setting}). 
-%We show the performance of $\mathsf{BATE}$ through answering the following specific questions:
-(1)  The admission control of $\mathsf{BATE}$ can achieve a reasonable tradeoff. $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of 5\% higher rejection ratio. 
-
-%compared with the latest TE schemes like FFC and TEAVAR, BATE can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
-(2) $\mathsf{BATE}$ has consistent performance under various topologies and traffic.
-Compared with the state-of-the-art traffic engineering algorithms, $\mathsf{BATE}$ is able to make  40\% more bandwidth demands meet availability SLAs.
-
-(3) $\mathsf{BATE}$ can retain 30\% more profit when network fails.
-
-(4)  $\mathsf{BATE}$ is fast and accuracy.
-The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%. 
+%The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%. 
 
 % \begin{itemize}
 %  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
@@ -2739,41 +2724,41 @@ month = may,
  
 %We now introduce the admission control problem when all the admitted demands can be rescheduled.
 %The new arrival demand and all the admitted ones (i.e., $I_a$) constitute request set $I$.
-%The Admission control problem  \textit{determines whether availability target of $\forall i \in I$ can be supported simultaneously subject to network failure model}.
+%The Admission control problem  \textit{determines whether availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new demand can be admitted, otherwise, it is rejected.
 %We begin with the constraints.
-Firstly, the bandwidth allocation results $f_{ikt}$ for demand $i$ over tunnel $t \in T_{k}$ should be non-negative, i.e.,
+Firstly, the bandwidth allocation results $f_{d}^t$ for BA demand $d$ over tunnel $t$ should be non-negative, i.e.,
 \begin{equation}
-f_{ikt} \ge 0, \quad\forall i \in I ,  k\in K,   t\in T_{k}.
+f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K:  t\in T_{k}.
 \label{constraint-f}
 \end{equation}
 Then total traffic through link $e$ should not be larger than its capacity $c_e$:
 
 \begin{equation}
- \sum_{i \in I}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}L_{te} \le c_e, \quad \forall e \in E.
+ \sum_{d \in D}\ \sum_{k\in K:t\in T_{k}}f_{d}^tu_t^e \le c_e, \quad \forall e \in E.
 \label{constraint-e}
 \end{equation}
 
 
-$R_{ik}(\bm{z})$ is the ratio of total reserved bandwidth to demand through pair $k$ for request $i$ under network scenario $\bm{z}$ and it is  defined as:
+$R_{dk}^{\bm{z}}$ is the ratio of total reserved bandwidth to demand through pair $k$ for BA demand $d$ under network scenario $\bm{z}$ and it is  defined as:
 
  \begin{eqnarray} \label{R}
-R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}}, \quad \forall  i \in I, \bm{z}\in \bm{Z}, k \in K.
+R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \bm{z}\in \bm{Z}, k \in K.
 \end{eqnarray}
 
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
-Under network scenario $\bm{z}$, tunnel $t$ might be unavailable (i.e., $x_t(\bm{z}) =0$).
-If the total reserved bandwidth through all the available tunnels is larger than $d_{ik}, \forall k \in K$,  then bandwidth demand can be satisfied even tunnel $t$ fails and network scenario $\bm{z}$ can be regarded as \textit{safe} .
-Let $A_i(\bm{z})$ denote whether scenario $\bm{z}$ is safe (i.e., $A_i(\bm{z})=1$) or not (i.e., $A_i(\bm{z})=0$) for request $i$:
+Under network scenario $\bm{z}$, tunnel $t$ might be unavailable (i.e., $v_t^{\bm{z}} =0$).
+If the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d, \forall k \in K$,  then bandwidth demand can be satisfied even tunnel $t$ fails and network scenario $\bm{z}$ can be regarded as \textit{safe} .
+Let $A_d^{\bm{z}}$ denote whether scenario $\bm{z}$ is safe (i.e., $A_d^{\bm{z}}=1$) or not (i.e., $A_d^{\bm{z}}=0$) for the BA demand $d$:
 
 \begin{equation}
-A_i(\bm{z})=
+A_d^{\bm{z}}=
 \begin{cases}
-1 &\text{$\forall k \in K:R_{ik}(\bm{z})\ge 1$}\\
+1 &\text{$\forall k \in K:R_{dk}^{\bm{z}}\ge 1$}\\
 0&\text{Otherwise}
 \end{cases}
-,\forall  i \in I, \bm{z}\in \bm{Z}.
+,\forall  d \in D, \bm{z}\in \bm{Z}.
 \label{CA}
 \end{equation}
 
@@ -2791,35 +2776,35 @@ It is a step function and we can change it to the following linear format:
 
 \begin{equation}
 \begin{cases}
-R_{ik}(\bm{z}) < 1- A_i(\bm{z})+M\times A_i(\bm{z}),&{\forall i \in I, \bm{z} \in Z, k\in K.} \\
-R_{ik}(\bm{z})>=A_i(\bm{z}),&{\forall i \in I, \bm{z} \in Z, k\in K.} \\
-A_i(\bm{z}) \in\{0,1\},&{\forall i \in I, \bm{z} \in Z.} \\
+R_{dk}^{\bm{z}} < 1- A_d^{\bm{z}}+M\times A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+R_{dk}^{\bm{z}}>=A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+A_d^{\bm{z}} \in\{0,1\},&{\forall d \in D, \bm{z} \in Z.} \\
 \end{cases}
 \label{A-z2}
 \end{equation}
 
-where $M$ is a big integer that is at least larger than the upper bound of $R_{ik},\forall i \in I,k\in K$.
+where $M$ is a big integer that is at least larger than the upper bound of $R_{dk}^{\bm{z}},\forall d \in D, k\in K,\bm{z} \in Z$.
 It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
-The achieved bandwidth-based availability of request $i$ is the sum of all safe network scenarios' probability: 
+The achieved bandwidth availability of demand $d$ is the sum of all safe network scenarios' probability: 
  \begin{eqnarray} \label{S}
-S_i=\sum_{\bm{z}\in \bm{Z}}A_i(\bm{z})\times p(\bm{z}),  \quad \forall  i \in I.
+S_d=\sum_{\bm{z}\in \bm{Z}}A_d^{\bm{z}}\times p_{\bm{z}},  \quad \forall  d \in D.
 \end{eqnarray}
 
-We use $g_i$ to present whether the availability target of $i$ can be satisfied: 
+We use $g_d$ to present whether the availability target of $d$ can be satisfied: 
 
 \begin{equation}
- g_i=
+ g_d=
 \begin{cases}
-1 &\text{$1 >S_i \ge \beta_{\gamma_{i}}$}\\
-0 &\text{$ \beta_{\gamma_{i}} >S_i \ge 0 $}
+1 &\text{$1 >S_d \ge \beta_{d}$}\\
+0 &\text{$ \beta_{d} >S_d\ge 0 $}
 \end{cases},
-\ \ \ \forall  i \in I.
+\ \ \ \forall  d \in D.
 \label{availability4}
 \end{equation}
 
-If the achieved bandwidth-based availability (i.e., $S_i$) is larger than its desired availability target (i.e., $\beta_{\gamma_{i}}$), the demand can be admitted.
+If the achieved bandwidth  availability (i.e., $S_d$) is larger than its desired availability target (i.e., $\beta_d$), the demand can be admitted.
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
-Otherwise, it is rejected, which means the network can't support $i$.
+Otherwise, it is rejected, which means the network can't support $d$.
 %where $R_j=\sum_{t \in T_j}f_{jt}/d_j$ and $f_{jtab}$.
 %\sum_{\forall a,b \in V: t\in T_{ab}}f_{jtab}/d_{jab} 
 %$\mu(f_{jtk}) $ aims to ensure that service $j$  will gain as much bandwidth as possible if the network fails to support the availability of service $j$.
@@ -2827,9 +2812,9 @@ Also,  (\ref{availability4}) can be changed into the following linear format:
 
 \begin{equation}
 \begin{cases}
-S_i <  \beta_{\gamma_{i}}\times  (1-g_i)+g_i,& \forall i \in I. \\
-S_i \ge  \beta_{\gamma_{i}} \times g_i,& \forall i \in I. \\
-g_i\in\{0,1\},& \forall i \in I. \\
+S_d <  \beta_{d}\times  (1-g_d)+g_d,& \forall d \in D. \\
+S_d \ge  \beta_{d} \times g_d,& \forall d \in D. \\
+g_d\in\{0,1\},& \forall d \in D. \\
 \end{cases}
 \label{g-2}
 \end{equation}
@@ -2846,7 +2831,7 @@ g_i\in\{0,1\},& \forall i \in I. \\
 %As TABLE \ref{target} shown, $g_j$ can be used to describe the availability targets defined in SLAs. 
 %Applications might have diverse availability demands (i.e., $\beta_j$) and the piecewise formulation also considers this by setting different bound for full profit $\alpha$.
 %where $M_2$ is  a big integer that is at least larger than the upper-bound of $S_j,\forall j \in J$.
-We intend to maximize the total accepted demands, i.e., $ \sum_{i\in I} g_i$.
+We intend to maximize the total number of accepted demands, i.e., $ \sum_{d\in D} g_d$.
 %\begin{eqnarray} \label{goal}
 %maximize  \sum_{i\in I} g_i
 %\end{eqnarray}
@@ -2871,20 +2856,20 @@ With the constraints introduced above, we can finally give the formulation of ad
 \begin{equation}
 \small
 \begin{aligned} \label{P8}
- &maximize  \sum_{i\in I} g_i\\
+ &maximize  \sum_{d\in D} g_d\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t.
 (\ref{constraint-f}), (\ref{constraint-e}), (\ref{R}), (\ref{A-z2}), (\ref{S}), (\ref{g-2})
 %\begin{cases}
-% \sum_{i \in I}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{ikt}L_{te} \le c_e, &\text{$\forall e \in E $.}\\
-%R_{ik}(\bm{z})=\frac{\sum_{t\in T_{k}}f_{ikt}x_t(\bm{z}) }{d_{ik}} , &\text{$\forall  i \in I, \bm{z}\in \bm{Z},  k \in K$.}\\
-%S_i=\sum_{\bm{z}\in \bm{Z}}A_i(\bm{z})\times p(\bm{z}) , & {\forall  i \in I.}\\
-%R_{ik}(\bm{z}) < 1- A_i(\bm{z})+M\times A_i(\bm{z}),&{\forall i \in I, \bm{z} \in Z, k\in K.} \\
-%R_{ik}(\bm{z})>=A_i(\bm{z}),&{\forall i \in I, \bm{z} \in Z, k\in K.} \\
-%S_i <  \beta_{\gamma_{i}}\times  (1-g_i)+g_i,& \forall i \in I. \\
-%S_i \ge  \beta_{\gamma_{i}} \times g_i,& \forall i \in I. \\
-%f_{ikt} \ge 0,&{\forall i \in I , \forall k\in K, \forall t\in T_{k}}.\\
-%A_i(\bm{z}), g_i\in\{0,1\}, & \forall \bm{z} \in \bm{Z}, i \in I. \\
+% \sum_{d \in D}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D, \bm{z}\in \bm{Z},  k \in K$.}\\
+%S_i=\sum_{\bm{z}\in \bm{Z}}A_d^{\bm{z}}\times p_{\bm{z}} , & {\forall  d \in D.}\\
+%R_{dk}^{\bm{z}} < 1- A_d^{\bm{z}}+M\times A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+%R_{dk}^{\bm{z}}>=A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+%S_i <  \beta_{\gamma_{i}}\times  (1-g_i)+g_i,& \forall d \in D. \\
+%S_i \ge  \beta_{\gamma_{i}} \times g_i,& \forall d \in D. \\
+%f_{d}^t \ge 0,&{\forall d \in D , \forall k\in K, \forall t\in T_{k}}.\\
+%A_d^{\bm{z}}, g_i\in\{0,1\}, & \forall \bm{z} \in \bm{Z}, d \in D. \\
 %\end{cases}\\
 \end{array}
 \end{aligned}
@@ -2892,10 +2877,10 @@ s.t.
 \section{Proof of Lemma \ref{NP-222}} \label{appendix-proof}
 
 \begin{proof}
-We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth-based availability.
+We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth availability.
 There are two cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
-Case (i) is impossible, because if bandwidth is insufficient (i.e., $d_{ik}> Capacity (T_k)$) , Algorithm \ref{greedy-1} won't admit the demand (Line 6-8).
-Case (ii) is also impossible, because if the availability is smaller than its target (i.e., $s_i <   \beta_{\gamma_{i}}$) , Algorithm \ref{greedy-1} will reject the demand (Line 14-16).
+Case (i) is impossible, because if bandwidth is insufficient (i.e., $\mathbf{b}^k_d> Capacity (T_k)$) , Algorithm \ref{greedy-1} won't admit the demand (Line 6-8).
+Case (ii) is also impossible, because if the availability is smaller than its target (i.e., $s_d <   \beta_{d}$) , Algorithm \ref{greedy-1} will reject the demand (Line 14-16).
 This completes the proof. 
 \end{proof}
 
@@ -2924,7 +2909,7 @@ s.t. &\forall e \in E: \sum_{i=1}^k\sum_{p\in \mathcal{P}_i}f_{ip}L_{pe} \le c_e
 \end{equation}
 Where $g_i$ denotes whether commodity flow $i$ can be routable.
 We transyorm the all-or-nothing multi-commodity flow problem to a special instance of
-failure recovery problem and consider a special case, in which $\mu_i=0,\forall i \in I_a$.
+failure recovery problem and consider a special case, in which $\mu_i=0,\forall d \in D_a$.
 In this case, if allocated bandwidth is larger than the demand, then the profit is 1, otherwise, it is 0.
 We consider setting the admitted demand from tenants and their bandwidth target in 
 the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.
@@ -2947,7 +2932,7 @@ proof.
 %We can rewrite (\ref{S}) as:
 %
 % \begin{eqnarray} \label{S-2}
-%\forall  j \in J :  S_j=\sum_{z\in \bm{z}}A_j(\bm{z})\times p(\bm{z})
+%\forall  j \in J :  S_j=\sum_{z\in \bm{z}}A_j(\bm{z})\times p_{\bm{z}}
 %\end{eqnarray}
 %$A(\bm{z})$ is defined as:
 %
@@ -3000,11 +2985,11 @@ proof.
      \begin{algorithm}
 \KwIn{Input parameters shown in Table \ref{Notation}} 
 \KwOut{ $\{f'_{ikt}\},F$}
-Sort $i\in I_a$ in non-decreasing order with $\frac{w_i}{\sum_{k\in K}d_{ik}}$;\\
+Sort $i\in I_a$ in non-decreasing order with $\frac{w_i}{\sum_{k\in K}\mathbf{b}^k_d}$;\\
 $B_e=c_e, \forall e \in E$; \\
-$h_i=0, \forall i \in I_a$; \\
+$h_i=0, \forall d \in D_a$; \\
 $F=\{\}$;\\
-\For{$i \in I_a$}{
+\For{$d \in D_a$}{
 $\{f'_{ikt}\},h_i,\{D_e\}\leftarrow$Allocation($F,i,B$);\\
 \If {$h_i==1$}{
     $F=F\cup {i}$;\\
@@ -3012,7 +2997,7 @@ $\{f'_{ikt}\},h_i,\{D_e\}\leftarrow$Allocation($F,i,B$);\\
 }
 \Else{
 \If{$\sum_{j\in F}w_j <w_i$}{
-$D_e=B_e+\sum_{j\in J}\sum_{k\in K}\sum_{t\in T_k}f_{jkt}L_{te}, \forall e \in E$;\\
+$D_e=B_e+\sum_{j\in J}\sum_{k\in K}\sum_{t\in T_k}f_{jkt}u_t^e, \forall e \in E$;\\
 $\{f''_{ikt}\},h'_i,\{D'_e\}\leftarrow$Allocation($F,i,D$);\\
 \If{$h'_i==1$}{
 $\{f'_{jtk}\} \leftarrow 0,\forall j\in F, k\in K, t\in T_k$;\\
@@ -3047,14 +3032,14 @@ $\bm{break}$;
 %}
 %\Else{
 %$r_{jk}=d_{jk}-\sum_{t\in T_{k}:x_t(\mathbf{z})=1}f_{jtk}, \forall k \in K$;\\
-%$b_{jk}=\sum_{t\in T_k}\min_{e\in E}L_{te}B_e x_t{(\mathbf{z})},\forall k \in K$;\\
+%$b_{jk}=\sum_{t\in T_k}\min_{e\in E}u_t^eB_e x_t{(\mathbf{z})},\forall k \in K$;\\
 %\If{$\forall k: r_{jk} <=b_{jk}$}{
 %\For{$k \in K$}{
 %\For{$t\in T_k$}{
-%$\gamma_t=\min_{e\in E}L_{te}B_e$ ;\\
+%$\gamma_t=\min_{e\in E}u_t^eB_e$ ;\\
 %$f_{jkt}=f_{jkt}+\min\{\gamma_t,r_{jk}\}$;\\
 %$r_{jk}=r_{jk}-\min\{\gamma_t,r_{jk}\}$;\\
-%$B_e=B_e-\min\{\gamma_t,r_{jk}\}L_{te}x_t{(\mathbf{z})}, \forall e$;\\
+%$B_e=B_e-\min\{\gamma_t,r_{jk}\}u_t^ex_t{(\mathbf{z})}, \forall e$;\\
 %}
 %
 %}
@@ -3075,7 +3060,7 @@ $\bm{break}$;
 
  In this part, we will introduce a greedy algorithm, shown in Algorithm \ref{greedy}, to solve failure recovery problem.
  Let $F$ denote the set that demand set that the network supports.
-Firstly, it sorts all the accepted demands  $i\in I_a$ in non-decreasing order according to the ratio of weight to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}d_{ik}}$ (Line 1).
+Firstly, it sorts all the accepted demands  $i\in I_a$ in non-decreasing order according to the ratio of weight to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}\mathbf{b}^k_d}$ (Line 1).
 The ordered sequence guarantees large profit demand with small bandwidth target have high priority.
 For each admitted demand, the algorithm tries to allocate resource it with remaining network capacity (Line 6).
 If the network is able to support it, then add to $F$.
@@ -3085,7 +3070,7 @@ If this is true, then algorithm will prefer current demand  (Line13-18), otherwi
 %\begin{aligned} \label{LP}
 %\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %& \quad maximize {\sum_{j\in J:g_j=0} w_j \times\mu(f_{jtk})}\\
-%s.t. &{\sum_{j \in J:g_j=0}\sum_{k\in K: t\in T_k}f_{jtk}\times L_{te} \le B_e, \forall e \in E} \\
+%s.t. &{\sum_{j \in J:g_j=0}\sum_{k\in K: t\in T_k}f_{jtk}\times u_t^e \le B_e, \forall e \in E} \\
 % \\\end{array}
 %\end{aligned}
 %\end{equation}
