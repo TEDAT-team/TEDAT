@@ -710,7 +710,7 @@ The framework intends to achieve the following objectives:
   Bandwidth availability demands might arrive at anytime. 
   The system should be able to efficiently accommodate as many BA demands as possible under the constraint of network capacity and failure probabilities, as this would increase service agility and bring more revenue. %availability and bandwidth targets.
 \item \textbf{High availability for allocated bandwidth:}
-The system should be able to optimize its achieved availability in the manner of expectation, 
+The system should be able to optimize its achieved availability in a sense of expectation, 
 as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with lower failure probability.
 %make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
 %Therefore, their bandwidth demands can be guaranteed with high probability.
@@ -801,7 +801,7 @@ is equal to the bandwidth demand $\mathbf{b}_d^k$ for that pair, and
 its expected availability under all possible network failure scenarios, 
 i.e., $\sum_{\mathbf{z}} \in Z} p_{\mathbf{z}} \times v_t^{\mathbf{z}} $, 
 is no less than the availability demand $\beta_d$, 
-then we say this BA demand is satisfied by this exact allocation result. 
+then we say this BA demand is satisfied by this exact allocation result in a sensen of expectation. 
 If a failure indeed occurs, our traffic engineering scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer (see $\S$\ref{background}), and we use $h_d$ to denote the profit (after refunding) for demand $d$.
 
 
@@ -1395,7 +1395,7 @@ These tunnels are used by the admission control module and the online scheduler 
 When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwith over the tunnels in nearly real-time.
 The results are sent to the corresponding brokers.
 (3) Online Scheduler. 
-Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in an expected manner. 
+Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in a sense of expectation. 
 It also pre-computes backup allocation (see $\S$ \ref{backup}) for some potential link failures.
 For each user demand, the normal bandwidth and backup bandwidth allocated over each tunnel (i.e., $f_i^t$) are then sent to the corresponding brokers. 
 In addition, our system also supports several other TE algorithms including SWAN \cite{swan}, FFC \cite{FFC} and TEAVAR \cite{Teavar}.
