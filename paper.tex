@@ -650,7 +650,7 @@ $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
 \multirow{3}{*}{$d\!=\!(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{a BA demand $d$, requiring bandwidth $\mathbf{b}_d$ with }\\
 &\multicolumn{6}{|l}{ availability $\beta_d$, where $\mathbf{b}_d$ is a vector $<\mathbf{b}^1_d, \mathbf{b}^2_d, ...>$}\\
-&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
+&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs} \\
 \hline
 $D, \hat{D}$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{When an admitted demand finishes, it will be removed from $\hat{D}$.} }\\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
@@ -757,21 +757,46 @@ Then, the expected probability that network scenario  $\mathbf{z}$ will happen \
 p_{\mathbf{z}}&=&\prod_{i=1}^{|E|}(\mathbf{z}_i \times (1-x_i)+ (1-\mathbf{z}_i)(x_i))
 \end{eqnarray}
 
+\textbf{To be updated, follow Fig.1 )
 For example, an inter-DC WAN contains three links $E=\{e_1,e_2,e_3\}$. 
 Network scenario $\{1,1,0\}$ means $e_1$ ,$e_2$ are available and  $e_3$ fails.
 If the up probability of $e_1,e_2,e_3$ are 0.9, 0.8, 0.85, respectively.
 Then its probability $p(\{1,1,0\}) =0.9\times0.8\times0.15=0.108$.
 
+\textbf{BA demand model:}
+%We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are nodes and link sets.
+Let $K$ denote the set of all source-destination (s-d) DC pairs.
+%Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
+%DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
+%\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
+%&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
+%&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
+%A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
+A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d)$,
+where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ...>$ of bandwidth demands over all s-d pairs \footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}.
+%where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
+%We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
+%The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
+%When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
+
+%If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
+
+
 \textbf{Traffic engineering model:}
-We consider tunnel-based forwarding \cite{FFC,swan,Teavar}, where traffic is carried over a set of tunnels.
+Our Traffic Engineering uses tunnel-based forwarding \cite{FFC,swan,Teavar}.%where traffic is carried over a set of tunnels.
 %Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
-For each node pair $k\in K$ of the inter-DC WAN, we are given a set of pre-selected tunnels $T_{k}$, where tunnel set $T_{k}$ can be derived with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}). 
+For each source-destination node pair $k\in K$ of the inter-DC WAN, we pre-compute a set of tunnels $T_{k}$ with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}, etc.). 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes  on performance.
-Each tunnel $t\in T_{k}$ contains a set of links and  $u_t^e$ presents whether tunnel $t$ contains link $e\in E$ or not.
+Each tunnel $t\in T_{k}$ contains a sequence of links and $u_t^e$ denotes whether tunnel $t$ passes a specific link $e \in E$ or not.
 %The network scenario set is $\mathbf{z}$ and the corresponding probability is $p_{\mathbf{z}}, \forall \mathbf{z}\in Z $.
-$f_d^t$ is the bandwidth allocated over tunnel $t$ for demand $d$ and 
-$\hat{D}$ is the total \textit{admitted} demand set.
-Let $v_t^{\mathbf{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under network scenario $\mathbf{z}$.
+We use $D$ and $\hat{D}$ to represent arrived demands and \textit{admitted} demands, respectively.
+Given a demand $d$, our traffic engineering scheme will decide whether to admit it (i.e., $g_d$), 
+and the bandwidth that will be allocated for an admitted demand $d \in \hat{D}$ over tunnel $t$ will be $f_d^t$.
+Under the above network failure scenario model, we also use 
+$v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under the network scenario $\mathbf{z}$.
+If a failure indeed occurs, our traffic engineering scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer (see $\S$\ref{background}), and we use $h_d$ to denote the profit (after refunding) for demand $d$.
+
+
 
 %\begin{enumerate}
 %    \item  How to accommodate as many requests as possible subject to network failure model and diverse service availability targets  (see $\S$ \ref{admission_control}).
@@ -805,23 +830,6 @@ Let $v_t^{\mathbf{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\math
 %Then the probability of state $\bm{q}$ is: $p(\bm{q})=0.2\times0.7\times0.6\times 0.5=0.042$.
 %Consider all events will not happen, we can also derive the available probability of link $e$: $p(\{0,0,0,0\})=0.8\times0.7\times0.6\times 0.5=0.168$.
 
-\textbf{BA demand model:}
-We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are nodes and link sets.
-Let $K$ denote the a source and destination DC pair.
-%Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
-%DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
-%\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
-%&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
-%&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
-For a  bandwidth availability demand $d$, the BA abstraction can be presented as $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
-where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ...>$ of bandwidth demands over all s-d pairs.
-%where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
-%We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
-Network providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $h_d$ to denote the profit (after refunding) for demand $d$.
-%The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
-%When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
-
-%If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
 
 
 %\subsection {Traffic Engineering for Diverse Availability Targets }\label{BATE}
