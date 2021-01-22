@@ -793,9 +793,16 @@ We use $D$ and $\hat{D}$ to represent arrived demands and \textit{admitted} dema
 Given a demand $d$, our traffic engineering scheme will decide whether to admit it (i.e., $g_d$), 
 and the bandwidth that will be allocated for an admitted demand $d \in \hat{D}$ over tunnel $t$ will be $f_d^t$.
 Under the above network failure scenario model, we also use 
-$v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under the network scenario $\mathbf{z}$.
+$v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under the network scenario $\mathbf{z}$. 
+Given an allocation result ${f_d^t | \foreach t \in T_k, k \in K}$, 
+if (1) the total bandwidth allocated for each s-d pair $k$, i.e., $\sum_{\foreach t \in T_k} f_d^t}$, 
+is equal to the bandwidth demand $\mathbf{b}_d^k$ for that pair, and 
+(2) for every tunnel $t$ that is used in the allocation (i.e., $\f_d^t>0$), 
+its expected availability under all possible network failure scenarios, 
+i.e., $\sum_{\mathbf{z}} \in Z} p_{\mathbf{z}} \times v_t^{\mathbf{z}} $, 
+is no less than the availability demand $\beta_d$, 
+then we say this BA demand is satisfied by this exact allocation result. 
 If a failure indeed occurs, our traffic engineering scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer (see $\S$\ref{background}), and we use $h_d$ to denote the profit (after refunding) for demand $d$.
-
 
 
 %\begin{enumerate}
