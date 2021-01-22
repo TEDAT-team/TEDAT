@@ -103,7 +103,7 @@ aims for \textit{bandwidth availability} (BA) provision, where a service level a
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
 The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
 They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of only a 5\% higher rejection ratio. 
+Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of a 5\% higher rejection ratio. 
 On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
 %.
 % $\mathsf{BATE}$ can 
@@ -294,7 +294,7 @@ we implement $\mathsf{BATE}$ as a real system, including a centralized controlle
  We conduct extensive experiments using a small testbed as well as trace driven large scale simulations (see $\S$\ref{evaluation}).
 We compare  $\mathsf{BATE}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
 Our evaluation demonstrates that $\mathsf{BATE}$ can 
-(1) speed up the online admission control by 30 $\times $ at the expense of a rejection ratio that is only 5\% higher than the optimal strategy;
+(1) speed up the online admission control by 30 $\times $ at the expense of a rejection ratio that is 5\% higher than the optimal strategy;
 (2) meet the bandwidth availability SLAs for 40\% more demands;
 (3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
 To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
@@ -641,21 +641,21 @@ $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
 $c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
 \hline
-$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(est) pair in the set of all s-d pairs}\\
+$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in the set of all s-d pairs}\\
 \hline
 $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 %\multirow{3}{*}{VM Instances}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}&\multirow{3}{*}{Azure}\\
 %&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%}& \\
 %&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}& \\
 \hline
-\multirow{3}{*}{$d\!=\!(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{a BA demand $d$, requiring bandwidth $\mathbf{b}_d$ with }\\
-&\multicolumn{6}{|l}{ availability $\beta_d$, where $\mathbf{b}_d$ is a vector $<\mathbf{b}^1_d, \mathbf{b}^2_d, ...>$}\\
-&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs} \\
+$D, D_a$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{When an admitted demand finishes, it will be removed from $D_a$.} }\\
 \hline
-$D, \hat{D}$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{When an admitted demand finishes, it will be removed from $\hat{D}$.} }\\
+\multirow{3}{*}{$d=(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{for a BA demand $d$, requiring bandwidth $\mathbf{b}_d$ with }\\
+&\multicolumn{6}{|l}{ availability $\beta_d$, where $\mathbf{b}_d$ is a vector $<\mathbf{b}^1_d, \mathbf{b}^2_d, ...>$}\\
+&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
 %\hline
-%$D, \hat{D}$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{$\hat{D}$ will update every time slot and an admitted demand will be removed if it finishes.} }\\
+%$D, D_a$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{$D_a$ will update every time slot and an admitted demand will be removed if it finishes.} }\\
 %\hline
 % $j\in J$ &\multicolumn{6}{|l}{the $j$-th availability target in the level set}\\
 %\hline
@@ -669,11 +669,11 @@ $t$ &\multicolumn{6}{|l}{a tunnel for transmitting traffic\footnote{Multiple tun
 \hline
 $u_t^e$ &\multicolumn{6}{|l}{whether tunnel $t$ passes link $e \in E$}\\
 \hline
-$\mathbf{z}\in Z$ &\multicolumn{6}{|l}{a network failure scenario in the scenario set}\\
+$\bm{z}\in \bm{Z}$ &\multicolumn{6}{|l}{a failure scenario in the scenario set}\\
 \hline
-$p_{\mathbf{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\mathbf{z}$ occurs}\\
+$p_{\bm{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\bm{z}$ occurs}\\
 \hline
-$v_t^{\mathbf{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenario $\mathbf{z}$}\\
+$v_t^{\bm{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenario $\bm{z}$}\\
  \hline
 % $\{1,\beta_j^1,\beta_j^2....\}$ &\multicolumn{6}{|l}{The availability target list for service $j$}\\
 %  \hline
@@ -694,7 +694,7 @@ $h_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
 %\hline
 %% $S_j$ &\multicolumn{6}{|l}{Network service achieved availability of $j$}\\
 %%\hline
-% $A_d^{\mathbf{z}}$&\multicolumn{6}{|l}{Whether scenario $\mathbf{z}$ is safe or not for $i$ }\\
+% $A_d^{\bm{z}}$&\multicolumn{6}{|l}{Whether scenario $\bm{z}$ is safe or not for $i$ }\\
 % \hline
 % $S_i$&\multicolumn{6}{|l}{Achieved availability of $i$ }\\
 \bottomrule
@@ -710,29 +710,47 @@ The framework intends to achieve the following objectives:
   Bandwidth availability demands might arrive at anytime. 
   The system should be able to efficiently accommodate as many BA demands as possible under the constraint of network capacity and failure probabilities, as this would increase service agility and bring more revenue. %availability and bandwidth targets.
 \item \textbf{High availability for allocated bandwidth:}
-The system should be able to optimize its achieved availability in the manner of expectation, 
-as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with lower failure probability.
+The system should be able to optimize its achieved availability in a probabilistic manner, 
+as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with low failure probability.
 %make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
 %Therefore, their bandwidth demands can be guaranteed with high probability.
 \item \textbf{Automatic and economical failure recovery:}
 If any link failure really happens, the system should reroute traffic away from that link, 
-while minimizing any possible collateral damage to normal traffic, i.e., congestion and lower bandwidth availability due to contention from the rerouted traffic.
+while minimizing any possible collateral damage to normal traffic, i.e., congestion and lower bandwidth availability due to rerouting.
 %\item \textbf{ \& scalability:}
 %
 \end{itemize}
 
-\subsection{Abstraction of bandwidth availability}
+\subsection{Abstraction of bandwidth availability demands}
 %Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
 %Tenants could deploy diverse service instances over Inter-DC WAN.
-In reality, a customer demanding inter-DC WAN bandwidth resources could be any application or tenant  spanning multiple data centers, in either a public or a private cloud. 
-%a tenant of a public cloud (e.g., Amazon AWS), who uses this substrate to build his own virtual private cloud over multiple DCs, or could be a service team who launches multiple VM instances in a private cloud (e.g., Google internal DCs).
+In reality, a customer could be a tenant who launches multiple virtual private clouds over  multiple DCs in public clouds (e.g., Amazon AWS) or could be a service team who launches multiple VM instances in private clouds (e.g., Google internal DCs).
 %The cloud providers are providing many services and each service contains numerous instances across geo-distributed data centers.
 %For example, a common practice is running MapReduce operations across geo-distributed data centers and many connections from mappers to reducers are maintained.
 %Services have different bandwidth demands as well as availability targets.
-%Currently, there is no interface for tenants to specify bandwidth availability.
-Our abstraction of network failure scenarios and bandwidth availability demands in $\mathsf{BATE}$ are as follows.
+However, there exists no interface for tenants to specify bandwidth availability.
+We now present $\mathsf{BATE}$ 's availability abstraction.
 
-\textbf{Network failure scenario model:} 
+\textbf{BA demand model:}
+We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are nodes and link sets.
+Let $K$ denote the a source and destination DC pair.
+%Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
+%DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
+%\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
+%&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
+%&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
+For a  bandwidth availability demand $d$, the BA abstraction can be presented as $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
+where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ...>$ of bandwidth demands over all s-d pairs.
+%where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
+%We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
+Network providers will offer refunding for any violating availability targets (see $\S$\ref{background}) and we use $h_d$ to denote the profit (after refunding) for demand $d$.
+%The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
+%When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
+
+%If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
+
+
+\textbf{Network  model:} 
 %$\mathsf{BATE}$ relies on network operators to provide link failure probabilities.
 %A series of failure events (e.g., power outage, configuration mistakes, firmware bugs) directly lead to link failures.
 %%According to the report of Google \cite{evole}, more than 90\% of the failure events can lead to high packets losses, or blackholes to entire data centers and they might occur anytime.
@@ -740,72 +758,36 @@ Our abstraction of network failure scenarios and bandwidth availability demands 
 %For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1min).
 %The link up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
 %Inspired by the site reliability engineering (SRE) technology\cite{jointfailure,overview}, we propose a general failure model.
-The inter-DC WAN is modeled as a directed graph $G(V,E)$, where the set of nodes $V$ represent the data centers, 
-and the set of links $V$ represent directed links between them. 
-A network scenario $\mathbf{z}=\{\mathbf{z}_1,\mathbf{z}_2,...,\mathbf{z}_{|E|}\}$ is a vector of link states, 
-where each element $\mathbf{z}_i \in \{0,1\}$ denotes whether the $i$-th link is up ($\mathbf{z}_i=1$) or down ($\mathbf{z}_i=0$), 
+A network scenario $\bm{z}=\{z_1,z_2,...\}$ is a vector consisting of each link's state.
+Each element $z_i \in \{0,1\}$ denotes whether link  $i$  is up ($z_i=1$) or down  ($z_i=0$).
 %Operators maintain the network empirical data, which can be used to estimate the link risks\cite{jointfailure,overview,evole}.
-and we also assume network operators can use historical data to estimate the failure probability $x_i$ for this link. 
-%can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1 min).
-%probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
-Let $Z$ denote the network scenario set and $p_{\mathbf{z}}$ is the probability that a scenario $\mathbf{z}\in Z$ may happen.
+For each link $e$, operators can examine historical data and track whether $e$ was up or down in a measured time epoch (e.g., 1 min).
+The up probability $p_i$ of link $i$ can be given by the up epoch percentage and its failure probability is $1-p_i$.
+Let $\bm{Z}$ present the network scenario set and $p_{\bm{z}}$ is the probability of scenario $\bm{z}\in \bm{Z}$.
 %Each link is up with the probability of $p_i$. \cite{Teavar}
-%Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
-Then, the expected probability that network scenario  $\mathbf{z}$ will happen \cite{Teavar} is given by 
+Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
+Similar to TEAVAR \cite{Teavar},  probability of network scenario  $\bm{z}$ is given by:
+
 \begin{eqnarray} \label{state}
-%p_{\mathbf{z}}&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
-p_{\mathbf{z}}&=&\prod_{i=1}^{|E|}(\mathbf{z}_i \times (1-x_i)+ (1-\mathbf{z}_i)(x_i))
+p_{\bm{z}}&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
+&=&\prod_{i=1}^{|E|}(z_i'p_i+(1-z_i')(1-p_i))
 \end{eqnarray}
 
-%\textbf{To be updated, follow Fig.1 }
-For example, the inter-DC WAN contains four links $E=\{e_1,e_2,e_3,e_4\} $ shown in Figure \ref{motivatio_fig}. 
-Network scenario $\{1,1,0,1\}$ means $e_1$ ,$e_2$, $e_4$ are available and  $e_3$ fails.
-The up probability of $e_1,e_2,e_3,e_4$ are 96\%, 99.9999\%, 99.9\%, 99.9999\%, respectively.
-Then its probability $p(\{1,1,0,1\}) =0.96\times0.999999\times0.001\times0.999999\simeq 0.000959998$.
-
-\textbf{BA demand model:}
-%We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are nodes and link sets.
-Let $K$ denote the set of all source-destination (s-d) DC pairs.
-%Each link $e\in E$ is associated with a link capacity $c_e$ (e.g., in bps).
-%DC pair set is $K$ and  $\beta_j$ presents the desired availability target  of service $j \in J$.
-%\multirow{3}{*}{$d_i=(\mathbf{b}_i, \beta_i)$}&\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b}_i$ with }\\
-%&\multicolumn{6}{|l}{ availability $\beta_i$, where $\mathbf{b}_i$ is a vector $<\mathbf{b}_i^1, \mathbf{b}_i^2, ...>$}\\
-%&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
-%A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
-A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d)$,
-where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ...>$ of bandwidth demands over all s-d pairs \footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}.
-%where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
-%We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
-%The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
-%When all services'  \textit{achieved} bandwidth-based availability are larger than their corresponding desired availability target, the system is able to accommodate this service request, otherwise, the request will be denied.
-
-%If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
+For example, an inter-DC WAN contains three links $E=\{e_1,e_2,e_3\}$. 
+Network scenario $\{1,1,0\}$ means $e_1$ ,$e_2$ are available and  $e_3$ fails.
+If the up probability of $e_1,e_2,e_3$ are 0.9, 0.8, 0.85, respectively.
+Then its probability $p(\{1,1,0\}) =0.9\times0.8\times0.15=0.108$.
 
 
-\textbf{Traffic engineering model:}
-Our Traffic Engineering uses tunnel-based forwarding \cite{FFC,swan,Teavar}.
-%where traffic is carried over a set of tunnels.
+We consider tunnel-based forwarding \cite{FFC,swan,Teavar}, where traffic is carried over a set of tunnels.
 %Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
-For each source-destination node pair $k\in K$ of the inter-DC WAN, we pre-compute a set of tunnels $T_{k}$ with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}, etc.). 
+For each node pair $k\in K$ of the inter-DC WAN, we are given a set of pre-selected tunnels $T_{k}$, where tunnel set $T_{k}$ can be derived with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}). 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes  on performance.
-Each tunnel $t\in T_{k}$ contains a sequence of links and $u_t^e$ denotes whether tunnel $t$ passes a specific link $e \in E$ or not.
-%The network scenario set is $\mathbf{z}$ and the corresponding probability is $p_{\mathbf{z}}, \forall \mathbf{z}\in Z $.
-We use $D$ and $\hat{D}$ to represent arrived demands and \textit{admitted} demands, respectively.
-Given a demand $d$, our traffic engineering scheme will decide whether to admit it (i.e., $g_d$), 
-and the bandwidth that will be allocated for an admitted demand $d \in \hat{D}$ over tunnel $t$ will be $f_d^t$.
-Under the above network failure scenario model, we also use 
-$v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under the network scenario $\mathbf{z}$. 
-Given an allocation result ${f_d^t}$, 
-(i) if the total bandwidth allocated for \textbf{each} s-d pair $k$ through the total surviving tunnels under network scenario $\mathbf{z}$, i.e., $\sum_{\forall t \in T_k} f_d^tv_t^{\mathbf{z}}$, 
-is not smaller than demand $\mathbf{b}_d^k$ for that pair under under scenario $\bm{z}$,  then we call the scenario as a qualified one;
-(ii) The sum of qualified scenario probability can be seen as the achieved availability and if the achieved availability
-%(ii) for every tunnel $t$ that is used in the allocation (i.e., $f_d^t>0$), 
-%its expected availability under all possible network failure scenarios, 
-%i.e., $\sum_{\mathbf{z}} \in Z p_{\mathbf{z}} \times v_t^{\mathbf{z}} $, 
-is no less than the availability demand $\beta_d$, 
-then we say this BA demand is \textbf{satisfied} by this exact allocation result. 
-If a failure indeed occurs, our traffic engineering scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer (see $\S$\ref{background}), and we use $h_d$ to denote the profit (after refunding) for demand $d$.
-
+Each tunnel $t\in T_{k}$ contains a set of links and  $u_t^e$ presents whether tunnel $t$ contains link $e\in E$ or not.
+%The network scenario set is $\bm{Z}$ and the corresponding probability is $p_{\bm{z}}, \forall \bm{z}\in \bm{Z} $.
+$f_d^t$ is the bandwidth allocated over tunnel $t$ for demand $d$ and 
+$D_a$ is the total \textit{admitted} demand set.
+Let $v_t^{\bm{z}}$ denote whether tunnel $t$ is available (i.e., $v_t^{\bm{z}}=1$)  or not  (i.e., $v_t^{\bm{z}}=0$) under network scenario $\bm{z}$.
 
 %\begin{enumerate}
 %    \item  How to accommodate as many requests as possible subject to network failure model and diverse service availability targets  (see $\S$ \ref{admission_control}).
@@ -817,7 +799,7 @@ If a failure indeed occurs, our traffic engineering scheme will try to reroute t
 %%We now discuss how to model network failure scenarios.
 
 
-%Under network scenario $\mathbf{z}$, a tunnel $t$ is available only when all the links it passes by are up.
+%Under network scenario $\bm{z}$, a tunnel $t$ is available only when all the links it passes by are up.
 
 
 
@@ -840,40 +822,32 @@ If a failure indeed occurs, our traffic engineering scheme will try to reroute t
 %Consider all events will not happen, we can also derive the available probability of link $e$: $p(\{0,0,0,0\})=0.8\times0.7\times0.6\times 0.5=0.168$.
 
 
-
 %\subsection {Traffic Engineering for Diverse Availability Targets }\label{BATE}
 %Based on the the network scenarios, we design our traffic engineering algorithm that optimizes bandwidth-based availability for diverse services.
 %To this end, we introduce the problem formulation of $\mathsf{BATE}$ problem and 
 
 \subsection {Admission control} \label{admission_control}
-User demands are served in a first-come-first-service (FCFS) manner without preemption.
-When a new demand $d$ arrives, we have $D= \hat{D} \cup {d}$.
+Users' demands arrive in the first-come-first-service (FCFS) manner and \textit {no preemption} is allowed.
+The new arrival demand, together with the admitted ones (i.e., $D_a$), constitute demand set $D$.
 %The Admission control  \textit{determines whether availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new arrival demand can be admitted, otherwise, it is rejected.
-To accommodate as many demands as possible, the optimal admission strategy would be that, 
-if every demand in $D$ can meet its availability target, then $d$ should be admitted. 
-Otherwise, it should be rejected.
-This can be modeled by a 0-1 Mixed-Integer Linear Programming (MILP) problem which  
-maximizes the number of demands whose availability targets can be satisfied.
-Appendix \ref{admission_problem} shows the formulation of this problem, 
-which can be proved to be NP-hard by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
-%The details are omitted for brevity.
+If every element in $D$ can meet its availability target, the new arrival demand can be admitted, otherwise, it is rejected.
+To accommodate as many demands as possible, we can model the admission control as a 0-1 Mixed-Integer Linear Programming (MILP) and maximize the number of demands that satisfy availability targets.
+Appendix \ref{admission_problem} shows the optimization formulation.
+The admission control optimization problem can be proven as a NP-hard problem by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
+We omit the details for brevity.
 %If availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model, the new arrival demand can be admitted, otherwise, it is rejected.
 %If , we can model the 
 %The Admission control part decides whether a new demand submitted by a tenant can be admitted or not.
 
 %Solving the optimization problem shown in Appendix \ref{admission_problem} can determine whether the new coming tenant's demand can be admitted.
 %However,  the large size of network scenarios and 
-However, in order to support agile deployment of new applications and services, 
-user demands should be admitted as soon as possible, 
-while the time needed to exactly sovle this NP-hard problem  may be prohibitive, 
-Therefore, we need a better tradeoff between efficiency and optimality.
-
-\iffalse
+In reality, 
+%tenants' demands can arrive at anytime and admission control should reply to the tenants in near real time.
+there is a \textit{tradeoff} between efficiency and optimal solution:
 If we assume all the admitted demands are fixed and can't be rescheduled, then we can derive the solution fast but the new arrival one might be unable to be accommodated;
 If we derive the optimal solution  by solving the optimization problem shown in Appendix \ref{admission_problem}, then we can accommodate more demands, however, this is time-consuming.
 To achieve a tradeoff, we would like to address the following three steps:
-\fi
 
 \begin{enumerate}
     \item When a new demand $d$ arrives, we assume that all admitted demands are \textit{fixed} and check whether the remaining network capacity and the corresponding links' up probability can support it. If this is true, then go to step (3), otherwise, go to step (2).
@@ -1058,7 +1032,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %The input includes two parts:
 %(1) Network states and topology.
 %For a given inter-DC WAN,  $c_e$ is the capacity of link $e$.
-%The network state $\mathbf{z}\in Z$ is an uncertainty parameter with probability $p_{\mathbf{z}}$; 
+%The network state $\bm{z}\in \bm{Z}$ is an uncertainty parameter with probability $p_{\bm{z}}$; 
 %(2) Application level traffic matrix (TM) and tunnel sets for each flow pair.
 %In traditional TE, a traffic matrix is a two dimensional array that describes the bandwidth demands from one point to another over the network.
 %$\mathsf{BATE}$ extends this from two aspects:
@@ -1069,7 +1043,7 @@ The proof details can be found in Appendix \ref{appendix-proof}
 %Given the network topology, we can derive the tunnel sets between site pair in advance. 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes (e.g., k-shortest paths, edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}) on performance.
 %Let $u_t^e$ present whether tunnel $t \in T_j$ passes link $e$ or not.
-%We use $v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available ($v_t^{\mathbf{z}}=1$)  or not  ($v_t^{\mathbf{z}}=0$) under network state $\mathbf{z}$.
+%We use $v_t^{\bm{z}}$ to denote whether tunnel $t$ is available ($v_t^{\bm{z}}=1$)  or not  ($v_t^{\bm{z}}=0$) under network state $\bm{z}$.
 
 % \begin{figure}
 %\begin{center}
@@ -1112,41 +1086,41 @@ To provider high availability with minimum induced overload, we restrict each de
 
 
 \begin{eqnarray} \label{Smaller}
- \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, \quad  \forall d \in \hat{D}, k \in K
+ \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, \quad  \forall d \in D_a, k \in K
 \end{eqnarray}
 
 
-$R_{dk}^{\mathbf{z}}$ is the ratio of total reserved bandwidth to demand through pair $k$ for BA demand $d$ under network scenario $\mathbf{z}$ and it is defined as:
+$R_{dk}^{\bm{z}}$ is the ratio of total reserved bandwidth to demand through pair $k$ for BA demand $d$ under network scenario $\bm{z}$ and it is defined as:
 
  \begin{eqnarray} \label{R2}
-R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \mathbf{z}\in Z, k \in K.
+R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \bm{z}\in \bm{Z}, k \in K.
 \end{eqnarray}
 
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
-$R_{dk}^{\mathbf{z}}$ describes the allocation return under network scenario $\mathbf{z}$.
-In reality, tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$), and if the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d, \forall k \in K$,  then bandwidth demand can still be satisfied and network scenario $\mathbf{z}$ can be regarded as \textit{qualified}, i.e., 
-$R_{dk}^{\mathbf{z}} \ge 1, \forall k \in K$.
+$R_{dk}^{\bm{z}}$ describes the allocation return under network scenario $\bm{z}$.
+In reality, tunnel $t$ might be unavailable (i.e., $v_t^{\bm{z}} =0$), and if the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d, \forall k \in K$,  then bandwidth demand can still be satisfied and network scenario $\bm{z}$ can be regarded as \textit{qualified}, i.e., 
+$R_{dk}^{\bm{z}} \ge 1, \forall k \in K$.
 To guarantee the availability target of a demand, we should make its total probability of qualified scenario larger than availability target, i.e., 
-$\sum_{\forall k: R_{dk}^{\mathbf{z}} \ge 1} p_{\mathbf{z}} \ge \beta_d, \forall d \in \hat{D}$.
+$\sum_{\forall k: R_{dk}^{\bm{z}} \ge 1} p_{\bm{z}} \ge \beta_d, \forall d \in D_a$.
 %This is a step function and we define the following potential function:
 % 
 %  \begin{eqnarray} \label{B3}
-%\sum_{R_{dk}^{\mathbf{z}} \ge 1} p_{\mathbf{z}} \ge \beta_i, \forall d \in \hat{D}
+%\sum_{R_{dk}^{\bm{z}} \ge 1} p_{\bm{z}} \ge \beta_i, \forall d \in D_a
 %\end{eqnarray}
-%$R_{dk}^{\mathbf{z}}$ is the ratio of allocated bandwidth to  demand over node pair $k$ under network scenario $\mathbf{z}$.
-Let $B_d^{\mathbf{z}}$ denote the lower bound of $R_{dk}^{\mathbf{z}}$ over the $k$ pairs for  $i$ under network scenario $\mathbf{z}$,  i.e.,
+%$R_{dk}^{\bm{z}}$ is the ratio of allocated bandwidth to  demand over node pair $k$ under network scenario $\bm{z}$.
+Let $B_d^{\bm{z}}$ denote the lower bound of $R_{dk}^{\bm{z}}$ over the $k$ pairs for  $i$ under network scenario $\bm{z}$,  i.e.,
 
  \begin{eqnarray} \label{B2}
-B_d^{\mathbf{z}} \le R_{dk}^{\mathbf{z}}, \quad  \forall  d \in \hat{D}, \mathbf{z}\in Z, k \in K
+B_d^{\bm{z}} \le R_{dk}^{\bm{z}}, \quad  \forall  d \in D_a, \bm{z}\in \bm{Z}, k \in K
 \end{eqnarray}
 
-It is obvious  $B_d^{\mathbf{z}} \le 1$ and $B_d^{\mathbf{z}}=1$ presents scenario $\mathbf{z}$ is qualified, therefore, 
-we can define $B_d^{\mathbf{z}}\times p_{\mathbf{z}}$  as the potential achieved availability of $i$ under network scenario  $\mathbf{z}$.
+It is obvious  $B_d^{\bm{z}} \le 1$ and $B_d^{\bm{z}}=1$ presents scenario $\bm{z}$ is qualified, therefore, 
+we can define $B_d^{\bm{z}}\times p_{\bm{z}}$  as the potential achieved availability of $d$ under network scenario  $\bm{z}$.
 To satisfy diverse availability targets, the achieved availability should be larger than availability target, i.e., 
  
  \begin{eqnarray} \label{Achieved}
-\sum_{\mathbf{z}\in Z}B_d^{\mathbf{z}}\times p_{\mathbf{z}} \ge \beta_{d},  \quad {\forall d \in \hat{D}}
+\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{d},  \quad {\forall d \in D_a}
 \end{eqnarray}
 
 
@@ -1158,16 +1132,16 @@ We want to maximize the overall achieved availability of all admitted demands,  
 \begin{equation}
 \small
 \begin{aligned} \label{BATE-TE}
- &maximize  \sum_{i\in I_a} \sum_{\mathbf{z}\in Z}B_d^{\mathbf{z}}\times p_{\mathbf{z}}\\
+ &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}}\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved})
 %\begin{cases}
-% \sum_{d \in \hat{D}}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
-%R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in \hat{D}, \mathbf{z}\in \mathbf{z},  k \in K$.}\\
-%R_{dk}^{\mathbf{z}}>=B_d^{\mathbf{z}},&{\forall d \in \hat{D}, \mathbf{z} \in Z, k\in K.} \\
-%\sum_{\mathbf{z}\in \mathbf{z}}B_d^{\mathbf{z}}\times p_{\mathbf{z}} \ge \beta_{\gamma_{i}},&{\forall d \in \hat{D}} .\\
-% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in \hat{D}, k \in K}.\\
-%f_{d}^t \ge 0,&{\forall d \in \hat{D} , \forall k\in K,\forall t\in T_{k}}.\\
+% \sum_{d \in D_a}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{dk}^{\bm{z}}>=B_d^{\bm{z}},&{\forall d \in D_a, \bm{z} \in Z, k\in K.} \\
+%\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall d \in D_a} .\\
+% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in D_a, k \in K}.\\
+%f_{d}^t \ge 0,&{\forall d \in D_a , \forall k\in K,\forall t\in T_{k}}.\\
 %\end{cases}\\
 \end{array}
 \end{aligned}
@@ -1207,16 +1181,16 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 %\begin{equation}
 %\small
 %\begin{aligned} \label{BATE-TE}
-% &maximize  \sum_{i\in I} \sum_{\mathbf{z}\in \mathbf{z}}B_d^{\mathbf{z}}\times p_{\mathbf{z}}\\
+% &maximize  \sum_{i\in I} \sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}}\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
 %\begin{cases}
 % \sum_{d \in D}\ \sum_{\forall k\in K: t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
-%R_{dk}^{\mathbf{z}}=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in \hat{D}, \mathbf{z}\in \mathbf{z},  k \in K$.}\\
-%R_{dk}^{\mathbf{z}}>=B_d^{\mathbf{z}},&{\forall d \in \hat{D}, \mathbf{z} \in Z, k\in K.} \\
-%\sum_{\mathbf{z}\in \mathbf{z}}B_d^{\mathbf{z}}\times p_{\mathbf{z}} \ge \beta_{\gamma_{i}},&{\forall d \in \hat{D}} .\\
-% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in \hat{D}, k \in K}.\\
-%f_{d}^t \ge 0,&{\forall d \in \hat{D} , \forall k\in K: t\in T_{k}}.\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{dk}^{\bm{z}}>=B_d^{\bm{z}},&{\forall d \in D_a, \bm{z} \in Z, k\in K.} \\
+%\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall d \in D_a} .\\
+% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in D_a, k \in K}.\\
+%f_{d}^t \ge 0,&{\forall d \in D_a , \forall k\in K: t\in T_{k}}.\\
 %\end{cases}\\
 %\end{array}
 %\end{aligned}
@@ -1255,16 +1229,16 @@ Figure \ref{recovery}(a) shows the original traffic engineering allocation and i
 %Let $M_e$ denote the used bandwidth of link $e$ by normal node pairs,
 Figure \ref{recovery}(b) depicts the backup allocation result when we assume the link between DC2 and DC4 is down, and the result will be put into practice when link DC2 $\to$ DC4 failure is detected.
 Network scenario number is huge for large-scale network and we assume that at any time, only one link in the network could fail. 
-If we assume network scenario $ \mathbf{z}$ could happen, and let 
-%$f^{\mathbf{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \mathbf{z}}_k$, where 
-$T^ { \mathbf{z}}_k$ denote the surviving tunnel set under scenario $ \mathbf{z}$ and the bandwidth allocated for demand $d$ over tunnel $t$ should be non-negative, i.e.,
+If we assume network scenario $ \bm{z}$ could happen, and let 
+%$f^{\bm{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \bm{z}}_k$, where 
+$T^ { \bm{z}}_k$ denote the surviving tunnel set under scenario $ \bm{z}$ and the bandwidth allocated for demand $d$ over tunnel $t$ should be non-negative, i.e.,
 \begin{equation}
-f^{t}_{d} \ge 0, \quad\forall d \in D ,  k\in K : t\in T^{\mathbf{z}}_k.
+f^{t}_{d} \ge 0, \quad\forall d \in D ,  k\in K : t\in T^{\bm{z}}_k.
 \label{constraint-f3}
 \end{equation}
 
 
-Let $A_e^{ \mathbf{z}}$ denote whether link $e$ is available under scenario $ \mathbf{z}$.
+Let $A_e^{ \bm{z}}$ denote whether link $e$ is available under scenario $ \bm{z}$.
 The total bandwidth should be smaller than capacity for each available link, i.e.,  
 
 \begin{figure}[t]
@@ -1279,16 +1253,16 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 %\begin{equation}
 %\small
 %\begin{aligned} \label{BATE-recovery}
-% &maximize  \sum_{i\in I_a} \sum_{\mathbf{z}\in \mathbf{z}}B_d^{\mathbf{z}}\times p_{\mathbf{z}}\\
+% &maximize  \sum_{i\in I_a} \sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}}\\
 %&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 %s.t.
 %\begin{cases}
 %\sum_{i\in I_a}\sum_{k\in K}\sum_{t\in Q_{h}} f'_{ikt}u_t^e+ \sum_{i\in I_a}\sum_{k\in K}\sum_{t'\in Q_{h}} f''_{ikt'}L_{t'e} \le c_e, &\text{$\forall e \in E \setminus e' $.}\\
-%R_{dk}^{\mathbf{z}}=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in \hat{D}, \mathbf{z}\in \mathbf{z},  k \in K$.}\\
-%R_{dk}^{\mathbf{z}}>=B_d^{\mathbf{z}},&{\forall d \in \hat{D}, \mathbf{z} \in Z, k\in K.} \\
-%\sum_{\mathbf{z}\in \mathbf{z}}B_d^{\mathbf{z}}\times p_{\mathbf{z}} \ge \beta_{\gamma_{i}},&{\forall d \in \hat{D}} .\\
-% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in \hat{D}, k \in K}.\\
-%f_{d}^t \ge 0,&{\forall d \in \hat{D} , \forall k\in K,\forall t\in T_{k}}.\\
+%R_{dk}^{\bm{z}}=\frac{\sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D_a, \bm{z}\in \bm{Z},  k \in K$.}\\
+%R_{dk}^{\bm{z}}>=B_d^{\bm{z}},&{\forall d \in D_a, \bm{z} \in Z, k\in K.} \\
+%\sum_{\bm{z}\in \bm{Z}}B_d^{\bm{z}}\times p_{\bm{z}} \ge \beta_{\gamma_{i}},&{\forall d \in D_a} .\\
+% \sum_{t\in T_{k}} f_{d}^t \le \mathbf{b}^k_d, &{  \forall d \in D_a, k \in K}.\\
+%f_{d}^t \ge 0,&{\forall d \in D_a , \forall k\in K,\forall t\in T_{k}}.\\
 %\end{cases}\\
 %\end{array}
 %\end{aligned}
@@ -1298,19 +1272,19 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 
 \begin{small}
 \begin{eqnarray} \label{B-constraint}
-\sum_{d\in \hat{D}}\sum_{k\in K:t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times A_e^{ \mathbf{z}}
+\sum_{d\in D_a}\sum_{k\in K:t\in T^{ \bm{z}}_k} f^{t}_{d}u_t^e \le c_e \times A_e^{ \bm{z}}
 \end{eqnarray}
 \end{small}
 
 The revenue return for $i$ over node pair $k$ can be described:
 \begin{small}
 \begin{eqnarray} \label{B-return}
-R_{dk}=\frac{\sum_{t\in T^{ \mathbf{z}}_k} f^{t}_{d}}{\mathbf{b}^k_d}, \forall  d \in \hat{D},  k \in K
+R_{dk}=\frac{\sum_{t\in T^{ \bm{z}}_k} f^{t}_{d}}{\mathbf{b}^k_d}, \forall  d \in D_a,  k \in K
 \end{eqnarray}
 \end{small}
 
 
-If the allocated bandwidth  of BA demand $d$ between each node pair is larger than its need (i.e., $R_{dk} \ge 1, \forall d \in  \hat{D}$), the profit unit is 1, 
+If the allocated bandwidth  of BA demand $d$ between each node pair is larger than its need (i.e., $R_{dk} \ge 1, \forall d \in  D_a$), the profit unit is 1, 
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
 otherwise, there is a refunding, which can be derived from SLA and we use $\mu_{d}$ to denote its profit fraction after refunding.
 Then, the profit of $d$ is:
@@ -1318,7 +1292,7 @@ Then, the profit of $d$ is:
 
 
 \begin{equation}
-\forall  d \in \hat{D} : h_d=
+\forall  d \in D_a : h_d=
 \begin{cases}
 1 &\text{$\forall k \in K: R_{dk} \ge 1 $}\\
 \mu_{d} &\text{Otherwise}
@@ -1330,10 +1304,10 @@ It is a step function and we can change it to the following linear format and we
 
 \begin{equation}
 \begin{cases}
-h_d=y_d+\mu_{d}*(1-y_d),&{\forall d \in \hat{D}.} \\
-R_{dk} < M*y_d+1-y_d,&{\forall d \in \hat{D},  k\in K.} \\
-R_{dk} >= y_d,&{\forall d \in \hat{D},  k\in K.} \\
-y_d \in\{0,1\},&{\forall d \in \hat{D}.} \\
+h_d=y_d+\mu_{d}*(1-y_d),&{\forall d \in D_a.} \\
+R_{dk} < M*y_d+1-y_d,&{\forall d \in D_a,  k\in K.} \\
+R_{dk} >= y_d,&{\forall d \in D_a,  k\in K.} \\
+y_d \in\{0,1\},&{\forall d \in D_a.} \\
 \end{cases}
 \label{A-SSS2}
 \end{equation}
@@ -1345,7 +1319,7 @@ The goal of failure recovery is to maximize profits of all the admitted demands,
 \begin{equation}
 \small
 \begin{aligned} \label{BATE-recovery}
- &maximize  \sum_{d\in \hat{D}} w_d\times h_d\\
+ &maximize  \sum_{d\in D_a} w_d\times h_d\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t.  (\ref{constraint-f3}), (\ref{B-constraint}), (\ref{B-return}), (\ref{A-SSS2})
 \end{array}
@@ -2767,25 +2741,25 @@ Then total traffic through link $e$ should not be larger than its capacity $c_e$
 \end{equation}
 
 
-$R_{dk}^{\mathbf{z}}$ is the ratio of total reserved bandwidth to demand through pair $k$ for BA demand $d$ under network scenario $\mathbf{z}$ and it is  defined as:
+$R_{dk}^{\bm{z}}$ is the ratio of total reserved bandwidth to demand through pair $k$ for BA demand $d$ under network scenario $\bm{z}$ and it is  defined as:
 
  \begin{eqnarray} \label{R}
-R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \mathbf{z}\in \mathbf{z}, k \in K.
+R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \bm{z}\in \bm{Z}, k \in K.
 \end{eqnarray}
 
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
-Under network scenario $\mathbf{z}$, tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$).
-If the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d, \forall k \in K$,  then bandwidth demand can be satisfied even tunnel $t$ fails and network scenario $\mathbf{z}$ can be regarded as \textit{safe} .
-Let $A_d^{\mathbf{z}}$ denote whether scenario $\mathbf{z}$ is safe (i.e., $A_d^{\mathbf{z}}=1$) or not (i.e., $A_d^{\mathbf{z}}=0$) for the BA demand $d$:
+Under network scenario $\bm{z}$, tunnel $t$ might be unavailable (i.e., $v_t^{\bm{z}} =0$).
+If the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d, \forall k \in K$,  then bandwidth demand can be satisfied even tunnel $t$ fails and network scenario $\bm{z}$ can be regarded as \textit{safe} .
+Let $A_d^{\bm{z}}$ denote whether scenario $\bm{z}$ is safe (i.e., $A_d^{\bm{z}}=1$) or not (i.e., $A_d^{\bm{z}}=0$) for the BA demand $d$:
 
 \begin{equation}
-A_d^{\mathbf{z}}=
+A_d^{\bm{z}}=
 \begin{cases}
-1 &\text{$\forall k \in K:R_{dk}^{\mathbf{z}}\ge 1$}\\
+1 &\text{$\forall k \in K:R_{dk}^{\bm{z}}\ge 1$}\\
 0&\text{Otherwise}
 \end{cases}
-,\forall  d \in D, \mathbf{z}\in \mathbf{z}.
+,\forall  d \in D, \bm{z}\in \bm{Z}.
 \label{CA}
 \end{equation}
 
@@ -2803,18 +2777,18 @@ It is a step function and we can change it to the following linear format:
 
 \begin{equation}
 \begin{cases}
-R_{dk}^{\mathbf{z}} < 1- A_d^{\mathbf{z}}+M\times A_d^{\mathbf{z}},&{\forall d \in D, \mathbf{z} \in Z, k\in K.} \\
-R_{dk}^{\mathbf{z}}>=A_d^{\mathbf{z}},&{\forall d \in D, \mathbf{z} \in Z, k\in K.} \\
-A_d^{\mathbf{z}} \in\{0,1\},&{\forall d \in D, \mathbf{z} \in Z.} \\
+R_{dk}^{\bm{z}} < 1- A_d^{\bm{z}}+M\times A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+R_{dk}^{\bm{z}}>=A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+A_d^{\bm{z}} \in\{0,1\},&{\forall d \in D, \bm{z} \in Z.} \\
 \end{cases}
 \label{A-z2}
 \end{equation}
 
-where $M$ is a big integer that is at least larger than the upper bound of $R_{dk}^{\mathbf{z}},\forall d \in D, k\in K,\mathbf{z} \in Z$.
+where $M$ is a big integer that is at least larger than the upper bound of $R_{dk}^{\bm{z}},\forall d \in D, k\in K,\bm{z} \in Z$.
 It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
 The achieved bandwidth availability of demand $d$ is the sum of all safe network scenarios' probability: 
  \begin{eqnarray} \label{S}
-S_d=\sum_{\mathbf{z}\in \mathbf{z}}A_d^{\mathbf{z}}\times p_{\mathbf{z}},  \quad \forall  d \in D.
+S_d=\sum_{\bm{z}\in \bm{Z}}A_d^{\bm{z}}\times p_{\bm{z}},  \quad \forall  d \in D.
 \end{eqnarray}
 
 We use $g_d$ to present whether the availability target of $d$ can be satisfied: 
@@ -2889,14 +2863,14 @@ s.t.
 (\ref{constraint-f}), (\ref{constraint-e}), (\ref{R}), (\ref{A-z2}), (\ref{S}), (\ref{g-2})
 %\begin{cases}
 % \sum_{d \in D}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
-%R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D, \mathbf{z}\in \mathbf{z},  k \in K$.}\\
-%S_i=\sum_{\mathbf{z}\in \mathbf{z}}A_d^{\mathbf{z}}\times p_{\mathbf{z}} , & {\forall  d \in D.}\\
-%R_{dk}^{\mathbf{z}} < 1- A_d^{\mathbf{z}}+M\times A_d^{\mathbf{z}},&{\forall d \in D, \mathbf{z} \in Z, k\in K.} \\
-%R_{dk}^{\mathbf{z}}>=A_d^{\mathbf{z}},&{\forall d \in D, \mathbf{z} \in Z, k\in K.} \\
+%R_{dk}^{\bm{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\bm{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D, \bm{z}\in \bm{Z},  k \in K$.}\\
+%S_i=\sum_{\bm{z}\in \bm{Z}}A_d^{\bm{z}}\times p_{\bm{z}} , & {\forall  d \in D.}\\
+%R_{dk}^{\bm{z}} < 1- A_d^{\bm{z}}+M\times A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
+%R_{dk}^{\bm{z}}>=A_d^{\bm{z}},&{\forall d \in D, \bm{z} \in Z, k\in K.} \\
 %S_i <  \beta_{\gamma_{i}}\times  (1-g_i)+g_i,& \forall d \in D. \\
 %S_i \ge  \beta_{\gamma_{i}} \times g_i,& \forall d \in D. \\
 %f_{d}^t \ge 0,&{\forall d \in D , \forall k\in K, \forall t\in T_{k}}.\\
-%A_d^{\mathbf{z}}, g_i\in\{0,1\}, & \forall \mathbf{z} \in \mathbf{z}, d \in D. \\
+%A_d^{\bm{z}}, g_i\in\{0,1\}, & \forall \bm{z} \in \bm{Z}, d \in D. \\
 %\end{cases}\\
 \end{array}
 \end{aligned}
@@ -2934,9 +2908,9 @@ s.t. &\forall e \in E: \sum_{i=1}^k\sum_{p\in \mathcal{P}_i}f_{ip}L_{pe} \le c_e
 \end{array}
 \end{aligned}
 \end{equation}
-Where $g_i$ denotes whether commodity flow $i$ can be routable.
-We transyorm the all-or-nothing multi-commodity flow problem to a special instance of
-failure recovery problem and consider a special case, in which $\mu_i=0,\forall d \in \hat{D}$.
+Where $y_i$ denotes whether commodity flow $i$ can be routable.
+We transform the all-or-nothing multi-commodity flow problem to a special instance of
+failure recovery problem and consider a special case, in which $\mu_d=0,\forall d \in D_a$.
 In this case, if allocated bandwidth is larger than the demand, then the profit is 1, otherwise, it is 0.
 We consider setting the admitted demand from tenants and their bandwidth target in 
 the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.
@@ -2959,33 +2933,33 @@ proof.
 %We can rewrite (\ref{S}) as:
 %
 % \begin{eqnarray} \label{S-2}
-%\forall  j \in J :  S_j=\sum_{z\in \mathbf{z}}A_j(\mathbf{z})\times p_{\mathbf{z}}
+%\forall  j \in J :  S_j=\sum_{z\in \bm{z}}A_j(\bm{z})\times p_{\bm{z}}
 %\end{eqnarray}
-%$A(\mathbf{z})$ is defined as:
+%$A(\bm{z})$ is defined as:
 %
 %\begin{equation}
-%\forall  j\in J, z\in \mathbf{z} : A_j(\mathbf{z})=
+%\forall  j\in J, z\in \bm{z} : A_j(\bm{z})=
 %\begin{cases}
-%1 &\text{$1\le R_j(\mathbf{z})\le M$}\\
-%0 &\text{$0\le R_j(\mathbf{z})<1$}
+%1 &\text{$1\le R_j(\bm{z})\le M$}\\
+%0 &\text{$0\le R_j(\bm{z})<1$}
 %\end{cases}
 %\label{A-z}
 %\end{equation}
-%where $M$ is larger than the upper bound of $R(\mathbf{z})$.
+%where $M$ is larger than the upper bound of $R(\bm{z})$.
 %(\ref{A-z}) is equivalent to the following format:
 %
 %\begin{equation}
 %\begin{cases}
-%A_j(\mathbf{z})+B_j(\mathbf{z}) =1&{\forall j \in J, \mathbf{z} \in Z} \\
-%R_j(\mathbf{z}) < B_j(\mathbf{z})+M\times A_j(\mathbf{z})&{\forall j \in J, \mathbf{z} \in Z} \\
-%R_j(\mathbf{z})>=A_j(\mathbf{z})&{\forall j \in J, \mathbf{z} \in Z} \\
-%A_j(\mathbf{z}),B_j(\mathbf{z})\in\{0,1\}&{\forall j \in J, \mathbf{z} \in Z} \\
+%A_j(\bm{z})+B_j(\bm{z}) =1&{\forall j \in J, \bm{z} \in Z} \\
+%R_j(\bm{z}) < B_j(\bm{z})+M\times A_j(\bm{z})&{\forall j \in J, \bm{z} \in Z} \\
+%R_j(\bm{z})>=A_j(\bm{z})&{\forall j \in J, \bm{z} \in Z} \\
+%A_j(\bm{z}),B_j(\bm{z})\in\{0,1\}&{\forall j \in J, \bm{z} \in Z} \\
 %\end{cases}
 %\label{A-z2}
 %\end{equation}
 %
 %This is easy to prove since the two cases:
-%(1) $A_j(\mathbf{z})=0, B_j(\mathbf{z})=1$ and (2)  $A_j(\mathbf{z})=1, B_j(\mathbf{z})=0$ all hold true.
+%(1) $A_j(\bm{z})=0, B_j(\bm{z})=1$ and (2)  $A_j(\bm{z})=1, B_j(\bm{z})=0$ all hold true.
 %
 %Secondly, we can change  (\ref{availability}) to:
 %
@@ -3014,9 +2988,9 @@ proof.
 \KwOut{ $\{f'_{ikt}\},F$}
 Sort $i\in I_a$ in non-decreasing order with $\frac{w_i}{\sum_{k\in K}\mathbf{b}^k_d}$;\\
 $B_e=c_e, \forall e \in E$; \\
-$h_i=0, \forall d \in \hat{D}$; \\
+$h_i=0, \forall d \in D_a$; \\
 $F=\{\}$;\\
-\For{$d \in \hat{D}$}{
+\For{$d \in D_a$}{
 $\{f'_{ikt}\},h_i,\{D_e\}\leftarrow$Allocation($F,i,B$);\\
 \If {$h_i==1$}{
     $F=F\cup {i}$;\\
