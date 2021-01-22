@@ -721,7 +721,7 @@ while minimizing any possible collateral damage to normal traffic, i.e., congest
 %
 \end{itemize}
 
-\subsection{Abstraction of bandwidth availability demands}
+\subsection{Abstraction of bandwidth availability}
 %Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
 %Tenants could deploy diverse service instances over Inter-DC WAN.
 In reality, a customer demanding Inter-DC WAN bandwidth resourses could be any application or tenant  spanning multiple DCs, in either a public or a private cloud. 
@@ -837,27 +837,34 @@ If a failure indeed occurs, our traffic engineering scheme will try to reroute t
 %To this end, we introduce the problem formulation of $\mathsf{BATE}$ problem and 
 
 \subsection {Admission control} \label{admission_control}
-Users' demands arrive in the first-come-first-service (FCFS) manner and \textit {no preemption} is allowed.
-The new arrival demand, together with the admitted ones (i.e., $\hat{D}$), constitute demand set $D$.
+User demands are served in a first-come-first-service (FCFS) manner without preemption.
+When a new demand $d$ arrives, we have $D= $\hat{D}$ \cup {d}$.
 %The Admission control  \textit{determines whether availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new arrival demand can be admitted, otherwise, it is rejected.
-If every element in $D$ can meet its availability target, the new arrival demand can be admitted, otherwise, it is rejected.
-To accommodate as many demands as possible, we can model the admission control as a 0-1 Mixed-Integer Linear Programming (MILP) and maximize the number of demands that satisfy availability targets.
-Appendix \ref{admission_problem} shows the optimization formulation.
-The admission control optimization problem can be proven as a NP-hard problem by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
-We omit the details for brevity.
+To accommodate as many demands as possible, the optimal admission strategy would be that, 
+if every demand in $D$ can meet its availability target, then $d$ should be admitted. 
+Otherwise, it should be rejected.
+This can be modeled by a 0-1 Mixed-Integer Linear Programming (MILP) problem which  
+maximizes the number of demands whose availability targets can be satisfied.
+Appendix \ref{admission_problem} shows the formulation of this problem, 
+which can be proved to be NP-hard by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
+%The details are omitted for brevity.
 %If availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model, the new arrival demand can be admitted, otherwise, it is rejected.
 %If , we can model the 
 %The Admission control part decides whether a new demand submitted by a tenant can be admitted or not.
 
 %Solving the optimization problem shown in Appendix \ref{admission_problem} can determine whether the new coming tenant's demand can be admitted.
 %However,  the large size of network scenarios and 
-In reality, 
-%tenants' demands can arrive at anytime and admission control should reply to the tenants in near real time.
-there is a \textit{tradeoff} between efficiency and optimal solution:
+However, in order to support agile deployment of new applications and services, 
+user demands should be admitted as soon as possible, 
+while the time needed to exactly sovle this NP-hard problem  may be prohibitive, 
+Therefore, we need a better tradeoff between efficiency and optimality.
+
+\iffalse
 If we assume all the admitted demands are fixed and can't be rescheduled, then we can derive the solution fast but the new arrival one might be unable to be accommodated;
 If we derive the optimal solution  by solving the optimization problem shown in Appendix \ref{admission_problem}, then we can accommodate more demands, however, this is time-consuming.
 To achieve a tradeoff, we would like to address the following three steps:
+\fi
 
 \begin{enumerate}
     \item When a new demand $d$ arrives, we assume that all admitted demands are \textit{fixed} and check whether the remaining network capacity and the corresponding links' up probability can support it. If this is true, then go to step (3), otherwise, go to step (2).
