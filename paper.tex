@@ -802,12 +802,12 @@ is not smaller than demand $\mathbf{b}_d^k$ for that pair under under scenario $
 %(ii) for every tunnel $t$ that is used in the allocation (i.e., $f_d^t>0$), 
 %its expected availability under all possible network failure scenarios, 
 %i.e., $\sum_{\mathbf{z}} \in Z p_{\mathbf{z}} \times v_t^{\mathbf{z}} $, 
-is no less than the availability demand $\beta_d$, 
-<<<<<<< HEAD
-then we say this BA demand is \textbf{satisfied} by this exact allocation result. 
-=======
-then we say this BA demand is satisfied by this exact allocation result in a sensen of expectation. 
->>>>>>> 7d80e71feb4d10a0f1449a95f5e091001064f259
+is no less than the availability demand $\beta_d$, then we say this BA demand is \textbf{satisfied} by this exact allocation result. 
+%<<<<<<< HEAD
+%then we say this BA demand is \textbf{satisfied} by this exact allocation result. 
+%=======
+%then we say this BA demand is satisfied by this exact allocation result in a sensen of expectation. 
+%>>>>>>> 7d80e71feb4d10a0f1449a95f5e091001064f259
 If a failure indeed occurs, our traffic engineering scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer (see $\S$\ref{background}), and we use $h_d$ to denote the profit (after refunding) for demand $d$.
 
 
@@ -2938,9 +2938,9 @@ s.t. &\forall e \in E: \sum_{i=1}^k\sum_{p\in \mathcal{P}_i}f_{ip}L_{pe} \le c_e
 \end{array}
 \end{aligned}
 \end{equation}
-Where $g_i$ denotes whether commodity flow $i$ can be routable.
-We transyorm the all-or-nothing multi-commodity flow problem to a special instance of
-failure recovery problem and consider a special case, in which $\mu_i=0,\forall d \in \hat{D}$.
+Where $y_i$ denotes whether commodity flow $i$ can be routable.
+We transform the all-or-nothing multi-commodity flow problem to a special instance of
+failure recovery problem and consider a special case, in which $\mu_d=0,\forall d \in \hat{D}$.
 In this case, if allocated bandwidth is larger than the demand, then the profit is 1, otherwise, it is 0.
 We consider setting the admitted demand from tenants and their bandwidth target in 
 the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.
