@@ -103,7 +103,7 @@ aims for \textit{bandwidth availability} provision, where a service level agreem
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
 The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
 They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of a 5\% higher rejection ratio. 
+Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of only a 5\% higher rejection ratio. 
 On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
 %.
 % $\mathsf{BATE}$ can 
@@ -294,7 +294,7 @@ we implement $\mathsf{BATE}$ as a real system, including a centralized controlle
  We conduct extensive experiments using a small testbed as well as trace driven large scale simulations (see $\S$\ref{evaluation}).
 We compare  $\mathsf{BATE}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
 Our evaluation demonstrates that $\mathsf{BATE}$ can 
-(1) speed up the online admission control by 30 $\times $ at the expense of a rejection ratio that is 5\% higher than the optimal strategy;
+(1) speed up the online admission control by 30 $\times $ at the expense of a rejection ratio that is only 5\% higher than the optimal strategy;
 (2) meet the bandwidth availability SLAs for 40\% more demands;
 (3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
 To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
@@ -641,7 +641,7 @@ $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
 \hline
 $c_e$ &\multicolumn{6}{|l}{the remaining capacity on link $e \in E$}\\
 \hline
-$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(estination) pair in the set of all s-d pairs}\\
+$k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(est) pair in the set of all s-d pairs}\\
 \hline
 $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
@@ -651,7 +651,7 @@ $T_{k}$ &\multicolumn{6}{|l}{the set of tunnels for a s-d pair $k$}\\
 \hline
 $D, D_a$&\multicolumn{6}{|l}{the set of arrived demands and admitted demands\footnote{When an admitted demand finishes, it will be removed from $D_a$.} }\\
 \hline
-\multirow{3}{*}{$d=(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{for a BA demand $d$, requiring bandwidth $\mathbf{b}_d$ with }\\
+\multirow{3}{*}{$d\!=\!(\mathbf{b}_d, \beta_d)$}&\multicolumn{6}{|l}{a BA demand $d$, requiring bandwidth $\mathbf{b}_d$ with }\\
 &\multicolumn{6}{|l}{ availability $\beta_d$, where $\mathbf{b}_d$ is a vector $<\mathbf{b}^1_d, \mathbf{b}^2_d, ...>$}\\
 &\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %$d_i=(\mathbf{b_i}, \beta_i)$ &\multicolumn{6}{|l}{the $i$-th user demand, requiring bandwidth $\mathbf{b_i}$ with availability $\beta_i$, where $\mathbf{b_i}$ is a vector $<\mathbf{d}_i^1, \mathbf{d}_i^2, ...>$ of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and scheduling.}}\\
