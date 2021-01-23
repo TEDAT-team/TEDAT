@@ -2809,7 +2809,7 @@ Then total traffic through link $e$ should not exceed its capacity $c_e$:
 \end{equation}
 
 
-$R_{dk}^{\mathbf{z}}$ is the ratio of total allocated bandwidth to demanded bandwidth on pair $k$ for BA demand $d$ under network scenario $\mathbf{z}$, and it is  defined as:
+For an s-d pair $k$ of BA demand $d$, $R_{dk}^{\mathbf{z}}$ is the ratio of the effective bandwidth under network scenario $\mathbf{z}$ to the demanded bandwidth:
 
  \begin{eqnarray} \label{R}
 R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \mathbf{z}\in \mathbf{z}, k \in K.
@@ -2818,8 +2818,8 @@ R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
 Under network scenario $\mathbf{z}$, tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$).
-If for every source-destination pair $k$, the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d$,  then bandwidth demand $d$ can be satisfied even when tunnel $t$ fails and network scenario $\mathbf{z}$ can be regarded as safe.
-Let $A_d^{\mathbf{z}}$ denote whether scenario $\mathbf{z}$ is safe (i.e., $A_d^{\mathbf{z}}=1$) or not (i.e., $A_d^{\mathbf{z}}=0$) for the BA demand $d$:
+For every source-destination pair $k$, if the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d$,  then bandwidth requirement can be satisfied even tunnel $t$ fails and network scenario $\mathbf{z}$ can be regarded as \textit{qualified}.
+Let $A_d^{\mathbf{z}}$ denote whether scenario $\mathbf{z}$ is qualified (i.e., $A_d^{\mathbf{z}}=1$) or not (i.e., $A_d^{\mathbf{z}}=0$) for a BA demand $d$:
 
 \begin{equation}
 A_d^{\mathbf{z}}=
@@ -2854,7 +2854,9 @@ A_d^{\mathbf{z}} \in\{0,1\},&{\forall d \in D, \mathbf{z} \in Z.} \\
 
 where $M$ is a big integer that is at least larger than the upper bound of $R_{dk}^{\mathbf{z}},\forall d \in D, k\in K,\mathbf{z} \in Z$.
 It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
-The achieved bandwidth availability of demand $d$ is the sum of all safe network scenarios' probability: 
+Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
+$\mathbf{z} \propto <d, \{f_d^t\}> \quad \Leftrightarrow \quad \forall k, A_d^{\mathbf{z}}=1$. 
+The achieved bandwidth availability of demand $d$ is the sum of all qualified network scenarios' probability: 
  \begin{eqnarray} \label{S}
 S_d=\sum_{\mathbf{z}\in \mathbf{z}}A_d^{\mathbf{z}}\times p_{\mathbf{z}},  \quad \forall  d \in D.
 \end{eqnarray}
@@ -3053,27 +3055,26 @@ proof.
 \begin{appendices}
      \section{Greedy algorithm for failure recovery} \label{B}
      \begin{algorithm}
-\KwIn{Input parameters shown in Table \ref{Notation}} 
-\KwOut{ $\{f'_{ikt}\},F$}
-Sort $i\in I_a$ in non-decreasing order with $\frac{w_i}{\sum_{k\in K}\mathbf{b}^k_d}$;\\
-$B_e=c_e, \forall e \in E$; \\
-$h_i=0, \forall d \in \hat{D}$; \\
+\KwIn{Input parameters shown in Table \ref{Notation}, a failure scenario $\bm{z}$} 
+\KwOut{ $\{f^t_{d}\},F$}
+Sort $d\in \hat{D}$ in non-decreasing order with $\frac{w_d}{\sum_{k\in K}\mathbf{b}^k_d}$;\\
+$h_d=0, \forall d \in \hat{D}$; \\
 $F=\{\}$;\\
 \For{$d \in \hat{D}$}{
-$\{f'_{ikt}\},h_i,\{D_e\}\leftarrow$Allocation($F,i,B$);\\
-\If {$h_i==1$}{
-    $F=F\cup {i}$;\\
-    $B_e = D_e, \forall e \in E$;\\
+%$\{f'_{ikt}\},h_i,\{D_e\}\leftarrow$Allocation($F,i,B$);\\
+%$h_d \leftarrow$ ;\\
+\If { $\bm{z}$' s remaining capacity can support $d$}{
+$h_d=1$;\\
+    $F=F\cup {d}$;\\
+    Update $\{f^t_{d}\}$;\\
+   Update $\bm{z}$' s remaining network capacity;\\
 }
 \Else{
-\If{$\sum_{j\in F}w_j <w_i$}{
-$D_e=B_e+\sum_{j\in J}\sum_{k\in K}\sum_{t\in T_k}f_{jkt}u_t^e, \forall e \in E$;\\
-$\{f''_{ikt}\},h'_i,\{D'_e\}\leftarrow$Allocation($F,i,D$);\\
-\If{$h'_i==1$}{
-$\{f'_{jtk}\} \leftarrow 0,\forall j\in F, k\in K, t\in T_k$;\\
-$\{f'_{itk}\} \leftarrow \{f''_{itk}\},\forall k\in K, t\in T_k$;\\
-$F={i}$;\\
-$h_i=1$;\\
+\If{$\sum_{d'\in F}w_d' <w_d$}{
+\If {Recycling network resource allocated to demands in $F$ is able to support $d$}{
+Recycle network resource allocated to demands in $F$;\\
+     $F= \{d\}$;\\
+    Update $\{f^t_{d}\},\forall d \in \hat{D}$;\\
 $\bm{break}$; \\
 }
 }
@@ -3084,7 +3085,7 @@ $\bm{break}$;
 }
 
 }
-\Return $\{f'_{ikt}\},F$
+\Return $\{f^t_{d}\},F$
   \caption{Greedy algorithm for failure recovery}
   \label{greedy}
  \end{algorithm}
@@ -3129,13 +3130,13 @@ $\bm{break}$;
 
 
  In this part, we will introduce a greedy algorithm, shown in Algorithm \ref{greedy}, to solve failure recovery problem.
- Let $F$ denote the set that demand set that the network supports.
-Firstly, it sorts all the accepted demands  $i\in I_a$ in non-decreasing order according to the ratio of weight to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}\mathbf{b}^k_d}$ (Line 1).
-The ordered sequence guarantees large profit demand with small bandwidth target have high priority.
-For each admitted demand, the algorithm tries to allocate resource it with remaining network capacity (Line 6).
+ Let $F$ denote the set that BA demand set that derive full profit.
+Firstly, it sorts all the accepted demands  $d\in \hat{D}$ in non-decreasing order according to the ratio of weight to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}\mathbf{b}^k_d}$ (Line 1).
+The ordered sequence guarantees demands that have large profit but small bandwidth deriving high priority.
+For each admitted demand, the algorithm tries to allocate resource it with remaining network capacity (Line 6-10).
 If the network is able to support it, then add to $F$.
-If the network is unable to support current demand's  bandwidth-based availability and current demand is more profit ,  the algorithm will try to recycle total resources and test that if allocating total network resources can support current demand  (Line 11-12).
-If this is true, then algorithm will prefer current demand  (Line13-18), otherwise, the algorithm finishes the iteration (Line 21).
+If the network is unable to support current demand but  current demand has more profit than the total profit of previous ones,  the algorithm will try to recycle total resources and test that if allocating total network resources can support current demand  (Line 13-17).
+If this is true, then algorithm will prefer current demand  (Line13-17), otherwise, the algorithm finishes the iteration (Line 18-19).
 %\begin{equation}
 %\begin{aligned} \label{LP}
 %\begin{array}{r@{\quad}r@{}l@{\quad}l}
@@ -3149,8 +3150,8 @@ If this is true, then algorithm will prefer current demand  (Line13-18), otherwi
 %It loops each network scenario and stops until its achieved bandwidth-based availability is larger than target (Line 4-6).
 %In each iteration, it checks whether the network is able to support the bandwidth demand of $j$ under network scenario $\mathbf{z}$ (Line 8-10).
 %If this is true, then bandwidth is allocated to this service according to the bottleneck link (Line 12-16).
-Compared with the bruce force algorithm, Algorithm \ref{greedy} can derive solution in $O(|I_a||T_k||E|)$ , which is Polynomial time.
-However, it achieves this at the cost of performance loss.
+Compared with the bruce force algorithm, Algorithm \ref{greedy} can derive solution in $O(|\hat{D}||T_k||E|)$ , which is Polynomial time.
+However, it achieves this at the cost of performance loss, which is proven as follows.
 %Analyzing the performance loss is not focus of this paper and we just take a special case, in which links/nodes are available and $\mu(f_{jtk})=0,\forall j \in J, k\in K: t\in T_k$, as the example and deploy it under a simple network $G(V,E)=\{v_1,v_2, e\}$ with only one link to perform the analysis.
 %The following lemma proves the upper approximation bound of the special case.
 \begin{lemma}\label{greedy-app}
