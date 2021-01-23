@@ -1149,7 +1149,7 @@ R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
 %$R_{dk}^{\mathbf{z}}$ describes the allocation return under network scenario $\mathbf{z}$.
 Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
-$\mathbf{z} \propto <d, \{f_d^t\}> \Leftrightarrow R_{dk}^{\mathbf{z}} \ge 1$. 
+$\mathbf{z} \propto <d, \{f_d^t\}> \quad \Leftrightarrow \quad \forall k, R_{dk}^{\mathbf{z}} \ge 1$. 
 %If for every source-destination pair $k$, the total reserved bandwidth through all available tunnels is larger than $\mathbf{b}^k_d$, then the bandwidth demand can still be satisfied, and network scenario $\mathbf{z}$ can be regarded as \textit{qualified}, i.e., 
 %$R_{dk}^{\mathbf{z}} \ge 1, \forall k \in K$.
 To meet the availability target, we should guarantee the total probability of the qualified scenarios 
