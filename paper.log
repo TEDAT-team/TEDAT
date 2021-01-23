@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  23 JAN 2021 10:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  23 JAN 2021 11:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2232,7 +2232,7 @@ N. Vi-jayku-mar. 2012.
 LaTeX Font Warning: Command \small invalid in math mode on input line 2913.
 
 
-Overfull \hbox (14.60666pt too wide) in paragraph at lines 2948--2953
+Overfull \hbox (14.60666pt too wide) in paragraph at lines 2948--2954
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) undi-rected graph $\OML/nxlmi/m/it/10 G \U
 /ntxmia/m/it/10 = \LMS/ntxsy/m/n/10 ¹\OML/nxlmi/m/it/10 V; E\LMS/ntxsy/m/n/10 º
 $ \T1/LinuxLibertineT-TLF/m/n/10 (-20) and a set of $\OML/nxlmi/m/it/10 k$ \T1/
@@ -2243,11 +2243,11 @@ LinuxLibertineT-TLF/m/n/10 (-20) pairs: $\OML/nxlmi/m/it/10 s[]t[]; s[]t[]; :::
 [15.15
 
 ] [16.16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3177.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3177.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3178.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3178.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3177.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3177.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3178.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3178.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: F4C09B27ED4D0D45D505A556491B4271;3643.
@@ -2297,7 +2297,7 @@ dist/fonts/type1/public/txfonts/txsya.pfb></usr/local/texlive/2016/texmf-dist/f
 onts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
 e1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1144586 bytes).
+Output written on paper.pdf (16 pages, 1144683 bytes).
 PDF statistics:
  1410 PDF objects out of 1440 (max. 8388607)
  1219 compressed objects within 13 object streams

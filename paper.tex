@@ -2933,10 +2933,10 @@ s.t.
 \section{Proof of Lemma \ref{NP-222}} \label{appendix-proof}
 
 \begin{proof}
-We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth availability.
+We use the contradiction method to prove, i.e., there is a BA demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth availability.
 There are two cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
-Case (i) is impossible, because if bandwidth is insufficient (i.e., $\mathbf{b}^k_d> Capacity (T_k)$) , Algorithm \ref{greedy-1} won't admit the demand (Line 6-8).
-Case (ii) is also impossible, because if the availability is smaller than its target (i.e., $s_d <   \beta_{d}$) , Algorithm \ref{greedy-1} will reject the demand (Line 14-16).
+Case (i) is impossible, because if bandwidth is insufficient (i.e., $\mathbf{b}^k_d>$ remaining capacity of s-d pair $k$) , Algorithm \ref{greedy-1} won't admit the demand (Line 4-5).
+Case (ii) is also impossible, because if the bandwidth availability is smaller than its target (i.e., $s_d <   \beta_{d}$) , Algorithm \ref{greedy-1} will reject the demand (Line 14-15).
 This completes the proof. 
 \end{proof}
 
@@ -2949,6 +2949,7 @@ The failure recovery problem contains the all-or-nothing multi-commodity flow pr
 Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
 where each pair $s_it_i$ corresponds to a commodity flow to be sent from the source node $s_i$ to the destination node $t_i$ with demand $d_i$.
 Let $\mathcal{P}_i$ denote the path set for pair $s_it_i$.
+$L_{pe}$ denotes whether path $p$ goes through link $e$ and $f_{ip}$ is the allocation result of commodity $i$ over path $p$.
 The  all-or-nothing multi-commodity flow problem tries to find a maximum weight routable set:
 \begin{equation}
 \begin{aligned} \label{P}
@@ -2957,8 +2958,8 @@ The  all-or-nothing multi-commodity flow problem tries to find a maximum weight 
 s.t. &\forall e \in E: \sum_{i=1}^k\sum_{p\in \mathcal{P}_i}f_{ip}L_{pe} \le c_e \\
      &\forall  1\le i \le k  : y_i=
 \begin{cases}
-1 &\text{$\sum_{p \in \mathcal{P}_i}f_{pt} \ge d_i$}\\
-0 &\text{$\sum_{p\in \mathcal{P}_i}f_{pt} < d_i$}
+1 &\text{$\sum_{p \in \mathcal{P}_i}f_{ip} \ge d_i$}\\
+0 &\text{$\sum_{p\in \mathcal{P}_i}f_{ip} < d_i$}
 \end{cases}\\
 \end{array}
 \end{aligned}
