@@ -34,7 +34,7 @@
 \usepackage{amssymb}
 \newtheorem{definition}{\noindent{\bf Definition}}
 %\newtheorem{lemma}{\noindent{\bf Lemma}}
-%\newtheorem{theorem}{\noindent{\bf Theorem}}
+\newtheorem{theorem}{\noindent{\bf Theorem}}
 %\newtheorem{proposition}{\noindent{\bf proposition}}
 \usepackage{appendix}
 \usepackage[ruled, vlined , linesnumbered]{algorithm2e}
@@ -773,7 +773,7 @@ Let $K$ denote the set of all source-destination (s-d) DC pairs.
 %&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
 A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d)$,
-where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, \mathbf{b}_d^2, ..., \mathbf{b}_d^k, ...>$ of bandwidth demands on each s-d pair $k \in K$ \footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}.
+where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, ..., \mathbf{b}_d^k, ...>$ of bandwidth demands on each s-d pair $k \in K$ \footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}.
 %where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
 %We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
 %The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
@@ -798,13 +798,13 @@ over tunnel $t$ is denoted by $f_d^t$.
 With the above network failure scenario model, we also use 
 $v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under network scenario $\mathbf{z}$. 
 Given a BA demand $d\!=\!(\mathbf{b}_d, \beta_d)$, an allocation result $\{f_d^t\}$ and a network scenario $\mathbf{z}$, 
-if \textbf{for each s-d pair} $k$, 
-the total allocated bandwidth on available tunnels under $\mathbf{z}$, 
+\textbf{for each s-d pair} $k$, 
+if the total allocated bandwidth on available tunnels under $\mathbf{z}$, 
 i.e., $\sum_{\forall t \in T_k} f_d^t v_t^{\mathbf{z}}$,  
 is no less than the bandwidth demand $\mathbf{b}_d^k$, 
 then we call $\mathbf{z}$ a \textit{qualified scenario} for allocation $\{f_d^t\}$ with respect to demand $d$, 
 and denote this by $\mathbf{z} \propto <d, \{f_d^t\}>$.
-The sumation of the probabilities of all such qualified scenarios, i.e., $\sum_{\mathbf{z} \propto <d, \{f_d^t\}>} p_{\mathbf{z}}$, is the expected probability that the bandwidth target $\mathbf{b}_d$ will be satisfied.
+The sum of the probabilities of all such qualified scenarios, i.e., $\sum_{\mathbf{z} \propto <d, \{f_d^t\}>} p_{\mathbf{z}}$, is the expected probability that the bandwidth target $\mathbf{b}_d$ will be satisfied.
 Now we can formally define when a bandwidth availability demand is satisfied: a demand $d$ is satisfied by an allocation $\{f_d^t\}$, if and only if 
 \[
 \sum_{\mathbf{z} \propto <d, \{f_d^t\}>} p_{\mathbf{z}} \ge \beta_d
@@ -861,7 +861,47 @@ If a failure indeed occurs, our failure recovery scheme will try to reroute traf
 %\subsection {Traffic Engineering for Diverse Availability Targets }\label{BATE}
 %Based on the the network scenarios, we design our traffic engineering algorithm that optimizes bandwidth-based availability for diverse services.
 %To this end, we introduce the problem formulation of $\mathsf{BATE}$ problem and 
+ \begin{algorithm}
+\KwIn{Input parameters shown in Table \ref{Notation}} 
+\KwOut{Whether the new demand can be admitted.}
+%$g_d=0, s_d=1, \forall d \in D$; \\
+%$f_{d}^t = 0, \forall d \in D ,  k\in K: t\in T_{k}$;\\
+\While{$true$}{
+$d=\arg_{d'\in D}min\{\sum_{k\in K}b_{d'}^k\times \beta_{d'}\}$;\\
+\For{$k\in K$}{
+\If{$b_{d}^k >$  remaining capacity of s-d pair $k$}{
+    \Return $ False$;\\
+}
+$T'_k=T_k$;\\
+\While{$b_{d}^k>0$}{
+$t=\arg_{t\in T'_k}{\min\{c_t*p_t\}}$;\\
+ $f_{d}^t=\min$\{$c_t$, $b_{d}^k$\};\\
+$ T'_k=T'_k \setminus t$;\\
+ $s_d=s_d*p_t$;\\
+ $b_{d}^k = b_{d}^k- f_{d}^t;$\\
+  $c_t= c_t- f_{d}^t;$\\
+}
+%\For{$t\in T_k$}{
+%   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
+%   \If{$f_{d}^t>=0$}{
+%   $s_i=s_i*p_t$;\\
+%   $\mathbf{b}^k_d = \mathbf{b}^k_d- f_{d}^t;$\\
+%   }
+%   \If{$\mathbf{b}^k_d<=0$}{
+%   \textbf{break};\\
+%   }
+%}
+}
+  \If{$s_d <   \beta_{d}$}{
+      \Return $False$;\\
+  }
+  $D=D\setminus d$;\\
+}
 
+\Return $True$;\\
+\caption{Admission Conjecture}
+\label{greedy-1}
+\end{algorithm}
 \subsection {Admission control} \label{admission_control}
 User demands are served in a first-come-first-service (FCFS) manner without preemption.
 When a new demand $d$ arrives, we have $D= \hat{D} \cup {d}$.
@@ -882,8 +922,8 @@ which can be proved to be NP-hard by reducing the all-or-nothing multi-commodity
 %Solving the optimization problem shown in Appendix \ref{admission_problem} can determine whether the new coming tenant's demand can be admitted.
 %However,  the large size of network scenarios and 
 However, in order to support agile deployment of new applications and services, 
-user demands should be admitted as soon as possible, 
-while the time needed to exactly sovle this NP-hard problem may be prohibitive, 
+user demands should be admitted as fast as possible, 
+while the time needed to exactly solve this NP-hard problem may be prohibitive, 
 Therefore, we need a better tradeoff between efficiency and optimality.
 The final admission control strategy we use is as follows:
 
@@ -894,21 +934,21 @@ To achieve a tradeoff, we would like to address the following three steps:
 \fi
 
 \begin{enumerate}
-    \item When a new demand $d$ arrives, we fix the bandwidth allocation for all admitted demands in $\hat{D}$, then we check whether $d$ can be satisfied by the remaining network capacity and failure  probability. If the answer is positive, then admit $d$ and make a first-time bandwidth allocation for it.
+    \item When a new demand $d$ arrives, we \textit{fix} the bandwidth allocation for all admitted demands in $\hat{D}$, then we check whether $d$ can be satisfied by the remaining network capacity and failure  probability. If the answer is positive, then admit $d$ and make a first-time bandwidth allocation for it.
     \item Otherwise, run a greedy algorithm (Algorithm \ref{greedy-1}) to conjecture whether the admitted demands can potentially be rescheduled to accommodate $d$. If the answer is positive, then admit $d$ and make a temporary bandwidth allocation for it, using the remaining network capacity as far as needed \footnote{It's possible that the temporarily allocated bandwidth falls below the demanded bandwidth, but a new allocation strategy satisfying all demands does exist (see Theorem \ref{NP-222}), and will be computed later in our periodical traffic scheduling.}. 
-	\item If $d$ still cannot be accomodated, reject the demand.
+	\item If $d$ still cannot be accommodated, reject the demand.
 %    \item Pre-allocate bandwidth to the demand with remaining network capacity and pass all the admitted demands to the traffic engineering algorithm.
 \end{enumerate}
 
 %We now introduce the admission control problem when all the admitted demands can be rescheduled.
 %
 %We begin with the constraints.
-The greedy algorithm tries to conjecture, in an efficient way, whether a allocation strategy satisfying all demands (i.e., including $d$) exists. It works iteratively as follows. In each iteration, 
-It finds the demand which has the smallest product of bandwidth target and availability target (i.e., $\sum_{k \in K}\mathbf{b}_d^k \time \beta_d$) at first (line 4). Then if the remaining network capacity cannot satisfiy this demand, we will give up (line 6$sim$8). 
+The greedy algorithm tries to conjecture, in an efficient way, whether an allocation strategy satisfying all demands (i.e., including $d$) exists. It works iteratively as follows. In each iteration, 
+It finds the demand which has the smallest product of bandwidth target and availability target (i.e., $\sum_{k \in K}\mathbf{b}_d^k \times \beta_d$) at first (line 2). Then if the remaining network capacity cannot satisfy this demand, we will give up (line 4-5). 
 Otherwise, it allocate tunnel bandwidth for this demand, where a tunnel with a smaller product of 
-remaining capacity and availability has a higher priority (line 9$sim$13). 
+remaining capacity and availability has a higher priority (line 7-13). 
 After this, if the availability target can roughly be satisfied, we go for the next iteration, 
-otherwise, we also give up (line 14$sim$18).
+otherwise, we also give up (line 14-15).
 
 The time complexity of Algorithm \ref{greedy-1} is $O(|D|*|K|*max(|T_k|))$. 
 It is also worth to note that, there is no false positive in conjectures made by Algorithm \ref{greedy-1}, 
@@ -930,53 +970,13 @@ The algorithm will return true when all demands' bandwidth availability targets 
 %The system should \textit{determine whether the new arrival and all admitted requests' availability targets can be supported simultaneously subject to network failure model} with near real-time fashion.
 %If all the admitted requests can be rescheduled, more requests can be admitted.
 
- \begin{algorithm}
-\KwIn{Input parameters shown in Table \ref{Notation}} 
-\KwOut{  $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}$\\}
-$g_d=0, s_d=1, \forall d \in D$; \\
-$f_{d}^t = 0, \forall d \in D ,  k\in K: t\in T_{k}$;\\
-\While{$true$}{
-$d=\arg_{d'\in D}min\{\sum_{k\in K}b_{d'}^k\times \beta_{d'}\}$;\\
-\For{$k\in K$}{
-\If{$b_{d}^k> Capacity(T_k)$}{
-    $g_d=0;$\\
-    \Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, False$;\\
-}
-\While{$b_{d}^k>0$}{
-$t=\arg_{t\in T_k}{\min\{c_t*p_t\}}$;\\
- $f_{d}^t=Allocation(t, b_{d}^k)$;\\
- $s_d=s_d*p_t$;\\
- $b_{d}^k = b_{d}^k- f_{d}^t;$\\
-}
-%\For{$t\in T_k$}{
-%   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
-%   \If{$f_{d}^t>=0$}{
-%   $s_i=s_i*p_t$;\\
-%   $\mathbf{b}^k_d = \mathbf{b}^k_d- f_{d}^t;$\\
-%   }
-%   \If{$\mathbf{b}^k_d<=0$}{
-%   \textbf{break};\\
-%   }
-%}
-}
-  \If{$s_d <   \beta_{d}$}{
-  $g_d=0$;\\
-      \Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, False$;\\
-  }
-  $g_d=1$;\\
-  $D=D\setminus d$;\\
-}
-
-\Return $\{g_1, g_2,..,g_d,....\},\{f_{d}^t\}, True$;\\
-\caption{Admission Conjecture}
-\label{greedy-1}
-\end{algorithm}
 
 
-\begin{Theorem}\label{NP-222}
+
+\begin{theorem}\label{NP-222}
 If a new demand $d$ can be admitted by Algorithm \ref{greedy-1}, 
 there must exist an allocation strategy to satisfy the bandwidth availability targets of all demands $D=\hat{D} \cup {d}$.
-\end{Theorem} 
+\end{theorem} 
 %\begin{proof}
 %We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth-based availability.
 %There are two cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
@@ -1419,11 +1419,11 @@ for potential link failures, it also pre-computes backup allocation strategies t
 \textbf{Controller} is the brain of the whole system. It is responsible for allocating WAN level bandwidth, and orchestrates all activities with a global view. The four main components in Controller are as follows.
 (1) Offline Routing.
 This module maintains the WAN level network topology, and computes TE tunnels between each node pair
- (i.e., $T_k,\forall \text{s-d pair} k \in K$), using certain routing algorithms (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.). 
+ (i.e., $T_k,\forall \text{s-d pair} \ k \in K$), using certain routing algorithms (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.). 
  %When topology changes (e.g., remove a node) are reported to controller, the TE Routing module will perform routing algorithm (oblivious routing \cite{SMORE}, k-shortest path \cite{swan}, etc.) to derive all the possible tunnels between each node pair (i.e., $T_k,\forall k \in K$) offline.
 These tunnels are used by the admission control module and the online scheduler module as input variables;
 (2) Admission Control.
-When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwith over the tunnels in nearly real-time.
+When a BA demand is submitted, this module uses the admission control algorithm (see $\S$ \ref{admission_control}) to reject it, or accept it and allocate bandwidth over the tunnels in nearly real-time.
 The results are sent to the corresponding brokers.
 (3) Online Scheduler. 
 Periodically, This module performs traffic scheduling (see $\S$ \ref{TE}) according to the bandwidth availability demands submitted by users, so that the availability can be optimized in a probabilistic sense. 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  22 JAN 2021 23:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  23 JAN 2021 10:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1374,16 +1374,17 @@ LaTeX Font Info:    Redeclaring math symbol \hslash on input line 262.
 LaTeX Font Info:    Redeclaring math symbol \backepsilon on input line 265.
 )
 \c@definition=\count183
+\c@theorem=\count184
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count184
-\c@@ppsavesec=\count185
-\c@@ppsaveapp=\count186
+\c@@pps=\count185
+\c@@ppsavesec=\count186
+\c@@ppsaveapp=\count187
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count187
+\c@AlgoLine=\count188
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -1392,7 +1393,7 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count188
+\c@checkoddpage=\count189
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
@@ -1429,18 +1430,18 @@ LaTeX Info: Redefining \smaller on input line 151.
 \algoheightrule=\skip102
 \algotitleheightruledefault=\skip103
 \algotitleheightrule=\skip104
-\c@algocfline=\count189
-\c@algocfproc=\count190
-\c@algocf=\count191
+\c@algocfline=\count190
+\c@algocfproc=\count191
+\c@algocf=\count192
 \algocf@algoframe=\box61
 \algocf@algobox=\box62
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count192
-\c@ALC@line=\count193
-\c@ALC@rem=\count194
-\c@ALC@depth=\count195
+\c@ALC@unique=\count193
+\c@ALC@line=\count194
+\c@ALC@rem=\count195
+\c@ALC@depth=\count196
 \ALC@tlm=\skip105
 \algorithmicindent=\skip106
 )
@@ -1465,7 +1466,6 @@ Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 Class acmart Info: Suppressing bibformat on input line 49.
 Class acmart Info: Suppressing CCS on input line 49.
 Class acmart Info: Printing folios on input line 49.
-\c@theorem=\count196
 
 Excluding comment 'screenonly' Include comment 'printonly'
 Include comment 'anonsuppress' (./paper.aux
@@ -1872,11 +1872,11 @@ Underfull \vbox (badness 1383) has occurred while \output is active []
  [3.3 <./fig/motivation-link.pdf> <./fig/motivation-ffc.pdf> <./fig/motivation-
 teavar.pdf> <./fig/motivation-hate.pdf>]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 655.
+(Font)              scaled to size 7.3pt on input line 653.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 655.
+(Font)              scaled to size 6.2pt on input line 653.
 
-Overfull \hbox (7.32234pt too wide) in paragraph at lines 636--703
+Overfull \hbox (5.3175pt too wide) in paragraph at lines 636--703
  [][] 
  []
 
@@ -1901,134 +1901,152 @@ y: \T1/LinuxLibertineT-TLF/m/n/10 (-20) If any
  []
 
 
-Overfull \hbox (1.87924pt too wide) in paragraph at lines 785--812
+Overfull \hbox (10.96967pt too wide) in paragraph at lines 766--781
+\OML/nxlmi/m/it/10 d$ \T1/LinuxLibertineT-TLF/m/n/10 (-20) is in the form of $\
+LMS/ntxsy/m/n/10 น\OT1/LinuxLibertineT-TLF/sb/n/10 b[]\OML/nxlmi/m/it/10 ; ^^L[
+]\LMS/ntxsy/m/n/10 บ$\T1/LinuxLibertineT-TLF/m/n/10 (-20) , where $\OT1/LinuxLi
+bertineT-TLF/sb/n/10 b[]$ \T1/LinuxLibertineT-TLF/m/n/10 (-20) is a vec-tor $\O
+ML/nxlmi/m/it/10 < \OT1/LinuxLibertineT-TLF/sb/n/10 b[]\OML/nxlmi/m/it/10 ; :::
+; \OT1/LinuxLibertineT-TLF/sb/n/10 b[]\OML/nxlmi/m/it/10 ; ::: >$
+ []
+
+
+Overfull \hbox (1.87924pt too wide) in paragraph at lines 785--797
 []\T1/LinuxLibertineT-TLF/b/n/10 Traffic en-gi-neer-ing model: \T1/LinuxLiberti
 neT-TLF/m/n/10 (-20) Our Traf-fic En-gi-neer-ing uses
  []
 
 
-Overfull \hbox (14.37021pt too wide) in paragraph at lines 785--812
+Overfull \hbox (14.37021pt too wide) in paragraph at lines 785--797
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) tunnel-based for-ward-ing [[], [], []]. Fo
 r each source-destination
  []
 
 [4.4]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 911.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 951.
+(Font)              scaled to size 7.0pt on input line 900.
  [5.5]
+Overfull \hbox (7.7283pt too wide) in paragraph at lines 953--956
+[]\T1/LinuxLibertineT-TLF/m/n/10 (-20) The time com-plex-ity of Al-go-rithm []1
+[] is $\OML/nxlmi/m/it/10 O\LMS/ntxsy/m/n/10 นj\OML/nxlmi/m/it/10 D\LMS/ntxsy/m
+/n/10 j ^^C j\OML/nxlmi/m/it/10 K\LMS/ntxsy/m/n/10 j ^^C \OML/nxlmi/m/it/10 max
+\LMS/ntxsy/m/n/10 นj\OML/nxlmi/m/it/10 T[]\LMS/ntxsy/m/n/10 jบบ$\T1/LinuxLibert
+ineT-TLF/m/n/10 (-20) .
+ []
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1163.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
+(Font)              scaled to size 10.0pt on input line 976.
 
-LaTeX Font Info:    Calculating math sizes for size <> on input line 1178.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1188.
+
+LaTeX Font Info:    Calculating math sizes for size <> on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 1.0pt on input line 1178.
+(Font)              scaled to size 1.0pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 0.73pt on input line 1178.
+(Font)              scaled to size 0.73pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 0.55pt on input line 1178.
+(Font)              scaled to size 0.55pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 1.0pt on input line 1178.
+(Font)              scaled to size 1.0pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 0.73pt on input line 1178.
+(Font)              scaled to size 0.73pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 0.55pt on input line 1178.
+(Font)              scaled to size 0.55pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 1.0pt on input line 1178.
+(Font)              scaled to size 1.0pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 0.73pt on input line 1178.
+(Font)              scaled to size 0.73pt on input line 1203.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 0.55pt on input line 1178.
+(Font)              scaled to size 0.55pt on input line 1203.
 [6.6]
 <fig/recovery-1.pdf, id=414, 341.275pt x 280.04625pt>
 File: fig/recovery-1.pdf Graphic file (type pdf)
 <use fig/recovery-1.pdf>
-Package pdftex.def Info: fig/recovery-1.pdf  used on input line 1277.
+Package pdftex.def Info: fig/recovery-1.pdf  used on input line 1302.
 (pdftex.def)             Requested size: 116.44568pt x 95.55203pt.
 <fig/recovery-2.pdf, id=415, 341.275pt x 280.04625pt>
 File: fig/recovery-2.pdf Graphic file (type pdf)
 <use fig/recovery-2.pdf>
-Package pdftex.def Info: fig/recovery-2.pdf  used on input line 1279.
+Package pdftex.def Info: fig/recovery-2.pdf  used on input line 1304.
 (pdftex.def)             Requested size: 116.44568pt x 95.55203pt.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 1327.
+(Font)              scaled to size 5.5pt on input line 1352.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1350.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1375.
 
 [7.7 <./fig/recovery-1.pdf> <./fig/recovery-2.pdf>]
 <fig/inter-DC-WAN-V3.pdf, id=488, 963.6pt x 542.025pt>
 File: fig/inter-DC-WAN-V3.pdf Graphic file (type pdf)
 <use fig/inter-DC-WAN-V3.pdf>
-Package pdftex.def Info: fig/inter-DC-WAN-V3.pdf  used on input line 1416.
+Package pdftex.def Info: fig/inter-DC-WAN-V3.pdf  used on input line 1441.
 (pdftex.def)             Requested size: 217.03127pt x 122.07442pt.
 <fig/testbed.pdf, id=491, 821.0675pt x 542.025pt>
 File: fig/testbed.pdf Graphic file (type pdf)
 <use fig/testbed.pdf>
-Package pdftex.def Info: fig/testbed.pdf  used on input line 1511.
+Package pdftex.def Info: fig/testbed.pdf  used on input line 1536.
 (pdftex.def)             Requested size: 192.91872pt x 127.35107pt.
 <fig/evaluation/testbed-admit.pdf, id=492, 697.60625pt x 527.9725pt>
 File: fig/evaluation/testbed-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-admit.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-admit.pdf  used on input line 1
-520.
+545.
 (pdftex.def)             Requested size: 121.51358pt x 91.96153pt.
 <fig/evaluation/testbed-public-2.pdf, id=493, 741.77126pt x 520.94624pt>
 File: fig/evaluation/testbed-public-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-public-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-public-2.pdf  used on input lin
-e 1522.
+e 1547.
 (pdftex.def)             Requested size: 121.51358pt x 85.3324pt.
 <fig/evaluation/test-bed-profit.pdf, id=494, 734.745pt x 520.94624pt>
 File: fig/evaluation/test-bed-profit.pdf Graphic file (type pdf)
 <use fig/evaluation/test-bed-profit.pdf>
 Package pdftex.def Info: fig/evaluation/test-bed-profit.pdf  used on input line
- 1524.
+ 1549.
 (pdftex.def)             Requested size: 121.51358pt x 86.15114pt.
 <fig/evaluation/testbed-data-loss-2.pdf, id=495, 757.83125pt x 507.8975pt>
 File: fig/evaluation/testbed-data-loss-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-data-loss-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-data-loss-2.pdf  used on input 
-line 1526.
+line 1551.
 (pdftex.def)             Requested size: 121.51358pt x 81.43576pt.
+ [8.8 <./fig/inter-DC-WAN-V3.pdf> <./fig/testbed.pdf>]
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 1593.
+(Font)              scaled to size 10.0pt on input line 1618.
 
-Overfull \hbox (4.34683pt too wide) in paragraph at lines 1593--1623
+Overfull \hbox (4.34683pt too wide) in paragraph at lines 1618--1648
  \T1/LinuxBiolinumT-TLF/m/it/10 (-20) 5.1.1 Testbed setup.[] \T1/LinuxLibertine
 T-TLF/m/n/10 (-20) We build a small testbed with 6 servers
  []
 
-[8.8 <./fig/inter-DC-WAN-V3.pdf> <./fig/testbed.pdf>]
-<fig/evaluation/test.pdf, id=707, 704.6325pt x 487.8225pt>
+<fig/evaluation/test.pdf, id=705, 704.6325pt x 487.8225pt>
 File: fig/evaluation/test.pdf Graphic file (type pdf)
 <use fig/evaluation/test.pdf>
-Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1655.
+Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1680.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/link-failures.pdf, id=708, 704.6325pt x 487.8225pt>
+<fig/evaluation/link-failures.pdf, id=706, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-failures.pdf Graphic file (type pdf)
 <use fig/evaluation/link-failures.pdf>
 Package pdftex.def Info: fig/evaluation/link-failures.pdf  used on input line 1
-657.
+682.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/data-loss.pdf, id=709, 671.50874pt x 481.8pt>
+<fig/evaluation/data-loss.pdf, id=707, 671.50874pt x 481.8pt>
 File: fig/evaluation/data-loss.pdf Graphic file (type pdf)
 <use fig/evaluation/data-loss.pdf>
-Package pdftex.def Info: fig/evaluation/data-loss.pdf  used on input line 1665.
+Package pdftex.def Info: fig/evaluation/data-loss.pdf  used on input line 1690.
 
 (pdftex.def)             Requested size: 121.51358pt x 87.18341pt.
-<fig/evaluation/fake-failure.pdf, id=710, 706.64pt x 508.90125pt>
+<fig/evaluation/fake-failure.pdf, id=708, 706.64pt x 508.90125pt>
 File: fig/evaluation/fake-failure.pdf Graphic file (type pdf)
 <use fig/evaluation/fake-failure.pdf>
 Package pdftex.def Info: fig/evaluation/fake-failure.pdf  used on input line 16
-69.
+94.
 (pdftex.def)             Requested size: 121.51358pt x 87.50601pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1745.
+(Font)              scaled to size 7.0pt on input line 1770.
+
+Underfull \vbox (badness 1348) has occurred while \output is active []
+
  [9.9 <./fig/evaluation/testbed-admit.pdf> <./fig/evaluation/testbed-public-2.p
 df
 
@@ -2046,39 +2064,39 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/testbed-dat
 a-loss-2.pdf): PDF inclusion: multiple pdfs with page group included in a singl
 e page
 >]
-<fig/evaluation/sim-admit.pdf, id=803, 703.62875pt x 486.81876pt>
+<fig/evaluation/sim-admit.pdf, id=802, 703.62875pt x 486.81876pt>
 File: fig/evaluation/sim-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-admit.pdf>
-Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 1877.
+Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 1902.
 
 (pdftex.def)             Requested size: 121.51358pt x 84.06546pt.
-<fig/evaluation/att.pdf, id=804, 704.6325pt x 487.8225pt>
+<fig/evaluation/att.pdf, id=803, 704.6325pt x 487.8225pt>
 File: fig/evaluation/att.pdf Graphic file (type pdf)
 <use fig/evaluation/att.pdf>
-Package pdftex.def Info: fig/evaluation/att.pdf  used on input line 1879.
+Package pdftex.def Info: fig/evaluation/att.pdf  used on input line 1904.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/cernet3.pdf, id=805, 704.6325pt x 487.8225pt>
+<fig/evaluation/cernet3.pdf, id=804, 704.6325pt x 487.8225pt>
 File: fig/evaluation/cernet3.pdf Graphic file (type pdf)
 <use fig/evaluation/cernet3.pdf>
-Package pdftex.def Info: fig/evaluation/cernet3.pdf  used on input line 1881.
+Package pdftex.def Info: fig/evaluation/cernet3.pdf  used on input line 1906.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/sim-monney.pdf, id=806, 704.6325pt x 487.8225pt>
+<fig/evaluation/sim-monney.pdf, id=805, 704.6325pt x 487.8225pt>
 File: fig/evaluation/sim-monney.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-monney.pdf>
-Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 1883
+Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 1908
 .
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/link-utilization.pdf, id=807, 704.6325pt x 487.8225pt>
+<fig/evaluation/link-utilization.pdf, id=806, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-utilization.pdf Graphic file (type pdf)
 <use fig/evaluation/link-utilization.pdf>
 Package pdftex.def Info: fig/evaluation/link-utilization.pdf  used on input lin
-e 1893.
+e 1918.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/admission-control-time.pdf, id=808, 703.62875pt x 483.8075pt>
+<fig/evaluation/admission-control-time.pdf, id=807, 703.62875pt x 483.8075pt>
 File: fig/evaluation/admission-control-time.pdf Graphic file (type pdf)
 <use fig/evaluation/admission-control-time.pdf>
 Package pdftex.def Info: fig/evaluation/admission-control-time.pdf  used on inp
-ut line 1895.
+ut line 1920.
 (pdftex.def)             Requested size: 116.44568pt x 80.06102pt.
  [10.10 <./fig/evaluation/test.pdf> <./fig/evaluation/link-failures.pdf
 
@@ -2097,38 +2115,38 @@ e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 <fig/evaluation/error.pdf, id=905, 704.6325pt x 487.8225pt>
 File: fig/evaluation/error.pdf Graphic file (type pdf)
 <use fig/evaluation/error.pdf>
-Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2188.
+Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2213.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
 <fig/evaluation/optimization_time.pdf, id=906, 703.62875pt x 486.81876pt>
 File: fig/evaluation/optimization_time.pdf Graphic file (type pdf)
 <use fig/evaluation/optimization_time.pdf>
 Package pdftex.def Info: fig/evaluation/optimization_time.pdf  used on input li
-ne 2190.
+ne 2215.
 (pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
 
 
-LaTeX Warning: Reference `pruning' on page 11 undefined on input line 2197.
+LaTeX Warning: Reference `pruning' on page 11 undefined on input line 2222.
 
 <fig/evaluation/routing.pdf, id=911, 703.62875pt x 486.81876pt>
 File: fig/evaluation/routing.pdf Graphic file (type pdf)
 <use fig/evaluation/routing.pdf>
-Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2219.
+Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2244.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 <fig/evaluation/approximation.pdf, id=912, 703.62875pt x 486.81876pt>
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-225.
+250.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-231.
+256.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-237.
+262.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 
 Underfull \vbox (badness 1038) has occurred while \output is active []
@@ -2165,14 +2183,13 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/optimizatio
 n_time.pdf): PDF inclusion: multiple pdfs with page group included in a single 
 page
 >]
-Overfull \hbox (1.96614pt too wide) in paragraph at lines 2429--2437
+Underfull \vbox (badness 4913) has occurred while \output is active []
+
+
+Overfull \hbox (1.96614pt too wide) in paragraph at lines 2454--2462
 []\T1/LinuxLibertineT-TLF/b/n/10 Bandwidth guar-an-tee. \T1/LinuxLibertineT-TLF
 /m/n/10 (-20) Up still now, many ex-ist-ing works
  []
-
-
-Underfull \vbox (badness 4913) has occurred while \output is active []
-
 
 
 LaTeX Warning: Overwriting file `./paper.bib'.
@@ -2181,14 +2198,14 @@ LaTeX Warning: Overwriting file `./paper.bib'.
 
 
 LaTeX Warning: Writing text ` ' before \end{filecontents}
-               as last line of paper.bib on input line 2746.
+               as last line of paper.bib on input line 2771.
 
 
 (./paper.bbl
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 71.
 
-Underfull \vbox (badness 3919) has occurred while \output is active []
+Underfull \vbox (badness 5475) has occurred while \output is active []
 
  [12.12 <./fig/evaluation/routing.pdf> <./fig/evaluation/approximation.pdf
 
@@ -2212,10 +2229,10 @@ N. Vi-jayku-mar. 2012.
 
 ) [14.14]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 2888.
+LaTeX Font Warning: Command \small invalid in math mode on input line 2913.
 
 
-Overfull \hbox (14.60666pt too wide) in paragraph at lines 2923--2928
+Overfull \hbox (14.60666pt too wide) in paragraph at lines 2948--2953
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) undi-rected graph $\OML/nxlmi/m/it/10 G \U
 /ntxmia/m/it/10 = \LMS/ntxsy/m/n/10 น\OML/nxlmi/m/it/10 V; E\LMS/ntxsy/m/n/10 บ
 $ \T1/LinuxLibertineT-TLF/m/n/10 (-20) and a set of $\OML/nxlmi/m/it/10 k$ \T1/
@@ -2226,14 +2243,14 @@ LinuxLibertineT-TLF/m/n/10 (-20) pairs: $\OML/nxlmi/m/it/10 s[]t[]; s[]t[]; :::
 [15.15
 
 ] [16.16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3152.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3152.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3177.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3177.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3152.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3152.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3177.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3177.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: B31F26D8BBED2261C92A4EBEA3A46994;3653.
+(rerunfilecheck)             Checksum: F4C09B27ED4D0D45D505A556491B4271;3643.
 
 
 LaTeX Warning: There were undefined references.
@@ -2243,20 +2260,20 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 31209 strings out of 492985
- 544536 string characters out of 6132585
- 638689 words of memory out of 5000000
+ 31222 strings out of 492985
+ 544865 string characters out of 6132585
+ 638648 words of memory out of 5000000
  33088 multiletter control sequences out of 15000+600000
- 370274 words of font info for 736 fonts, out of 8000000 for 9000
+ 371710 words of font info for 745 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  60i,23n,94p,1770b,740s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/newtx/libertinealt.enc}{/us
-r/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{/usr
-/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{/usr/
-local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/tex
+live/2016/texmf-dist/fonts/enc/dvips/newtx/libertinealt.enc}{/usr/local/texlive
+/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{/usr/local/texlive/
+2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{/usr/local/texlive/2
 016/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.enc}{/usr/local/texlive/20
 16/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{/usr/local/texlive/201
 6/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{/usr/local/texlive/2016
@@ -2273,16 +2290,17 @@ local/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineTZ.pfb><
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/newtx/fxlri-7letters.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/newtx/ntxsyralt.pfb></u
 sr/local/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1135817 bytes).
+al/texlive/2016/texmf-dist/fonts/type1/public/newtx/rtxmi7.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/txfonts/txsya.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/newtx/zxlzi.pfb>
+Output written on paper.pdf (16 pages, 1144586 bytes).
 PDF statistics:
- 1406 PDF objects out of 1440 (max. 8388607)
- 1217 compressed objects within 13 object streams
- 211 named destinations out of 1000 (max. 500000)
+ 1410 PDF objects out of 1440 (max. 8388607)
+ 1219 compressed objects within 13 object streams
+ 210 named destinations out of 1000 (max. 500000)
  90435 words of extra memory for PDF output out of 106986 (max. 10000000)
 
