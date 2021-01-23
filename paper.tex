@@ -1123,7 +1123,8 @@ there must exist an allocation strategy to satisfy the bandwidth availability ta
 
 \subsection{Traffic scheduling} \label{TE}
 
-For \textit{admitted} demands (including the newly admitted one), we carry out traffic scheduling to further optimize the bandwidth allocation periodically (e.g., every 10 minutes).
+For \textit{admitted} demands (including the newly admitted ones), 
+we carry out traffic scheduling to further optimize the bandwidth allocation periodically (e.g., every 10 minutes).
 We model this as a linear programming problem, which maximizes the overall availability to be achieved (in a probabilistic sense), under the constraint that all bandwidth target must be met. Specifically, 
 
 \begin{eqnarray} \label{Smaller}
@@ -1140,7 +1141,7 @@ We model this as a linear programming problem, which maximizes the overall avail
 
 
 
-For a s-d pair $k$ of BA demand $d$, we use $R_{dk}^{\mathbf{z}}$ to denote the ratio of the effective bandwidth to the demanded bandwidth under network scenario $\mathbf{z}$, which is defined as:
+For an s-d pair $k$ of BA demand $d$, we use $R_{dk}^{\mathbf{z}}$ to denote the ratio of the effective bandwidth to the demanded bandwidth under network scenario $\mathbf{z}$, which is defined as:
  \begin{eqnarray} \label{R2}
 R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in \hat{D}, k \in K, \mathbf{z}\in Z.
 \end{eqnarray}
@@ -1174,7 +1175,7 @@ under network scenario  $\mathbf{z}$, which is set to be no smaller than the ava
 \sum_{\mathbf{z}\in Z}B_d^{\mathbf{z}}\times p_{\mathbf{z}} \ge \beta_{d},  \quad {\forall d \in \hat{D}}
 \end{eqnarray}
 
-Besides, the bandwidth allocation result $\{f_{d}^t}$ should be non-negative and limited by the network capacity, i.e.,
+Besides, the bandwidth allocation result $f_{d}^t$ should be non-negative and limited by the network capacity, i.e.,
 \begin{equation}
 f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K,   t\in T_{k}.
 \label{constraint-f2}
@@ -1192,9 +1193,8 @@ under the above constraints, i.e.,
 \begin{equation}
 \small
 \begin{aligned} \label{BATE-TE}
-% &maximize  \sum_{i\in I_a} \sum_{\mathbf{z}\in Z}B_d^{\mathbf{z}}\times p_{\mathbf{z}}\\
-%&\begin{array}{r@{\quad}r@{}l@{\quad}l}
-&minimize \sum_{d \in \hat{D}, k \in K, t \in T_k} f_d^t 
+&minimize \sum_{d \in \hat{D}, k \in K, t \in T_k} f_d^t  \\
+&\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved})
 %\begin{cases}
 % \sum_{d \in \hat{D}}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
@@ -1216,7 +1216,7 @@ s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), 
 %\end{center}
 %\end{figure}
 
-Soving this LP problem directly is possible, but as it considers every possible network scenario, 
+Solving this LP problem directly is possible, but as it considers every possible network scenario, 
 the complexity will increase exponentially with the network size.
 %For example, we consider a small inter-DC WAN which contains 3 links and  5 events.
 %Each link has $2^5=32$ states and the network includes $32^3=32768$ states in total. 
@@ -1224,9 +1224,10 @@ the complexity will increase exponentially with the network size.
 For instance, the B4 topology \cite{B4} has 12 nodes and 38 links,
 so there are totally $2^{38}$ network failure scenarios (when only link failures considered).
 %The explosive network scenarios make it impossible to solve $\mathsf{BATE}$ problem.
-Therefore, an important question is how to effectively reduce the problem size without 
-affecting the result significantly. TEAVAR \cite{Teavar} prunes a scenario if its probability is smaller than a threshold. However, such a threshould is difficult to choose, and it still has to enumerate all 
-possible scenarios. Instead, we use a much faster prunning method, 
+Therefore, an important question is \textit{how to effectively reduce the problem size without 
+affecting the result significantly}. 
+TEAVAR \cite{Teavar} prunes a scenario if its probability is smaller than a threshold. However, such a threshold is difficult to choose, and it still has to enumerate all 
+possible scenarios. Instead, we use a much faster pruning method, 
 where at most two concurrent link failures will be considered in our network scenarios, 
 and all the remaining scenarios will be converted into one special \textit{unqualified} scenario. 
 In this way, the set of scenarios $Z$ and the corresponding $\{p_\mathbf{z}\}$ can be efficiently computed. 
@@ -1238,6 +1239,7 @@ Instead, we propose to cut off network failure scenarios in which \textit{concur
 We think this method is much more practical since most scenarios could hardly happen (e.g., more than two links fail simultaneously). 
 Therefore, we can ignore these scenarios.
 To provide an upper bound of the traffic engineering problem, we collapse all the pruned scenarios into a single scenario with probability equal to the sum of probabilities of the pruned scenarios and regard that scenario as an unsafe one.
+\fi
 %Figure \ref{pic-fig} depicts an example of a simple network with four links when $l=2$. 
 %The root node denotes all
 %links are available (i.e., $[1111]$). 
@@ -1365,7 +1367,7 @@ Then, the profit of $d$ is:
 \label{availability222}
 \end{equation}
 
-It is a step function and we can change it to the following linear format and we can also change it into a linear format:
+It is a step function and we can change it to the following linear format :
 
 \begin{equation}
 \begin{cases}
