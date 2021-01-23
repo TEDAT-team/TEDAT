@@ -1141,14 +1141,15 @@ We model this as a linear programming problem, which maximizes the overall avail
 
 
 
-For an s-d pair $k$ of BA demand $d$, we use $R_{dk}^{\mathbf{z}}$ to denote the ratio of the effective bandwidth to the demanded bandwidth under network scenario $\mathbf{z}$, which is defined as:
+For an s-d pair $k$ of BA demand $d$, we use $R_{dk}^{\mathbf{z}}$ to denote the ratio of the effective bandwidth under network scenario $\mathbf{z}$ to the demanded bandwidth, which is defined as:
  \begin{eqnarray} \label{R2}
 R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in \hat{D}, k \in K, \mathbf{z}\in Z.
 \end{eqnarray}
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
 %$R_{dk}^{\mathbf{z}}$ describes the allocation return under network scenario $\mathbf{z}$.
-Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}. 
+Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
+$\mathbf{z} \propto <d, \{f_d^t\}> \Leftrightarrow R_{dk}^{\mathbf{z}} \ge 1$. 
 %If for every source-destination pair $k$, the total reserved bandwidth through all available tunnels is larger than $\mathbf{b}^k_d$, then the bandwidth demand can still be satisfied, and network scenario $\mathbf{z}$ can be regarded as \textit{qualified}, i.e., 
 %$R_{dk}^{\mathbf{z}} \ge 1, \forall k \in K$.
 To meet the availability target, we should guarantee the total probability of the qualified scenarios 
@@ -1169,7 +1170,7 @@ Let $B_d^{\mathbf{z}}$ denote the lower bound of $R_{dk}^{\mathbf{z}}$ over all 
 B_d^{\mathbf{z}} \le R_{dk}^{\mathbf{z}}, \quad  \forall  d \in \hat{D}, k \in K, \mathbf{z}\in Z
 \end{eqnarray}
 %It is obvious  $B_d^{\mathbf{z}} \le 1$ and $B_d^{\mathbf{z}}=1$ presents scenario $\mathbf{z}$ is qualified, therefore, 
-and define $B_d^{\mathbf{z}}\times p_{\mathbf{z}}$ as the potential achieved availability  
+and use $B_d^{\mathbf{z}}\times p_{\mathbf{z}}$ to roughtly represent the availability that can be achieved   
 under network scenario  $\mathbf{z}$, which is set to be no smaller than the availability target, i.e., 
 \begin{eqnarray} \label{Achieved}
 \sum_{\mathbf{z}\in Z}B_d^{\mathbf{z}}\times p_{\mathbf{z}} \ge \beta_{d},  \quad {\forall d \in \hat{D}}
@@ -1226,11 +1227,11 @@ so there are totally $2^{38}$ network failure scenarios (when only link failures
 %The explosive network scenarios make it impossible to solve $\mathsf{BATE}$ problem.
 Therefore, an important question is \textit{how to effectively reduce the problem size without 
 affecting the result significantly}. 
-TEAVAR \cite{Teavar} prunes a scenario if its probability is smaller than a threshold. However, such a threshold is difficult to choose, and it still has to enumerate all 
-possible scenarios. Instead, we use a much faster pruning method, 
-where at most two concurrent link failures will be considered in our network scenarios, 
-and all the remaining scenarios will be converted into one special \textit{unqualified} scenario. 
-In this way, the set of scenarios $Z$ and the corresponding $\{p_\mathbf{z}\}$ can be efficiently computed. 
+TEAVAR \cite{Teavar} prunes a scenario if its probability is smaller than a threshold. However, such a threshold is difficult to choose, and an enumeration of all 
+possible scenarios is still needed. Instead, we use a much faster pruning method, 
+where at most two concurrent link failures will be considered, 
+and all the remaining scenarios will be aggregated into one special \textit{unqualified} scenario. 
+In this way, the set of scenarios $Z$ and the corresponding probabilities $\{p_\mathbf{z}\}$ can be efficiently computed. 
 
 \iffalse
 This method is easy but the accuracy and efficiency tradeoff threshold is hard to decide.
