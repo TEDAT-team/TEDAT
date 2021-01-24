@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  24 JAN 2021 09:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  24 JAN 2021 16:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2265,11 +2265,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 31237 strings out of 492985
- 545288 string characters out of 6132585
+ 31240 strings out of 492985
+ 545363 string characters out of 6132585
  639639 words of memory out of 5000000
  33088 multiletter control sequences out of 15000+600000
- 373740 words of font info for 757 fonts, out of 8000000 for 9000
+ 374013 words of font info for 759 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  60i,23n,94p,1770b,740s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
@@ -2302,7 +2302,7 @@ dist/fonts/type1/public/txfonts/txsya.pfb></usr/local/texlive/2016/texmf-dist/f
 onts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
 e1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1142293 bytes).
+Output written on paper.pdf (16 pages, 1142378 bytes).
 PDF statistics:
  1403 PDF objects out of 1440 (max. 8388607)
  1213 compressed objects within 13 object streams
