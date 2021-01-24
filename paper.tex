@@ -1333,11 +1333,11 @@ Our failure recovery scheme takes this economic factor into account in the way a
 %\end{aligned}
 %\end{equation}
 
-For a given network scenario $ \mathbf{z}$ (where one link failure occurs) in consideration, 
+For a specific network scenario $ \mathbf{z}$ (where one link failure occurs) in consideration, 
 %let
 %$f^{\mathbf{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \mathbf{z}}_k$, where 
 %$T^ { \mathbf{z}}_k$ denote the set of surviving tunnels for the s-d pair $k$ under scenario $ \mathbf{z}$.
-the ration of allocated bandwidth to a user's demanded bandwidth is \footnote{This is the same as equation (3), but we omit the superscript $\mathbf{z}$ of $R_{dk}^\mathbf{z}$.}
+the ratio of allocated bandwidth to a user's demanded bandwidth is \footnote{This is the same as equation (3), but we omit the superscript $\mathbf{z}$ of $R_{dk}^\mathbf{z}$.}
 
 \begin{small}
 \begin{eqnarray} \label{B-return}
@@ -1353,14 +1353,14 @@ However, if any $R_{dk}$ falls below 1, then the corresponding SLA will be viola
 For simplicity, here we assume a simple pricing and refunding model, 
 where the charge for serving a user demand $d$ is $g_d$, and if the SLA is violated, 
 a fraction $\mu_d$ of $g_d$ will be refunded. 
-We use $r_d$ denote the profit of demand $d$ with refunding, such that
+We use $r_d$ to denote the profit of demand $d$ with refunding, such that
 
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
 
 \begin{equation}
 r_d=
 \begin{cases}
-g_d &\text{$\forall k \in K: R_{dk} \ge 1$ }\\
+g_d &\text{if $R_{dk} \ge 1$ for every $k \in K$}\\
 (1-\mu_{d})g_d &\text{Otherwise}
 \end{cases}
 \label{availability222}
@@ -1390,7 +1390,6 @@ R_{dk} <  M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
 R_{dk} \ge   y_d &{\forall d \in \hat{D},  k\in K}
 \end{cases}
 \end{equation}
-
 where $M$ is a constant large enough (e.g., at least larger than the upper bound of $R_{dk}$).
 
 \iffalse
@@ -1432,7 +1431,7 @@ s.t.  (\ref{constraint-f3}), (\ref{B-constraint}), (\ref{B-return}), (\ref{A-SSS
 \end{aligned}
 \end{equation}
 
-This mixed-integer linear programming  (MILP) problem can be proved to be NP-hard, 
+The above mixed-integer linear programming  (MILP) problem can be proved to be NP-hard, 
 and the proof details can be found in Appendix \ref{appendix1}.
 To efficiently solve this problem, we further propose a 2-approximation greedy algorithm.
 The key idea is to prioritize demands by the ratio of profit to the allocated bandwidth in a non-decreasing order.
@@ -1820,7 +1819,7 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
 %Our traffic engineering optimization framework uses Gurobi LP solver\cite{gurobi} to solve the optimization problems.
 
 
-\subsubsection{A private cloud example}\label{testbedresults}
+\textbf{A private cloud example}
 
 %In this part we will perform experiments on our testbed to evaluate the performance of  $\mathsf{BATE}$.
  \begin{table}
