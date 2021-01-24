@@ -1302,9 +1302,9 @@ and Figure \ref{recovery}(b) depicts the backup allocation pre-computed for a fa
 
 However, service providers have to refund credits to users if their bandwidth availability targets according the agreed SLAs are violated (see $\S$\ref{background}), both for users affected \textit{directly} by the failure and for users \textit{collaterally} affected by the recovery procedure. 
 Our failure recovery scheme takes this economic factor into account in the way as follows.
-
-
-
+%
+%
+%
 \begin{figure}[t]
 \centering
 \subfigure[Original allocation]{
@@ -1338,11 +1338,14 @@ For a given network scenario $ \mathbf{z}$ (where one link failure occurs) in co
 %$f^{\mathbf{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \mathbf{z}}_k$, where 
 %$T^ { \mathbf{z}}_k$ denote the set of surviving tunnels for the s-d pair $k$ under scenario $ \mathbf{z}$.
 the ration of allocated bandwidth to a user's demanded bandwidth is \footnote{This is the same as equation (3), but we omit the superscript $\mathbf{z}$ of $R_{dk}^\mathbf{z}$.}
+
 \begin{small}
 \begin{eqnarray} \label{B-return}
-R_{dk}}=\frac{\sum_{t\in T_k f^{t}_{d} v_t^{\mathbf{z}}} {\mathbf{b}^k_d}, \quad \forall  d \in \hat{D},  k \in K
+R_{dk}=\frac{\sum_{t\in T_k} f^{t}_{d} v_t^{\mathbf{z}}} {\mathbf{b}^k_d}, \quad \forall  d \in \hat{D},  k \in K
 \end{eqnarray}
 \end{small}
+
+
 
 If for every $k$, $R_{dk}$ is larger than its demand (i.e., $R_{dk} \ge 1$), 
 then there is no problem since the demanded availability is still satisfied. 
@@ -1350,31 +1353,44 @@ However, if any $R_{dk}$ falls below 1, then the corresponding SLA will be viola
 For simplicity, here we assume a simple pricing and refunding model, 
 where the charge for serving a user demand $d$ is $g_d$, and if the SLA is violated, 
 a fraction $\mu_d$ of $g_d$ will be refunded. 
-We use $r_d$ denote the profit of demand $d$ with rufunding, such that
+We use $r_d$ denote the profit of demand $d$ with refunding, such that
 
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
 
-\begin{equation*}
+\begin{equation}
 r_d=
 \begin{cases}
-g_d &\text{$\forall k \in K: R_{dk} \ge 1 $}\\
-\(1-mu_{d})g_d &\text{Otherwise}
+g_d &\text{$\forall k \in K: R_{dk} \ge 1$ }\\
+(1-\mu_{d})g_d &\text{Otherwise}
 \end{cases}
 \label{availability222}
-\end{equation*}
+\end{equation}
+
+%\begin{equation}
+%A_d^{\mathbf{z}}=
+%\begin{cases}
+%1 &\text{$\forall k \in K:R_{dk}^{\mathbf{z}}\ge 1$}\\
+%0&\text{Otherwise}
+%\end{cases}
+%,\forall  d \in D, \mathbf{z}\in \mathbf{z}.
+%\label{CA}
+%\end{equation}
+
 
 We use an auxiliary integer variable $y_d \in \{0, 1\}$ to denote the violation condition, 
 where $y_d=1$ means no violation. 
 Then the profit $r_d$ can be rewritten as 
+
 \begin{equation}
 \label{A-SSS2}
-\begin{array}{rclr}
-y_d &\in &\{0,1\} &{\forall d \in \hat{D}} \\
-r_d & = & g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
-R_{dk}& < & M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
-R_{dk}& \ge &  y_d, &{\forall d \in \hat{D},  k\in K}
-\end{array}
+\begin{cases}
+y_d \in \{0,1\} &{\forall d \in \hat{D}} \\
+r_d  =  g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
+R_{dk} <  M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
+R_{dk} \ge   y_d &{\forall d \in \hat{D},  k\in K}
+\end{cases}
 \end{equation}
+
 where $M$ is a constant large enough (e.g., at least larger than the upper bound of $R_{dk}$).
 
 \iffalse
@@ -1394,7 +1410,7 @@ and limited by the available network capacity.
 Let $w_e^{ \mathbf{z}}$ denote whether link $e$ is available under scenario $ \mathbf{z}$, 
 then we have 
 \begin{equation}
-f^{t}_{d} \ge 0, \quad\forall d \in \hat{D} ,  k\in K,  t\in T^{\mathbf{z}}_k.
+f^{t}_{d} \ge 0, \quad\forall d \in \hat{D} ,  k\in K,  t\in T_k.
 \label{constraint-f3}
 \end{equation}
 and 
@@ -1421,7 +1437,7 @@ and the proof details can be found in Appendix \ref{appendix1}.
 To efficiently solve this problem, we further propose a 2-approximation greedy algorithm.
 The key idea is to prioritize demands by the ratio of profit to the allocated bandwidth in a non-decreasing order.
 Due to space limitations, the detailed algorithm, as well as the proof on its optimality, 
-are put into Appendix \ref{B}}.
+are put into Appendix \ref{B}.
 
 \iffalse
 \begin{lemma}\label{NP-hard}
@@ -1435,7 +1451,7 @@ The key idea of the greedy algorithm is to give priority to demands in non-decre
 \textit{We also prove the approximation of the greedy algorithm is 2  in Appendix \ref{B}}. 
 %The greedy algorithm can solve $\mathsf{BATE}$  problem in  $O(|J||Z||T_k||E|)$ time.
 %We further explore the accuracy of greedy algorithm in Section \ref{evaluation}.
-\false
+\fi
 
 
 
@@ -2886,10 +2902,10 @@ The achieved bandwidth availability of demand $d$ is the sum of all qualified ne
 S_d=\sum_{\mathbf{z}\in \mathbf{z}}A_d^{\mathbf{z}}\times p_{\mathbf{z}},  \quad \forall  d \in D.
 \end{eqnarray}
 
-We use $g_d$ to present whether the availability target of $d$ can be satisfied: 
+We use $y_d$ to present whether the availability target of $d$ can be satisfied: 
 
 \begin{equation}
- g_d=
+ y_d=
 \begin{cases}
 1 &\text{$1 >S_d \ge \beta_{d}$}\\
 0 &\text{$ \beta_{d} >S_d\ge 0 $}
@@ -2908,9 +2924,9 @@ Also,  (\ref{availability4}) can be changed into the following linear format:
 
 \begin{equation}
 \begin{cases}
-S_d <  \beta_{d}\times  (1-g_d)+g_d,& \forall d \in D. \\
-S_d \ge  \beta_{d} \times g_d,& \forall d \in D. \\
-g_d\in\{0,1\},& \forall d \in D. \\
+S_d <  \beta_{d}\times  (1-y_d)+y_d,& \forall d \in D. \\
+S_d \ge  \beta_{d} \times y_d,& \forall d \in D. \\
+y_d\in\{0,1\},& \forall d \in D. \\
 \end{cases}
 \label{g-2}
 \end{equation}
@@ -2927,7 +2943,7 @@ g_d\in\{0,1\},& \forall d \in D. \\
 %As TABLE \ref{target} shown, $g_j$ can be used to describe the availability targets defined in SLAs. 
 %Applications might have diverse availability demands (i.e., $\beta_j$) and the piecewise formulation also considers this by setting different bound for full profit $\alpha$.
 %where $M_2$ is  a big integer that is at least larger than the upper-bound of $S_j,\forall j \in J$.
-We intend to maximize the total number of accepted demands, i.e., $ \sum_{d\in D} g_d$.
+We intend to maximize the total number of accepted demands, i.e., $ \sum_{d\in D} y_d$.
 %\begin{eqnarray} \label{goal}
 %maximize  \sum_{i\in I} g_i
 %\end{eqnarray}
@@ -2952,7 +2968,7 @@ With the constraints introduced above, we can finally give the formulation of ad
 \begin{equation}
 \small
 \begin{aligned} \label{P8}
- &maximize  \sum_{d\in D} g_d\\
+ &maximize  \sum_{d\in D} y_d\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t.
 (\ref{constraint-f}), (\ref{constraint-e}), (\ref{R}), (\ref{A-z2}), (\ref{S}), (\ref{g-2})
@@ -3082,7 +3098,7 @@ proof.
      \begin{algorithm}
 \KwIn{Input parameters shown in Table \ref{Notation}, a failure scenario $\bm{z}$} 
 \KwOut{ $\{f^t_{d}\},F$}
-Sort $d\in \hat{D}$ in non-decreasing order with $\frac{w_d}{\sum_{k\in K}\mathbf{b}^k_d}$;\\
+Sort $d\in \hat{D}$ in non-decreasing order with $\frac{g_d}{\sum_{k\in K}\mathbf{b}^k_d}$;\\
 $h_d=0, \forall d \in \hat{D}$; \\
 $F=\{\}$;\\
 \For{$d \in \hat{D}$}{
@@ -3095,7 +3111,7 @@ $h_d=1$;\\
    Update $\bm{z}$' s remaining network capacity;\\
 }
 \Else{
-\If{$\sum_{d'\in F}w_d' <w_d$}{
+\If{$\sum_{d'\in F}g_{d'} <g_d$}{
 \If {Recycling network resource allocated to demands in $F$ is able to support $d$}{
 Recycle network resource allocated to demands in $F$;\\
      $F= \{d\}$;\\
@@ -3186,18 +3202,18 @@ Algorithm \ref{greedy} achieves 2-approximation for the MILP problem in failure 
 \begin{proof}
 Algorithm \ref{greedy} prefers accepted demands according to the following sequence:
  \begin{eqnarray} \label{B-2}
-\frac{w_1}{\sum_{k\in K} d_{1k}} \ge \frac{w_2}{\sum_{k\in K}d_{2k}} \ge ....
+\frac{g_1}{\sum_{k\in K}\mathbf{b}^k_1} \ge \frac{g_2}{\sum_{k\in K}\mathbf{b}^k_2} \ge ....
 \end{eqnarray}
 
 (\ref{B-2})  means the priority of flow pair is decided by the unit value.
-W.l.o.g., assume that the network can't transfer the $n+1$ demand,  Algorithm \ref{greedy} will choose $max\{w_{n+1},\sum_{i=1}^{n}w_i\}$ as the value.
-Let $OPT$ denote the optimal solution and it is obvious that  $\sum_{i=1}^{n} w_i\le OPT$.
-Also, we have  $\sum_{i=1}^{n+1} w_i\ge OPT$.
+W.l.o.g., assume that the network can't transfer the $n+1$ demand,  Algorithm \ref{greedy} will choose $max\{g_{n+1},\sum_{i=1}^{n}g_i\}$ as the value.
+Let $OPT$ denote the optimal solution and it is obvious that  $\sum_{i=1}^{n} g_i\le OPT$.
+Also, we have  $\sum_{i=1}^{n+1} g_i\ge OPT$.
 This holds, since we've already made the density of network as high as possible by the greedy method.
-If we violate the link capacity constraint and put the $n+1$ demand into the link, then the link is fulfilled.
-There is no other way that the density of the link is greater than this, that is, the value is greater than $OPT$. 
- $\sum_{i=1}^{n+1} w_i/2 \le max\{\sum_{i=1}^{n} w_i,w_{n+1}\}$.
- Therefore, $OPT/2 \le max\{\sum_{i=1}^{n} w_i,w_{n+1}\}$. This completes the
+If we violate the link capacity constraint and put the $n+1$ demand into links, then  links are fulfilled.
+There is no other way that the density of links are greater than this, that is, the value is greater than $OPT$. 
+ $\sum_{i=1}^{n+1} g_i/2 \le max\{\sum_{i=1}^{n} g_i,g_{n+1}\}$.
+ Therefore, $OPT/2 \le max\{\sum_{i=1}^{n} g_i,g_{n+1}\}$. This completes the
 proof.
 \end{proof}
 
