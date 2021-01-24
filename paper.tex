@@ -675,7 +675,7 @@ $p_{\mathbf{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\
 \hline
 $v_t^{\mathbf{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenario $\mathbf{z}$}\\
  \hline
-  $L_e^{ \mathbf{z}}$ &\multicolumn{6}{|l}{whether link $e$ is available under scenario $ \mathbf{z}$}\\
+$w_e^{ \mathbf{z}}$ &\multicolumn{6}{|l}{whether link $e$ is available under scenario $ \mathbf{z}$}\\
 % $\{1,\beta_j^1,\beta_j^2....\}$ &\multicolumn{6}{|l}{The availability target list for service $j$}\\
 %  \hline
 % $\{1,\alpha_j^1,\alpha_j^2...\}$ &\multicolumn{6}{|l}{The profit list for service $j$}\\
@@ -688,7 +688,7 @@ $g_d$& \multicolumn{6}{|l}{whether demand $d$ is admitted}\\
 %$f_{d}^t$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t \in T_{k}$ }\\
 $f_d^t$& \multicolumn{6}{|l}{bandwidth allocated for demand $d$ over tunnel $t$}\\
 \hline
-$h_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
+$r_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
 %\hline
 %\hline
 %&\textbf{Auxiliary Output Variables}\\
@@ -881,7 +881,8 @@ $t=\arg_{t\in T'_k}{\min\{c_t*p_t\}}$;\\
 $ T'_k=T'_k \setminus t$;\\
  $s_d=s_d*p_t$;\\
  $b_{d}^k = b_{d}^k- f_{d}^t;$\\
-  $c_t= c_t- f_{d}^t;$\\
+  update the remaining capacities of links and tunnels;\\
+  %$c_t= c_t- f_{d}^t;$\\
 }
 %\For{$t\in T_k$}{
 %   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
@@ -978,8 +979,8 @@ The algorithm will return true when all demands' bandwidth availability targets 
 
 
 \begin{theorem}\label{NP-222}
-If a new demand $d$ can be admitted by Algorithm \ref{greedy-1}, 
-there must exist an allocation strategy to satisfy the bandwidth availability targets of all demands $D=\hat{D} \cup {d}$.
+If a new demand $d$ can be admitted by Algorithm \ref{greedy-1}, then
+there must exist an allocation result $\{f_d^t\}$ to satisfy the bandwidth availability targets of all demands $D=\hat{D} \cup {d}$.
 \end{theorem} 
 %\begin{proof}
 %We use the contradiction method to prove, i.e., there is a demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth-based availability.
@@ -1278,45 +1279,40 @@ To provide an upper bound of the traffic engineering problem, we collapse all th
 
 
 \subsection{Failure recovery} \label{backup}
-In $\mathsf{BATE}$,  traffic can also be redistributed across the surviving tunnels via rerouting when any tunnel becomes unavailable.
+When failures occur and any tunnel becomes unavailable, traffic can be redistributed across the surviving tunnels. To reduce recovery time, $\mathsf{BATE}$ proactively computes backup allocation strategies for potential failure scenarios, so that the surviving tunnels can be used immediately, and packet loss 
+can be mitigated \footnote{Here we only consider backup allocations for one link, while this scheme can be easily extended to deal with concurrent failures.}. 
 %Previous tunnel-based traffic engineering schemes (such as FFC) keep link utilization low to prevent congestion when there are failures.
 %Different from them, links have less vacant capacity under $\mathsf{BATE}$, therefore, when there are failures, re-routing might cause congestion.
 %When a link $e'$ fails, all tunnels through this link  fails.
-In reality, service providers have to derive refunding credits for violating availability targets (see $\S$\ref{background}).
-$\mathsf{BATE}$ proactively considers failure scenarios and pre-computes backup allocation to maximize total revenue, and the surviving tunnels can be used immediately to support tenants.
+
+ 
 %Each tunnel belongs to one flow pair.
 %We can divide all node pairs into two groups, i.e.,  victim node pairs and normal node pairs, which is similar to \cite{sentinel}.
 %Let $H$ denote all the victim node pairs when link $e'$ fails.
 %Assume link $e'$ will fail, the normal tunnel set is $Q_{k}$ and the backup tunnel set is $Q'_{k}$.
 %In reality, the backup tunnel set can be pre-computed by the network operators beforehand.
-For example, Figure \ref{recovery} shows two services are from DC1 to DC4 and both of them need bandwidth demand of 2.
-Link capacity is 1 everywhere.
-Figure \ref{recovery}(a) shows the original traffic engineering allocation and it is used when no failures happen.
+For example, in Figure \ref{recovery}, there are two users, and the link capacity is 1 everywhere.  One user requests a bandwidth of 1 from DC1 to DC2, while the other one requests a bandwidth of 1 from DC1 to DC4.
+Figure \ref{recovery}(a) shows the original bandwidth allocation when no failures occur, 
 %if we assume the link between DC2 and DC4 is down, then DC1$\to$DC4 is victim node pair and DC1$\to$ DC2 is normal pair. 
 %the backup tunnel set $Q'$=\{DC1$\to$DC2$\to$DC3$\to$DC4\} and normal tunnel set is 
 %$Q$ =\{DC1$\to$DC3$\to$DC4\} for the victim node pair DC1$\to$DC4.
 %Let $M_e$ denote the used bandwidth of link $e$ by normal node pairs,
-Figure \ref{recovery}(b) depicts the backup allocation result when we assume the link between DC2 and DC4 is down, and the result will be put into practice when link DC2 $\to$ DC4 failure is detected.
-Network scenario number is huge for large-scale network and we assume that at any time, only one link in the network could fail. 
-If we assume network scenario $ \mathbf{z}$ could happen, and let 
-%$f^{\mathbf{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \mathbf{z}}_k$, where 
-$T^ { \mathbf{z}}_k$ denote the surviving tunnel set under scenario $ \mathbf{z}$ and the bandwidth allocated for demand $d$ over tunnel $t$ should be non-negative, i.e.,
-\begin{equation}
-f^{t}_{d} \ge 0, \quad\forall d \in D ,  k\in K : t\in T^{\mathbf{z}}_k.
-\label{constraint-f3}
-\end{equation}
+and Figure \ref{recovery}(b) depicts the backup allocation pre-computed for a failure of link DC2$\to$DC4.
+%and the result will be put into practice when link DC2 $\to$ DC4 failure is detected.
+
+However, service providers have to refund credits to users if their bandwidth availability targets according the agreed SLAs are violated (see $\S$\ref{background}), both for users affected \textit{directly} by the failure and for users \textit{collaterally} affected by the recovery procedure. 
+Our failure recovery scheme takes this economic factor into account in the way as follows.
 
 
-Let $L_e^{ \mathbf{z}}$ denote whether link $e$ is available under scenario $ \mathbf{z}$.
-The total bandwidth should be smaller than capacity for each available link, i.e.,  
 
 \begin{figure}[t]
 \centering
-\subfigure[Original TE allocation]{
+\subfigure[Original allocation]{
 \includegraphics[width=0.23\textwidth]{fig/recovery-1.pdf}}
 \subfigure[Backup allocation]{
 \includegraphics[width=0.23\textwidth]{fig/recovery-2.pdf}}
-\caption{There are two services from DC1 to DC4 and link capacity is 1 everywhere. (a) shows the original TE allocation. (b) shows the backup allocation result when assuming link DC2 $\to$ DC4 is broken.  }
+%\caption{There are two services from DC1 to DC4 and link capacity is 1 everywhere. (a) shows the original TE allocation. (b) shows the backup allocation result when assuming link DC2 $\to$ DC4 is broken.  }
+\caption{Pre-compute Backup allocation for link failure on DC2$\to$DC4}
 \label{recovery}
 \end{figure}
 %\begin{equation}
@@ -1337,40 +1333,51 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 %\end{aligned}
 %\end{equation}
 
-
-
-\begin{small}
-\begin{eqnarray} \label{B-constraint}
-\sum_{d\in \hat{D}}\sum_{k\in K:t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times L_e^{ \mathbf{z}}
-\end{eqnarray}
-\end{small}
-
-The revenue return for $i$ over node pair $k$ can be described:
+For a given network scenario $ \mathbf{z}$ (where one link failure occurs) in consideration, 
+%let
+%$f^{\mathbf{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \mathbf{z}}_k$, where 
+%$T^ { \mathbf{z}}_k$ denote the set of surviving tunnels for the s-d pair $k$ under scenario $ \mathbf{z}$.
+the ration of allocated bandwidth to a user's demanded bandwidth is \footnote{This is the same as equation (3), but we omit the superscript $\mathbf{z}$ of $R_{dk}^\mathbf{z}$.}
 \begin{small}
 \begin{eqnarray} \label{B-return}
-R_{dk}=\frac{\sum_{t\in T^{ \mathbf{z}}_k} f^{t}_{d}}{\mathbf{b}^k_d}, \forall  d \in \hat{D},  k \in K
+R_{dk}}=\frac{\sum_{t\in T_k f^{t}_{d} v_t^{\mathbf{z}}} {\mathbf{b}^k_d}, \quad \forall  d \in \hat{D},  k \in K
 \end{eqnarray}
 \end{small}
 
+If for every $k$, $R_{dk}$ is larger than its demand (i.e., $R_{dk} \ge 1$), 
+then there is no problem since the demanded availability is still satisfied. 
+However, if any $R_{dk}$ falls below 1, then the corresponding SLA will be violated. 
+For simplicity, here we assume a simple pricing and refunding model, 
+where the charge for serving a user demand $d$ is $g_d$, and if the SLA is violated, 
+a fraction $\mu_d$ of $g_d$ will be refunded. 
+We use $r_d$ denote the profit of demand $d$ with rufunding, such that
 
-If the allocated bandwidth  of BA demand $d$ between each node pair is larger than its need (i.e., $R_{dk} \ge 1, \forall d \in  \hat{D}$), the profit unit is 1, 
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
-otherwise, there is a refunding, which can be derived from SLA and we use $\mu_{d}$ to denote its profit fraction after refunding.
-Then, the profit of $d$ is:
 
-
-
-\begin{equation}
-\forall  d \in \hat{D} : h_d=
+\begin{equation*}
+r_d=
 \begin{cases}
-1 &\text{$\forall k \in K: R_{dk} \ge 1 $}\\
-\mu_{d} &\text{Otherwise}
+g_d &\text{$\forall k \in K: R_{dk} \ge 1 $}\\
+\(1-mu_{d})g_d &\text{Otherwise}
 \end{cases}
 \label{availability222}
+\end{equation*}
+
+We use an auxiliary integer variable $y_d \in \{0, 1\}$ to denote the violation condition, 
+where $y_d=1$ means no violation. 
+Then the profit $r_d$ can be rewritten as 
+\begin{equation}
+\label{A-SSS2}
+\begin{array}{rclr}
+y_d &\in &\{0,1\} &{\forall d \in \hat{D}} \\
+r_d & = & g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
+R_{dk}& < & M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
+R_{dk}& \ge &  y_d, &{\forall d \in \hat{D},  k\in K}
+\end{array}
 \end{equation}
+where $M$ is a constant large enough (e.g., at least larger than the upper bound of $R_{dk}$).
 
-It is a step function and we can change it to the following linear format :
-
+\iffalse
 \begin{equation}
 \begin{cases}
 h_d=y_d+\mu_{d}*(1-y_d),&{\forall d \in \hat{D}.} \\
@@ -1380,38 +1387,55 @@ y_d \in\{0,1\},&{\forall d \in \hat{D}.} \\
 \end{cases}
 \label{A-SSS2}
 \end{equation}
+\fi
 
-Where $M$ is a big integer that is at least larger than the upper bound of $R_{dk}$.
-Let $w_d$ denote the profit of demand $d$ when its availability target can be satisfied.
-The goal of failure recovery is to maximize profits of all the admitted demands, and we can give the problem formulation finally:
+Besides, the bandwidth allocation result $f_t^d$ should be nonnegative
+and limited by the available network capacity. 
+Let $w_e^{ \mathbf{z}}$ denote whether link $e$ is available under scenario $ \mathbf{z}$, 
+then we have 
+\begin{equation}
+f^{t}_{d} \ge 0, \quad\forall d \in \hat{D} ,  k\in K,  t\in T^{\mathbf{z}}_k.
+\label{constraint-f3}
+\end{equation}
+and 
+\begin{small}
+\begin{eqnarray} \label{B-constraint}
+\sum_{d\in \hat{D}}\sum_{k\in K, t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times w_e^{ \mathbf{z}}, \forall e \in E
+\end{eqnarray}
+\end{small}
+
+Finally, the failure recovery scheme tries to maximize the total profit (after refunding) by 
 
 \begin{equation}
 \small
 \begin{aligned} \label{BATE-recovery}
- &maximize  \sum_{d\in \hat{D}} w_d\times h_d\\
+ &maximize  \sum_{d\in \hat{D}} r_d\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t.  (\ref{constraint-f3}), (\ref{B-constraint}), (\ref{B-return}), (\ref{A-SSS2})
 \end{array}
 \end{aligned}
 \end{equation}
 
+This mixed-integer linear programming  (MILP) problem can be proved to be NP-hard, 
+and the proof details can be found in Appendix \ref{appendix1}.
+To efficiently solve this problem, we further propose a 2-approximation greedy algorithm.
+The key idea is to prioritize demands by the ratio of profit to the allocated bandwidth in a non-decreasing order.
+Due to space limitations, the detailed algorithm, as well as the proof on its optimality, 
+are put into Appendix \ref{B}}.
 
-The auxiliary output variables $y_d$ are chosen from \{0,1\},  so that the  failure recovery problem is a 0-1 Mixed-integer linear programming.
-
+\iffalse
 \begin{lemma}\label{NP-hard}
 The failure recovery problem is NP-hard.
 \end{lemma}
 The detailed proof can be found in Appendix \ref{appendix1}.
 
-
-
-As the failure recovery problem is NP-hard and one important question is \textit{can we develop an efficient algorithm to solve it in polynomial time?} 
 %For the second challenge, although the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can derive the solution, it might be too slow to converge before next TE scheduling epoch.
 In this case,  we propose a greedy algorithm to attain an approximate solution whose pseudocode is shown in Appendix \ref{B}.
 The key idea of the greedy algorithm is to give priority to demands in non-decreasing order by the ratio of profit to its efficient bandwidth demands.
 \textit{We also prove the approximation of the greedy algorithm is 2  in Appendix \ref{B}}. 
 %The greedy algorithm can solve $\mathsf{BATE}$  problem in  $O(|J||Z||T_k||E|)$ time.
 %We further explore the accuracy of greedy algorithm in Section \ref{evaluation}.
+\false
 
 
 
@@ -3156,7 +3180,7 @@ However, it achieves this at the cost of performance loss, which is proven as fo
 %Analyzing the performance loss is not focus of this paper and we just take a special case, in which links/nodes are available and $\mu(f_{jtk})=0,\forall j \in J, k\in K: t\in T_k$, as the example and deploy it under a simple network $G(V,E)=\{v_1,v_2, e\}$ with only one link to perform the analysis.
 %The following lemma proves the upper approximation bound of the special case.
 \begin{lemma}\label{greedy-app}
-The approximation of Algorithm \ref{greedy} is 2.
+Algorithm \ref{greedy} achieves 2-approximation for the MILP problem in failure recovery.
 \end{lemma}
 
 \begin{proof}
