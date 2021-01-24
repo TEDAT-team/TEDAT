@@ -882,7 +882,6 @@ $ T'_k=T'_k \setminus t$;\\
  $s_d=s_d*p_t$;\\
  $b_{d}^k = b_{d}^k- f_{d}^t;$\\
   $c_t= c_t- f_{d}^t;$\\
-  \textit{Update remaining link capacity} ;\\
 }
 %\For{$t\in T_k$}{
 %   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
@@ -951,8 +950,8 @@ It finds the demand which has the smallest product of bandwidth target and avail
 and tries to allocate bandwidth for each of its s-d pairs one by one. 
 If the remaining network capacity cannot satisfy this demand, we will give up (line 4-5). 
 Otherwise, it allocates tunnel bandwidth for this demand, where a tunnel with a smaller product of 
-remaining capacity and availability has a higher priority (line 7-14). 
-After this, if the availability target cannot be roughly satisfied, we will give up  (line 15-16), 
+remaining capacity and availability has a higher priority (line 7-13). 
+After this, if the availability target cannot be roughly satisfied, we will give up  (line 14-15), 
 otherwise, we go for the next iteration.
 
 The time complexity of Algorithm \ref{greedy-1} is $O(|D|*|K|*max(|T_k|))$. 
