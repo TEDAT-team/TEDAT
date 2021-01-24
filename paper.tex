@@ -1631,10 +1631,10 @@ Flow table just maps the packet based on the destination and the group tables co
 
 \section{Evaluation} \label{evaluation}
 In this section, we use a small testbed and larger scale trace driven simulations  to evaluate the performance of $\mathsf{BATE}$. 
-On the testbed, we also implement two TE algorithms, i.e., FFC \cite{FFC} and TEAVAR \cite{Teavar}. 
-For simulation, we implement more algorithms, including xxx. 
+On the testbed, we also implement another two state-of-the-art TE algorithms considering network availability, i.e., FFC \cite{FFC} and TEAVAR \cite{Teavar}. 
+For simulation, we implement more TE algorithms, including xxx. 
 All codes for our implementation and evaluation will be published, 
-so that interested readers can use them in other environments or make further improvements. 
+so that interested readers can use them in their own environments or make further improvements. 
 
 Our main results are as follows:
 
@@ -1685,7 +1685,7 @@ We also deploy our controller and brokers on extra VMs.
 The network agent module in each broker uses Floodlight \cite{floodlight} to control the vSwitch, 
 while the latter monitors link status and reports any failure to the former.
 If not stated otherwise, we use 4 shortest paths between each source-destination pair as the tunnels in TE algorithms.
- 
+
 %Each VM has a demand and the it varies with a period of 3-minutes pattern just as \cite{swan}.  
 %The importance of services are randomly chosen from \{1,2,3,4,5\} 
 %All services have the same level of importance and availability targets of services are from the SLAs of Azure \cite{azure}.
@@ -1759,7 +1759,7 @@ If not stated otherwise, we use 4 shortest paths between each source-destination
 
 
 
-\subsubsection{A public cloud example}
+\textbf{A public cloud example}
 We firstly evaluate a public cloud case.
 Assume tenants arrive at the public cloud under poisson process with mean arrival rate 2 every minute and the duration of each bandwidth demand is under exponential distribution with a mean of 5 minutes.
 Bandwidth demands between each node pair are under uniform distribution between 10Mbps and 50Mbps.
