@@ -3131,13 +3131,13 @@ $\bm{break}$;
 
 
  In this part, we will introduce a greedy algorithm, shown in Algorithm \ref{greedy}, to solve failure recovery problem.
- Let $F$ denote the set that BA demand set that derive full profit.
-Firstly, it sorts all the accepted demands  $d\in \hat{D}$ in non-decreasing order according to the ratio of weight to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}\mathbf{b}^k_d}$ (Line 1).
-The ordered sequence guarantees demands that have large profit but small bandwidth deriving high priority.
-For each admitted demand, the algorithm tries to allocate resource it with remaining network capacity (Line 6-10).
-If the network is able to support it, then add to $F$.
-If the network is unable to support current demand but  current demand has more profit than the total profit of previous ones,  the algorithm will try to recycle total resources and test that if allocating total network resources can support current demand  (Line 13-17).
-If this is true, then algorithm will prefer current demand  (Line13-17), otherwise, the algorithm finishes the iteration (Line 18-19).
+ Let $F$ denote the BA demands set that derive full profit (i.e. $h_d=1$).
+Firstly, it sorts all the accepted demands  $d\in \hat{D}$ in non-decreasing order according to the ratio of demand profit to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}\mathbf{b}^k_d}$ (Line 1).
+The ordered sequence prefers demands that have large profit and  small bandwidth.
+The algorithm then loops all the ordered admitted demands and tries to allocate resources with remaining network capacity (Line 5-9).
+If the network is able to support current demand, then add to $F$ (Line 7).
+If the network is unable to support current demand  but  it has larger profit than the total profit of previous ones in $F$,  the algorithm will try to recycle total resources that are allocated to $F$ and test that if allocating total network resources can support current demand  (Line 12-16).
+If this is true, then algorithm will prefer current demand, otherwise, the algorithm finishes the iteration (Line 17-18).
 %\begin{equation}
 %\begin{aligned} \label{LP}
 %\begin{array}{r@{\quad}r@{}l@{\quad}l}
