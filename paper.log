@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  24 JAN 2021 23:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  24 JAN 2021 23:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2010,46 +2010,40 @@ File: fig/evaluation/testbed-data-loss-2.pdf Graphic file (type pdf)
 Package pdftex.def Info: fig/evaluation/testbed-data-loss-2.pdf  used on input 
 line 1617.
 (pdftex.def)             Requested size: 121.51358pt x 81.43576pt.
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 1684.
-
-Overfull \hbox (4.34683pt too wide) in paragraph at lines 1684--1714
- \T1/LinuxBiolinumT-TLF/m/it/10 (-20) 5.1.1 Testbed setup.[] \T1/LinuxLibertine
-T-TLF/m/n/10 (-20) We build a small testbed with 6 servers
- []
-
-
-Underfull \vbox (badness 6157) has occurred while \output is active []
-
  [8.8 <./fig/inter-DC-WAN-V3.pdf> <./fig/testbed.pdf>]
 <fig/evaluation/test.pdf, id=706, 704.6325pt x 487.8225pt>
 File: fig/evaluation/test.pdf Graphic file (type pdf)
 <use fig/evaluation/test.pdf>
-Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1746.
+Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1749.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
 <fig/evaluation/link-failures.pdf, id=707, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-failures.pdf Graphic file (type pdf)
 <use fig/evaluation/link-failures.pdf>
 Package pdftex.def Info: fig/evaluation/link-failures.pdf  used on input line 1
-748.
+751.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
 <fig/evaluation/data-loss.pdf, id=708, 671.50874pt x 481.8pt>
 File: fig/evaluation/data-loss.pdf Graphic file (type pdf)
 <use fig/evaluation/data-loss.pdf>
-Package pdftex.def Info: fig/evaluation/data-loss.pdf  used on input line 1756.
+Package pdftex.def Info: fig/evaluation/data-loss.pdf  used on input line 1759.
 
 (pdftex.def)             Requested size: 121.51358pt x 87.18341pt.
 <fig/evaluation/fake-failure.pdf, id=709, 706.64pt x 508.90125pt>
 File: fig/evaluation/fake-failure.pdf Graphic file (type pdf)
 <use fig/evaluation/fake-failure.pdf>
 Package pdftex.def Info: fig/evaluation/fake-failure.pdf  used on input line 17
-60.
+63.
 (pdftex.def)             Requested size: 121.51358pt x 87.50601pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1836.
+(Font)              scaled to size 7.0pt on input line 1839.
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 1882.
+
+Underfull \vbox (badness 1348) has occurred while \output is active []
+
  [9.9 <./fig/evaluation/testbed-admit.pdf> <./fig/evaluation/testbed-public-2.p
 df
 
@@ -2067,43 +2061,40 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/testbed-dat
 a-loss-2.pdf): PDF inclusion: multiple pdfs with page group included in a singl
 e page
 >]
-<fig/evaluation/sim-admit.pdf, id=804, 703.62875pt x 486.81876pt>
+<fig/evaluation/sim-admit.pdf, id=801, 703.62875pt x 486.81876pt>
 File: fig/evaluation/sim-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-admit.pdf>
-Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 1968.
+Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 1971.
 
 (pdftex.def)             Requested size: 121.51358pt x 84.06546pt.
-<fig/evaluation/att.pdf, id=805, 704.6325pt x 487.8225pt>
+<fig/evaluation/att.pdf, id=802, 704.6325pt x 487.8225pt>
 File: fig/evaluation/att.pdf Graphic file (type pdf)
 <use fig/evaluation/att.pdf>
-Package pdftex.def Info: fig/evaluation/att.pdf  used on input line 1970.
+Package pdftex.def Info: fig/evaluation/att.pdf  used on input line 1973.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/cernet3.pdf, id=806, 704.6325pt x 487.8225pt>
+<fig/evaluation/cernet3.pdf, id=803, 704.6325pt x 487.8225pt>
 File: fig/evaluation/cernet3.pdf Graphic file (type pdf)
 <use fig/evaluation/cernet3.pdf>
-Package pdftex.def Info: fig/evaluation/cernet3.pdf  used on input line 1972.
+Package pdftex.def Info: fig/evaluation/cernet3.pdf  used on input line 1975.
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/sim-monney.pdf, id=807, 704.6325pt x 487.8225pt>
+<fig/evaluation/sim-monney.pdf, id=804, 704.6325pt x 487.8225pt>
 File: fig/evaluation/sim-monney.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-monney.pdf>
-Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 1974
+Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 1977
 .
 (pdftex.def)             Requested size: 121.51358pt x 84.11969pt.
-<fig/evaluation/link-utilization.pdf, id=808, 704.6325pt x 487.8225pt>
+<fig/evaluation/link-utilization.pdf, id=805, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-utilization.pdf Graphic file (type pdf)
 <use fig/evaluation/link-utilization.pdf>
 Package pdftex.def Info: fig/evaluation/link-utilization.pdf  used on input lin
-e 1984.
+e 1987.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/admission-control-time.pdf, id=809, 703.62875pt x 483.8075pt>
+<fig/evaluation/admission-control-time.pdf, id=806, 703.62875pt x 483.8075pt>
 File: fig/evaluation/admission-control-time.pdf Graphic file (type pdf)
 <use fig/evaluation/admission-control-time.pdf>
 Package pdftex.def Info: fig/evaluation/admission-control-time.pdf  used on inp
-ut line 1986.
+ut line 1989.
 (pdftex.def)             Requested size: 116.44568pt x 80.06102pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 Underfull \vbox (badness 1314) has occurred while \output is active []
 
@@ -2121,41 +2112,41 @@ df): PDF inclusion: multiple pdfs with page group included in a single page
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/fake-failur
 e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<fig/evaluation/error.pdf, id=906, 704.6325pt x 487.8225pt>
+<fig/evaluation/error.pdf, id=904, 704.6325pt x 487.8225pt>
 File: fig/evaluation/error.pdf Graphic file (type pdf)
 <use fig/evaluation/error.pdf>
-Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2279.
+Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2282.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/optimization_time.pdf, id=907, 703.62875pt x 486.81876pt>
+<fig/evaluation/optimization_time.pdf, id=905, 703.62875pt x 486.81876pt>
 File: fig/evaluation/optimization_time.pdf Graphic file (type pdf)
 <use fig/evaluation/optimization_time.pdf>
 Package pdftex.def Info: fig/evaluation/optimization_time.pdf  used on input li
-ne 2281.
+ne 2284.
 (pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
 
 
-LaTeX Warning: Reference `pruning' on page 11 undefined on input line 2288.
+LaTeX Warning: Reference `pruning' on page 11 undefined on input line 2291.
 
-<fig/evaluation/routing.pdf, id=912, 703.62875pt x 486.81876pt>
+<fig/evaluation/routing.pdf, id=910, 703.62875pt x 486.81876pt>
 File: fig/evaluation/routing.pdf Graphic file (type pdf)
 <use fig/evaluation/routing.pdf>
-Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2310.
+Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2313.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
-<fig/evaluation/approximation.pdf, id=913, 703.62875pt x 486.81876pt>
+<fig/evaluation/approximation.pdf, id=911, 703.62875pt x 486.81876pt>
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-316.
-(pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
-File: fig/evaluation/approximation.pdf Graphic file (type pdf)
-<use fig/evaluation/approximation.pdf>
-Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-322.
+319.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-328.
+325.
+(pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
+File: fig/evaluation/approximation.pdf Graphic file (type pdf)
+<use fig/evaluation/approximation.pdf>
+Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
+331.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 [11.11 <./fig/evaluation/sim-admit.pdf> <./fig/evaluation/att.pdf
 
@@ -2192,7 +2183,7 @@ page
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (1.96614pt too wide) in paragraph at lines 2520--2528
+Overfull \hbox (1.96614pt too wide) in paragraph at lines 2523--2531
 []\T1/LinuxLibertineT-TLF/b/n/10 Bandwidth guar-an-tee. \T1/LinuxLibertineT-TLF
 /m/n/10 (-20) Up still now, many ex-ist-ing works
  []
@@ -2204,7 +2195,7 @@ LaTeX Warning: Overwriting file `./paper.bib'.
 
 
 LaTeX Warning: Writing text ` ' before \end{filecontents}
-               as last line of paper.bib on input line 2837.
+               as last line of paper.bib on input line 2840.
 
 
 (./paper.bbl
@@ -2235,10 +2226,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ) [14.14]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 2981.
+LaTeX Font Warning: Command \small invalid in math mode on input line 2984.
 
 
-Overfull \hbox (14.60666pt too wide) in paragraph at lines 3016--3022
+Overfull \hbox (14.60666pt too wide) in paragraph at lines 3019--3025
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) undi-rected graph $\OML/nxlmi/m/it/10 G \U
 /ntxmia/m/it/10 = \LMS/ntxsy/m/n/10 ¹\OML/nxlmi/m/it/10 V; E\LMS/ntxsy/m/n/10 º
 $ \T1/LinuxLibertineT-TLF/m/n/10 (-20) and a set of $\OML/nxlmi/m/it/10 k$ \T1/
@@ -2252,15 +2243,15 @@ LinuxLibertineT-TLF/m/n/10 (-20) pairs: $\OML/nxlmi/m/it/10 s[]t[]; s[]t[]; :::
 Underfull \vbox (badness 2932) has occurred while \output is active []
 
  [16.16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3245.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3245.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3248.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3248.
 
 (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3245.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3245.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3248.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3248.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: E64206133E2320F01E0FAD39D3E745B2;3651.
+(rerunfilecheck)             Checksum: CB1037986A4EAF2995DF773EF6542DCD;3760.
 
 
 LaTeX Warning: There were undefined references.
@@ -2270,11 +2261,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 31243 strings out of 492985
- 545362 string characters out of 6132585
- 638482 words of memory out of 5000000
+ 31237 strings out of 492985
+ 545220 string characters out of 6132585
+ 639523 words of memory out of 5000000
  33087 multiletter control sequences out of 15000+600000
- 375373 words of font info for 764 fonts, out of 8000000 for 9000
+ 374825 words of font info for 761 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  60i,23n,94p,1770b,740s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
@@ -2307,10 +2298,10 @@ dist/fonts/type1/public/txfonts/txsya.pfb></usr/local/texlive/2016/texmf-dist/f
 onts/type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
 e1/public/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlzi.pfb>
-Output written on paper.pdf (16 pages, 1142599 bytes).
+Output written on paper.pdf (16 pages, 1141921 bytes).
 PDF statistics:
- 1408 PDF objects out of 1440 (max. 8388607)
- 1217 compressed objects within 13 object streams
- 208 named destinations out of 1000 (max. 500000)
+ 1406 PDF objects out of 1440 (max. 8388607)
+ 1215 compressed objects within 13 object streams
+ 206 named destinations out of 1000 (max. 500000)
  90435 words of extra memory for PDF output out of 106986 (max. 10000000)
 
