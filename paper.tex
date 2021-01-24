@@ -1381,15 +1381,27 @@ We use an auxiliary integer variable $y_d \in \{0, 1\}$ to denote the violation 
 where $y_d=1$ means no violation. 
 Then the profit $r_d$ can be rewritten as 
 
+%\begin{equation}
+%\label{A-SSS2}
+%y_d \in \{0,1\} &{\forall d \in \hat{D}} \\
+%r_d  =  g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
+%R_{dk} <  M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
+%R_{dk} \ge   y_d &{\forall d \in \hat{D},  k\in K}
+%\end{equation}
+
 \begin{equation}
 \label{A-SSS2}
-\begin{cases}
-y_d \in \{0,1\} &{\forall d \in \hat{D}} \\
-r_d  =  g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
-R_{dk} <  M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
-R_{dk} \ge   y_d &{\forall d \in \hat{D},  k\in K}
-\end{cases}
+\begin{split}
+&y_d \in \{0,1\}, \quad  \forall d \in \hat{D}\\
+&r_d  =  g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big), \quad {\forall d \in \hat{D}}\\
+&R_{dk} <  M\times y_d+1-y_d ,\quad{\forall d \in \hat{D},  k\in K} \\
+&R_{dk} \ge   y_d,\quad {\forall d \in \hat{D},  k\in K}
+\end{split}
 \end{equation}
+  
+ 
+
+
 
 where $M$ is a constant large enough (e.g., at least larger than the upper bound of $R_{dk}$).
 
@@ -1416,7 +1428,7 @@ f^{t}_{d} \ge 0, \quad\forall d \in \hat{D} ,  k\in K,  t\in T_k.
 and 
 \begin{small}
 \begin{eqnarray} \label{B-constraint}
-\sum_{d\in \hat{D}}\sum_{k\in K, t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times w_e^{ \mathbf{z}}, \forall e \in E
+\sum_{d\in \hat{D}}\sum_{k\in K, t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times w_e^{ \mathbf{z}}, \quad \forall e \in E
 \end{eqnarray}
 \end{small}
 
@@ -1427,7 +1439,7 @@ Finally, the failure recovery scheme tries to maximize the total profit (after r
 \begin{aligned} \label{BATE-recovery}
  &maximize  \sum_{d\in \hat{D}} r_d\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
-s.t.  (\ref{constraint-f3}), (\ref{B-constraint}), (\ref{B-return}), (\ref{A-SSS2})
+s.t.  (\ref{B-return}), (\ref{A-SSS2}), (\ref{constraint-f3}), (\ref{B-constraint})
 \end{array}
 \end{aligned}
 \end{equation}
