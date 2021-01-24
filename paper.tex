@@ -1614,21 +1614,24 @@ Flow table just maps the packet based on the destination and the group tables co
 %\end{description}
 
 \section{Evaluation} \label{evaluation}
-In this section, we evaluate the performance of $\mathsf{BATE}$  in both real trace driven simulation and testbed.
-Our main results are as follows.
+In this section, we use a small testbed and larger scale trace driven simulations  to evaluate the performance of $\mathsf{BATE}$. 
+On the testbed, we also implement two TE algorithms, i.e., FFC \cite{FFC} and TEAVAR \cite{Teavar}. 
+For simulation, we implement more algorithms, including xxx. 
+All codes for our implementation and evaluation will be published, 
+so that interested readers can use them in other environments or make further improvements. 
+
+Our main results are as follows:
 
 %We begin by describing the experimental framework ($\S$ \ref{setting}). 
 %We show the performance of $\mathsf{BATE}$ through answering the following specific questions:
-(1)  The admission control of $\mathsf{BATE}$ can achieve a reasonable tradeoff. $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of 5\% higher rejection ratio. 
-
 %compared with the latest TE schemes like FFC and TEAVAR, BATE can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
-(2) $\mathsf{BATE}$ has consistent performance under various topologies and traffic.
-Compared with the state-of-the-art traffic engineering algorithms, $\mathsf{BATE}$ is able to make  40\% more bandwidth demands meet availability SLAs.
+(1) $\mathsf{BATE}$ consistently ourperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, up to 40\% more bandwidth availability demands can be successfully fulfilled, and 30\% more profit can be retained when failures occur.
 
-(3) $\mathsf{BATE}$ can retain 30\% more profit when network fails.
-
-(4)  $\mathsf{BATE}$ is fast and accuracy.
-The average error of traffic scheduling is within 8\% and the profit loss of greedy algorithm is less than 10\%. 
+(2) $\mathsf{BATE}$ achieves a good tradeoff between efficiency and optimality. 
+Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of only 5\% higher rejection ratio, 
+(ii) our pruning-augmented scheduling algorithm runs xx$\times$ faster with only 6\% waste of total bandwidth and 8\% loss in the overall availability, 
+and (iii) our greedy failure recovery algorithm needs xx$\times$ less time to react, 
+where the achieved profit decreases by less than 10\%.
 
 % \begin{itemize}
 %  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
@@ -1652,27 +1655,27 @@ The average error of traffic scheduling is within 8\% and the profit loss of gre
 
 
 \subsection{Testbed evaluation}\label{testbed-evaluation}
-\subsubsection{Testbed setup}
-We build a small testbed with 6 servers to emulate an inter-DC WAN with 6 DCs as in Figure \ref{testbed}.
-Each server equips with 4 Intel Xeon E5-2620 CPUs, 64GB memory and 4 Ethernet NICs, and runs Centos 7 64-bit version with Linux 4.15.6 kernel \cite{Kermel}.
-Each inter-DC WAN link is emulated using 1Gbps physical link.
-We use 4-shortest path to decide tunnel set of each node pair.
-Controller locates in DC1 and runs the software defined networking framework.
-We add 100ms delay to emulate the WAN environment.
-We start 21 VMs (1 vCPU, 2GB memory, 100GB disk) in each server, where 20 VMs are used to emulate the hosts and 1 VM runs as the broker.
-Each VM belongs to only one customer and will send  \textit{iperf} UDP flows with specified rates to other DCs.
+\textbf{Testbed setup}
+We build a small testbed with 6 servers to emulate an inter-DC WAN connecting 6 DCs, as shown in Figure \ref{testbed}. 
+The inter-DC links run at 1Gbps, and we add 100ms delay on each link to emulate a WAN environment.
+Each server is equipped with 4 Intel Xeon E5-2620 CPUs, 64GB memory and 4 Ethernet NICs, 
+and on each server we start 20 VMs, which are all connected to an Open vSwitch \cite{openvswitch}.
+The VMs run CentOS 7 and use Linux v4.15.6 kernel \cite{Kermel} with our rate limiting module plugged in. 
+%We start 21 VMs (1 vCPU, 2GB memory, 100GB disk) in each server, where 20 VMs are used to emulate the hosts and 1 VM runs as the broker.
+Every second, we emulate link failures by shutting down the corresponding VM interfaces 
+under the failure probabilities shown in Fig. \ref{testbed}, 
+and bring them online after 3 seconds. 
+We also deploy our controller and brokers on extra VMs. 
+The network agent module in each broker uses Floodlight \cite{floodlight} to control the vSwitch, 
+while the latter monitors link status and reports any failure to the former.
+If not stated otherwise, we use 4 shortest paths between each source-destination pair as the tunnels in TE algorithms.
+ 
 %Each VM has a demand and the it varies with a period of 3-minutes pattern just as \cite{swan}.  
 %The importance of services are randomly chosen from \{1,2,3,4,5\} 
 %All services have the same level of importance and availability targets of services are from the SLAs of Azure \cite{azure}.
-The network agent in broker runs Floodlight \cite{floodlight} as the OpenFlow controller.
-In each data center, all hosts and  NICs connect to an Open vSwitch \cite{openvswitch}.
-We start an extra VM in DC1 as the controller. 
-%CPU, memory and disk are not the bottleneck in our experiments.
-All switches run link liveness detection protocol, and they report any failures to brokers.
-Every second, we randomly generate an integer $p$ between 0 and 10000 for each link.
-If  $p/10000$ is smaller than the failure threshold shown in Figure \ref{testbed}, we disable the network interface to emulate link failure.
-Then after 3 seconds, we enable the network interface to emulate link repair.
-We also evaluate FFC \cite{FFC} and TEAVAR \cite{Teavar} to make comparisons.
+
+
+
 %We mainly care about the following metrics:
 %(1) Availability.  Bandwidth-based availability is measured as the time qualification ratio. A second is regarded as qualified if the gap between total measured bandwidth and bandwidth demand is less than 1\%;
 %(2) Data loss ratio. We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio;
@@ -2981,7 +2984,7 @@ This completes the proof.
 \end{proof}
 
 
-\section{Proof of NP-hardness} \label{appendix1}
+\section{Proof of NP-hardness in Failure Recovery} \label{appendix1}
 
  
 \begin{proof}
