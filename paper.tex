@@ -675,6 +675,7 @@ $p_{\mathbf{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\
 \hline
 $v_t^{\mathbf{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenario $\mathbf{z}$}\\
  \hline
+  $L_e^{ \mathbf{z}}$ &\multicolumn{6}{|l}{whether link $e$ is available under scenario $ \mathbf{z}$}\\
 % $\{1,\beta_j^1,\beta_j^2....\}$ &\multicolumn{6}{|l}{The availability target list for service $j$}\\
 %  \hline
 % $\{1,\alpha_j^1,\alpha_j^2...\}$ &\multicolumn{6}{|l}{The profit list for service $j$}\\
@@ -881,6 +882,7 @@ $ T'_k=T'_k \setminus t$;\\
  $s_d=s_d*p_t$;\\
  $b_{d}^k = b_{d}^k- f_{d}^t;$\\
   $c_t= c_t- f_{d}^t;$\\
+  \textit{Update remaining link capacity} ;\\
 }
 %\For{$t\in T_k$}{
 %   $f_{d}^t=Allocation(t, \mathbf{b}^k_d)$;\\
@@ -949,8 +951,8 @@ It finds the demand which has the smallest product of bandwidth target and avail
 and tries to allocate bandwidth for each of its s-d pairs one by one. 
 If the remaining network capacity cannot satisfy this demand, we will give up (line 4-5). 
 Otherwise, it allocates tunnel bandwidth for this demand, where a tunnel with a smaller product of 
-remaining capacity and availability has a higher priority (line 7-13). 
-After this, if the availability target cannot be roughly satisfied, we will give up  (line 14-15), 
+remaining capacity and availability has a higher priority (line 7-14). 
+After this, if the availability target cannot be roughly satisfied, we will give up  (line 15-16), 
 otherwise, we go for the next iteration.
 
 The time complexity of Algorithm \ref{greedy-1} is $O(|D|*|K|*max(|T_k|))$. 
@@ -1196,7 +1198,7 @@ under the above constraints, i.e.,
 \begin{aligned} \label{BATE-TE}
 &minimize \sum_{d \in \hat{D}, k \in K, t \in T_k} f_d^t  \\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
-s.t. (\ref{constraint-f2}), (\ref{constraint-e2}), (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved})
+s.t.  (\ref{Smaller}), (\ref{R2}), (\ref{B2}), (\ref{Achieved}), (\ref{constraint-f2}), (\ref{constraint-e2})
 %\begin{cases}
 % \sum_{d \in \hat{D}}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
 %R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in \hat{D}, \mathbf{z}\in \mathbf{z},  k \in K$.}\\
@@ -1306,7 +1308,7 @@ f^{t}_{d} \ge 0, \quad\forall d \in D ,  k\in K : t\in T^{\mathbf{z}}_k.
 \end{equation}
 
 
-Let $A_e^{ \mathbf{z}}$ denote whether link $e$ is available under scenario $ \mathbf{z}$.
+Let $L_e^{ \mathbf{z}}$ denote whether link $e$ is available under scenario $ \mathbf{z}$.
 The total bandwidth should be smaller than capacity for each available link, i.e.,  
 
 \begin{figure}[t]
@@ -1340,7 +1342,7 @@ The total bandwidth should be smaller than capacity for each available link, i.e
 
 \begin{small}
 \begin{eqnarray} \label{B-constraint}
-\sum_{d\in \hat{D}}\sum_{k\in K:t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times A_e^{ \mathbf{z}}
+\sum_{d\in \hat{D}}\sum_{k\in K:t\in T^{ \mathbf{z}}_k} f^{t}_{d}u_t^e \le c_e \times L_e^{ \mathbf{z}}
 \end{eqnarray}
 \end{small}
 
