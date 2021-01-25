@@ -2110,12 +2110,14 @@ The arrivals of BA demands follow a Poisson process, with a mean inter-arrival t
 The duration of each demand follows an exponential distribution, and the mean duration corresponds to 1000 time slots.
 The required bandwidth in each user demand is randomly drawn from the traffic metrices (we have collected 200 matrices for each topology) with a proper scale down factor (we use 5), so that between each source-destination pair, multiple users can be served simultaneously. 
 The required availability in each user demand is drawn from 10 different SLAs of Azure\cite{azure}.
-In addition to FFC and TEAVAR, the TE algorithms we compare in simulations also include 
-SWAN \cite{swan}, SMORE \cite{SMORE} and B4 \cite{B4}. 
+In our simulations, besides FFC and TEAVAR, we also compare against several other TE algorithms,  
+including SWAN \cite{swan}, SMORE \cite{SMORE} and B4 \cite{B4}. 
+They have not explicitly considered availability, but pay attention to 
+total throughput, link utilization or user fairness. 
+These TE algorithms will be activated every 10 time slots.
 We assume at most one link failure (i.e., no concurrent failures) in FFC,  
 use 99.9\% (the maximum value in the user demands) as the default availability target in TEAVAR,
 and let SWAN maximize the total throughput of all users. 
-These TE algorithms will be activated every 10 time slots.
 With the above settings, each simulation lasts 150,000 slots (corresponding to 100 days if each slot represents 1 minute), and the results that achieved by each algorithm on each topology are calculated on 5 independent simulations with different workload traces. 
 
 
