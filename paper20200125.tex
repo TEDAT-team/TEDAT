@@ -103,7 +103,7 @@ aims for \textit{bandwidth availability} (BA) provision, where a service level a
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
 The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
 They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of only a xx\% false rejections. 
+Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30 $\times$ at the expense of only a 5\% higher rejection ratio. 
 On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
 %.
 % $\mathsf{BATE}$ can 
@@ -294,7 +294,7 @@ we implement $\mathsf{BATE}$ as a real system, including a centralized controlle
  We conduct extensive experiments using a small testbed as well as trace driven large scale simulations (see $\S$\ref{evaluation}).
 We compare  $\mathsf{BATE}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
 Our evaluation demonstrates that $\mathsf{BATE}$ can 
-(1) speed up the online admission control by 30$\times $ at the expense of a false rejection ratio that is only around xx\%;
+(1) speed up the online admission control by 30 $\times $ at the expense of a rejection ratio that is only 5\% higher than the optimal strategy;
 (2) meet the bandwidth availability SLAs for 40\% more demands;
 (3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
 To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
@@ -753,10 +753,10 @@ Let $Z$ denote the network scenario set, %and $p_{\mathbf{z}}$ is the probabilit
 %Each link is up with the probability of $p_i$. \cite{Teavar}
 %Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
 then the expected probability that a network scenario  $\mathbf{z} \in Z$ will happen is given by \cite{Teavar} 
-\begin{eqnarray*} \label{state}
+\begin{eqnarray} \label{state}
 %p_{\mathbf{z}}&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
 p_{\mathbf{z}}&=&\prod_{i=1}^{|E|}\big(\mathbf{z}_i \times (1-x_i)+ (1-\mathbf{z}_i) \times x_i\big)
-\end{eqnarray*}
+\end{eqnarray}
 
 %\textbf{To be updated, follow Fig.1 }
 Use the simple Inter-DC WAN topology in Figure \ref{motivatio_fig} as an example, where $E=\{e_1,e_2,e_3,e_4\}$.
@@ -1145,15 +1145,13 @@ We model this as a linear programming problem, which maximizes the overall avail
 
 For an s-d pair $k$ of BA demand $d$, we use $R_{dk}^{\mathbf{z}}$ to denote the ratio of the effective bandwidth under network scenario $\mathbf{z}$ to the demanded bandwidth, which is defined as:
  \begin{eqnarray} \label{R2}
-R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in \hat{D}, k \in K, \mathbf{z}\in Z
+R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in \hat{D}, k \in K, \mathbf{z}\in Z.
 \end{eqnarray}
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
 %$R_{dk}^{\mathbf{z}}$ describes the allocation return under network scenario $\mathbf{z}$.
 Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
-\[
-\mathbf{z} \propto <d, \{f_d^t\}> \quad \Leftrightarrow \quad \forall k, R_{dk}^{\mathbf{z}} \ge 1
-\] 
+$\mathbf{z} \propto <d, \{f_d^t\}> \quad \Leftrightarrow \quad \forall k, R_{dk}^{\mathbf{z}} \ge 1$. 
 %If for every source-destination pair $k$, the total reserved bandwidth through all available tunnels is larger than $\mathbf{b}^k_d$, then the bandwidth demand can still be satisfied, and network scenario $\mathbf{z}$ can be regarded as \textit{qualified}, i.e., 
 %$R_{dk}^{\mathbf{z}} \ge 1, \forall k \in K$.
 To meet the availability target, we should guarantee the total probability of the qualified scenarios 
@@ -1182,13 +1180,13 @@ under network scenario  $\mathbf{z}$, which is set to be no smaller than the ava
 
 Besides, the bandwidth allocation result $f_{d}^t$ should be non-negative and limited by the network capacity, i.e.,
 \begin{equation}
-f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K,   t\in T_{k}
+f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K,   t\in T_{k}.
 \label{constraint-f2}
 \end{equation}
 %Then total traffic through link $e$ should not be larger than its capacity $c_e$:
 and
 \begin{equation}
- \sum_{d \in \hat{D}}\ \sum_{k\in K, t\in T_{k}}f_{d}^tu_t^e \le c_e, \quad \forall e \in E
+ \sum_{d \in \hat{D}}\ \sum_{k\in K, t\in T_{k}}f_{d}^tu_t^e \le c_e, \quad \forall e \in E.
 \label{constraint-e2}
 \end{equation}
 
@@ -1335,12 +1333,11 @@ Our failure recovery scheme takes this economic factor into account in the way a
 %\end{aligned}
 %\end{equation}
 
-For a specific network scenario $ \mathbf{z}$ (where one link failure occurs) in consideration, 
+For a given network scenario $ \mathbf{z}$ (where one link failure occurs) in consideration, 
 %let
 %$f^{\mathbf{z}}_{ikt}$ denote bandwidth of $i$ over tunnel $t\in T^{ \mathbf{z}}_k$, where 
 %$T^ { \mathbf{z}}_k$ denote the set of surviving tunnels for the s-d pair $k$ under scenario $ \mathbf{z}$.
-the ratio of allocated bandwidth to a user's demanded bandwidth is 
-\footnote{This is the same as equation (\ref{R2}), but we omit the superscript $\mathbf{z}$ of $R_{dk}^\mathbf{z}$.}
+the ration of allocated bandwidth to a user's demanded bandwidth is \footnote{This is the same as equation (3), but we omit the superscript $\mathbf{z}$ of $R_{dk}^\mathbf{z}$.}
 
 \begin{small}
 \begin{eqnarray} \label{B-return}
@@ -1356,18 +1353,18 @@ However, if any $R_{dk}$ falls below 1, then the corresponding SLA will be viola
 For simplicity, here we assume a simple pricing and refunding model, 
 where the charge for serving a user demand $d$ is $g_d$, and if the SLA is violated, 
 a fraction $\mu_d$ of $g_d$ will be refunded. 
-We use $r_d$ to denote the profit of demand $d$ with refunding, such that
+We use $r_d$ denote the profit of demand $d$ with refunding, such that
 
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
 
-\begin{equation*}
+\begin{equation}
 r_d=
 \begin{cases}
-g_d &\text{if $R_{dk} \ge 1$ for every $k \in K$}\\
+g_d &\text{$\forall k \in K: R_{dk} \ge 1$ }\\
 (1-\mu_{d})g_d &\text{Otherwise}
 \end{cases}
 \label{availability222}
-\end{equation*}
+\end{equation}
 
 %\begin{equation}
 %A_d^{\mathbf{z}}=
@@ -1392,7 +1389,6 @@ Then the profit $r_d$ can be rewritten as
 %R_{dk} \ge   y_d &{\forall d \in \hat{D},  k\in K}
 %\end{equation}
 
-\iffalse
 \begin{equation}
 \label{A-SSS2}
 \begin{split}
@@ -1402,16 +1398,11 @@ Then the profit $r_d$ can be rewritten as
 &R_{dk} \ge   y_d,\quad {\forall d \in \hat{D},  k\in K}
 \end{split}
 \end{equation}
-\fi
-\begin{equation}
-\label{A-SSS2}
-\begin{array}{rcll}
-y_d &\in &\{0,1\} &{\forall d \in \hat{D}} \\
-r_d & = & g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
-R_{dk}& < & M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
-R_{dk}& \ge &  y_d, &{\forall d \in \hat{D},  k\in K}
-\end{array}
-\end{equation}
+  
+ 
+
+
+
 where $M$ is a constant large enough (e.g., at least larger than the upper bound of $R_{dk}$).
 
 \iffalse
@@ -1453,7 +1444,7 @@ s.t.  (\ref{B-return}), (\ref{A-SSS2}), (\ref{constraint-f3}), (\ref{B-constrain
 \end{aligned}
 \end{equation}
 
-The above mixed-integer linear programming  (MILP) problem can be proved to be NP-hard, 
+This mixed-integer linear programming  (MILP) problem can be proved to be NP-hard, 
 and the proof details can be found in Appendix \ref{appendix1}.
 To efficiently solve this problem, we further propose a 2-approximation greedy algorithm.
 The key idea is to prioritize demands by the ratio of profit to the allocated bandwidth in a non-decreasing order.
@@ -1665,10 +1656,10 @@ Our main results are as follows:
 (1) $\mathsf{BATE}$ consistently ourperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, up to 40\% more bandwidth availability demands can be successfully fulfilled, and 30\% more profit can be retained when failures occur.
 
 (2) $\mathsf{BATE}$ achieves a good tradeoff between efficiency and optimality. 
-Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of only xx\% false rejections, 
-(ii) our pruning-augmented scheduling algorithm runs xx$\times$ faster while wasting only 6\% total bandwidth and losing only 8\% overall availability, 
-and (iii) our greedy failure recovery algorithm can reduce the reaction time by xx$\times$, 
-where the profit loss is below 10\%.
+Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of only 5\% higher rejection ratio, 
+(ii) our pruning-augmented scheduling algorithm runs xx$\times$ faster with only 6\% waste of total bandwidth and 8\% loss in the overall availability, 
+and (iii) our greedy failure recovery algorithm needs xx$\times$ less time to react, 
+where the achieved profit decreases by less than 10\%.
 
 % \begin{itemize}
 %  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
@@ -1693,7 +1684,7 @@ where the profit loss is below 10\%.
 
 \subsection{Testbed evaluation}\label{testbed-evaluation}
 \textbf{Testbed setup}
-We build a testbed with 6 servers to emulate a small inter-DC WAN connecting 6 DCs, as shown in Figure \ref{testbed}. 
+We build a small testbed with 6 servers to emulate an inter-DC WAN connecting 6 DCs, as shown in Figure \ref{testbed}. 
 The inter-DC links run at 1Gbps, and we add 100ms delay on each link to emulate a WAN environment.
 Each server is equipped with 4 Intel Xeon E5-2620 CPUs, 64GB memory and 4 Ethernet NICs, 
 and on each server we start 20 VMs, which are all connected to an Open vSwitch \cite{openvswitch}.
@@ -1780,61 +1771,26 @@ If not stated otherwise, we use 4 shortest paths between each source-destination
 
 
 
-\textbf{User demands arrive continuously.}
-We first conduct experiments where user demands are generated from models used 
-in some latest inter-DC traffic scheduling algorithms \cite{Guaranteeings,Online-deadline}. 
-For each source-destination pair, the arrival of user bandwidth demands follows a poisson process, 
-and the demand duration follows an exponential distribution.  
-The mean inter-arrival time we use is 2 miniutes, and the mean duration is 5 minutes. 
-The demanded bandwidth is uniformly distributed between 10 Mbps and 50 Mbps.
-The availability targets and refunding ratio are chosen from the Azure SLAs \cite{azure}, 
-and we assume a unit price is charged for 1 Mbps. 
-Each experiment lasts 100 minutes, where link failures occur probabilistically, 
-and is repeated for 50 times.
-
+\textbf{A public cloud example}
+We firstly evaluate a public cloud case.
+Assume tenants arrive at the public cloud under poisson process with mean arrival rate 2 every minute and the duration of each bandwidth demand is under exponential distribution with a mean of 5 minutes.
+Bandwidth demands between each node pair are under uniform distribution between 10Mbps and 50Mbps.
+Every 1Mbps is sold 1$\$$.
 %The profit of each tenant (i.e., $w_i$) is proportional to his/her total bandwidth demand.
-%Each experiment lasts 100 minutes and is repeated 20 times, where the error bars paints the maximal, minimal and mean value.
-\textit{Admission control.} We evaluate how demands can be correctly admitted by $\mathsf{BATE}$, 
-comparing with both the optimal admission strategy, 
-and a strategy that assumes a \textit{fixed} bandwith allocation for demands that have already been admitted, which is effectively step (1) in $\mathsf{BATE}$.
-Figure \ref{e2}(a) demonstrates that $\mathsf{BATE}$ performs closely to the optimal strategy, 
-i.e., the false rejection ratio is at most 1\%, while the \textit{fixed} algorithm 
-rejects least 10$\times$ more admissible demands. 
-%This is because $\mathsf{BATE}$ fully considers the availability diversity of tenants.
-%In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
+Availability targets and refunding ratio are randomly chosen from Azure SLAs \cite{azure}.
+Each experiment lasts 100 minutes and is repeated 20 times, where the error bars paints the maximal, minimal and mean value.
 
-\textit{Traffic scheduling.} We evaluate, once a user demand is admitted, 
-how often its bandwith availability requirement can be guaranteed. 
-Since we emulate different link failures according to their probabilities in every second, 
-we can measure how the bandwidth a user actually uses deviates from its requirement. 
-If such a deviation is less than 1\%, we regard the bandwidth availability as \textit{satisfied in that second}. Figure \ref{e2}(b) shows the overall fraction of satisfication, under 
-different levels of availability requirements (i.e., 95\%, 99\% and 99.99\%). 
-We note that, FFC-fixed (or TEAVAR-fixed) in the figure represents applying FFC (or TEAVAR) 
-only to demands admitted by the fixed admission control strategy, 
-where the total bandwidth required for the admitted demands will be much lower. 
-$\mathsf{BATE}$ always achieves the highest availability, even compared with FFC-fixed and TEAVAR-fixed. 
-In particular, it has a clear advantage for high availability requirements (e.g., >99.99\%). 
-To further illustrate the difference in their mechanisms, 
-we plot in Figure \ref{e2}(c), for each algorithm, the ratio of the allocated bandwidth 
-to the demanded bandwidth. 
-The cdf curve shows that FFC is too conservative in bandwidth allocation, 
-which failes to allocate proper bandwidth in almost 60\% time.   
-On the other hand, although TEAVAR provides bandwidth fairly well, 
-it ignores the diverse availability requirements of different users, 
-and achieves a lower satisfication ratio than $\mathsf{BATE}$. 
-
-\textit{Failure Recovery} We evaluate when failures do occur and cause SLA violations, 
-how profit loss can be mitigated by our failure recovery scheme.
-Figure \ref{e2}(d) plots the overall profit $\mathsf{BATE}$, FFC and TEAVAR can achieve for admitted demands, under three different admission control strategies, i.e., fixed, AD (which is the strategy $\mathsf{BATE}$ uses) and optimal. 
-\textbf{TBD: This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.}
-Figure \ref{e2}(e) further depicts the fraction of profit loss caused by SLA violations, where the baseline for each algorithm is the profit it can achieve when no failures occur. 
-\textbf{TBD: $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.}
-Compared with TEAVAR, FFC has a lower profit loss ratio due to its conservative bandwidth allocation, as indicated in Figure \ref{e2}(c) earlier. 
-
-\textbf{TBD: We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
+Figure \ref{e2}(a) demonstrates $\mathsf{BATE}$ only performs slightly worse than the optimal solution (about 4\%) and is at least 2 $\times$ better than the \textit{Fixed} admission control.
+This is because $\mathsf{BATE}$ fully considers the availability diversity of tenants.
+In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
+Figure \ref{e2}(b) shows once a tenant's demand is admitted, $\mathsf{BATE}$ can guarantee bandwidth.
+FFC and TEAVAR with \textit{Fixed} admission control perform slightly better than when they are without admission control since many tenants' demands are rejected, but they also perform worse than $\mathsf{BATE}$, because FFC is too conservative and and TEAVAR ignores the diverse demands.
+Figure \ref{e2}(c) shows $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.
+This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.
+We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
 Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{BATE}$ performs about 8\% worse than FFC.
 FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
-while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
+while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
 %, where  FFC-1 and FFC-2 
 %denote FFC with and without Fixed admission control,  respectively.
 %where TEAVAR-1 and TEAVAR-2 are 
@@ -1876,7 +1832,7 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
 %Our traffic engineering optimization framework uses Gurobi LP solver\cite{gurobi} to solve the optimization problems.
 
 
-\textbf{A private cloud example}
+\subsubsection{A private cloud example}\label{testbedresults}
 
 %In this part we will perform experiments on our testbed to evaluate the performance of  $\mathsf{BATE}$.
  \begin{table}
@@ -2011,43 +1967,26 @@ CERNET2&14&32\\
 %\includegraphics[width=0.7\textwidth]{fig/evaluation/legend.pdf}
 %\end{tabular}
 %\vfill
-\subfigure[Rejection percentage]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/sim-admit.pdf}}
-\subfigure[Link utilization]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/link-utilization.pdf}}
-\subfigure[Admission time]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/admission-control-time.pdf}}
-\caption{$\mathsf{BATE}$  vs. Fixed admission control under different network topologies.}
+\subfigure[IBM]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-admit.pdf}}
+\subfigure[B4 ]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/att.pdf}}
+\subfigure[ATT]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/cernet3.pdf}}
+\subfigure[Cernet]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-monney.pdf}}
+\caption{$\mathsf{BATE}$  vs. various schemes under different network topologies.}
 \label{availability_fig1}
 \end{figure*}
-
-
-%\begin{figure*}[t]
-%\centering
-%%\begin{tabular}{c}
-%%\includegraphics[width=0.7\textwidth]{fig/evaluation/legend.pdf}
-%%\end{tabular}
-%%\vfill
-%\subfigure[IBM]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-admit.pdf}}
-%\subfigure[B4 ]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/att.pdf}}
-%\subfigure[ATT]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/cernet3.pdf}}
-%\subfigure[Cernet]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-monney.pdf}}
-%\caption{$\mathsf{BATE}$  vs. various schemes under different network topologies.}
-%\label{availability_fig1}
-%\end{figure*}
 
 
 
 \begin{figure}
 \centering
 \subfigure[Link utilization]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/att.pdf}}
+\includegraphics[width=0.23\textwidth]{fig/evaluation/link-utilization.pdf}}
 \subfigure[Admission time]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/cernet3.pdf}}
+\includegraphics[width=0.23\textwidth]{fig/evaluation/admission-control-time.pdf}}
 \caption{Scalability of admission control.}
 \label{admission-benefit}
 \end{figure}
@@ -2162,7 +2101,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %We randomly assign weights to services within \{1,2,3,4,5\}with uniform distribution, which is similar to \cite{hanzhang}.
 % $\mu(f_{jtk})=\sum_{k\in K, t \in T_k}f_{jtk}/d_j, \forall j \in J$ in our experiments.
 %Default  profit is 1 when availability is achieved, otherwise, the profit is $\mu(R_j)=0.01\times R_j$.
-We consider 10 availability targets, which are chosen from the SLAs of Azure \cite{azure}.
+We consider 10 availability targets, whose value are from the SLAs of Azure \cite{azure}.
 
 
 \textbf{Workload.} 
@@ -2330,13 +2269,7 @@ To closely mimic the real traffic, bandwidth of each BA demand is randomly chose
 %(1) Availability satisfaction fraction. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
-Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept up to 50\% more demands than the \textit{Fixed} consistently.
-Figure \ref{availability_fig1}(b) demonstrates  $\mathsf{BATE}$ is able to maintain at least 10\% higher link utilization than \textit{Fixed} algorithm.
-We qualify the scalability by measuring the admission control time for each demand.
-The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
-As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution.
-
-
+Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept about 50\% more demands than the \textit{Fixed} consistently.
 Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
 %We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
 The sum of scenario probability where demand is fully satisfied reflects the \textit{achieved availability}.
@@ -2358,6 +2291,28 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
 \caption{Impact of pruning for traffic scheduling.}
 \label{availability_fig3}
 \end{figure}
+We qualify the scalability by measuring the admission control time for each demand.
+The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
+As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution under ATT topology.
+Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
+%Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
+%Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
+%We can see that even with small cutoff threshold, more than 97\% probability are included.
+% In Section \ref{solutions}, we show how to derive the solutions for WAPM problem.
+% The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
+%In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
+%Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
+Let $\mathsf{BATE}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
+Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
+Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
+We can see the error is less than 8\% even the current link failure number is 1.
+Traditionally, TE should update the network state every 5-10 minutes.
+% and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{BATE}$ problem, it might be too slow.
+Figure \ref{availability_fig3} (b) shows the time when solving it with Gurobi \cite{gurobi} on the server (4-core, 2.60GHz processor with 32GB ).
+We can see that even on a large network (e.g., ATT topology), at most  15 seconds are needed when current link failure numbers are 2, which is fast enough in reality.
+%We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
+%While the bruce force algorithm is more than 1000 minutes for each topology and we don't paint them in the picture.
+%We can see the result is fast enough to deploy in practice.
 \begin{figure*} 
    \begin{minipage}[t]{0.24\linewidth} 
     \centering 
@@ -2385,27 +2340,6 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
   \end{minipage}
   
 \end{figure*}
-
-
-Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
-%Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
-%Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
-%We can see that even with small cutoff threshold, more than 97\% probability are included.
-% In Section \ref{solutions}, we show how to derive the solutions for WAPM problem.
-% The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
-%In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
-%Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
-Let $\mathsf{BATE}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
-Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
-Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
-We can see the error is less than 8\% even the current link failure number is 1.
-Traditionally, TE should update the network state every 5-10 minutes.
-% and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{BATE}$ problem, it might be too slow.
-Figure \ref{availability_fig3} (b) shows the time when solving it with Gurobi \cite{gurobi} on the server (4-core, 2.60GHz processor with 32GB ).
-We can see that even on a large network (e.g., ATT topology), at most  15 seconds are needed when current link failure numbers are 2, which is fast enough in reality.
-%We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
-%While the bruce force algorithm is more than 1000 minutes for each topology and we don't paint them in the picture.
-%We can see the result is fast enough to deploy in practice.
 
 So far, we use K-shortest path as the default tunnel selection scheme.
 There are also other tunnel selection schemes, e.g., edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}.
@@ -3098,8 +3032,7 @@ This completes the proof.
 
  
 \begin{proof}
-The all-or-nothing multi-commodity flow problem, which is known to be NP-hard\cite{inproceedings2}, 
-can be regarded as a special case of our failure recovery problem (\ref{BATE-recovery}).
+The failure recovery problem contains the all-or-nothing multi-commodity flow problem as a special case, which is known as an NP-hard problem\cite{inproceedings2}.
 Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
 where each pair $s_it_i$ corresponds to a commodity flow to be sent from the source node $s_i$ to the destination node $t_i$ with demand $d_i$.
 Let $\mathcal{P}_i$ denote the path set for pair $s_it_i$.

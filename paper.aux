@@ -86,7 +86,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}$\mathsf  {BATE}$ framework}{4}{section.3}}
 \newlabel{HATE}{{3}{4}{$\mathsf {BATE}$ framework}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Abstraction of bandwidth availability}{4}{subsection.3.1}}
-\newlabel{state}{{1}{4}{Abstraction of bandwidth availability}{equation.3.1}{}}
+\newlabel{state}{{1}{4}{Abstraction of bandwidth availability}{}{}}
 \citation{inproceedings2}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Admission control}{5}{subsection.3.2}}
 \newlabel{admission_control}{{3.2}{5}{Admission control}{subsection.3.2}{}}
@@ -97,13 +97,13 @@
 \newlabel{NP-222}{{1}{6}{}{theorem.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Traffic scheduling}{6}{subsection.3.3}}
 \newlabel{TE}{{3.3}{6}{Traffic scheduling}{subsection.3.3}{}}
-\newlabel{Smaller}{{2}{6}{Traffic scheduling}{equation.3.2}{}}
-\newlabel{R2}{{3}{6}{Traffic scheduling}{equation.3.3}{}}
-\newlabel{B2}{{4}{6}{Traffic scheduling}{equation.3.4}{}}
-\newlabel{Achieved}{{5}{6}{Traffic scheduling}{equation.3.5}{}}
-\newlabel{constraint-f2}{{6}{6}{Traffic scheduling}{equation.3.6}{}}
-\newlabel{constraint-e2}{{7}{6}{Traffic scheduling}{equation.3.7}{}}
-\newlabel{BATE-TE}{{8}{6}{Traffic scheduling}{equation.3.8}{}}
+\newlabel{Smaller}{{1}{6}{Traffic scheduling}{equation.3.1}{}}
+\newlabel{R2}{{2}{6}{Traffic scheduling}{equation.3.2}{}}
+\newlabel{B2}{{3}{6}{Traffic scheduling}{equation.3.3}{}}
+\newlabel{Achieved}{{4}{6}{Traffic scheduling}{equation.3.4}{}}
+\newlabel{constraint-f2}{{5}{6}{Traffic scheduling}{equation.3.5}{}}
+\newlabel{constraint-e2}{{6}{6}{Traffic scheduling}{equation.3.6}{}}
+\newlabel{BATE-TE}{{7}{6}{Traffic scheduling}{equation.3.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Failure recovery}{6}{subsection.3.4}}
 \newlabel{backup}{{3.4}{6}{Failure recovery}{subsection.3.4}{}}
 \citation{SMORE}
@@ -116,12 +116,12 @@
 \newlabel{recovery}{{2}{7}{Pre-compute Backup allocation for link failure on DC2$\to $DC4\relax }{figure.caption.7}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Original allocation}}}{7}{figure.caption.7}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Backup allocation}}}{7}{figure.caption.7}}
-\newlabel{B-return}{{9}{7}{Failure recovery}{equation.3.9}{}}
-\newlabel{availability222}{{10}{7}{Failure recovery}{equation.3.10}{}}
-\newlabel{A-SSS2}{{11}{7}{Failure recovery}{equation.3.11}{}}
-\newlabel{constraint-f3}{{12}{7}{Failure recovery}{equation.3.12}{}}
-\newlabel{B-constraint}{{13}{7}{Failure recovery}{equation.3.13}{}}
-\newlabel{BATE-recovery}{{14}{7}{Failure recovery}{equation.3.14}{}}
+\newlabel{B-return}{{8}{7}{Failure recovery}{equation.3.8}{}}
+\newlabel{availability222}{{3.4}{7}{Failure recovery}{equation.3.8}{}}
+\newlabel{A-SSS2}{{9}{7}{Failure recovery}{equation.3.9}{}}
+\newlabel{constraint-f3}{{10}{7}{Failure recovery}{equation.3.10}{}}
+\newlabel{B-constraint}{{11}{7}{Failure recovery}{equation.3.11}{}}
+\newlabel{BATE-recovery}{{12}{7}{Failure recovery}{equation.3.12}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}system implementation}{7}{section.4}}
 \newlabel{system}{{4}{7}{system implementation}{section.4}{}}
 \citation{floodlight}
@@ -137,6 +137,7 @@
 \citation{openvswitch}
 \citation{Kermel}
 \citation{floodlight}
+\citation{Guaranteeings,Online-deadline}
 \citation{azure}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.\relax }}{9}{figure.caption.10}}
 \newlabel{e2}{{5}{9}{A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.\relax }{figure.caption.10}{}}
@@ -146,8 +147,14 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Data loss ratio}}}{9}{figure.caption.10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Testbed evaluation}{9}{subsection.5.1}}
 \newlabel{testbed-evaluation}{{5.1}{9}{Testbed evaluation}{subsection.5.1}{}}
-\newlabel{testbedresults}{{5.1.1}{9}{A private cloud example}{subsubsection.5.1.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}A private cloud example}{9}{table.caption.12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A private cloud example: we deploy three services whose details are shown in Table \ref  {testbed-1}.\relax }}{10}{figure.caption.11}}
+\newlabel{e1}{{6}{10}{A private cloud example: we deploy three services whose details are shown in Table \ref {testbed-1}.\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Bandwidth-based availability}}}{10}{figure.caption.11}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Link failures}}}{10}{figure.caption.11}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Data loss ratio}}}{10}{figure.caption.11}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Events after L3 failure}}}{10}{figure.caption.11}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Scheduled results of different schemes.\relax }}{10}{table.caption.12}}
+\newlabel{testbed-1}{{3}{10}{Scheduled results of different schemes.\relax }{table.caption.12}{}}
 \citation{B4}
 \citation{Teavar}
 \citation{SMORE}
@@ -164,17 +171,6 @@
 \citation{swan}
 \citation{B4}
 \citation{azure}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A private cloud example: we deploy three services whose details are shown in Table \ref  {testbed-1}.\relax }}{10}{figure.caption.11}}
-\newlabel{e1}{{6}{10}{A private cloud example: we deploy three services whose details are shown in Table \ref {testbed-1}.\relax }{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Bandwidth-based availability}}}{10}{figure.caption.11}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Link failures}}}{10}{figure.caption.11}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Data loss ratio}}}{10}{figure.caption.11}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Events after L3 failure}}}{10}{figure.caption.11}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Scheduled results of different schemes.\relax }}{10}{table.caption.12}}
-\newlabel{testbed-1}{{3}{10}{Scheduled results of different schemes.\relax }{table.caption.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Network topologies used in the simulations\relax }}{10}{table.caption.13}}
-\newlabel{evaluation-topologies}{{4}{10}{Network topologies used in the simulations\relax }{table.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Simulation evaluation}{10}{subsection.5.2}}
 \citation{OWAN,Guaranteeings,Online-deadline,Teavar}
 \citation{Guaranteeings,Online-deadline}
 \citation{Guaranteeings}
@@ -183,22 +179,11 @@
 \citation{gurobi}
 \citation{Bruno2013Dynamic}
 \citation{SMORE}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces $\mathsf  {BATE}$ vs. various schemes under different network topologies.\relax }}{11}{figure.caption.14}}
-\newlabel{availability_fig1}{{7}{11}{$\mathsf {BATE}$ vs. various schemes under different network topologies.\relax }{figure.caption.14}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {IBM}}}{11}{figure.caption.14}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {B4 }}}{11}{figure.caption.14}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {ATT}}}{11}{figure.caption.14}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Cernet}}}{11}{figure.caption.14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Scalability of admission control.\relax }}{11}{figure.caption.15}}
-\newlabel{admission-benefit}{{8}{11}{Scalability of admission control.\relax }{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Link utilization}}}{11}{figure.caption.15}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Admission time}}}{11}{figure.caption.15}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Network topologies used in the simulations\relax }}{11}{table.caption.13}}
+\newlabel{evaluation-topologies}{{4}{11}{Network topologies used in the simulations\relax }{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Simulation evaluation}{11}{subsection.5.2}}
 \newlabel{scales}{{5.2.1}{11}{Performance under real network topologies}{subsubsection.5.2.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Performance under real network topologies}{11}{subsubsection.5.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Impact of pruning for traffic scheduling.\relax }}{11}{figure.caption.16}}
-\newlabel{availability_fig3}{{9}{11}{Impact of pruning for traffic scheduling.\relax }{figure.caption.16}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Cutoff error}}}{11}{figure.caption.16}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Optimization time}}}{11}{figure.caption.16}}
 \citation{OSPF}
 \citation{MATE,Tightrope}
 \citation{swan}
@@ -222,6 +207,21 @@
 \citation{Guaranteeings}
 \citation{appdriven}
 \citation{EyeQ}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces $\mathsf  {BATE}$ vs. Fixed admission control under different network topologies.\relax }}{12}{figure.caption.14}}
+\newlabel{availability_fig1}{{7}{12}{$\mathsf {BATE}$ vs. Fixed admission control under different network topologies.\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Rejection percentage}}}{12}{figure.caption.14}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Link utilization}}}{12}{figure.caption.14}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Admission time}}}{12}{figure.caption.14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Scalability of admission control.\relax }}{12}{figure.caption.15}}
+\newlabel{admission-benefit}{{8}{12}{Scalability of admission control.\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Link utilization}}}{12}{figure.caption.15}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Admission time}}}{12}{figure.caption.15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Impact of pruning for traffic scheduling.\relax }}{12}{figure.caption.16}}
+\newlabel{availability_fig3}{{9}{12}{Impact of pruning for traffic scheduling.\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Cutoff error}}}{12}{figure.caption.16}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Optimization time}}}{12}{figure.caption.16}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Related work}{12}{section.6}}
+\newlabel{relate}{{6}{12}{Related work}{section.6}{}}
 \bibstyle{ACM-Reference-Format}
 \bibdata{paper}
 \bibcite{alibaba2}{{1}{2020a}{{{Aliababa}}}{{{Aliababa}}}}
@@ -229,18 +229,6 @@
 \bibcite{riskbased}{{3}{2019}{{Alipourfard et~al\unhbox \voidb@x \hbox {.}}}{{Alipourfard, Gao, Koenig, Harshaw, Vahdat, and Yu}}}
 \bibcite{amazon}{{4}{2019}{{{Amazon}}}{{{Amazon}}}}
 \bibcite{amazon3}{{5}{2020a}{{{Amazon}}}{{{Amazon}}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Routings.\relax }}{12}{figure.caption.17}}
-\newlabel{routing-version}{{10}{12}{Routings.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Approximation.\relax }}{12}{figure.caption.17}}
-\newlabel{approximation}{{11}{12}{Approximation.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Approximation.\relax }}{12}{figure.caption.17}}
-\newlabel{approximation}{{12}{12}{Approximation.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Approximation.\relax }}{12}{figure.caption.17}}
-\newlabel{approximation}{{13}{12}{Approximation.\relax }{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Related work}{12}{section.6}}
-\newlabel{relate}{{6}{12}{Related work}{section.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion Remarks}{12}{section.7}}
-\@writefile{toc}{\contentsline {section}{References}{12}{section*.19}}
 \bibcite{amazon2}{{6}{2020b}{{{Amazon}}}{{{Amazon}}}}
 \bibcite{aryaka}{{7}{2020}{{{aryaka}}}{{{aryaka}}}}
 \bibcite{azure}{{8}{2020}{{{Azure}}}{{{Azure}}}}
@@ -259,6 +247,16 @@
 \bibcite{publicore}{{21}{2020}{{Harchol et~al\unhbox \voidb@x \hbox {.}}}{{Harchol, Bergemann, Feamster, Friedman, Krishnamurthy, Panda, Ratnasamy, Schapira, and Shenker}}}
 \bibcite{swan}{{22}{2013}{{Hong et~al\unhbox \voidb@x \hbox {.}}}{{Hong, Kandula, Mahajan, Zhang, Gill, Nanduri, and Wattenhofer}}}
 \bibcite{hong2018b4}{{23}{2018}{{Hong et~al\unhbox \voidb@x \hbox {.}}}{{Hong, Mandal, Al-Fares, Zhu, Alimi, B., Bhagat, Jain, Kaimal, Liang, Mendelev, Padgett, Rabe, Ray, Tewari, Tierney, Zahn, Zolla, Ong, and Vahdat}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Routings.\relax }}{13}{figure.caption.17}}
+\newlabel{routing-version}{{10}{13}{Routings.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Approximation.\relax }}{13}{figure.caption.17}}
+\newlabel{approximation}{{11}{13}{Approximation.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Approximation.\relax }}{13}{figure.caption.17}}
+\newlabel{approximation}{{12}{13}{Approximation.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Approximation.\relax }}{13}{figure.caption.17}}
+\newlabel{approximation}{{13}{13}{Approximation.\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion Remarks}{13}{section.7}}
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.19}}
 \bibcite{B4}{{24}{2013}{{Jain et~al\unhbox \voidb@x \hbox {.}}}{{Jain, Kumar, Mandal, Ong, Poutievski, Singh, Venkata, Wanderer, Zhou, Zhu, Zolla, H\"{o}lzle, Stuart, and Vahdat}}}
 \bibcite{dynamic}{{25}{2016}{{Jalaparti et~al\unhbox \voidb@x \hbox {.}}}{{Jalaparti, Bliznets, Kandula, Lucier, and Menache}}}
 \bibcite{EyeQ}{{26}{2013}{{Jeyakumar et~al\unhbox \voidb@x \hbox {.}}}{{Jeyakumar, Alizadeh, Mazi{\`e}res, Prabhakar, Greenberg, and Kim}}}
@@ -289,31 +287,31 @@
 \bibcite{Guaranteeings}{{51}{2015}{{Zhang et~al\unhbox \voidb@x \hbox {.}}}{{Zhang, Chen, Bai, Han, Tian, Wang, Guan, and Zhang}}}
 \bibcite{LPD}{{52}{2015}{{{Zhang} et~al\unhbox \voidb@x \hbox {.}}}{{{Zhang}, {Shi}, {Yin}, {Ren}, and {Wang}}}}
 \citation{inproceedings2}
-\@writefile{toc}{\contentsline {section}{\numberline {A}The Admission Control Problem}{15}{Appendix.1.A}}
-\newlabel{admission_problem}{{A}{15}{The Admission Control Problem}{Appendix.1.A}{}}
-\newlabel{constraint-f}{{15}{15}{The Admission Control Problem}{equation.1.A.15}{}}
-\newlabel{constraint-e}{{16}{15}{The Admission Control Problem}{equation.1.A.16}{}}
-\newlabel{R}{{17}{15}{The Admission Control Problem}{equation.1.A.17}{}}
-\newlabel{CA}{{18}{15}{The Admission Control Problem}{equation.1.A.18}{}}
-\newlabel{A-z2}{{19}{15}{The Admission Control Problem}{equation.1.A.19}{}}
-\newlabel{S}{{20}{15}{The Admission Control Problem}{equation.1.A.20}{}}
-\newlabel{availability4}{{21}{15}{The Admission Control Problem}{equation.1.A.21}{}}
-\newlabel{g-2}{{22}{15}{The Admission Control Problem}{equation.1.A.22}{}}
-\newlabel{P8}{{23}{15}{The Admission Control Problem}{equation.1.A.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Proof of Theorem \ref  {NP-222}}{15}{Appendix.1.B}}
-\newlabel{appendix-proof}{{B}{15}{Proof of Theorem \ref {NP-222}}{Appendix.1.B}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C}Proof of NP-hardness in Failure Recovery}{15}{Appendix.1.C}}
-\newlabel{appendix1}{{C}{15}{Proof of NP-hardness in Failure Recovery}{Appendix.1.C}{}}
-\newlabel{P}{{24}{15}{Proof of NP-hardness in Failure Recovery}{equation.1.C.24}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {D}Greedy algorithm for failure recovery}{16}{Appendix.2.D}}
-\newlabel{B}{{D}{16}{Greedy algorithm for failure recovery}{Appendix.2.D}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Greedy algorithm for failure recovery\relax }}{16}{algocf.2}}
-\newlabel{greedy}{{2}{16}{Greedy algorithm for failure recovery}{algocf.2}{}}
-\newlabel{greedy-app}{{2}{16}{}{theorem.2}{}}
-\newlabel{B-2}{{25}{16}{Greedy algorithm for failure recovery}{equation.2.D.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}The Admission Control Problem}{16}{Appendix.1.A}}
+\newlabel{admission_problem}{{A}{16}{The Admission Control Problem}{Appendix.1.A}{}}
+\newlabel{constraint-f}{{13}{16}{The Admission Control Problem}{equation.1.A.13}{}}
+\newlabel{constraint-e}{{14}{16}{The Admission Control Problem}{equation.1.A.14}{}}
+\newlabel{R}{{15}{16}{The Admission Control Problem}{equation.1.A.15}{}}
+\newlabel{CA}{{16}{16}{The Admission Control Problem}{equation.1.A.16}{}}
+\newlabel{A-z2}{{17}{16}{The Admission Control Problem}{equation.1.A.17}{}}
+\newlabel{S}{{18}{16}{The Admission Control Problem}{equation.1.A.18}{}}
+\newlabel{availability4}{{19}{16}{The Admission Control Problem}{equation.1.A.19}{}}
+\newlabel{g-2}{{20}{16}{The Admission Control Problem}{equation.1.A.20}{}}
+\newlabel{P8}{{21}{16}{The Admission Control Problem}{equation.1.A.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Proof of Theorem \ref  {NP-222}}{16}{Appendix.1.B}}
+\newlabel{appendix-proof}{{B}{16}{Proof of Theorem \ref {NP-222}}{Appendix.1.B}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Proof of NP-hardness in Failure Recovery}{16}{Appendix.1.C}}
+\newlabel{appendix1}{{C}{16}{Proof of NP-hardness in Failure Recovery}{Appendix.1.C}{}}
+\newlabel{P}{{22}{16}{Proof of NP-hardness in Failure Recovery}{equation.1.C.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Greedy algorithm for failure recovery}{17}{Appendix.2.D}}
+\newlabel{B}{{D}{17}{Greedy algorithm for failure recovery}{Appendix.2.D}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Greedy algorithm for failure recovery\relax }}{17}{algocf.2}}
+\newlabel{greedy}{{2}{17}{Greedy algorithm for failure recovery}{algocf.2}{}}
+\newlabel{greedy-app}{{2}{17}{}{theorem.2}{}}
+\newlabel{B-2}{{23}{17}{Greedy algorithm for failure recovery}{equation.2.D.23}{}}
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
 \newlabel{tocindent1}{7.01pt}
 \newlabel{tocindent2}{11.49998pt}
 \newlabel{tocindent3}{20.22pt}
-\newlabel{TotPages}{{16}{16}{}{page.16}{}}
+\newlabel{TotPages}{{17}{17}{}{page.17}{}}
