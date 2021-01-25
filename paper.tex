@@ -1802,6 +1802,7 @@ i.e., the false rejection ratio is at most 1\%, while the \textit{fixed} algorit
 rejects least 10$\times$ more admissible demands. 
 %This is because $\mathsf{BATE}$ fully considers the availability diversity of tenants.
 %In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
+
 \textit{Traffic scheduling.} We evaluate, once a user demand is admitted, 
 how often its bandwith availability requirement can be guaranteed. 
 Since we emulate different link failures according to their probabilities in every second, 
@@ -1829,7 +1830,6 @@ Figure \ref{e2}(d) plots the overall profit $\mathsf{BATE}$, FFC and TEAVAR can 
 Figure \ref{e2}(e) further depicts the fraction of profit loss caused by SLA violations, where the baseline for each algorithm is the profit it can achieve when no failures occur. 
 \textbf{TBD: $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.}
 Compared with TEAVAR, FFC has a lower profit loss ratio due to its conservative bandwidth allocation, as indicated in Figure \ref{e2}(c) earlier. 
-
 
 \textbf{TBD: We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
 Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{BATE}$ performs about 8\% worse than FFC.
