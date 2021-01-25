@@ -38,6 +38,8 @@ Warning--numpages field, but no articleno or eid field, in video1
 Warning--numpages field, but no articleno or eid field, in bwe
 Warning--numpages field, but no articleno or eid field, in appdriven
 Warning--numpages field, but no articleno or eid field, in FFC
+Warning--empty publisher in Online-deadline
+Warning--empty address in Online-deadline
 Warning--numpages field, but no articleno or eid field, in video2
 Warning--numpages field, but no articleno or eid field, in Stochastic
 Warning--empty publisher in video3
@@ -54,43 +56,43 @@ Warning--empty publisher in LPD
 Warning--empty address in LPD
 You've used 52 entries,
             5795 wiz_defined-function locations,
-            1685 strings with 28054 characters,
-and the built_in function-call counts, 68369 in all, are:
-= -- 7533
-> -- 3034
+            1687 strings with 28192 characters,
+and the built_in function-call counts, 68907 in all, are:
+= -- 7582
+> -- 3066
 < -- 0
-+ -- 1018
-- -- 1251
-* -- 5505
-:= -- 7360
++ -- 1030
+- -- 1259
+* -- 5556
+:= -- 7404
 add.period$ -- 258
 call.type$ -- 52
-change.case$ -- 441
+change.case$ -- 444
 chr.to.int$ -- 49
-cite$ -- 94
-duplicate$ -- 5671
-empty$ -- 3959
-format.name$ -- 1183
-if$ -- 15416
+cite$ -- 96
+duplicate$ -- 5721
+empty$ -- 3990
+format.name$ -- 1195
+if$ -- 15555
 int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 187
-newline$ -- 511
+missing$ -- 192
+newline$ -- 512
 num.names$ -- 413
-pop$ -- 2077
+pop$ -- 2105
 preamble$ -- 1
-purify$ -- 903
+purify$ -- 906
 quote$ -- 0
-skip$ -- 2035
+skip$ -- 2051
 stack$ -- 0
-substring$ -- 5481
-swap$ -- 575
+substring$ -- 5525
+swap$ -- 583
 text.length$ -- 441
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 1444
-warning$ -- 42
-while$ -- 363
+warning$ -- 44
+while$ -- 361
 width$ -- 0
 write$ -- 1066
-(There were 42 warnings)
+(There were 44 warnings)

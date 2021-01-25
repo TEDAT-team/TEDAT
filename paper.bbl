@@ -573,16 +573,6 @@
 \url{https://doi.org/10.1145/2619239.2626326}}
 
 
-\bibitem[\protect\citeauthoryear{{Linux}}{{Linux}}{2020}]%
-        {TCM}
-\bibfield{author}{\bibinfo{person}{{Linux}}.} \bibinfo{year}{2020}\natexlab{}.
-\newblock \bibinfo{title}{Linux Traffic Control}.
-\newblock
-  \bibinfo{howpublished}{\url{https://tldp.org/HOWTO/Traffic-Control-HOWTO/intro.html}}.
-    (\bibinfo{year}{2020}).
-\newblock
-
-
 \bibitem[\protect\citeauthoryear{Liu, Kandula, Mahajan, Zhang, and
   Gelernter}{Liu et~al\mbox{.}}{2014}]%
         {FFC}
@@ -598,6 +588,20 @@
 \showISBNx{9781450328364}
 \showDOI{%
 \url{https://doi.org/10.1145/2619239.2626314}}
+
+
+\bibitem[\protect\citeauthoryear{{Luo}, {Yu}, {Ye}, and {Du}}{{Luo}
+  et~al\mbox{.}}{2018}]%
+        {Online-deadline}
+\bibfield{author}{\bibinfo{person}{L. {Luo}}, \bibinfo{person}{H. {Yu}},
+  \bibinfo{person}{Z. {Ye}}, {and} \bibinfo{person}{X. {Du}}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Online Deadline-Aware Bulk Transfer Over
+  Inter-Datacenter WANs}. In \bibinfo{booktitle}{{\em IEEE INFOCOM 2018 - IEEE
+  Conference on Computer Communications}}. \bibinfo{pages}{630--638}.
+\newblock
+\showDOI{%
+\url{https://doi.org/10.1109/INFOCOM.2018.8485828}}
 
 
 \bibitem[\protect\citeauthoryear{Mao, Netravali, and Alizadeh}{Mao
