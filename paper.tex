@@ -1776,11 +1776,6 @@ If not stated otherwise, we use 4 shortest paths between each source-destination
 \end{figure*}
 
 
-
-
-
-
-\textbf{User demands arrive continuously.}
 We first conduct experiments where user demands are generated from models used 
 in some latest inter-DC traffic scheduling algorithms \cite{Guaranteeings,Online-deadline}. 
 For each source-destination pair, the arrival of user bandwidth demands follows a poisson process, 
@@ -1789,8 +1784,8 @@ The mean inter-arrival time we use is 2 miniutes, and the mean duration is 5 min
 The demanded bandwidth is uniformly distributed between 10 Mbps and 50 Mbps.
 The availability targets and refunding ratio are chosen from the Azure SLAs \cite{azure}, 
 and we assume a unit price is charged for 1 Mbps. 
-Each experiment lasts 100 minutes, where link failures occur probabilistically, 
-and is repeated for 50 times.
+Each experiment lasts 100 minutes and is repeated for 50 times, 
+where link failures occur probabilistically, 
 
 %The profit of each tenant (i.e., $w_i$) is proportional to his/her total bandwidth demand.
 %Each experiment lasts 100 minutes and is repeated 20 times, where the error bars paints the maximal, minimal and mean value.
@@ -1818,14 +1813,14 @@ To further illustrate the difference in their mechanisms,
 we plot in Figure \ref{e2}(c), for each algorithm, the ratio of the allocated bandwidth 
 to the demanded bandwidth. 
 The cdf curve shows that FFC is too conservative in bandwidth allocation, 
-which failes to allocate proper bandwidth in almost 60\% time.   
+and fails to allocate proper bandwidth in almost 60\% time.   
 On the other hand, although TEAVAR provides bandwidth fairly well, 
 it ignores the diverse availability requirements of different users, 
 and achieves a lower satisfication ratio than $\mathsf{BATE}$. 
 
 \textit{Failure Recovery} We evaluate when failures do occur and cause SLA violations, 
 how profit loss can be mitigated by our failure recovery scheme.
-Figure \ref{e2}(d) plots the overall profit $\mathsf{BATE}$, FFC and TEAVAR can achieve for admitted demands, under three different admission control strategies, i.e., fixed, AD (which is the strategy $\mathsf{BATE}$ uses) and optimal. 
+Figure \ref{e2}(d) plots the overall profit $\mathsf{BATE}$, FFC and TEAVAR can achieve for admitted demands, under three different admission control strategies, i.e., fixed, BATE-AD (which is the strategy $\mathsf{BATE}$ uses) and optimal. 
 \textbf{TBD: This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.}
 Figure \ref{e2}(e) further depicts the fraction of profit loss caused by SLA violations, where the baseline for each algorithm is the profit it can achieve when no failures occur. 
 \textbf{TBD: $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.}
@@ -1876,8 +1871,6 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
 %Our traffic engineering optimization framework uses Gurobi LP solver\cite{gurobi} to solve the optimization problems.
 
 
-\textbf{A private cloud example}
-
 %In this part we will perform experiments on our testbed to evaluate the performance of  $\mathsf{BATE}$.
  \begin{table}
 \scriptsize
@@ -1923,21 +1916,36 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
 \hline
 \end{tabular}
 \end{table}
-We now test the performance under a simple private cloud example, where three services are deployed and all admitted.
-Service-1 is from DC1 to DC3, Service-2 is from DC1 to DC4 and Service-3 is from DC1 to DC5.
-Their bandwidth demands are 1000Mbps, 500Mbps and 1500Mbps, respectively.
-Assume the availability targets of Service-1 , Service-2 and Service-3 are  99.5\%, 99.9\% and 95\%, respectively.
-All services last 100s and each experiment repeats 100 times,  where the error bars paints the maximal, minimal and mean value.
-$\mathsf{BATE}$-WT refers $\mathsf{BATE}$ without failure recovery.
 
-Figure \ref{e1}(a) shows the bandwidth-based availability which is measured as the time qualification ratio. A second is regarded as qualified if the gap between total measured bandwidth and bandwidth demand is less than 1\%.
-We can see that all services can reach their availability targets under $\mathsf{BATE}$, while Service-1 fails under FFC and Service-2 fails under both TEAVAR and FFC.
-To explore the reason, we show the scheduled results of the three schemes in TABLE \ref{testbed-1}:  
-(1) FFC reserves too much bandwidth to protect routing and service1 is unable to gain enough bandwidth;
-(2) $\mathsf{BATE}$ abandons link L4 for Service-2, while TEAVAR adopts it.
-According to the link failure times shown in Figure \ref{e1}(b), we can see that most failures are from link L4 in our experiment.
-Although TEAVAR considers link failure probability, it ignores the availability targets of different services.
-Therefore, Service-3 gains redundant bandwidth and affects Service-2 finally.
+Now we use another example with three user demands to illustrate more details of $\mathsf{BATE}$. 
+In our evaluation, we also compare with another scheme named BATE-TE, i.e, the traffic scheduling part of $\mathsf{BATE}$, with its fast failure recovery scheme abandoned. 
+Demand-1 requires 1000Mbps from DC1 to DC3, demand-2 requires  500Mbps from DC1 to DC4, 
+and demand-3 requires 1500Mbps from DC1 to DC5, 
+with their availability target set as 99.5\%, 99.9\% and 95\%, respectively. 
+We start their traffic simultaneously, assuming all of them have been admitted, 
+and their bandwidth on each path, as shown in Table \ref{testbed-1}, 
+is determined by different TE algorithms. 
+The experiment lasts 100s and is repeated by 100 times.
+Figure \ref{e1}(a) shows the fraction of time each bandwidth availability demand is satisfied, 
+using the same method as in Figure \ref{e2}(a), i.e, for each second, 
+a gap of more than 1\% bandwidth means the demand is not satisfied in that slot. 
+It shows that all the three demands can reach their availability targets under $\mathsf{BATE}$,
+while TEAVAR and FFC may fail for some users. 
+With an investigation on the bandwidth allocation result in Table \ref{testbed-1}, 
+we can see that, FFC reserves too much bandwidth for failure recovery, 
+so that demand-1 never gets enough bandwidth (250 Mbps allocated v.s. 1500 Mbps demanded), 
+and its achieved bandwidth availability is always 0. 
+Even it allocates enough bandwidth for demand-2, the achieved bandwidth availability (98.2\%)  
+is still lower than required (99.9\%). 
+On the other hand, TEAVAR does not make a good match between the link failure probability and the availability users ask for. 
+For example, for demand-2, which needs the highest level of availability (99.9\%), 
+TEAVAR still allocates 250 Mbps on link L4, which has the highest failure probability (1\%) 
+\footnote{In Figure \ref{e1}(b), we plot the actual number of failures that occur in the 100 experiments, 
+where L4 fails most frequently.}. 
+On the contrary, $\mathsf{BATE}$ matches demands and links well, and does not use L4 for user-2.
+Another factor we must pay attention into is the 
+
+
 %During L4 failure, service2 is unable to gain enough bandwidth. 
 %and it will take much time for the controller to retrieve from congestion.
 %All links are up under normal circumstances and the probability of this scenario is 98.9\%.
@@ -1947,10 +1955,10 @@ Therefore, Service-3 gains redundant bandwidth and affects Service-2 finally.
 %Figure \ref{e1}(c) shows aggregate bandwidth from DC1 to DC3.
 %We can see SWAN drops about 33\% bandwidth between 0.2s and 1.1s.
 %The result of service1 is similar.
-Data loss mainly comes from congestion and blackhole, where congestion losses are always link oversubscribed and blackhole losses occur during the time between a link fails and ingress switch rescale.
+\textbf{TBD:Data loss mainly comes from congestion and blackhole, where congestion losses are always link oversubscribed and blackhole losses occur during the time between a link fails and ingress switch rescale.
 Figure \ref{e1}(c) demonstrates $\mathsf{BATE}$ and FFC performs better than   $\mathsf{BATE}$-WT  and TEAVAR for data losses ratio.
 Data losses of Service-2 under TEAVAR is high due to Link L4 failings.
-$\mathsf{BATE}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{BATE}$-WT shown in Figure \ref{e1}(d) just prove this.
+$\mathsf{BATE}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{BATE}$-WT shown in Figure \ref{e1}(d) just prove this.}
 %We can see that $\mathsf{BATE}$-1 and FFC performs better than   $\mathsf{BATE}$-2  and TEAVAR.
 %The losses of TEAVAR mainly comes from link $L4$ failure which is adopt by Service-2.
 %When L3 fails, DC1 and DC4 take about 0.4s to detect the failure.
