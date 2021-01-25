@@ -1314,7 +1314,7 @@ Our failure recovery scheme takes this economic factor into account in the way a
 \subfigure[Backup allocation]{
 \includegraphics[width=0.23\textwidth]{fig/recovery-2.pdf}}
 %\caption{There are two services from DC1 to DC4 and link capacity is 1 everywhere. (a) shows the original TE allocation. (b) shows the backup allocation result when assuming link DC2 $\to$ DC4 is broken.  }
-\caption{Pre-compute Backup allocation for link failure on DC2$\to$DC4}
+\caption{Bandwidth allocation for DC2$\to$DC4 failure}
 \label{recovery}
 \end{figure}
 %\begin{equation}
@@ -1514,7 +1514,7 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 \begin{figure}
 \begin{center}
 \includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
-\caption{System architecture of $\mathsf{BATE}$.}
+\caption{System architecture of $\mathsf{BATE}$}
 \label{pic-overview}
 \end{center}
 \end{figure}
@@ -1609,7 +1609,7 @@ Flow table just maps the packet based on the destination and the group tables co
  \begin{figure}
 \begin{center}
 \includegraphics [width=0.8\columnwidth] {fig/testbed.pdf}
-\caption{Testbed topology. Each link has the same capacity 1Gbps but  different failure probability.}
+\caption{Testbed topology with failure probabilities}
 \label{testbed}
 \end{center}
 \end{figure}
@@ -1775,12 +1775,12 @@ If not stated otherwise, we use 4 shortest paths between each source-destination
 \label{e1}
 \end{figure*}
 
-
+\textbf{Evaluations on continuous demand arrivals.}
 We first conduct experiments where user demands are generated from models used 
-in some latest inter-DC traffic scheduling algorithms \cite{Guaranteeings,Online-deadline}. 
+in some latest inter-DC traffic scheduling algorithms \cite{Guaranteeings,Online-deadline,OWAN,Teavar}. 
 For each source-destination pair, the arrival of user bandwidth demands follows a poisson process, 
 and the demand duration follows an exponential distribution.  
-The mean inter-arrival time we use is 2 miniutes, and the mean duration is 5 minutes. 
+The mean inter-arrival time we use is 2 minutes, and the mean duration is 5 minutes. 
 The demanded bandwidth is uniformly distributed between 10 Mbps and 50 Mbps.
 The availability targets and refunding ratio are chosen from the Azure SLAs \cite{azure}, 
 and we assume a unit price is charged for 1 Mbps. 
@@ -1917,6 +1917,7 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
 \end{tabular}
 \end{table}
 
+\textbf{Evaluations on parallel demands.}
 Now we use another example with three user demands to illustrate more details of $\mathsf{BATE}$. 
 In our evaluation, we also compare with another scheme named BATE-TE, i.e, the traffic scheduling part of $\mathsf{BATE}$, with its fast failure recovery scheme abandoned. 
 Demand-1 requires 1000Mbps from DC1 to DC3, demand-2 requires  500Mbps from DC1 to DC4, 
@@ -2008,7 +2009,7 @@ B4&12&38\\
 \hline
 ATT&25&112\\
 \hline
-CERNET2&14&32\\
+a national-level backbone&14&32\\
 \hline
 \end{tabular}
 \end{table}
@@ -2097,16 +2098,36 @@ CERNET2&14&32\\
 %  
 %\end{figure*}
 
-\subsection{Simulation evaluation}
+\subsection{Simulations}
 \textbf{Simulation setup.} 
-We evaluate the performance of $\mathsf{BATE}$ under four network topologies: B4 \cite{B4}, ATT \cite{Teavar}, IBM\cite{SMORE}, CERNET2 (China Education and Research Network), where the first three topologies (including their traffic metrics) are obtained from the authors of TEAVAR\cite{Teavar} and CERNET2 is measured by ourselves.
-Table \ref{evaluation-topologies} shows the topology details.
-To accommodate the reproducibility of link failures, we make the assumption that link failures fit Weibull distribution, which has been widely used in studying failures over backbones \cite{Characterization} and inter-DC WAN \cite{Teavar}.
-Link failure probability varies each time slot with Weibull distribution.
-Each run simulates 150000  1-minute timeslot (about 100 days).
-The Weibull distribution probability density function $f(\lambda,k)$ contains two parameters, where $\lambda$ is shape parameter and $k$ is scale parameter.
-We choose $f(0.8,0.00001)$ as our default distribution, which is similar to \cite{Teavar}.
-Tenants' demands can arrive at anytime.
+We also conduct simulations on four real network topologies, including B4 \cite{B4}, ATT \cite{Teavar}, IBM\cite{SMORE} and a national-level backbone. 
+Table \ref{evaluation-topologies} shows the topology details
+\footnote{For B4, ATT and IBM, we get their topologies, link capacities and traffic matrices from the authors of TEAVAR\cite{Teavar}, and for the national backbone, we conduct a direct measurement on it but hide its name due to anonymity requirement.}. 
+Following the conclusion on WAN failures in literature studies\cite{Characterization, Teavar}, 
+we simulate link failures according to a Weibull distribution with its shape $\lambda=0.8$ and scale $k=0.00001$. 
+We generate the demand workload in a similar way to that in the testbed. 
+The arrivals of BA demands follow a Poisson process, with a mean inter-arrival time of 2 minutes. 
+The duration of each demand follows an exponential distribution, and the mean duration corresponds to 1000 time slots.
+The required bandwidth in each user demand is randomly drawn from the traffic metrices (we have collected 200 matrices for each topology) with a proper scale down factor (we use 5), so that between each source-destination pair, multiple users can be served simultaneously. 
+The required availability in each user demand is drawn from 10 different SLAs of Azure\cite{azure}.
+In addition to FFC and TEAVAR, the TE algorithms we compare in simulations also include 
+SWAN \cite{swan}, SMORE \cite{SMORE} and B4 \cite{B4}. 
+We assume at most one link failure (i.e., no concurrent failures) in FFC,  
+use 99.9\% (the maximum value in the user demands) as the default availability target in TEAVAR,
+and let SWAN maximize the total throughput of all users. 
+These TE algorithms will be activated every 10 time slots.
+With the above settings, each simulation lasts 150,000 slots (corresponding to 100 days if each slot represents 1 minute), and the results that achieved by each algorithm on each topology are calculated on 5 independent simulations with different workload traces. 
+
+
+\iffalse
+\textbf{Workload.} 
+%We perform trace-driven simulations.
+Similar to previous work\cite{OWAN,Guaranteeings,Online-deadline,Teavar}, 
+BA demands arrival time is also modeled as Poisson process with arrival rate $\lambda$ per time slot \cite{Guaranteeings,Online-deadline}.
+The duration of each demand is modeled as an exponential distribution with a mean of 1000 time slots \cite{Guaranteeings}.
+Our collected traffic data contains the capacity of all links as well as 200 bandwidth demands matrices for each topology.
+To closely mimic the real traffic, bandwidth of each BA demand is randomly chosen from the real demands matrices, but each scales down 5 $\times$ \cite{Teavar}.
+
 %After a request arriving the system, we run admitted control algorithm to determine whether the request can be accommodated or not.
 %As introduced above, $\mathsf{BATE}$ adopts Algorithm \ref{greedy} as its default option.
 %We compare Algorithm \ref{greedy} (i.e, Greedy) with fixed algorithm and the optimal algorithm
@@ -2120,6 +2141,7 @@ Tenants' demands can arrive at anytime.
 %The achieved availability can be derived by a post-processing simulation composed by network states.
 %In each network state, we record the application level throughput ratio as well as the network state probability.
 %The sum of network state probability in which the allocated bandwidth larger than the demand is regarded as the achieved availability.
+
 Traffic engineering performs every 10 time slots.
 For traffic engineering part, we compare the performance of $\mathsf{BATE}$ against FFC \cite{FFC}, TEAVAR \cite{Teavar}, SWAN \cite{swan}, SMORE \cite{SMORE}, B4 \cite{B4}.
 We change them to adapt service level traffic engineering: 
@@ -2133,6 +2155,8 @@ The default availability target of TEAVAR is $99.9\%$ in our simulations.
 SMORE \cite{SMORE} minimizes the maximum link utilization without explicit guarantees on availability.
 SWAN \cite{swan}  tries to  maximize the total throughput of all demands in the current slot.
 B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
+\fi
+
 %We compare the failure recovery part with random rerouting mechanism when there are link failures. 
 %However, SWAN 
 %However, TEAVAR .
@@ -2170,16 +2194,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %We randomly assign weights to services within \{1,2,3,4,5\}with uniform distribution, which is similar to \cite{hanzhang}.
 % $\mu(f_{jtk})=\sum_{k\in K, t \in T_k}f_{jtk}/d_j, \forall j \in J$ in our experiments.
 %Default  profit is 1 when availability is achieved, otherwise, the profit is $\mu(R_j)=0.01\times R_j$.
-We consider 10 availability targets, which are chosen from the SLAs of Azure \cite{azure}.
 
-
-\textbf{Workload.} 
-%We perform trace-driven simulations.
-Similar to previous work\cite{OWAN,Guaranteeings,Online-deadline,Teavar}, 
-BA demands arrival time is also modeled as Poisson process with arrival rate $\lambda$ per time slot \cite{Guaranteeings,Online-deadline}.
-The duration of each demand is modeled as an exponential distribution with a mean of 1000 time slots \cite{Guaranteeings}.
-Our collected traffic data contains the capacity of all links as well as 200 bandwidth demands matrices for each topology.
-To closely mimic the real traffic, bandwidth of each BA demand is randomly chosen from the real demands matrices, but each scales down 5 $\times$ \cite{Teavar}.
 
 
 
@@ -2234,7 +2249,7 @@ To closely mimic the real traffic, bandwidth of each BA demand is randomly chose
 %\label{availability_fig2}
 %\end{figure*}
 
-\subsubsection{Performance under real network topologies}\label{scales}
+\textbf{Evaluation results.}
 %From the comparison between the scheduled and testbed results, we can see that the scheduled results match the real testbed quite well,
 %so in the following part, we will use trace-driven simulation to evaluate the performance of $\mathsf{BATE}$.
 
