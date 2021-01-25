@@ -1967,43 +1967,26 @@ CERNET2&14&32\\
 %\includegraphics[width=0.7\textwidth]{fig/evaluation/legend.pdf}
 %\end{tabular}
 %\vfill
-\subfigure[Rejection percentage]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/sim-admit.pdf}}
-\subfigure[Link utilization]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/link-utilization.pdf}}
-\subfigure[Admission time]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/admission-control-time.pdf}}
-\caption{$\mathsf{BATE}$  vs. Fixed admission control under different network topologies.}
+\subfigure[IBM]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-admit.pdf}}
+\subfigure[B4 ]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/att.pdf}}
+\subfigure[ATT]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/cernet3.pdf}}
+\subfigure[Cernet]{
+\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-monney.pdf}}
+\caption{$\mathsf{BATE}$  vs. various schemes under different network topologies.}
 \label{availability_fig1}
 \end{figure*}
-
-
-%\begin{figure*}[t]
-%\centering
-%%\begin{tabular}{c}
-%%\includegraphics[width=0.7\textwidth]{fig/evaluation/legend.pdf}
-%%\end{tabular}
-%%\vfill
-%\subfigure[IBM]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-admit.pdf}}
-%\subfigure[B4 ]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/att.pdf}}
-%\subfigure[ATT]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/cernet3.pdf}}
-%\subfigure[Cernet]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-monney.pdf}}
-%\caption{$\mathsf{BATE}$  vs. various schemes under different network topologies.}
-%\label{availability_fig1}
-%\end{figure*}
 
 
 
 \begin{figure}
 \centering
 \subfigure[Link utilization]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/att.pdf}}
+\includegraphics[width=0.23\textwidth]{fig/evaluation/link-utilization.pdf}}
 \subfigure[Admission time]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/cernet3.pdf}}
+\includegraphics[width=0.23\textwidth]{fig/evaluation/admission-control-time.pdf}}
 \caption{Scalability of admission control.}
 \label{admission-benefit}
 \end{figure}
@@ -2118,7 +2101,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %We randomly assign weights to services within \{1,2,3,4,5\}with uniform distribution, which is similar to \cite{hanzhang}.
 % $\mu(f_{jtk})=\sum_{k\in K, t \in T_k}f_{jtk}/d_j, \forall j \in J$ in our experiments.
 %Default  profit is 1 when availability is achieved, otherwise, the profit is $\mu(R_j)=0.01\times R_j$.
-We consider 10 availability targets, which are chosen from the SLAs of Azure \cite{azure}.
+We consider 10 availability targets, whose value are from the SLAs of Azure \cite{azure}.
 
 
 \textbf{Workload.} 
@@ -2286,13 +2269,7 @@ To closely mimic the real traffic, bandwidth of each BA demand is randomly chose
 %(1) Availability satisfaction fraction. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
-Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept up to 50\% more demands than the \textit{Fixed} consistently.
-Figure \ref{availability_fig1}(b) demonstrates  $\mathsf{BATE}$ is able to maintain at least 10\% higher link utilization than \textit{Fixed} algorithm.
-We qualify the scalability by measuring the admission control time for each demand.
-The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
-As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution.
-
-
+Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept about 50\% more demands than the \textit{Fixed} consistently.
 Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
 %We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
 The sum of scenario probability where demand is fully satisfied reflects the \textit{achieved availability}.
@@ -2314,6 +2291,28 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
 \caption{Impact of pruning for traffic scheduling.}
 \label{availability_fig3}
 \end{figure}
+We qualify the scalability by measuring the admission control time for each demand.
+The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
+As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution under ATT topology.
+Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
+%Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
+%Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
+%We can see that even with small cutoff threshold, more than 97\% probability are included.
+% In Section \ref{solutions}, we show how to derive the solutions for WAPM problem.
+% The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
+%In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
+%Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
+Let $\mathsf{BATE}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
+Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
+Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
+We can see the error is less than 8\% even the current link failure number is 1.
+Traditionally, TE should update the network state every 5-10 minutes.
+% and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{BATE}$ problem, it might be too slow.
+Figure \ref{availability_fig3} (b) shows the time when solving it with Gurobi \cite{gurobi} on the server (4-core, 2.60GHz processor with 32GB ).
+We can see that even on a large network (e.g., ATT topology), at most  15 seconds are needed when current link failure numbers are 2, which is fast enough in reality.
+%We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
+%While the bruce force algorithm is more than 1000 minutes for each topology and we don't paint them in the picture.
+%We can see the result is fast enough to deploy in practice.
 \begin{figure*} 
    \begin{minipage}[t]{0.24\linewidth} 
     \centering 
@@ -2341,27 +2340,6 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
   \end{minipage}
   
 \end{figure*}
-
-
-Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
-%Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
-%Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
-%We can see that even with small cutoff threshold, more than 97\% probability are included.
-% In Section \ref{solutions}, we show how to derive the solutions for WAPM problem.
-% The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
-%In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
-%Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
-Let $\mathsf{BATE}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
-Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
-Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
-We can see the error is less than 8\% even the current link failure number is 1.
-Traditionally, TE should update the network state every 5-10 minutes.
-% and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{BATE}$ problem, it might be too slow.
-Figure \ref{availability_fig3} (b) shows the time when solving it with Gurobi \cite{gurobi} on the server (4-core, 2.60GHz processor with 32GB ).
-We can see that even on a large network (e.g., ATT topology), at most  15 seconds are needed when current link failure numbers are 2, which is fast enough in reality.
-%We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
-%While the bruce force algorithm is more than 1000 minutes for each topology and we don't paint them in the picture.
-%We can see the result is fast enough to deploy in practice.
 
 So far, we use K-shortest path as the default tunnel selection scheme.
 There are also other tunnel selection schemes, e.g., edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}.
