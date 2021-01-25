@@ -69,7 +69,7 @@
 %\titlenote{Produces the permission block, and copyright information}
 %\subtitle{Extended Abstract}
 
-\author{Paper \# 56, 16 pages}
+\author{Paper \# 56, 18 pages}
 % \author{Firstname Lastname}
 % \authornote{Note}
 % \orcid{1234-5678-9012}
@@ -569,7 +569,7 @@ bandwidth demands for inter-DC transmission from DC1 to DC4, i.e., user1 (red) r
 with at least 99\% availability, and user2 (blue) requires 12Gbps bandwidth with at least 90\% availability. 
 There are two paths from DC1 to DC4, i.e., DC1$\to$ DC2 $\to$ DC4, and DC1 $\to$ DC3 $\to$ DC4, whose available probabilities are $(1-4\%) \times (1-0.0001\%)=95.999904\%$ and $(1-0.1\%) \times (1-0.0001\%) = 99.8999001\%$, respectively. We apply FFC \cite{FFC} and TEAVAR \cite{Teavar}, two latest WAN traffic engineering schemes that take network failures into account, to this scenario. 
 
-FFC \cite{FFC} guarantees a total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. Figure \ref{motivatio_fig}(b) shows FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904\%) \times (1-99.8999001\%) = 0.004004092096\%$). Since user1 and user2 can get respectively 3.34Gbps and 6.66Gbps, which are evenly distributed on the two paths from DC1 to DC4, 
+FFC \cite{FFC} guarantees a total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. Figure \ref{motivatio_fig}(b) shows FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904\%) \times (1-99.8999001\%) = 0.004004092096\%$. Since user1 and user2 can get respectively 3.34Gbps and 6.66Gbps, which are evenly distributed on the two paths from DC1 to DC4, 
 and neither of their bandwidth demands can be satisfied. This shows \textit{FFC does not differentiate between paths with different availabilities.} The lower path has a much smaller failure probability, and it is wasteful without utilizing it as much as possible. 
 
 On the other hand, TEAVAR \cite{Teavar} exploits the different link failure probabilities and maximizes the network utilization, subject to meeting a \textit{single} desired availability. Figure \ref{motivatio_fig}(c) illustrates the bandwidth allocation result of TEAVAR, where user1 and user2 can get their demanded 6Gbps and 12Gbps bandwidth, both in about 95.9\% time. However, this falls below 
@@ -1613,18 +1613,42 @@ Flow table just maps the packet based on the destination and the group tables co
 \label{testbed}
 \end{center}
 \end{figure}
+%
+%
+% \begin{figure}
+%\begin{center}
+%\includegraphics [width=0.8\columnwidth] {fig/evaluation/testbed-admit.pdf}
+%\caption{Admission control comparison.}
+%\label{admission-control2}
+%\end{center}
+%\end{figure}
+%
+%
+%
+%\begin{figure}
+%\centering
+%\subfigure[Availability satisfaction]{
+%\includegraphics[width=0.23\textwidth]{fig/evaluation/fake-testbed-target.pdf}}
+%\subfigure[Admission time]{
+%\includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-public-2.pdf}}
+%\caption{Traffic scheduling comparison.}
+%\label{testbed-traffic-scheduling}
+%\end{figure}
+
+
+
 
 \begin{figure*}
 \centering
 \subfigure[Admission control]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/testbed-admit.pdf}}
-\subfigure[Measured and demand ratio]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/testbed-public-2.pdf}}
-\subfigure[Monetary gain after failures]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/test-bed-profit.pdf}}
-\subfigure[Data loss ratio]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/testbed-data-loss-2.pdf}}
-\caption{A public cloud example: tenants' demands arrive obeying poisson process and the duration of demands are with exponential distribution.}
+\includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-admit.pdf}}
+\subfigure[Bandwidth availability]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/fake-testbed-target.pdf}}
+\subfigure[Monetary loss after failures]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/testbet-loss2.pdf}}
+\subfigure[Overall monetary gain]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/overall-profit.pdf}}
+\caption{BA demands arrive with poisson process and their duration are with exponential distribution.}
 \label{e2}
 \end{figure*}
 
@@ -1699,7 +1723,7 @@ Each server is equipped with 4 Intel Xeon E5-2620 CPUs, 64GB memory and 4 Ethern
 and on each server we start 20 VMs, which are all connected to an Open vSwitch \cite{openvswitch}.
 The VMs run CentOS 7 and use Linux v4.15.6 kernel \cite{Kermel} with our rate limiting module plugged in. 
 %We start 21 VMs (1 vCPU, 2GB memory, 100GB disk) in each server, where 20 VMs are used to emulate the hosts and 1 VM runs as the broker.
-Every second, we emulate link failures by shutting down the corresponding VM interfaces 
+Every second, we emulate link failures by shutting down the corresponding network interfaces 
 under the failure probabilities shown in Fig. \ref{testbed}, 
 and bring them online after 3 seconds. 
 We also deploy our controller and brokers on extra VMs. 
@@ -1751,29 +1775,8 @@ If not stated otherwise, we use 4 shortest paths between each source-destination
 
 
 
+%
 
-\begin{figure*}[t]
-\centering
-\subfigure[Bandwidth-based availability]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/test.pdf}}
-\subfigure[Link failures]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/link-failures.pdf}}
-%\subfigure[Scheduled results (SWAN)]{
-%\includegraphics[width=0.19\textwidth]{fig/testbed6.pdf}}
-%\subfigure[Measured bandwidth (DC1 to DC3)]{
-%\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
-%\subfigure[Measured bandwidth (DC1 to DC3)]{
-%\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
-\subfigure[Data loss ratio]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/data-loss.pdf}}
-%\subfigure[After L4 failure ($\mathsf{BATE}$-1)]{
-%\includegraphics[width=0.24\textwidth]{fig/evaluation/time2.pdf}}
-\subfigure[Events after L3 failure]{
-\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
-
-\caption{A private cloud example: we deploy three services whose details are shown in Table \ref{testbed-1}.}
-\label{e1}
-\end{figure*}
 
 
 We first conduct experiments where user demands are generated from models used 
@@ -1799,37 +1802,32 @@ rejects least 10$\times$ more admissible demands.
 %In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
 
 \textit{Traffic scheduling.} We evaluate, once a user demand is admitted, 
-how often its bandwith availability requirement can be guaranteed. 
-Since we emulate different link failures according to their probabilities in every second, 
+how often its bandwidth availability requirement can be guaranteed. 
+Since we emulate different link failures according to their probabilities in each second, 
 we can measure how the bandwidth a user actually uses deviates from its requirement. 
-If such a deviation is less than 1\%, we regard the bandwidth availability as \textit{satisfied in that second}. Figure \ref{e2}(b) shows the overall fraction of satisfication, under 
-different levels of availability requirements (i.e., 95\%, 99\% and 99.99\%). 
+If such a deviation is less than 1\%, we regard the bandwidth availability as \textit{satisfied in that second}. Figure \ref{e2}(b) shows the overall fraction of satisfaction, under  different levels of availability requirements (i.e., 95\%, 99\% and 99.99\%). 
 We note that, FFC-fixed (or TEAVAR-fixed) in the figure represents applying FFC (or TEAVAR) 
 only to demands admitted by the fixed admission control strategy, 
 where the total bandwidth required for the admitted demands will be much lower. 
 $\mathsf{BATE}$ always achieves the highest availability, even compared with FFC-fixed and TEAVAR-fixed. 
 In particular, it has a clear advantage for high availability requirements (e.g., >99.99\%). 
-To further illustrate the difference in their mechanisms, 
-we plot in Figure \ref{e2}(c), for each algorithm, the ratio of the allocated bandwidth 
-to the demanded bandwidth. 
-The cdf curve shows that FFC is too conservative in bandwidth allocation, 
-and fails to allocate proper bandwidth in almost 60\% time.   
-On the other hand, although TEAVAR provides bandwidth fairly well, 
-it ignores the diverse availability requirements of different users, 
-and achieves a lower satisfication ratio than $\mathsf{BATE}$. 
+%To further illustrate the difference in their mechanisms, 
 
-\textit{Failure Recovery} We evaluate when failures do occur and cause SLA violations, 
+
+\textit{Failure Recovery.} We evaluate when failures do occur and cause SLA violations, 
 how profit loss can be mitigated by our failure recovery scheme.
-Figure \ref{e2}(d) plots the overall profit $\mathsf{BATE}$, FFC and TEAVAR can achieve for admitted demands, under three different admission control strategies, i.e., fixed, BATE-AD (which is the strategy $\mathsf{BATE}$ uses) and optimal. 
-\textbf{TBD: This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.}
-Figure \ref{e2}(e) further depicts the fraction of profit loss caused by SLA violations, where the baseline for each algorithm is the profit it can achieve when no failures occur. 
-\textbf{TBD: $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.}
-Compared with TEAVAR, FFC has a lower profit loss ratio due to its conservative bandwidth allocation, as indicated in Figure \ref{e2}(c) earlier. 
+Figure \ref{e2}(c) depicts the fraction of profit loss caused by SLA violations under three different admission control strategies, i.e., fixed, BATE-AD (which is the strategy $\mathsf{BATE}$ uses) and optimal, where baseline for each algorithm is the profit it can achieve when no failures occur. 
+%\textbf{TBD: $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.}
+Compared with TEAVAR, FFC has a lower profit loss ratio due to its conservative bandwidth allocation. 
 
-\textbf{TBD: We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
-Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{BATE}$ performs about 8\% worse than FFC.
-FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
-while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
+
+
+\textit{Overall Profit.}
+Figure \ref{e2}(d) plots the overall profit gain comparison among $\mathsf{BATE}$, FFC and TEAVAR  for all arrived demands.
+Thanks to the hard guarantee of bandwidth availability and optimization of profit gain after failures, $\mathsf{BATE}$ can maintain at least 15\% more profit than  FFC and TEAVAR.
+
+Due to space limitations, more details of the evaluations are shown in  Appendix \ref{testbed-appendix}.
+
 %, where  FFC-1 and FFC-2 
 %denote FFC with and without Fixed admission control,  respectively.
 %where TEAVAR-1 and TEAVAR-2 are 
@@ -1882,17 +1880,17 @@ while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.}
 {Service}&\multicolumn{1}{|c|}{paths}&\multicolumn{1}{|c|}{$\mathsf{BATE}$}&\multicolumn{1}{|c|}{TEAVAR}&\multicolumn{1}{|c|}{FFC}\\
 \hline
 &{DC1$\to$DC2$\to$DC3}&0&500&0\\
-{Service-1}&{DC1$\to$DC4$\to$DC3}&1000&500&250\\
+{demand-1}&{DC1$\to$DC4$\to$DC3}&1000&500&250\\
 (99.5\%)&{DC1$\to$DC2$\to$DC5$\to$DC4$\to$DC3}&0&0&0\\
 &{DC1$\to$DC4$\to$DC5$\to$DC2$\to$DC3}&0&0&0\\
 \hline
 &{DC1$\to$DC4}&0&250&0\\
-{Service-2}&{DC1$\to$DC2$\to$DC5$\to$DC4}&0&0&0\\
+{demand-2}&{DC1$\to$DC2$\to$DC5$\to$DC4}&0&0&0\\
 (99.9\%)&{DC1$\to$DC2$\to$DC3$\to$DC4}&500&0&250\\
 &{DC1$\to$DC6$\to$DC5$\to$DC4}&0&250&250\\
 \hline
 &{DC1$\to$DC2$\to$DC5}&500&500&750\\
-{Service-3}&{DC1$\to$DC4$\to$DC5}&0&250&0\\
+{demand-3}&{DC1$\to$DC4$\to$DC5}&0&250&0\\
 (95\%)&{DC1$\to$DC6$\to$DC5}&1000&750&750\\
 &{DC1$\to$DC2$\to$DC3$\to$DC4$\to$DC5}&0&0&0\\
 %&&&{DC1$\to$DC4$\to$DC5$\to$DC2$\to$DC3}&{750}\\
@@ -1943,8 +1941,29 @@ TEAVAR still allocates 250 Mbps on link L4, which has the highest failure probab
 \footnote{In Figure \ref{e1}(b), we plot the actual number of failures that occur in the 100 experiments, 
 where L4 fails most frequently.}. 
 On the contrary, $\mathsf{BATE}$ matches demands and links well, and does not use L4 for user-2.
-Another factor we must pay attention into is the 
+%Another factor we must pay attention into is the 
 
+\begin{figure}
+\centering
+\subfigure[Bandwidth availability]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/test.pdf}}
+\subfigure[Failures of links]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/link-failures.pdf}}
+%\subfigure[Scheduled results (SWAN)]{
+%\includegraphics[width=0.19\textwidth]{fig/testbed6.pdf}}
+%\subfigure[Measured bandwidth (DC1 to DC3)]{
+%\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
+%\subfigure[Measured bandwidth (DC1 to DC3)]{
+%\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
+%\subfigure[Data loss ratio]{
+%\includegraphics[width=0.24\textwidth]{fig/evaluation/data-loss.pdf}}
+%%\subfigure[After L4 failure ($\mathsf{BATE}$-1)]{
+%%\includegraphics[width=0.24\textwidth]{fig/evaluation/time2.pdf}}
+%\subfigure[Events after L3 failure]{
+%\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
+\caption{ An simple example with three user demands whose details are shown in Table \ref{testbed-1}.}
+\label{e1}
+\end{figure}
 
 %During L4 failure, service2 is unable to gain enough bandwidth. 
 %and it will take much time for the controller to retrieve from congestion.
@@ -1955,10 +1974,10 @@ Another factor we must pay attention into is the
 %Figure \ref{e1}(c) shows aggregate bandwidth from DC1 to DC3.
 %We can see SWAN drops about 33\% bandwidth between 0.2s and 1.1s.
 %The result of service1 is similar.
-\textbf{TBD:Data loss mainly comes from congestion and blackhole, where congestion losses are always link oversubscribed and blackhole losses occur during the time between a link fails and ingress switch rescale.
-Figure \ref{e1}(c) demonstrates $\mathsf{BATE}$ and FFC performs better than   $\mathsf{BATE}$-WT  and TEAVAR for data losses ratio.
-Data losses of Service-2 under TEAVAR is high due to Link L4 failings.
-$\mathsf{BATE}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{BATE}$-WT shown in Figure \ref{e1}(d) just prove this.}
+%\textbf{TBD:Data loss mainly comes from congestion and blackhole, where congestion losses are always link oversubscribed and blackhole losses occur during the time between a link fails and ingress switch rescale.
+%Figure \ref{e1}(c) demonstrates $\mathsf{BATE}$ and FFC performs better than   $\mathsf{BATE}$-WT  and TEAVAR for data losses ratio.
+%Data losses of Service-2 under TEAVAR is high due to Link L4 failings.
+%$\mathsf{BATE}$-WT performs worse than the other three schemes, because it takes much time to derive new resource allocation when network fails and the events time of  $\mathsf{BATE}$-WT shown in Figure \ref{e1}(d) just prove this.}
 %We can see that $\mathsf{BATE}$-1 and FFC performs better than   $\mathsf{BATE}$-2  and TEAVAR.
 %The losses of TEAVAR mainly comes from link $L4$ failure which is adopt by Service-2.
 %When L3 fails, DC1 and DC4 take about 0.4s to detect the failure.
@@ -3323,13 +3342,52 @@ There is no other way that the density of links are greater than this, that is, 
 proof.
 \end{proof}
 
-
-
-
-
-
-
  \end{appendices}
+ 
+\begin{appendices}
+     \section{More evaluation details} \label{testbed-appendix}
+     \begin{figure}
+\centering
+\subfigure[Measured and demand ratio]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-public-2.pdf}}
+\subfigure[Data loss comparison]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-data-loss-2.pdf}}
+%\subfigure[Scheduled results (SWAN)]{
+%\includegraphics[width=0.19\textwidth]{fig/testbed6.pdf}}
+%\subfigure[Measured bandwidth (DC1 to DC3)]{
+%\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
+%\subfigure[Measured bandwidth (DC1 to DC3)]{
+%\includegraphics[width=0.19\textwidth]{fig/evaluation/fake/throughput.pdf}}
+%\subfigure[Data loss ratio]{
+%\includegraphics[width=0.24\textwidth]{fig/evaluation/data-loss.pdf}}
+%%\subfigure[After L4 failure ($\mathsf{BATE}$-1)]{
+%%\includegraphics[width=0.24\textwidth]{fig/evaluation/time2.pdf}}
+%\subfigure[Events after L3 failure]{
+%\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
+\caption{More details of testbed evaluations}
+\label{appendix -e1}
+\end{figure}
+
+we plot in Figure \ref{appendix -e1}(a), for each algorithm, the ratio of the allocated bandwidth 
+to the demanded bandwidth. 
+The CDF curve shows that FFC is too conservative in bandwidth allocation, 
+and fails to allocate proper bandwidth in almost 60\% time.   
+On the other hand, although TEAVAR provides bandwidth fairly well, 
+it ignores the diverse availability requirements of different users, 
+and achieves a lower satisfaction ratio than $\mathsf{BATE}$. 
+
+%\textbf{TBD: This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.}
+
+We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
+Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{BATE}$ performs about 8\% worse than FFC.
+FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
+while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
+
+\end{appendices}
+
+
+
+
 
 
 \clearpage
