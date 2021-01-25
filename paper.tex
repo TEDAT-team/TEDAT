@@ -1644,9 +1644,9 @@ Flow table just maps the packet based on the destination and the group tables co
 \includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-admit.pdf}}
 \subfigure[Bandwidth availability]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/fake-testbed-target.pdf}}
-\subfigure[Monetary loss after failures]{
+\subfigure[Profit loss after failures]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/testbet-loss2.pdf}}
-\subfigure[Overall monetary gain]{
+\subfigure[Overall profit gain]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/overall-profit.pdf}}
 \caption{BA demands arrive with poisson process and their duration are with exponential distribution.}
 \label{e2}
@@ -2072,12 +2072,12 @@ a national-level backbone&14&32\\
 
 \begin{figure}
 \centering
-\subfigure[Link utilization]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/att.pdf}}
-\subfigure[Admission time]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/cernet3.pdf}}
-\caption{Scalability of admission control.}
-\label{admission-benefit}
+\subfigure[No extra admission control]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/fixed-scheduling.pdf}}
+\subfigure[Fixed admission control]{
+\includegraphics[width=0.23\textwidth]{fig/evaluation/no-fixed.pdf}}
+\caption{Traffic scheduling schemes comparisons.}
+\label{scheduling-benefit}
 \end{figure}
 
 
@@ -2284,13 +2284,13 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %
 %
 %
-% \begin{figure}[h]
-%\begin{center}
-%\includegraphics [width=0.8\columnwidth] {fig/evaluation/fake/totalprofit.pdf}
-%\caption{Profit comparison between $\mathsf{BATE}$ and other Traffic engineering schemes.}
-%\label{sim-profit}
-%\end{center}
-%\end{figure}
+ \begin{figure}[h]
+\begin{center}
+\includegraphics [width=0.7\columnwidth] {fig/evaluation/sim-monney.pdf}
+\caption{Profit gain after failures}
+\label{sim-profit}
+\end{center}
+\end{figure}
 
 
 
@@ -2298,7 +2298,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 
 
 
-
+%\includegraphics[width=0.24\textwidth]{fig/evaluation/sim-monney.pdf}}
 
 
 
@@ -2378,7 +2378,7 @@ Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\%
 Figure \ref{availability_fig1}(b) demonstrates  $\mathsf{BATE}$ is able to maintain at least 10\% higher link utilization than \textit{Fixed} algorithm.
 We qualify the scalability by measuring the admission control time for each demand.
 The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
-As shown in Figure \ref{admission-benefit}, the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution.
+As shown in Figure \ref{availability_fig1}(c), the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution.
 
 
 Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
@@ -2386,13 +2386,18 @@ Similar to \cite{Teavar}, we next start a post-processing simulation, in which i
 The sum of scenario probability where demand is fully satisfied reflects the \textit{achieved availability}.
 %If a demand's , then the availability defined in SLA is \textit{satisfaction}.
 The term \textit{satisfaction percentage} refers to the fraction of total arrival demands whose achieved availability are higher than their availability targets throughout duration.
-Figure \ref{availability_fig1}(b) demonstrates that $\mathsf{BATE}$ can make 40\% more demands satisfy SLA availability.
+Figure \ref{scheduling-benefit}(a) demonstrates that $\mathsf{BATE}$ can even make up to 40\% more demands satisfy SLA availability.
 %Demands SLA violation of  $\mathsf{BATE}$ mainly comes from admission control rejection.
 %The reason for this is that $\mathsf{BATE}$ adopts admission control and it considers the diverse availability targets of different bandwidth demands.
 $\mathsf{BATE}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but other schemes are unable differentiate demands.
-To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{availability_fig1}(c) shows $\mathsf{BATE}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
-Figure \ref{availability_fig1}(d) shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
+To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{scheduling-benefit}(b) shows $\mathsf{BATE}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
+
+Figure \ref{sim-profit} shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
 We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algorithms when network fails.
+
+
+
+
 \begin{figure}
 \centering
 \subfigure[Cutoff error]{
@@ -2402,36 +2407,72 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
 \caption{Impact of pruning for traffic scheduling.}
 \label{availability_fig3}
 \end{figure}
-\begin{figure*} 
-   \begin{minipage}[t]{0.24\linewidth} 
+
+% \begin{figure}
+%\begin{center}
+%\includegraphics [width=0.7\columnwidth] {fig/evaluation/routing.pdf}
+%\caption{Different routing schemes comparison}
+%\label{routing-version}
+%\end{center}
+%\end{figure}
+%
+% \begin{figure}
+%\begin{center}
+%\includegraphics [width=0.7\columnwidth] {fig/evaluation/approximation.pdf}
+%\caption{Approximation.}
+%\label{approximation}
+%\end{center}
+%\end{figure}
+
+
+\begin{figure} 
+   \begin{minipage}[t]{0.5\linewidth} 
     \centering 
     \includegraphics[width=1.6 in]{fig/evaluation/routing.pdf}
     \caption{Routings.} 
     \label{routing-version} 
   \end{minipage}% 
-   \begin{minipage}[t]{0.24\linewidth} 
-    \centering 
-    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
-    \caption{Approximation.} 
-    \label{approximation} 
-  \end{minipage}
-     \begin{minipage}[t]{0.24\linewidth} 
-    \centering 
-    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
-    \caption{Approximation.} 
-    \label{approximation} 
-  \end{minipage}
-       \begin{minipage}[t]{0.24\linewidth} 
+   \begin{minipage}[t]{0.5\linewidth} 
     \centering 
     \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
     \caption{Approximation.} 
     \label{approximation} 
   \end{minipage}
   
-\end{figure*}
+\end{figure}
 
 
-Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
+
+%\begin{figure*} 
+%   \begin{minipage}[t]{0.24\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.6 in]{fig/evaluation/routing.pdf}
+%    \caption{Routings.} 
+%    \label{routing-version} 
+%  \end{minipage}% 
+%   \begin{minipage}[t]{0.24\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
+%    \caption{Approximation.} 
+%    \label{approximation} 
+%  \end{minipage}
+%     \begin{minipage}[t]{0.24\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
+%    \caption{Approximation.} 
+%    \label{approximation} 
+%  \end{minipage}
+%       \begin{minipage}[t]{0.24\linewidth} 
+%    \centering 
+%    \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
+%    \caption{Approximation.} 
+%    \label{approximation} 
+%  \end{minipage}
+%  
+%\end{figure*}
+
+
+Traffic scheduling algorithm cuts off the scenarios that can hardly happen.
 %Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
 %Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
 %We can see that even with small cutoff threshold, more than 97\% probability are included.
@@ -2439,7 +2480,7 @@ Algorithm \ref{pruning} cuts off the scenarios that can hardly happen.
 % The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
 %In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
 %Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
-Let $\mathsf{BATE}$ denote the overall achieved availability of all admitted demands with scenario pruning  and $OPT$ denote the achieved availability of optimal solution without scenario pruning. 
+Let $\mathsf{BATE}$ denote the overall allocated bandwidth of all admitted demands with scenario pruning  and $OPT$ denote the allocated bandwidth of optimal solution without scenario pruning. 
 Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
 Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
 We can see the error is less than 8\% even the current link failure number is 1.
