@@ -62,6 +62,7 @@
 %% {} with no args suppresses printing of the price
 \acmPrice{}
 
+\setlength{\textfloatsep}{3.8pt}
 
 \begin{document}
 \title{\bf $\mathsf{BATE}$: Boosting Bandwidth Availability Over Inter-DC WAN}
@@ -1310,9 +1311,9 @@ Our failure recovery scheme takes this economic factor into account in the way a
 \begin{figure}[t]
 \centering
 \subfigure[Original allocation]{
-\includegraphics[width=0.23\textwidth]{fig/recovery-1.pdf}}
+\includegraphics[width=0.2\textwidth]{fig/recovery-1.pdf}}
 \subfigure[Backup allocation]{
-\includegraphics[width=0.23\textwidth]{fig/recovery-2.pdf}}
+\includegraphics[width=0.2\textwidth]{fig/recovery-2.pdf}}
 %\caption{There are two services from DC1 to DC4 and link capacity is 1 everywhere. (a) shows the original TE allocation. (b) shows the backup allocation result when assuming link DC2 $\to$ DC4 is broken.  }
 \caption{Bandwidth allocation for DC2$\to$DC4 failure}
 \label{recovery}
@@ -1521,7 +1522,7 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 
 \begin{figure}
 \begin{center}
-\includegraphics [width=0.8\columnwidth] {fig/inter-DC-WAN-V3.pdf}
+\includegraphics [width=0.7\columnwidth] {fig/inter-DC-WAN-V3.pdf}
 \caption{System architecture of $\mathsf{BATE}$}
 \label{pic-overview}
 \end{center}
@@ -1616,7 +1617,7 @@ Flow table just maps the packet based on the destination and the group tables co
 
  \begin{figure}[t]
 \begin{center}
-\includegraphics [width=0.68\columnwidth] {fig/testbed.pdf}
+\includegraphics [width=0.6\columnwidth] {fig/testbed.pdf}
 \caption{Testbed topology with failure probabilities}
 \label{testbed}
 \end{center}
@@ -1649,13 +1650,13 @@ Flow table just maps the packet based on the destination and the group tables co
 \begin{figure*}
 \centering
 \subfigure[Admission control]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-admit.pdf}}
+\includegraphics[width=0.24\textwidth]{fig/evaluation/testbed-admit.pdf}}
 \subfigure[Traffic scheduling]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/fake-testbed-target.pdf}}
+\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-testbed-target.pdf}}
 \subfigure[Profit loss after failures]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/testbet-loss2.pdf}}
+\includegraphics[width=0.24\textwidth]{fig/evaluation/testbet-loss2.pdf}}
 \subfigure[Overall profit gain]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/overall-profit.pdf}}
+\includegraphics[width=0.24\textwidth]{fig/evaluation/overall-profit.pdf}}
 \caption{Testbed evaluation with Poisson demand arrivals}
 \label{e2}
 \end{figure*}
@@ -1699,9 +1700,9 @@ Our main results are as follows:
 Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of less than 4\% false rejections, 
 (ii) our pruning-augmented scheduling algorithm runs $10^2 \sim 10^4 \times$ faster while wasting only 6\% total bandwidth, 
 and (iii) our greedy failure recovery algorithm can reduce the reaction time by xx$\times$, 
-where the profit loss is only around 10\%.
+where profit loss is only around 10\%.
 
-(3) $\mathsf{BATE}$ has a stable performance across differnet network topologies, link characteristics, 
+(3) $\mathsf{BATE}$ has a stable performance across different network topologies, 
 demand matrices and routing schemes. 
 
 % \begin{itemize}
@@ -2053,11 +2054,11 @@ a national-level backbone&14&32\\
 %\end{tabular}
 %\vfill
 \subfigure[Rejection ratio]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/sim-admit.pdf}}
+\includegraphics[width=0.3\textwidth]{fig/evaluation/sim-admit.pdf}}
 \subfigure[Link utilization]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/link-utilization.pdf}}
+\includegraphics[width=0.3\textwidth]{fig/evaluation/link-utilization.pdf}}
 \subfigure[Admission delay]{
-\includegraphics[width=0.32\textwidth]{fig/evaluation/admission-control-time.pdf}}
+\includegraphics[width=0.3\textwidth]{fig/evaluation/admission-control-time.pdf}}
 \caption{Admission control results in simulations}
 \label{availability_fig1}
 \end{figure*}
@@ -2086,9 +2087,9 @@ a national-level backbone&14&32\\
 \begin{figure}[t]
 \centering
 \subfigure[$\mathsf{BATE}$ v.s. other TE algorithms]{
-\includegraphics[width=0.45\textwidth]{fig/evaluation/no-fixed.pdf}}
+\includegraphics[width=0.4\textwidth]{fig/evaluation/no-fixed.pdf}}
 \subfigure[augmented with \textit{fixed} admission control]{
-\includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
+\includegraphics[width=0.4\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
 \caption{BA satisfaction results under simulations}
 \label{scheduling-benefit}
 \end{figure}
@@ -2381,13 +2382,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
 \textbf{Evaluation results.}
-\begin{figure}[t]
-\begin{center}
-\includegraphics [width=0.9\columnwidth] {fig/evaluation/sim-monney.pdf}
-\caption{Profit gain after failures}
-\label{sim-profit}
-\end{center}
-\end{figure}
+
 Figure \ref{availability_fig1} compares, under different demand arrival rates, 
 the admission results of $\mathsf{BATE}$  against  
 the optimal strategy and the \textit{fixed} one, i.e., step (1) in $\mathsf{BATE}$. 
@@ -2426,7 +2421,13 @@ Figure \ref{scheduling-benefit}(a) demonstrates that $\mathsf{BATE}$ can even ma
 $\mathsf{BATE}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but other schemes are unable differentiate demands.
 To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{scheduling-benefit}(b) shows $\mathsf{BATE}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
 \fi
-
+\begin{figure}[t]
+\begin{center}
+\includegraphics [width=0.8\columnwidth] {fig/evaluation/sim-monney.pdf}
+\caption{Profit gain after failures}
+\label{sim-profit}
+\end{center}
+\end{figure}
 Figure \ref{sim-profit} shows the average profit after failures occur in the network.
 Due to its considration of pricing and refunding,  
 $\mathsf{BATE}$ is able to retain 10\%$\sim$20\% more profit than the other algorithms.
