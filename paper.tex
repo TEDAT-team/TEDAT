@@ -55,7 +55,7 @@
 \acmISBN{}
 
 %Conference
-\acmConference[Submitted for review to SIGCOMM]{}
+\acmConference[Submitted to SIGCOMM]{}
 \acmYear{2021}
 %\copyrightyear{}
 
@@ -1357,9 +1357,7 @@ For simplicity, here we assume a simple pricing and refunding model,
 where the charge for serving a user demand $d$ is $g_d$, and if the SLA is violated, 
 a fraction $\mu_d$ of $g_d$ will be refunded. 
 We use $r_d$ to denote the profit of demand $d$ with refunding, such that
-
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
-
 \begin{equation*}
 r_d=
 \begin{cases}
@@ -1383,7 +1381,6 @@ g_d &\text{if $R_{dk} \ge 1$ for every $k \in K$}\\
 We use an auxiliary integer variable $y_d \in \{0, 1\}$ to denote the violation condition, 
 where $y_d=1$ means no violation. 
 Then the profit $r_d$ can be rewritten as 
-
 %\begin{equation}
 %\label{A-SSS2}
 %y_d \in \{0,1\} &{\forall d \in \hat{D}} \\
@@ -1391,7 +1388,6 @@ Then the profit $r_d$ can be rewritten as
 %R_{dk} <  M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
 %R_{dk} \ge   y_d &{\forall d \in \hat{D},  k\in K}
 %\end{equation}
-
 \iffalse
 \begin{equation}
 \label{A-SSS2}
@@ -1403,6 +1399,7 @@ Then the profit $r_d$ can be rewritten as
 \end{split}
 \end{equation}
 \fi
+\iffalse
 \begin{equation}
 \label{A-SSS2}
 \begin{array}{rcll}
@@ -1410,6 +1407,16 @@ y_d &\in &\{0,1\} &{\forall d \in \hat{D}} \\
 r_d & = & g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
 R_{dk}& < & M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
 R_{dk}& \ge &  y_d, &{\forall d \in \hat{D},  k\in K}
+\end{array}
+\end{equation}
+\fi
+\begin{equation}
+\label{A-SSS2}
+\begin{array}{rll}
+y_d \in &\!\!\{0,1\} &{\forall d \in \hat{D}} \\
+r_d  = &\!\! g_d \times \Big(y_d+(1-\mu_{d})\times (1-y_d)\Big) &{\forall d \in \hat{D}} \\
+R_{dk} < &\!\! M\times y_d+1-y_d &{\forall d \in \hat{D},  k\in K} \\
+R_{dk} \ge &\!\!  y_d, &{\forall d \in \hat{D},  k\in K}
 \end{array}
 \end{equation}
 where $M$ is a constant large enough (e.g., at least larger than the upper bound of $R_{dk}$).
@@ -3068,31 +3075,20 @@ month = may,
 %The Admission control problem  \textit{determines whether availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new demand can be admitted, otherwise, it is rejected.
 %We begin with the constraints.
-Firstly, the bandwidth allocation results $f_{d}^t$ for BA demand $d$ over tunnel $t$ should be non-negative, i.e.,
-\begin{equation}
-f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K,  t\in T_{k}.
-\label{constraint-f}
-\end{equation}
-Then total traffic through link $e$ should not exceed its capacity $c_e$:
 
-\begin{equation}
- \sum_{d \in D}\ \sum_{k\in K, t\in T_{k}}f_{d}^tu_t^e \le c_e, \quad \forall e \in E.
-\label{constraint-e}
-\end{equation}
-
-
-For an s-d pair $k$ of BA demand $d$, $R_{dk}^{\mathbf{z}}$ is the ratio of the effective bandwidth under network scenario $\mathbf{z}$ to the demanded bandwidth:
-
- \begin{eqnarray} \label{R}
+For an source-destination pair $k$ of BA demand $d$, let $R_{dk}^{\mathbf{z}}$ denote the ratio of the effective bandwidth under network scenario $\mathbf{z}$ to the demanded bandwidth:
+\begin{eqnarray} \label{R}
 R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d}, \quad \forall  d \in D, \mathbf{z}\in \mathbf{z}, k \in K.
 \end{eqnarray}
-
 %Figure \ref{Time-fig} gives an illustration on resource allocation return.
 %For a given bandwidth allocation vector, it plots the sorted return and the corresponding probability.
-Under network scenario $\mathbf{z}$, tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$).
-For every source-destination pair $k$, if the total reserved bandwidth through all the available tunnels is larger than $\mathbf{b}^k_d$,  then bandwidth requirement can be satisfied even tunnel $t$ fails and network scenario $\mathbf{z}$ can be regarded as \textit{qualified}.
-Let $A_d^{\mathbf{z}}$ denote whether scenario $\mathbf{z}$ is qualified (i.e., $A_d^{\mathbf{z}}=1$) or not (i.e., $A_d^{\mathbf{z}}=0$) for a BA demand $d$:
+where $v_t^{\mathbf{z}}$ represents whether tunnel $t$ is available under network scenario $\mathbf{z}$.
 
+For every source-destination pair $k$, if the total effective bandwidth on all the available tunnels is larger than $\mathbf{b}^k_d$,  then the bandwidth target can be met under $\mathbf{z}$, even some tunnels fail. In this situation, network scenario $\mathbf{z}$ can be regarded as \textit{qualified}.
+
+Let $q_d^{\mathbf{z}}$ denote whether scenario $\mathbf{z}$ is qualified (i.e., $q_d^{\mathbf{z}}=1$) or not (i.e., $q_d^{\mathbf{z}}=0$) for a BA demand $d$:
+
+\iffalse
 \begin{equation}
 A_d^{\mathbf{z}}=
 \begin{cases}
@@ -3102,19 +3098,26 @@ A_d^{\mathbf{z}}=
 ,\forall  d \in D, \mathbf{z}\in \mathbf{z}.
 \label{CA}
 \end{equation}
+\fi
+\begin{equation*}
+q_d^{\mathbf{z}}=
+\begin{cases}
+1 &\text{if $R_{dk} \ge 1$ for every $k \in K$}\\
+0 &\text{Otherwise}
+\end{cases}
+\label{CA}
+\end{equation*}
 
-
-
-It is a step function and we can change it to the following linear format:
 %subject to:
 %
 %(\ref{constraint-f}), (\ref{constraint-e}),(\ref{R}),  (\ref{CA}),  (\ref{S}), (\ref{availability})
- 
 %The optimization problem 
 %It attempts to  maximize the bandwidth-based availability for the important applications.
 %Therefore, the important applications with large weight would try best to meet the availability targets, while the lax ones will gain as much profit as possible. 
 
 
+It can be rewritten as
+\iffalse
 \begin{equation}
 \begin{cases}
 R_{dk}^{\mathbf{z}} < 1- A_d^{\mathbf{z}}+M\times A_d^{\mathbf{z}},&{\forall d \in D, \mathbf{z} \in Z, k\in K.} \\
@@ -3123,18 +3126,28 @@ A_d^{\mathbf{z}} \in\{0,1\},&{\forall d \in D, \mathbf{z} \in Z.} \\
 \end{cases}
 \label{A-z2}
 \end{equation}
+\fi
+\begin{equation}
+\label{A-z2}
+\begin{array}{rll}
+q_d^{\mathbf{z}} \in &\!\!\{0,1\} &{\forall d \in \hat{D}, \mathbf{z} \in Z} \\
+R_{dk}^{\mathbf{z}} < &\!\! M\times q_d^{\mathbf{z}}+1-q_d^{\mathbf{z}} &{\forall d \in \hat{D},  k\in K} \\
+R_{dk}^{\mathbf{z}} \ge &\!\!  q_d^{\mathbf{z}}, &{\forall d \in \hat{D},  k\in K}
+\end{array}
+\end{equation}
+where $M$ is an constant larger than the upper bound of $R_{dk}^{\mathbf{z}}$.
+%,\forall d \in D, k\in K,\mathbf{z} \in Z$.
+%It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
+%Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
+%$\mathbf{z} \propto <d, \{f_d^t\}> \quad \Leftrightarrow \quad \forall k, A_d^{\mathbf{z}}=1$. 
 
-where $M$ is a big integer that is at least larger than the upper bound of $R_{dk}^{\mathbf{z}},\forall d \in D, k\in K,\mathbf{z} \in Z$.
-It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
-Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
-$\mathbf{z} \propto <d, \{f_d^t\}> \quad \Leftrightarrow \quad \forall k, A_d^{\mathbf{z}}=1$. 
-The achieved bandwidth availability of demand $d$ is the sum of all qualified network scenarios' probability: 
- \begin{eqnarray} \label{S}
-S_d=\sum_{\mathbf{z}\in \mathbf{z}}A_d^{\mathbf{z}}\times p_{\mathbf{z}},  \quad \forall  d \in D.
+The achieved bandwidth availability of demand $d$ is the total probabilities of all \textit{qualified} network scenarios, i.e., 
+\begin{eqnarray} \label{S}
+s_d=\sum_{\mathbf{z}\in \mathbf{z}}q_d^{\mathbf{z}}\times p_{\mathbf{z}},  \quad \forall  d \in D.
 \end{eqnarray}
 
-We use $y_d$ to present whether the availability target of $d$ can be satisfied: 
-
+Use $a_d$ to represent whether the BA target of $d$ can be satisfied, which also means $a_d$ can be admitted, then we have 
+\iffalse
 \begin{equation}
  y_d=
 \begin{cases}
@@ -3144,15 +3157,23 @@ We use $y_d$ to present whether the availability target of $d$ can be satisfied:
 \ \ \ \forall  d \in D.
 \label{availability4}
 \end{equation}
-
-If the achieved bandwidth  availability (i.e., $S_d$) is larger than its desired availability target (i.e., $\beta_d$), the demand can be admitted.
+\fi
+\begin{equation*}
+a_d=
+\begin{cases}
+1 &\text{if $ \beta_{d} \le s_d \le 1$}\\
+0 &\text{if $ 0 \le s_d< \beta_{d} $}
+\end{cases}
+\label{availability4}
+\end{equation*}
+%If the achieved bandwidth  availability (i.e., $s_d$) is larger than its desired availability target (i.e., $\beta_d$), the demand can be admitted.
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
-Otherwise, it is rejected, which means the network can't support $d$.
+%Otherwise, it is rejected, which means the network can't support $d$.
 %where $R_j=\sum_{t \in T_j}f_{jt}/d_j$ and $f_{jtab}$.
 %\sum_{\forall a,b \in V: t\in T_{ab}}f_{jtab}/d_{jab} 
 %$\mu(f_{jtk}) $ aims to ensure that service $j$  will gain as much bandwidth as possible if the network fails to support the availability of service $j$.
-Also,  (\ref{availability4}) can be changed into the following linear format:
-
+which can further written as
+\iffalse
 \begin{equation}
 \begin{cases}
 S_d <  \beta_{d}\times  (1-y_d)+y_d,& \forall d \in D. \\
@@ -3161,6 +3182,16 @@ y_d\in\{0,1\},& \forall d \in D. \\
 \end{cases}
 \label{g-2}
 \end{equation}
+\fi
+\begin{equation}
+\label{g-2}
+\begin{array}{rll}
+a_d\in & \!\!\{0,1\},& \forall d \in D
+s_d < & \!\!\beta_{d}\times  (1-a_d)+a_d,& \forall d \in D \\
+s_d \ge & \!\!\beta_{d} \times a_d,& \forall d \in D \\
+\end{array}
+\end{equation}
+
 %\begin{equation}
 %\forall  j \in J : g_j=
 %\begin{cases}
@@ -3174,35 +3205,42 @@ y_d\in\{0,1\},& \forall d \in D. \\
 %As TABLE \ref{target} shown, $g_j$ can be used to describe the availability targets defined in SLAs. 
 %Applications might have diverse availability demands (i.e., $\beta_j$) and the piecewise formulation also considers this by setting different bound for full profit $\alpha$.
 %where $M_2$ is  a big integer that is at least larger than the upper-bound of $S_j,\forall j \in J$.
-We intend to maximize the total number of accepted demands, i.e., $ \sum_{d\in D} y_d$.
+In addition, the bandwidth allocation result $f_{d}^t$ for BA demand $d$ over tunnel $t$ should be non-negative and limited by link capacities, i.e.,
+\begin{equation}
+f_{d}^t \ge 0, \quad\forall d \in D ,  k\in K,  t\in T_{k}.
+\label{constraint-f}
+\end{equation}
+and 
+\begin{equation}
+ \sum_{d \in D}\ \sum_{k\in K, t\in T_{k}}f_{d}^tu_t^e \le c_e, \quad \forall e \in E.
+\label{constraint-e}
+\end{equation}
+
+
+Finally, the admission control intends to maximize the total number of accepted demands
+with the above constraints, i.e., 
 %\begin{eqnarray} \label{goal}
 %maximize  \sum_{i\in I} g_i
 %\end{eqnarray}
 %where $w_j$ presents the importance of service $j$.
 %It considers bandwidth-based availability profit and the importance of services simultaneously.
 %Note, constraints (\ref{CA}) and  (\ref{availability}) have piecewise functions which are nonlinear.
-With the constraints introduced above, we can finally give the formulation of admission problem:
-
 %We transform them into linear format, then Table \ref{Notation} shows the results.
 %
-
-
-
-
 %\begin{lemma}\label{ew}
 %The constraints (\ref{constraint-f})-(\ref{availability}) are equivalent to the linear format shown in Table \ref{Notation}.
 %\end{lemma}
 %The proof details can be found in Appendix \ref{A}.
-
-
-
 \begin{equation}
 \small
 \begin{aligned} \label{P8}
- &maximize  \sum_{d\in D} y_d\\
+ &maximize  \sum_{d\in D} a_d\\
 &\begin{array}{r@{\quad}r@{}l@{\quad}l}
 s.t.
-(\ref{constraint-f}), (\ref{constraint-e}), (\ref{R}), (\ref{A-z2}), (\ref{S}), (\ref{g-2})
+(\ref{R}), (\ref{A-z2}), (\ref{S}), (\ref{g-2}), (\ref{constraint-f}), (\ref{constraint-e})
+\end{array}
+\end{aligned}
+\end{equation}
 %\begin{cases}
 % \sum_{d \in D}\ \sum_{k\in K}\sum_{t\in T_{k}}f_{d}^tu_t^e \le c_e, &\text{$\forall e \in E $.}\\
 %R_{dk}^{\mathbf{z}}=\frac{\sum_{t\in T_{k}}f_{d}^tv_t^{\mathbf{z}} }{\mathbf{b}^k_d} , &\text{$\forall  d \in D, \mathbf{z}\in \mathbf{z},  k \in K$.}\\
@@ -3214,15 +3252,13 @@ s.t.
 %f_{d}^t \ge 0,&{\forall d \in D , \forall k\in K, \forall t\in T_{k}}.\\
 %A_d^{\mathbf{z}}, g_i\in\{0,1\}, & \forall \mathbf{z} \in \mathbf{z}, d \in D. \\
 %\end{cases}\\
-\end{array}
-\end{aligned}
-\end{equation}
+
 \section{Proof of Theorem \ref{NP-222}} \label{appendix-proof}
 
 \begin{proof}
-We use the contradiction method to prove, i.e., there is a BA demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth availability.
-There are two cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
-Case (i) is impossible, because if bandwidth is insufficient (i.e., $\mathbf{b}^k_d>$ remaining capacity of s-d pair $k$) , Algorithm \ref{greedy-1} won't admit the demand (Line 4-5).
+We prove by contradiction. Suppose there is a BA demand that is admitted by Algorithm \ref{greedy-1} but the network is unable to satisfy its bandwidth availability.
+There are two possible cases: (i) network bandwidth is insufficient; (ii) The availability provided by the network is not enough. 
+Case (i) is impossible, because if bandwidth is insufficient (i.e., $\mathbf{b}^k_d$ is larger than the remaining network capacity for s-d pair $k$) , Algorithm \ref{greedy-1} won't admit the demand (Line 4-5).
 Case (ii) is also impossible, because if the bandwidth availability is smaller than its target (i.e., $s_d <   \beta_{d}$) , Algorithm \ref{greedy-1} will reject the demand (Line 14-15).
 This completes the proof. 
 \end{proof}
@@ -3234,7 +3270,7 @@ This completes the proof.
 \begin{proof}
 The all-or-nothing multi-commodity flow problem, which is known to be NP-hard\cite{inproceedings2}, 
 can be regarded as a special case of our failure recovery problem (\ref{BATE-recovery}).
-Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
+Consider an undirected graph $G = (V,E)$ and a set of $k$ source-destination pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
 where each pair $s_it_i$ corresponds to a commodity flow to be sent from the source node $s_i$ to the destination node $t_i$ with demand $d_i$.
 Let $\mathcal{P}_i$ denote the path set for pair $s_it_i$.
 $L_{pe}$ denotes whether path $p$ goes through link $e$ and $f_{ip}$ is the allocation result of commodity $i$ over path $p$.
@@ -3252,22 +3288,23 @@ s.t. &\forall e \in E: \sum_{i=1}^k\sum_{p\in \mathcal{P}_i}f_{ip}L_{pe} \le c_e
 \end{array}
 \end{aligned}
 \end{equation}
-Where $y_i$ denotes whether commodity flow $i$ can be routable.
-We transform the all-or-nothing multi-commodity flow problem to a special instance of
-failure recovery problem and consider a special case, in which $\mu_d=0,\forall d \in \hat{D}$.
-In this case, if allocated bandwidth is larger than the demand, then the profit is 1, otherwise, it is 0.
+Where $y_i$ denotes whether commodity flow $i$ is routable.
+Consider a special case of the failure recovery problem, where $\mu_d=0$ for every $d$.
+This means, if the allocated bandwidth is no less than the demand, 
+then the profit is 1, or the profit is 0 otherwise.
+We transform the all-or-nothing multi-commodity flow problem to this case as follows:
+\textbf{TBD:
 We consider setting the admitted demand from tenants and their bandwidth target in 
-the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.
-If we can solve the special case of the admission control problem with a polynomial time algorithm, we would obtain the routable multi-commodity flow set  in the all-or-nothing multi-commodity flow problem.  
-Therefore, the failure recovery problem  is at least as hard as the all-or-nothing multi-commodity flow
-problem, which is known to be NP-hard. This completes the
-proof.
+the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.}
+%If we can solve the special case of the admission control problem with a polynomial time algorithm, we would obtain the routable multi-commodity flow set  in the all-or-nothing multi-commodity flow problem.  
+Therefore, the failure recovery problem is at least as hard as the all-or-nothing multi-commodity flow
+problem, which is known to be NP-hard. This completes the proof.
 %If we regard $j \in J$ as a multi-commodity flow pair and the topology as the undirected graph.
 %$g_j$ denotes whether multi-commodity flow $j$ is able to be routed.
 %Then WAPM-S problem can be seen as a variant of all-or-nothing multi-commodity flow problem and it is NP-hardness.
 \end{proof}
 
- \end{appendices}
+\end{appendices}
 
  
 %    
@@ -3344,10 +3381,11 @@ $h_d=1$;\\
 }
 \Else{
 \If{$\sum_{d'\in F}g_{d'} <g_d$}{
-\If {Recycling network resource allocated to demands in $F$ is able to support $d$}{
-Recycle network resource allocated to demands in $F$;\\
+\If {network resource allocated to demands in $F$ is able to support $d$}{
+	release network resource allocated to demands in $F$;\\
      $F= \{d\}$;\\
     Update $\{f^t_{d}\},\forall d \in \hat{D}$;\\
+    Update z’ s remaining network capacity;\\
 $\bm{break}$; \\
 }
 }
@@ -3400,10 +3438,9 @@ $\bm{break}$;
 
 
 
-
-
- In this part, we will introduce a greedy algorithm, shown in Algorithm \ref{greedy}, to solve failure recovery problem.
- Let $F$ denote the BA demands set that derive full profit (i.e. $h_d=1$).
+Our greedy algorithm to solve the MILP failure recovery problem (\ref{BATE-recovery}) 
+is  shown in Algorithm \ref{greedy}, which works as follows. 
+Let $F$ denote the BA demands set that derive full profit (i.e. $h_d=1$).
 Firstly, it sorts all the accepted demands  $d\in \hat{D}$ in non-decreasing order according to the ratio of demand profit to aggregate bandwidth demands, where the aggregate bandwidth demands are derived as ${\sum_{k\in K}\mathbf{b}^k_d}$ (Line 1).
 The ordered sequence prefers demands that have large profit and  small bandwidth.
 The algorithm then loops all the ordered admitted demands and tries to allocate resources with remaining network capacity (Line 5-9).
@@ -3428,7 +3465,7 @@ However, it achieves this at the cost of performance loss, which is proven as fo
 %Analyzing the performance loss is not focus of this paper and we just take a special case, in which links/nodes are available and $\mu(f_{jtk})=0,\forall j \in J, k\in K: t\in T_k$, as the example and deploy it under a simple network $G(V,E)=\{v_1,v_2, e\}$ with only one link to perform the analysis.
 %The following lemma proves the upper approximation bound of the special case.
 \begin{lemma}\label{greedy-app}
-Algorithm \ref{greedy} achieves 2-approximation for the MILP problem in failure recovery.
+Algorithm \ref{greedy} achieves 2-approximation for the MILP failure recovery problem.
 \end{lemma}
 
 \begin{proof}
@@ -3438,7 +3475,8 @@ Algorithm \ref{greedy} prefers accepted demands according to the following seque
 \end{eqnarray}
 
 (\ref{B-2})  means the priority of flow pair is decided by the unit value.
-W.l.o.g., assume that the network can't transfer the $n+1$ demand,  Algorithm \ref{greedy} will choose $max\{g_{n+1},\sum_{i=1}^{n}g_i\}$ as the value.
+Withou loss of generality, assume that the network can't transfer the $n+1$ demand,  
+Algorithm \ref{greedy} will choose $max\{g_{n+1},\sum_{i=1}^{n}g_i\}$ as the value.
 Let $OPT$ denote the optimal solution and it is obvious that  $\sum_{i=1}^{n} g_i\le OPT$.
 Also, we have  $\sum_{i=1}^{n+1} g_i\ge OPT$.
 This holds, since we've already made the density of network as high as possible by the greedy method.
@@ -3472,10 +3510,10 @@ proof.
 %\subfigure[Events after L3 failure]{
 %\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
 \caption{More details of testbed evaluations}
-\label{appendix -e1}
+\label{appendix-e1}
 \end{figure}
 
-we plot in Figure \ref{appendix -e1}(a), for each algorithm, the ratio of the allocated bandwidth 
+we plot in Figure \ref{appendix-e1}(a), for each algorithm, the ratio of the allocated bandwidth 
 to the demanded bandwidth. 
 The CDF curve shows that FFC is too conservative in bandwidth allocation, 
 and fails to allocate proper bandwidth in almost 60\% time.   
