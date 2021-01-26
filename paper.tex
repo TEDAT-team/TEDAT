@@ -1642,13 +1642,13 @@ Flow table just maps the packet based on the destination and the group tables co
 \centering
 \subfigure[Admission control]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/testbed-admit.pdf}}
-\subfigure[Bandwidth availability]{
+\subfigure[Traffic scheduling]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/fake-testbed-target.pdf}}
 \subfigure[Profit loss after failures]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/testbet-loss2.pdf}}
 \subfigure[Overall profit gain]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/overall-profit.pdf}}
-\caption{Demands arrive with poisson process and their duration are with exponential distribution.}
+\caption{Testbed evaluation with Poisson demand arrivals}
 \label{e2}
 \end{figure*}
 
@@ -1829,7 +1829,7 @@ Figure \ref{e2}(d) plots the overall profit of $\mathsf{BATE}$, FFC and TEAVAR.
 Due to its hard guarantee on bandwidth availability and its  profit maximization, 
 $\mathsf{BATE}$ can achieve at least 15\% more profit than the other two.
 
-Due to space limitations, more details of the evaluations, including the the ratio of the
+Due to space limitations, more details of this evaluation, including the the ratio of the
 allocated bandwidth to the demanded bandwidth, and the actual data loss ratio, 
 are put into  Appendix \ref{testbed-appendix}.
 
@@ -1951,7 +1951,7 @@ On the contrary, $\mathsf{BATE}$ matches demands and links well, and does not us
 
 \begin{figure}
 \centering
-\subfigure[Bandwidth availability]{
+\subfigure[Satisfied BA demands]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/test.pdf}}
 \subfigure[Failures of links]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/link-failures.pdf}}
@@ -1967,7 +1967,7 @@ On the contrary, $\mathsf{BATE}$ matches demands and links well, and does not us
 %%\includegraphics[width=0.24\textwidth]{fig/evaluation/time2.pdf}}
 %\subfigure[Events after L3 failure]{
 %\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
-\caption{ An simple example with three user demands whose details are shown in Table \ref{testbed-1}.}
+\caption{A simple example with three parallel demands.}
 \label{e1}
 \end{figure}
 
@@ -2044,13 +2044,13 @@ a national-level backbone&14&32\\
 %\includegraphics[width=0.7\textwidth]{fig/evaluation/legend.pdf}
 %\end{tabular}
 %\vfill
-\subfigure[Rejection percentage]{
+\subfigure[Rejection ratio]{
 \includegraphics[width=0.32\textwidth]{fig/evaluation/sim-admit.pdf}}
 \subfigure[Link utilization]{
 \includegraphics[width=0.32\textwidth]{fig/evaluation/link-utilization.pdf}}
-\subfigure[Admission time]{
+\subfigure[Admission delay]{
 \includegraphics[width=0.32\textwidth]{fig/evaluation/admission-control-time.pdf}}
-\caption{$\mathsf{BATE}$  vs. Fixed admission control under different network topologies.}
+\caption{Admission control results in simulations}
 \label{availability_fig1}
 \end{figure*}
 
@@ -2077,11 +2077,11 @@ a national-level backbone&14&32\\
 
 \begin{figure}
 \centering
-\subfigure[No extra admission control]{
+\subfigure[\mathsf{BATE} v.s. other TE algorithms]{
 \includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
-\subfigure[Fixed admission control]{
+\subfigure[augmented with \textit{fixed} admission control]{
 \includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-scheduling.pdf}}
-\caption{Traffic scheduling schemes comparisons.}
+\caption{Traffic scheduling results under simulations}
 \label{scheduling-benefit}
 \end{figure}
 
@@ -2130,7 +2130,7 @@ Table \ref{evaluation-topologies} shows the topology details
 Following the conclusion on WAN failures in literature studies\cite{Characterization, Teavar}, 
 we simulate link failures according to a Weibull distribution with its shape $\lambda=0.8$ and scale $k=0.00001$. 
 We generate the demand workload in a similar way to that in the testbed. 
-The arrivals of BA demands follow a Poisson process, with a mean inter-arrival time of 2 minutes. 
+The arrivals of BA demands follow a Poisson process, where the mean arrival rate varies from 1 to 5 in each time slot. 
 The duration of each demand follows an exponential distribution, and the mean duration corresponds to 1000 time slots.
 The required bandwidth in each user demand is randomly drawn from the traffic metrices (we have collected 200 matrices for each topology) with a proper scale down factor (we use 5), so that between each source-destination pair, multiple users can be served simultaneously. 
 The required availability in each user demand is drawn from 10 different SLAs of Azure\cite{azure}.
@@ -2143,7 +2143,7 @@ We assume at most one link failure (i.e., no concurrent failures) in FFC,
 use 99.9\% (which is the maximum value in the user demands) as the default availability target in TEAVAR,
 and let SWAN maximize the total throughput of all users. 
 With the above settings, each simulation lasts 150,000 slots (corresponding to 100 days if each slot represents 1 minute), and the results achieved by each algorithm on each topology are calculated on 5 independent simulations with different workload traces. 
-
+All the simulations are conducted on a Linux server with a quad-core 2.60GHz processor and 32GB memory.
 
 \iffalse
 \textbf{Workload.} 
@@ -2380,13 +2380,14 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 \label{sim-profit}
 \end{center}
 \end{figure}
-Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept up to 50\% more demands than the \textit{Fixed} consistently.
-Figure \ref{availability_fig1}(b) demonstrates  $\mathsf{BATE}$ is able to maintain at least 10\% higher link utilization than \textit{Fixed} algorithm.
-We qualify the scalability by measuring the admission control time for each demand.
-The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
-As shown in Figure \ref{availability_fig1}(c), the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution.
+Figure \ref{availability_fig1} compares, under different demand arrival rates, 
+the admission results of $\mathsf{BATE}$  against  
+the optimal strategy and the \textit{fixed} one, i.e., step (1) in $\mathsf{BATE}$. 
+Figure \ref{availability_fig1}(a) shows that, $\mathsf{BATE}$ falsely rejects at most 4\% demands (using the optimal solution as a baseline), but accepts up to 50\% more demands with a much smaller variance than Fixed. 
+It can also utilize at least 10\% higher bandwith than Fixed, as shown in Figure \ref{availability_fig1}(b). 
+We also qualify their efficiency by measuring the admission control delay, and Figure \ref{availability_fig1}(c) demonstrates that, $\mathsf{BATE}$ runs at least 30$\times$ faster than directly solving the MILP optimization problem, and always finishes within 1 second. 
 
- \begin{figure}[t]
+\begin{figure}[t]
 \begin{center}
 \includegraphics [width=0.8\columnwidth] {fig/evaluation/sim-monney.pdf}
 \caption{Profit gain after failures}
@@ -2394,7 +2395,17 @@ As shown in Figure \ref{availability_fig1}(c), the admission control time of $\m
 \end{center}
 \end{figure}
 
-Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
+We then compare the traffic scheduling capability of $\mathsf{BATE}$ against FFC, TEAVAR, SWAN, SMORE and B4.
+The methodology is similar to the post-processing simulation in TEAVAR \cite{Teavar}, 
+where we simulate different failure scenarios according to their probabilities, 
+and in each scenario we record the demands that can be satisfied. 
+If the \textit{achieved availibility}, i.e., the total posterior probabilities of \textit{qualified} scenarios where a user's bandwidth target is met, is larger than the user's availability target, 
+then the BA demand is \textit{satisfied}. 
+We plot the overall percentage of satisfied BA demands under each arrival rate (averaged across all simulations) in Figure \ref{scheduling-benefit}(a). $\mathsf{BATE}$ nearly always achieves a satisfaction ratio around 100\%, with a leading margin of up to 40\%, especially under a high arrival rate. 
+This clearly demonstrates $\mathsf{BATE}$'s advantage by matching  stringent availability requirements  
+with reliable links. 
+
+\iffalse
 %We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
 The sum of scenario probability where demand is fully satisfied reflects the \textit{achieved availability}.
 %If a demand's , then the availability defined in SLA is \textit{satisfaction}.
@@ -2407,6 +2418,7 @@ To show this benefit, we adopt \textit{Fixed} admission control for each traffic
 
 Figure \ref{sim-profit} shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
 We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algorithms when network fails.
+\fi
 
 
 
