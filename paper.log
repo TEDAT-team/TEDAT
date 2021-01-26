@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  26 JAN 2021 00:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  26 JAN 2021 10:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1976,24 +1976,24 @@ LaTeX Font Warning: Command \small invalid in math mode on input line 1447.
 File: fig/inter-DC-WAN-V3.pdf Graphic file (type pdf)
 <use fig/inter-DC-WAN-V3.pdf>
 Package pdftex.def Info: fig/inter-DC-WAN-V3.pdf  used on input line 1516.
-(pdftex.def)             Requested size: 217.03127pt x 122.07442pt.
+(pdftex.def)             Requested size: 192.91872pt x 108.51059pt.
 <fig/testbed.pdf, id=495, 821.0675pt x 542.025pt>
 File: fig/testbed.pdf Graphic file (type pdf)
 <use fig/testbed.pdf>
 Package pdftex.def Info: fig/testbed.pdf  used on input line 1611.
-(pdftex.def)             Requested size: 192.91872pt x 127.35107pt.
-<fig/evaluation/testbed-admit.pdf, id=496, 697.60625pt x 527.9725pt>
+(pdftex.def)             Requested size: 180.86061pt x 119.39473pt.
+<fig/evaluation/testbed-admit.pdf, id=496, 703.62875pt x 486.81876pt>
 File: fig/evaluation/testbed-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-admit.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-admit.pdf  used on input line 1
 644.
-(pdftex.def)             Requested size: 116.44568pt x 88.12679pt.
-<fig/evaluation/fake-testbed-target.pdf, id=497, 755.82375pt x 550.055pt>
+(pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
+<fig/evaluation/fake-testbed-target.pdf, id=497, 704.6325pt x 487.8225pt>
 File: fig/evaluation/fake-testbed-target.pdf Graphic file (type pdf)
 <use fig/evaluation/fake-testbed-target.pdf>
 Package pdftex.def Info: fig/evaluation/fake-testbed-target.pdf  used on input 
 line 1646.
-(pdftex.def)             Requested size: 116.44568pt x 84.73726pt.
+(pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
 <fig/evaluation/testbet-loss2.pdf, id=498, 704.6325pt x 487.8225pt>
 File: fig/evaluation/testbet-loss2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbet-loss2.pdf>
@@ -2007,6 +2007,9 @@ Package pdftex.def Info: fig/evaluation/overall-profit.pdf  used on input line
 1650.
 (pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
  [8.8 <./fig/inter-DC-WAN-V3.pdf> <./fig/testbed.pdf>]
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9.9 <./fig/evaluation/testbed-admit.pdf> <./fig/evaluation/fake-testbed-targe
@@ -2027,89 +2030,70 @@ fit.pdf): PDF inclusion: multiple pdfs with page group included in a single pag
 e
 >]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1874.
+(Font)              scaled to size 7.0pt on input line 1875.
 
 Underfull \vbox (badness 5878) has occurred while \output is active []
 
 <fig/evaluation/test.pdf, id=809, 704.6325pt x 487.8225pt>
 File: fig/evaluation/test.pdf Graphic file (type pdf)
 <use fig/evaluation/test.pdf>
-Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1950.
+Package pdftex.def Info: fig/evaluation/test.pdf  used on input line 1951.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
 <fig/evaluation/link-failures.pdf, id=810, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-failures.pdf Graphic file (type pdf)
 <use fig/evaluation/link-failures.pdf>
 Package pdftex.def Info: fig/evaluation/link-failures.pdf  used on input line 1
-952.
+953.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
 <fig/evaluation/sim-admit.pdf, id=813, 703.62875pt x 486.81876pt>
 File: fig/evaluation/sim-admit.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-admit.pdf>
-Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 2043.
+Package pdftex.def Info: fig/evaluation/sim-admit.pdf  used on input line 2044.
 
 (pdftex.def)             Requested size: 162.0181pt x 112.09224pt.
 <fig/evaluation/link-utilization.pdf, id=814, 704.6325pt x 487.8225pt>
 File: fig/evaluation/link-utilization.pdf Graphic file (type pdf)
 <use fig/evaluation/link-utilization.pdf>
 Package pdftex.def Info: fig/evaluation/link-utilization.pdf  used on input lin
-e 2045.
+e 2046.
 (pdftex.def)             Requested size: 162.0181pt x 112.16704pt.
 <fig/evaluation/admission-control-time.pdf, id=815, 703.62875pt x 483.8075pt>
 File: fig/evaluation/admission-control-time.pdf Graphic file (type pdf)
 <use fig/evaluation/admission-control-time.pdf>
 Package pdftex.def Info: fig/evaluation/admission-control-time.pdf  used on inp
-ut line 2047.
+ut line 2048.
 (pdftex.def)             Requested size: 162.0181pt x 111.39888pt.
-<fig/evaluation/fixed-scheduling.pdf, id=816, 704.6325pt x 487.8225pt>
+<fig/evaluation/fixed-shuduling.pdf, id=816, 711.65875pt x 285.065pt>
+File: fig/evaluation/fixed-shuduling.pdf Graphic file (type pdf)
+<use fig/evaluation/fixed-shuduling.pdf>
+Package pdftex.def Info: fig/evaluation/fixed-shuduling.pdf  used on input line
+ 2077.
+(pdftex.def)             Requested size: 227.83119pt x 91.25746pt.
+<fig/evaluation/fixed-scheduling.pdf, id=817, 711.65875pt x 285.065pt>
 File: fig/evaluation/fixed-scheduling.pdf Graphic file (type pdf)
 <use fig/evaluation/fixed-scheduling.pdf>
 Package pdftex.def Info: fig/evaluation/fixed-scheduling.pdf  used on input lin
-e 2076.
-(pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/no-fixed.pdf, id=817, 704.6325pt x 487.8225pt>
-File: fig/evaluation/no-fixed.pdf Graphic file (type pdf)
-<use fig/evaluation/no-fixed.pdf>
-Package pdftex.def Info: fig/evaluation/no-fixed.pdf  used on input line 2078.
-(pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
+e 2079.
+(pdftex.def)             Requested size: 227.83119pt x 91.25746pt.
  [10.10 <./fig/evaluation/test.pdf> <./fig/evaluation/link-failures.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/link-failur
 es.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 
 >]
-<fig/evaluation/sim-monney.pdf, id=873, 704.6325pt x 487.8225pt>
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
+<fig/evaluation/sim-monney.pdf, id=876, 768.8725pt x 384.43625pt>
 File: fig/evaluation/sim-monney.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-monney.pdf>
-Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 2289
+Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 2379
 .
-(pdftex.def)             Requested size: 168.8025pt x 116.86392pt.
+(pdftex.def)             Requested size: 192.91872pt x 96.45491pt.
 
+Underfull \vbox (badness 1320) has occurred while \output is active []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+ [11.11 <./fig/evaluation/sim-admit.pdf> <./fig/evaluation/link-utilization.pdf
 
-<fig/evaluation/error.pdf, id=881, 704.6325pt x 487.8225pt>
-File: fig/evaluation/error.pdf Graphic file (type pdf)
-<use fig/evaluation/error.pdf>
-Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2404.
-(pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
-<fig/evaluation/optimization_time.pdf, id=882, 703.62875pt x 486.81876pt>
-File: fig/evaluation/optimization_time.pdf Graphic file (type pdf)
-<use fig/evaluation/optimization_time.pdf>
-Package pdftex.def Info: fig/evaluation/optimization_time.pdf  used on input li
-ne 2406.
-(pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
-<fig/evaluation/routing.pdf, id=883, 703.62875pt x 486.81876pt>
-File: fig/evaluation/routing.pdf Graphic file (type pdf)
-<use fig/evaluation/routing.pdf>
-Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2431.
-(pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
-<fig/evaluation/approximation.pdf, id=884, 703.62875pt x 486.81876pt>
-File: fig/evaluation/approximation.pdf Graphic file (type pdf)
-<use fig/evaluation/approximation.pdf>
-Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-437.
-(pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
-[11.11 <./fig/evaluation/sim-admit.pdf> <./fig/evaluation/link-utilization.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/link-utiliz
 ation.pdf): PDF inclusion: multiple pdfs with page group included in a single p
@@ -2119,20 +2103,44 @@ age
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/admission-c
 ontrol-time.pdf): PDF inclusion: multiple pdfs with page group included in a si
 ngle page
+> <./fig/evaluation/fixed-shuduling.pdf
+
+pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/fixed-shudu
+ling.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
+ge
 > <./fig/evaluation/fixed-scheduling.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/fixed-sched
 uling.pdf): PDF inclusion: multiple pdfs with page group included in a single p
 age
-> <./fig/evaluation/no-fixed.pdf
-
-pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/no-fixed.pd
-f): PDF inclusion: multiple pdfs with page group included in a single page
 > <./fig/evaluation/sim-monney.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/sim-monney.
 pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
+<fig/evaluation/error.pdf, id=979, 704.6325pt x 487.8225pt>
+File: fig/evaluation/error.pdf Graphic file (type pdf)
+<use fig/evaluation/error.pdf>
+Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2405.
+(pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
+<fig/evaluation/optimization_time.pdf, id=980, 703.62875pt x 486.81876pt>
+File: fig/evaluation/optimization_time.pdf Graphic file (type pdf)
+<use fig/evaluation/optimization_time.pdf>
+Package pdftex.def Info: fig/evaluation/optimization_time.pdf  used on input li
+ne 2407.
+(pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
+<fig/evaluation/routing.pdf, id=981, 703.62875pt x 486.81876pt>
+File: fig/evaluation/routing.pdf Graphic file (type pdf)
+<use fig/evaluation/routing.pdf>
+Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2432.
+(pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
+<fig/evaluation/approximation.pdf, id=982, 703.62875pt x 486.81876pt>
+File: fig/evaluation/approximation.pdf Graphic file (type pdf)
+<use fig/evaluation/approximation.pdf>
+Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
+438.
+(pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
+
 
 LaTeX Warning: Overwriting file `./paper.bib'.
 
@@ -2140,16 +2148,11 @@ LaTeX Warning: Overwriting file `./paper.bib'.
 
 
 LaTeX Warning: Writing text ` ' before \end{filecontents}
-               as last line of paper.bib on input line 3029.
+               as last line of paper.bib on input line 3030.
 
 
-(./paper.bbl
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 71.
-
-Underfull \vbox (badness 4660) has occurred while \output is active []
-
- [12.12 <./fig/evaluation/error.pdf> <./fig/evaluation/optimization_time.pdf
+(./paper.bbl [12.12 <./fig/evaluation/error.pdf> <./fig/evaluation/optimization
+_time.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/optimizatio
 n_time.pdf): PDF inclusion: multiple pdfs with page group included in a single 
@@ -2164,15 +2167,21 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/approximati
 on.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 
 >]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 8.0pt on input line 71.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Underfull \hbox (badness 1097) in paragraph at lines 362--373
 []\T1/LinuxLibertineT-TLF/m/n/8 (+20) Sushant Jain, Alok Ku-mar, Sub-has-ree Ma
 n-dal, Joon Ong, Leon
  []
 
-
+[13.13]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13.13]
+
 Underfull \hbox (badness 2142) in paragraph at lines 737--747
 []\T1/LinuxLibertineT-TLF/m/n/8 (+20) Balajee Va-manan, Ja-hangir Hasan, and T.
 N. Vi-jayku-mar. 2012.
@@ -2180,7 +2189,7 @@ N. Vi-jayku-mar. 2012.
 
 ) [14.14]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 3173.
+LaTeX Font Warning: Command \small invalid in math mode on input line 3174.
 
 [15.15
 
@@ -2191,13 +2200,13 @@ Underfull \vbox (badness 2932) has occurred while \output is active []
 File: fig/evaluation/testbed-public-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-public-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-public-2.pdf  used on input lin
-e 3432.
+e 3433.
 (pdftex.def)             Requested size: 116.44568pt x 81.11943pt.
 <fig/evaluation/testbed-data-loss-2.pdf, id=1212, 757.83125pt x 507.8975pt>
 File: fig/evaluation/testbed-data-loss-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-data-loss-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-data-loss-2.pdf  used on input 
-line 3434.
+line 3435.
 (pdftex.def)             Requested size: 116.44568pt x 78.0413pt.
  [16.16]
 [17.17
@@ -2209,19 +2218,19 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./fig/evaluation/testbed-dat
 a-loss-2.pdf): PDF inclusion: multiple pdfs with page group included in a singl
 e page
 >]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3477.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3477.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3478.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3478.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3477.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3477.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3478.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3478.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: C83681E46015D04D9BEAD737304F0894;3845.
  ) 
 Here is how much of TeX's memory you used:
  31240 strings out of 492985
- 545425 string characters out of 6132585
- 639434 words of memory out of 5000000
+ 545460 string characters out of 6132585
+ 638432 words of memory out of 5000000
  33086 multiletter control sequences out of 15000+600000
  369836 words of font info for 764 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
@@ -2255,7 +2264,7 @@ xmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016/texmf-dist
 /type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
 ublic/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ne
 wtx/zxlzi.pfb>
-Output written on paper.pdf (17 pages, 1130680 bytes).
+Output written on paper.pdf (17 pages, 1131143 bytes).
 PDF statistics:
  1415 PDF objects out of 1440 (max. 8388607)
  1225 compressed objects within 13 object streams

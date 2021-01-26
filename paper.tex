@@ -69,7 +69,7 @@
 %\titlenote{Produces the permission block, and copyright information}
 %\subtitle{Extended Abstract}
 
-\author{Paper \# 56, 18 pages}
+\author{Paper \# 56, 17 pages}
 % \author{Firstname Lastname}
 % \authornote{Note}
 % \orcid{1234-5678-9012}
@@ -1513,7 +1513,7 @@ where the master controller is elected by the Paxos \cite{lamport1998the} algori
 
 \begin{figure}
 \begin{center}
-\includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
+\includegraphics [width=0.8\columnwidth] {fig/inter-DC-WAN-V3.pdf}
 \caption{System architecture of $\mathsf{BATE}$}
 \label{pic-overview}
 \end{center}
@@ -1608,7 +1608,7 @@ Flow table just maps the packet based on the destination and the group tables co
 
  \begin{figure}
 \begin{center}
-\includegraphics [width=0.8\columnwidth] {fig/testbed.pdf}
+\includegraphics [width=0.75\columnwidth] {fig/testbed.pdf}
 \caption{Testbed topology with failure probabilities}
 \label{testbed}
 \end{center}
@@ -1648,7 +1648,7 @@ Flow table just maps the packet based on the destination and the group tables co
 \includegraphics[width=0.23\textwidth]{fig/evaluation/testbet-loss2.pdf}}
 \subfigure[Overall profit gain]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/overall-profit.pdf}}
-\caption{BA demands arrive with poisson process and their duration are with exponential distribution.}
+\caption{Demands arrive with poisson process and their duration are with exponential distribution.}
 \label{e2}
 \end{figure*}
 
@@ -1680,19 +1680,20 @@ On the testbed, we also implement another two state-of-the-art TE algorithms con
 For simulation, we implement more TE algorithms, including SWAN \cite{swan}, SMORE \cite{SMORE} and B4 \cite{B4}. 
 All codes for our implementation and evaluation will be published, 
 so that interested readers can use them in their own environments or make further improvements. 
-
 Our main results are as follows:
 
 %We begin by describing the experimental framework ($\S$ \ref{setting}). 
 %We show the performance of $\mathsf{BATE}$ through answering the following specific questions:
 %compared with the latest TE schemes like FFC and TEAVAR, BATE can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
-(1) $\mathsf{BATE}$ consistently ourperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, up to 40\% more bandwidth availability demands can be successfully fulfilled, and 30\% more profit can be retained when failures occur.
+(1) $\mathsf{BATE}$ consistently outperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, up to 40\% more bandwidth availability demands can be successfully fulfilled, and 30\% more profit can be retained when failures occur.
 
 (2) $\mathsf{BATE}$ achieves a good tradeoff between efficiency and optimality. 
 Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of less than 4\% false rejections, 
 (ii) our pruning-augmented scheduling algorithm runs xx$\times$ faster while wasting only 6\% total bandwidth and losing only 8\% overall availability, 
 and (iii) our greedy failure recovery algorithm can reduce the reaction time by xx$\times$, 
 where the profit loss is below 10\%.
+
+(3)  $\mathsf{BATE}$ has stable performance: it doesn't depend on specific network topology, routing schemes, etc.
 
 % \begin{itemize}
 %  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
@@ -2076,9 +2077,9 @@ a national-level backbone&14&32\\
 \begin{figure}
 \centering
 \subfigure[No extra admission control]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/fixed-scheduling.pdf}}
+\includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
 \subfigure[Fixed admission control]{
-\includegraphics[width=0.23\textwidth]{fig/evaluation/no-fixed.pdf}}
+\includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-scheduling.pdf}}
 \caption{Traffic scheduling schemes comparisons.}
 \label{scheduling-benefit}
 \end{figure}
@@ -2384,6 +2385,13 @@ We qualify the scalability by measuring the admission control time for each dema
 The simulation is performed on a Linux server (4-core, 2.60GHz processor with 32GB).
 As shown in Figure \ref{availability_fig1}(c), the admission control time of $\mathsf{BATE}$ is less than 1s with about less than 5\% error, which is at least 30$\times$ faster the global optimal solution.
 
+ \begin{figure}[t]
+\begin{center}
+\includegraphics [width=0.8\columnwidth] {fig/evaluation/sim-monney.pdf}
+\caption{Profit gain after failures}
+\label{sim-profit}
+\end{center}
+\end{figure}
 
 Similar to \cite{Teavar}, we next start a post-processing simulation, in which intends to send entirely bandwidth under each scenario at each time slot.
 %We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
