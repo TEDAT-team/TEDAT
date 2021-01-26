@@ -1,0 +1,814 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{51}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{{Aliababa}}{{Aliababa}}{2020a}]%
+        {alibaba2}
+\bibfield{author}{\bibinfo{person}{{Aliababa}}.}
+  \bibinfo{year}{2020}\natexlab{a}.
+\newblock \bibinfo{title}{Data Transmission Service Level Agreement}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.alibabacloud.com/help/zh/doc-detail/50079.htm}}.
+    (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{Aliababa}}{{Aliababa}}{2020b}]%
+        {alibaba3}
+\bibfield{author}{\bibinfo{person}{{Aliababa}}.}
+  \bibinfo{year}{2020}\natexlab{b}.
+\newblock \bibinfo{title}{Short Message Service (SMS) Service Level Agreement}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.alibabacloud.com/help/zh/doc-detail/155130.htm}}.
+    (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Alipourfard, Gao, Koenig, Harshaw, Vahdat, and
+  Yu}{Alipourfard et~al\mbox{.}}{2019}]%
+        {riskbased}
+\bibfield{author}{\bibinfo{person}{Omid Alipourfard}, \bibinfo{person}{Jiaqi
+  Gao}, \bibinfo{person}{Jeremie Koenig}, \bibinfo{person}{Chris Harshaw},
+  \bibinfo{person}{Amin Vahdat}, {and} \bibinfo{person}{Minlan Yu}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Risk Based Planning of Network Changes in Evolving
+  Data Centers}. In \bibinfo{booktitle}{{\em Proceedings of the 27th ACM
+  Symposium on Operating Systems Principles}} {\em (\bibinfo{series}{SOSP
+  '19})}. \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{414--429}.
+\newblock
+\showISBNx{9781450368735}
+\showDOI{%
+\url{https://doi.org/10.1145/3341301.3359664}}
+
+
+\bibitem[\protect\citeauthoryear{{Amazon}}{{Amazon}}{2019}]%
+        {amazon}
+\bibfield{author}{\bibinfo{person}{{Amazon}}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \bibinfo{title}{Amazon Compute Service Level Agreement (2019)}.
+\newblock \bibinfo{howpublished}{\url{https://aws.amazon.com/compute/sla/}}.
+  (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{Amazon}}{{Amazon}}{2020a}]%
+        {amazon3}
+\bibfield{author}{\bibinfo{person}{{Amazon}}.}
+  \bibinfo{year}{2020}\natexlab{a}.
+\newblock \bibinfo{title}{Amazon AppFlow Service Level Agreement}.
+\newblock \bibinfo{howpublished}{\url{https://aws.amazon.com/cn/appflow/sla/}}.
+    (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{Amazon}}{{Amazon}}{2020b}]%
+        {amazon2}
+\bibfield{author}{\bibinfo{person}{{Amazon}}.}
+  \bibinfo{year}{2020}\natexlab{b}.
+\newblock \bibinfo{title}{AWS Database Migration Service (AWS DMS) Service
+  Level Agreement}.
+\newblock \bibinfo{howpublished}{\url{https://aws.amazon.com/cn/dms/sla/}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{aryaka}}{{aryaka}}{2020}]%
+        {aryaka}
+\bibfield{author}{\bibinfo{person}{{aryaka}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Aryaka Private WAN}.
+\newblock \bibinfo{howpublished}{\url{https://www.aryaka.com}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{Azure}}{{Azure}}{2020}]%
+        {azure}
+\bibfield{author}{\bibinfo{person}{{Azure}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Microsoft Azure Service Level Agreements (2020)}.
+\newblock
+  \bibinfo{howpublished}{\url{https://azure.microsoft.com/en-us/support/legal/sla/summary/}}.
+    (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Bi and Tang}{Bi and Tang}{2019}]%
+        {bi2019uncertainty-aware}
+\bibfield{author}{\bibinfo{person}{Yingjie Bi} {and} \bibinfo{person}{Ao
+  Tang}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Uncertainty-Aware optimization for Network
+  Provisioning and Routing}.
+\newblock  (\bibinfo{year}{2019}), \bibinfo{pages}{1--6}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Bogle, Bhatia, Ghobadi, Menache, Bj\o{}rner,
+  Valadarsky, and Schapira}{Bogle et~al\mbox{.}}{2019}]%
+        {Teavar}
+\bibfield{author}{\bibinfo{person}{Jeremy Bogle}, \bibinfo{person}{Nikhil
+  Bhatia}, \bibinfo{person}{Manya Ghobadi}, \bibinfo{person}{Ishai Menache},
+  \bibinfo{person}{Nikolaj Bj\o{}rner}, \bibinfo{person}{Asaf Valadarsky},
+  {and} \bibinfo{person}{Michael Schapira}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{TEAVAR: Striking the Right Utilization-Availability
+  Balance in WAN Traffic Engineering}. In \bibinfo{booktitle}{{\em Proceedings
+  of the ACM Special Interest Group on Data Communication}} {\em
+  (\bibinfo{series}{SIGCOMM '19})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{29--43}.
+\newblock
+\showISBNx{9781450359566}
+\showDOI{%
+\url{https://doi.org/10.1145/3341302.3342069}}
+
+
+\bibitem[\protect\citeauthoryear{{cato}}{{cato}}{2020}]%
+        {cato}
+\bibfield{author}{\bibinfo{person}{{cato}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Cato Managed Services}.
+\newblock \bibinfo{howpublished}{\url{https://www.catonetworks.com}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chekuri, Khanna, and Shepherd}{Chekuri
+  et~al\mbox{.}}{2004}]%
+        {inproceedings2}
+\bibfield{author}{\bibinfo{person}{Chandra Chekuri}, \bibinfo{person}{Sanjeev
+  Khanna}, {and} \bibinfo{person}{{F. Bruce} Shepherd}.}
+  \bibinfo{year}{2004}\natexlab{}.
+\newblock \showarticletitle{The all-or-nothing multicommodity flow problem}.
+\newblock \bibinfo{journal}{{\em Conference Proceedings of the Annual ACM
+  Symposium on Theory of Computing\/}} (\bibinfo{date}{29 Sept.}
+  \bibinfo{year}{2004}), \bibinfo{pages}{156--165}.
+\newblock
+\showISSN{0734-9025}
+\newblock
+\shownote{Proceedings of the 36th Annual ACM Symposium on Theory of Computing ;
+  Conference date: 13-06-2004 Through 15-06-2004.}
+
+
+\bibitem[\protect\citeauthoryear{{Elwalid}, {Jin}, {Low}, and
+  {Widjaja}}{{Elwalid} et~al\mbox{.}}{2001}]%
+        {MATE}
+\bibfield{author}{\bibinfo{person}{A. {Elwalid}}, \bibinfo{person}{C. {Jin}},
+  \bibinfo{person}{S. {Low}}, {and} \bibinfo{person}{I. {Widjaja}}.}
+  \bibinfo{year}{2001}\natexlab{}.
+\newblock \showarticletitle{MATE: MPLS adaptive traffic engineering}. In
+  \bibinfo{booktitle}{{\em Proceedings IEEE INFOCOM 2001. Conference on
+  Computer Communications. Twentieth Annual Joint Conference of the IEEE
+  Computer and Communications Society (Cat. No.01CH37213)}},
+  Vol.~\bibinfo{volume}{3}. \bibinfo{pages}{1300--1309 vol.3}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{floodlight}}{{floodlight}}{2020}]%
+        {floodlight}
+\bibfield{author}{\bibinfo{person}{{floodlight}}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Floodlight controller}.
+\newblock
+  \bibinfo{howpublished}{\url{https://github.com/floodlight/floodlight}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{Fortz} and {Thorup}}{{Fortz} and
+  {Thorup}}{2002}]%
+        {OSPF}
+\bibfield{author}{\bibinfo{person}{B. {Fortz}} {and} \bibinfo{person}{M.
+  {Thorup}}.} \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{Optimizing OSPF/IS-IS weights in a changing world}.
+\newblock \bibinfo{journal}{{\em IEEE Journal on Selected Areas in
+  Communications\/}} \bibinfo{volume}{20}, \bibinfo{number}{4}
+  (\bibinfo{year}{2002}), \bibinfo{pages}{756--767}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ghobadi and Mahajan}{Ghobadi and
+  Mahajan}{2016a}]%
+        {failureslarge}
+\bibfield{author}{\bibinfo{person}{Monia Ghobadi} {and} \bibinfo{person}{Ratul
+  Mahajan}.} \bibinfo{year}{2016}\natexlab{a}.
+\newblock \showarticletitle{Optical Layer Failures in a Large Backbone}. In
+  \bibinfo{booktitle}{{\em Proceedings of the 2016 Internet Measurement
+  Conference}} {\em (\bibinfo{series}{IMC '16})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{461--467}.
+\newblock
+\showISBNx{9781450345262}
+\showDOI{%
+\url{https://doi.org/10.1145/2987443.2987483}}
+
+
+\bibitem[\protect\citeauthoryear{Ghobadi and Mahajan}{Ghobadi and
+  Mahajan}{2016b}]%
+        {Optical}
+\bibfield{author}{\bibinfo{person}{Monia Ghobadi} {and} \bibinfo{person}{Ratul
+  Mahajan}.} \bibinfo{year}{2016}\natexlab{b}.
+\newblock \showarticletitle{Optical Layer Failures in a Large Backbone}. In
+  \bibinfo{booktitle}{{\em Proceedings of the 2016 Internet Measurement
+  Conference}} {\em (\bibinfo{series}{IMC '16})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{461--467}.
+\newblock
+\showISBNx{9781450345262}
+\showDOI{%
+\url{https://doi.org/10.1145/2987443.2987483}}
+
+
+\bibitem[\protect\citeauthoryear{Gill, Jain, and Nagappan}{Gill
+  et~al\mbox{.}}{2011}]%
+        {understanding}
+\bibfield{author}{\bibinfo{person}{Phillipa Gill}, \bibinfo{person}{Navendu
+  Jain}, {and} \bibinfo{person}{Nachiappan Nagappan}.}
+  \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Understanding Network Failures in Data Centers:
+  Measurement, Analysis, and Implications}. In \bibinfo{booktitle}{{\em
+  Proceedings of the ACM SIGCOMM 2011 Conference}} {\em
+  (\bibinfo{series}{SIGCOMM '11})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{350--361}.
+\newblock
+\showISBNx{9781450307970}
+\showDOI{%
+\url{https://doi.org/10.1145/2018436.2018477}}
+
+
+\bibitem[\protect\citeauthoryear{Govindan, Minei, Kallahalla, Koley, and
+  Vahdat}{Govindan et~al\mbox{.}}{2016}]%
+        {evole}
+\bibfield{author}{\bibinfo{person}{Ramesh Govindan}, \bibinfo{person}{Ina
+  Minei}, \bibinfo{person}{Mahesh Kallahalla}, \bibinfo{person}{Bikash Koley},
+  {and} \bibinfo{person}{Amin Vahdat}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Evolve or Die: High-Availability Design Principles
+  Drawn from Googles Network Infrastructure}. In \bibinfo{booktitle}{{\em
+  Proceedings of the 2016 ACM SIGCOMM Conference}} {\em
+  (\bibinfo{series}{SIGCOMM '16})}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{{Gurobi}}{{Gurobi}}{2020}]%
+        {gurobi}
+\bibfield{author}{\bibinfo{person}{{Gurobi}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Gurobi is a powerful mathematical optimization
+  solver}.
+\newblock \bibinfo{howpublished}{\url{https://www.gurobi.com}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Harchol, Bergemann, Feamster, Friedman,
+  Krishnamurthy, Panda, Ratnasamy, Schapira, and Shenker}{Harchol
+  et~al\mbox{.}}{2020}]%
+        {publicore}
+\bibfield{author}{\bibinfo{person}{Yotam Harchol}, \bibinfo{person}{Dirk
+  Bergemann}, \bibinfo{person}{Nick Feamster}, \bibinfo{person}{Eric Friedman},
+  \bibinfo{person}{Arvind Krishnamurthy}, \bibinfo{person}{Aurojit Panda},
+  \bibinfo{person}{Sylvia Ratnasamy}, \bibinfo{person}{Michael Schapira}, {and}
+  \bibinfo{person}{Scott Shenker}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{A Public Option for the Core}. In
+  \bibinfo{booktitle}{{\em Proceedings of the Annual Conference of the ACM
+  Special Interest Group on Data Communication on the Applications,
+  Technologies, Architectures, and Protocols for Computer Communication}} {\em
+  (\bibinfo{series}{SIGCOMM' 20})}. \bibinfo{publisher}{Association for
+  Computing Machinery}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{377–389}.
+\newblock
+\showISBNx{9781450379557}
+\showDOI{%
+\url{https://doi.org/10.1145/3387514.3405875}}
+
+
+\bibitem[\protect\citeauthoryear{Hong, Kandula, Mahajan, Zhang, Gill, Nanduri,
+  and Wattenhofer}{Hong et~al\mbox{.}}{2013}]%
+        {swan}
+\bibfield{author}{\bibinfo{person}{Chi{-}Yao Hong}, \bibinfo{person}{Srikanth
+  Kandula}, \bibinfo{person}{Ratul Mahajan}, \bibinfo{person}{Ming Zhang},
+  \bibinfo{person}{Vijay Gill}, \bibinfo{person}{Mohan Nanduri}, {and}
+  \bibinfo{person}{Roger Wattenhofer}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Achieving high utilization with software-driven
+  {WAN}}. In \bibinfo{booktitle}{{\em {ACM} {SIGCOMM} 2013 Conference,
+  SIGCOMM'13, Hong Kong, China, August 12-16, 2013}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hong, Mandal, Al-Fares, Zhu, Alimi, B.,
+  Bhagat, Jain, Kaimal, Liang, Mendelev, Padgett, Rabe, Ray, Tewari, Tierney,
+  Zahn, Zolla, Ong, and Vahdat}{Hong et~al\mbox{.}}{2018}]%
+        {hong2018b4}
+\bibfield{author}{\bibinfo{person}{Chi-Yao Hong}, \bibinfo{person}{Subhasree
+  Mandal}, \bibinfo{person}{Mohammad Al-Fares}, \bibinfo{person}{Min Zhu},
+  \bibinfo{person}{Richard Alimi}, \bibinfo{person}{Kondapa~Naidu B.},
+  \bibinfo{person}{Chandan Bhagat}, \bibinfo{person}{Sourabh Jain},
+  \bibinfo{person}{Jay Kaimal}, \bibinfo{person}{Shiyu Liang},
+  \bibinfo{person}{Kirill Mendelev}, \bibinfo{person}{Steve Padgett},
+  \bibinfo{person}{Faro Rabe}, \bibinfo{person}{Saikat Ray},
+  \bibinfo{person}{Malveeka Tewari}, \bibinfo{person}{Matt Tierney},
+  \bibinfo{person}{Monika Zahn}, \bibinfo{person}{Jonathan Zolla},
+  \bibinfo{person}{Joon Ong}, {and} \bibinfo{person}{Amin Vahdat}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{B4 and after: Managing Hierarchy, Partitioning, and
+  Asymmetry for Availability and Scale in Google's Software-Defined WAN}. In
+  \bibinfo{booktitle}{{\em Proceedings of the 2018 Conference of the ACM
+  Special Interest Group on Data Communication}} {\em (\bibinfo{series}{SIGCOMM
+  '18})}. \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{74--87}.
+\newblock
+\showISBNx{9781450355674}
+\showDOI{%
+\url{https://doi.org/10.1145/3230543.3230545}}
+
+
+\bibitem[\protect\citeauthoryear{Jain, Kumar, Mandal, Ong, Poutievski, Singh,
+  Venkata, Wanderer, Zhou, Zhu, Zolla, H\"{o}lzle, Stuart, and Vahdat}{Jain
+  et~al\mbox{.}}{2013}]%
+        {B4}
+\bibfield{author}{\bibinfo{person}{Sushant Jain}, \bibinfo{person}{Alok Kumar},
+  \bibinfo{person}{Subhasree Mandal}, \bibinfo{person}{Joon Ong},
+  \bibinfo{person}{Leon Poutievski}, \bibinfo{person}{Arjun Singh},
+  \bibinfo{person}{Subbaiah Venkata}, \bibinfo{person}{Jim Wanderer},
+  \bibinfo{person}{Junlan Zhou}, \bibinfo{person}{Min Zhu},
+  \bibinfo{person}{Jon Zolla}, \bibinfo{person}{Urs H\"{o}lzle},
+  \bibinfo{person}{Stephen Stuart}, {and} \bibinfo{person}{Amin Vahdat}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{B4: Experience with a Globally-Deployed Software
+  Defined Wan}. In \bibinfo{booktitle}{{\em Proceedings of the ACM SIGCOMM 2013
+  Conference on SIGCOMM}} {\em (\bibinfo{series}{SIGCOMM '13})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{3--14}.
+\newblock
+\showISBNx{9781450320566}
+\showDOI{%
+\url{https://doi.org/10.1145/2486001.2486019}}
+
+
+\bibitem[\protect\citeauthoryear{Jalaparti, Bliznets, Kandula, Lucier, and
+  Menache}{Jalaparti et~al\mbox{.}}{2016}]%
+        {dynamic}
+\bibfield{author}{\bibinfo{person}{Virajith Jalaparti}, \bibinfo{person}{Ivan
+  Bliznets}, \bibinfo{person}{Srikanth Kandula}, \bibinfo{person}{Brendan
+  Lucier}, {and} \bibinfo{person}{Ishai Menache}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Dynamic Pricing and Traffic Engineering for Timely
+  Inter-Datacenter Transfers}. In \bibinfo{booktitle}{{\em Proceedings of the
+  2016 ACM SIGCOMM Conference}} {\em (\bibinfo{series}{SIGCOMM '16})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{73--86}.
+\newblock
+\showISBNx{9781450341936}
+\showDOI{%
+\url{https://doi.org/10.1145/2934872.2934893}}
+
+
+\bibitem[\protect\citeauthoryear{Jeyakumar, Alizadeh, Mazi{\`e}res, Prabhakar,
+  Greenberg, and Kim}{Jeyakumar et~al\mbox{.}}{2013}]%
+        {EyeQ}
+\bibfield{author}{\bibinfo{person}{Vimalkumar Jeyakumar},
+  \bibinfo{person}{Mohammad Alizadeh}, \bibinfo{person}{David Mazi{\`e}res},
+  \bibinfo{person}{Balaji Prabhakar}, \bibinfo{person}{Albert Greenberg}, {and}
+  \bibinfo{person}{Changhoon Kim}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{EyeQ: Practical Network Performance Isolation at
+  the Edge}. In \bibinfo{booktitle}{{\em Presented as part of the 10th {USENIX}
+  Symposium on Networked Systems Design and Implementation ({NSDI} 13)}}.
+  \bibinfo{publisher}{{USENIX}}, \bibinfo{address}{Lombard, IL},
+  \bibinfo{pages}{297--311}.
+\newblock
+\showISBNx{978-1-931971-00-3}
+\showURL{%
+\url{https://www.usenix.org/conference/nsdi13/technical-sessions/presentation/jeyakumar}}
+
+
+\bibitem[\protect\citeauthoryear{Jiang, Rao, and Tawarmalani}{Jiang
+  et~al\mbox{.}}{2020}]%
+        {PCF}
+\bibfield{author}{\bibinfo{person}{Chuan Jiang}, \bibinfo{person}{Sanjay Rao},
+  {and} \bibinfo{person}{Mohit Tawarmalani}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{PCF: Provably Resilient Flexible Routing}. In
+  \bibinfo{booktitle}{{\em Proceedings of the Annual Conference of the ACM
+  Special Interest Group on Data Communication on the Applications,
+  Technologies, Architectures, and Protocols for Computer Communication}} {\em
+  (\bibinfo{series}{SIGCOMM '20})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{139--153}.
+\newblock
+\showISBNx{9781450379557}
+\showDOI{%
+\url{https://doi.org/10.1145/3387514.3405858}}
+
+
+\bibitem[\protect\citeauthoryear{Jin, Li, Wei, Li, Gao, Xu, Li, Xu, and
+  Rexford}{Jin et~al\mbox{.}}{2016}]%
+        {OWAN}
+\bibfield{author}{\bibinfo{person}{Xin Jin}, \bibinfo{person}{Yiran Li},
+  \bibinfo{person}{Da Wei}, \bibinfo{person}{Siming Li}, \bibinfo{person}{Jie
+  Gao}, \bibinfo{person}{Lei Xu}, \bibinfo{person}{Guangzhi Li},
+  \bibinfo{person}{Wei Xu}, {and} \bibinfo{person}{Jennifer Rexford}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Optimizing Bulk Transfers with Software-Defined
+  Optical WAN}. In \bibinfo{booktitle}{{\em Proceedings of the 2016 ACM SIGCOMM
+  Conference}} {\em (\bibinfo{series}{SIGCOMM '16})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{87--100}.
+\newblock
+\showISBNx{9781450341936}
+\showDOI{%
+\url{https://doi.org/10.1145/2934872.2934904}}
+
+
+\bibitem[\protect\citeauthoryear{Kandula, Katabi, Davie, and Charny}{Kandula
+  et~al\mbox{.}}{2005}]%
+        {Tightrope}
+\bibfield{author}{\bibinfo{person}{Srikanth Kandula}, \bibinfo{person}{Dina
+  Katabi}, \bibinfo{person}{Bruce Davie}, {and} \bibinfo{person}{Anna Charny}.}
+  \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{Walking the Tightrope: Responsive yet Stable
+  Traffic Engineering}. In \bibinfo{booktitle}{{\em Proceedings of the 2005
+  Conference on Applications, Technologies, Architectures, and Protocols for
+  Computer Communications}} {\em (\bibinfo{series}{SIGCOMM '05})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{253--264}.
+\newblock
+\showISBNx{1595930094}
+\showDOI{%
+\url{https://doi.org/10.1145/1080091.1080122}}
+
+
+\bibitem[\protect\citeauthoryear{Kandula, Menache, Schwartz, and
+  Babbula}{Kandula et~al\mbox{.}}{2014}]%
+        {calendaring}
+\bibfield{author}{\bibinfo{person}{Srikanth Kandula}, \bibinfo{person}{Ishai
+  Menache}, \bibinfo{person}{Roy Schwartz}, {and} \bibinfo{person}{Spandana~Raj
+  Babbula}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Calendaring for Wide Area Networks}. In
+  \bibinfo{booktitle}{{\em Proceedings of the 2014 ACM Conference on SIGCOMM}}
+  {\em (\bibinfo{series}{SIGCOMM '14})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{515--526}.
+\newblock
+\showISBNx{9781450328364}
+\showDOI{%
+\url{https://doi.org/10.1145/2619239.2626336}}
+
+
+\bibitem[\protect\citeauthoryear{{Kermel}}{{Kermel}}{2020}]%
+        {Kermel}
+\bibfield{author}{\bibinfo{person}{{Kermel}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Linux Kernel}.
+\newblock
+  \bibinfo{howpublished}{\url{http://cdn.kernel.org/pub/linux/kernel/v4.x/}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Krishnan and Sitaraman}{Krishnan and
+  Sitaraman}{2012}]%
+        {video1}
+\bibfield{author}{\bibinfo{person}{S.~Shunmuga Krishnan} {and}
+  \bibinfo{person}{Ramesh~K. Sitaraman}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Video Stream Quality Impacts Viewer Behavior:
+  Inferring Causality Using Quasi-Experimental Designs}. In
+  \bibinfo{booktitle}{{\em Proceedings of the 2012 Internet Measurement
+  Conference}} {\em (\bibinfo{series}{IMC '12})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{211--224}.
+\newblock
+\showISBNx{9781450317054}
+\showDOI{%
+\url{https://doi.org/10.1145/2398776.2398799}}
+
+
+\bibitem[\protect\citeauthoryear{Kumar, Jain, Naik, Raghuraman, Kasinadhuni,
+  Zermeno, Gunn, Ai, Carlin, Amarandei-Stavila, Robin, Siganporia, Stuart, and
+  Vahdat}{Kumar et~al\mbox{.}}{2015}]%
+        {bwe}
+\bibfield{author}{\bibinfo{person}{Alok Kumar}, \bibinfo{person}{Sushant Jain},
+  \bibinfo{person}{Uday Naik}, \bibinfo{person}{Anand Raghuraman},
+  \bibinfo{person}{Nikhil Kasinadhuni}, \bibinfo{person}{Enrique~Cauich
+  Zermeno}, \bibinfo{person}{C.~Stephen Gunn}, \bibinfo{person}{Jing Ai},
+  \bibinfo{person}{Bj\"{o}rn Carlin}, \bibinfo{person}{Mihai
+  Amarandei-Stavila}, \bibinfo{person}{Mathieu Robin}, \bibinfo{person}{Aspi
+  Siganporia}, \bibinfo{person}{Stephen Stuart}, {and} \bibinfo{person}{Amin
+  Vahdat}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{BwE: Flexible, Hierarchical Bandwidth Allocation
+  for WAN Distributed Computing}. In \bibinfo{booktitle}{{\em Proceedings of
+  the 2015 ACM Conference on Special Interest Group on Data Communication}}
+  {\em (\bibinfo{series}{SIGCOMM '15})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{1--14}.
+\newblock
+\showISBNx{9781450335423}
+\showDOI{%
+\url{https://doi.org/10.1145/2785956.2787478}}
+
+
+\bibitem[\protect\citeauthoryear{Kumar, Yuan, Yu, Foster, Kleinberg, Lapukhov,
+  Lim, and Soul{\'e}}{Kumar et~al\mbox{.}}{2018}]%
+        {SMORE}
+\bibfield{author}{\bibinfo{person}{Praveen Kumar}, \bibinfo{person}{Yang Yuan},
+  \bibinfo{person}{Chris Yu}, \bibinfo{person}{Nate Foster},
+  \bibinfo{person}{Robert Kleinberg}, \bibinfo{person}{Petr Lapukhov},
+  \bibinfo{person}{Chiun~Lin Lim}, {and} \bibinfo{person}{Robert Soul{\'e}}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Semi-Oblivious Traffic Engineering: The Road Not
+  Taken}. In \bibinfo{booktitle}{{\em 15th {USENIX} Symposium on Networked
+  Systems Design and Implementation ({NSDI} 18)}}. \bibinfo{publisher}{{USENIX}
+  Association}, \bibinfo{address}{Renton, WA}, \bibinfo{pages}{157--170}.
+\newblock
+\showISBNx{978-1-939133-01-4}
+\showURL{%
+\url{https://www.usenix.org/conference/nsdi18/presentation/kumar}}
+
+
+\bibitem[\protect\citeauthoryear{Lamport}{Lamport}{1998}]%
+        {lamport1998the}
+\bibfield{author}{\bibinfo{person}{Leslie Lamport}.}
+  \bibinfo{year}{1998}\natexlab{}.
+\newblock \showarticletitle{The part-time parliament}.
+\newblock \bibinfo{journal}{{\em ACM Transactions on Computer Systems\/}}
+  \bibinfo{volume}{16}, \bibinfo{number}{2} (\bibinfo{year}{1998}),
+  \bibinfo{pages}{133--169}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Lee, Turner, Lee, Popa, Banerjee, Kang, and
+  Sharma}{Lee et~al\mbox{.}}{2014}]%
+        {appdriven}
+\bibfield{author}{\bibinfo{person}{Jeongkeun Lee}, \bibinfo{person}{Yoshio
+  Turner}, \bibinfo{person}{Myungjin Lee}, \bibinfo{person}{Lucian Popa},
+  \bibinfo{person}{Sujata Banerjee}, \bibinfo{person}{Joon-Myung Kang}, {and}
+  \bibinfo{person}{Puneet Sharma}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Application-Driven Bandwidth Guarantees in
+  Datacenters}. In \bibinfo{booktitle}{{\em Proceedings of the 2014 ACM
+  Conference on SIGCOMM}} {\em (\bibinfo{series}{SIGCOMM '14})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{467--478}.
+\newblock
+\showISBNx{9781450328364}
+\showDOI{%
+\url{https://doi.org/10.1145/2619239.2626326}}
+
+
+\bibitem[\protect\citeauthoryear{Liu, Kandula, Mahajan, Zhang, and
+  Gelernter}{Liu et~al\mbox{.}}{2014}]%
+        {FFC}
+\bibfield{author}{\bibinfo{person}{Hongqiang~Harry Liu},
+  \bibinfo{person}{Srikanth Kandula}, \bibinfo{person}{Ratul Mahajan},
+  \bibinfo{person}{Ming Zhang}, {and} \bibinfo{person}{David Gelernter}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Traffic Engineering with Forward Fault Correction}.
+  In \bibinfo{booktitle}{{\em Proceedings of the 2014 ACM Conference on
+  SIGCOMM}} {\em (\bibinfo{series}{SIGCOMM '14})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{527--538}.
+\newblock
+\showISBNx{9781450328364}
+\showDOI{%
+\url{https://doi.org/10.1145/2619239.2626314}}
+
+
+\bibitem[\protect\citeauthoryear{Mao, Netravali, and Alizadeh}{Mao
+  et~al\mbox{.}}{2017}]%
+        {video2}
+\bibfield{author}{\bibinfo{person}{Hongzi Mao}, \bibinfo{person}{Ravi
+  Netravali}, {and} \bibinfo{person}{Mohammad Alizadeh}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Neural Adaptive Video Streaming with Pensieve}. In
+  \bibinfo{booktitle}{{\em Proceedings of the Conference of the ACM Special
+  Interest Group on Data Communication}} {\em (\bibinfo{series}{SIGCOMM '17})}.
+  \bibinfo{publisher}{Association for Computing Machinery},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{197--210}.
+\newblock
+\showISBNx{9781450346535}
+\showDOI{%
+\url{https://doi.org/10.1145/3098822.3098843}}
+
+
+\bibitem[\protect\citeauthoryear{{Markopoulou}, {Iannaccone}, {Bhattacharyya},
+  {Chuah}, {Ganjali}, and {Diot}}{{Markopoulou} et~al\mbox{.}}{2008}]%
+        {Characterization}
+\bibfield{author}{\bibinfo{person}{A. {Markopoulou}}, \bibinfo{person}{G.
+  {Iannaccone}}, \bibinfo{person}{S. {Bhattacharyya}}, \bibinfo{person}{C.
+  {Chuah}}, \bibinfo{person}{Y. {Ganjali}}, {and} \bibinfo{person}{C. {Diot}}.}
+  \bibinfo{year}{2008}\natexlab{}.
+\newblock \showarticletitle{Characterization of Failures in an Operational IP
+  Backbone Network}.
+\newblock \bibinfo{journal}{{\em IEEE/ACM Transactions on Networking\/}}
+  \bibinfo{volume}{16}, \bibinfo{number}{4} (\bibinfo{year}{2008}),
+  \bibinfo{pages}{749--762}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Mitra and Wang}{Mitra and Wang}{2005}]%
+        {Stochastic}
+\bibfield{author}{\bibinfo{person}{Debasis Mitra} {and} \bibinfo{person}{Qiong
+  Wang}.} \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{Stochastic Traffic Engineering for Demand
+  Uncertainty and Risk-Aware Network Revenue Management}.
+\newblock \bibinfo{journal}{{\em IEEE/ACM Trans. Netw.\/}}
+  \bibinfo{volume}{13}, \bibinfo{number}{2} (\bibinfo{date}{April}
+  \bibinfo{year}{2005}), \bibinfo{pages}{221--233}.
+\newblock
+\showISSN{1063-6692}
+\showDOI{%
+\url{https://doi.org/10.1109/TNET.2005.845527}}
+
+
+\bibitem[\protect\citeauthoryear{{Openflow}}{{Openflow}}{2020}]%
+        {openflow}
+\bibfield{author}{\bibinfo{person}{{Openflow}}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{sdn and openflow}.
+\newblock
+  \bibinfo{howpublished}{\url{https://tools.ietf.org/html/rfc7426\#page-23}}.
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Pfaff, Pettit, Koponen, Jackson, Zhou,
+  Rajahalme, Gross, Wang, Stringer, Shelar, Amidon, and Casado}{Pfaff
+  et~al\mbox{.}}{2015}]%
+        {openvswitch}
+\bibfield{author}{\bibinfo{person}{Ben Pfaff}, \bibinfo{person}{Justin Pettit},
+  \bibinfo{person}{Teemu Koponen}, \bibinfo{person}{Ethan Jackson},
+  \bibinfo{person}{Andy Zhou}, \bibinfo{person}{Jarno Rajahalme},
+  \bibinfo{person}{Jesse Gross}, \bibinfo{person}{Alex Wang},
+  \bibinfo{person}{Joe Stringer}, \bibinfo{person}{Pravin Shelar},
+  \bibinfo{person}{Keith Amidon}, {and} \bibinfo{person}{Martin Casado}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{The Design and Implementation of Open vSwitch}. In
+  \bibinfo{booktitle}{{\em 12th {USENIX} Symposium on Networked Systems Design
+  and Implementation ({NSDI} 15)}}. \bibinfo{publisher}{{USENIX} Association},
+  \bibinfo{address}{Oakland, CA}, \bibinfo{pages}{117--130}.
+\newblock
+\showISBNx{978-1-931971-218}
+\showURL{%
+\url{https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/pfaff}}
+
+
+\bibitem[\protect\citeauthoryear{{Spiteri}, {Urgaonkar}, and
+  {Sitaraman}}{{Spiteri} et~al\mbox{.}}{2016}]%
+        {video3}
+\bibfield{author}{\bibinfo{person}{K. {Spiteri}}, \bibinfo{person}{R.
+  {Urgaonkar}}, {and} \bibinfo{person}{R.~K. {Sitaraman}}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{BOLA: Near-optimal bitrate adaptation for online
+  videos}. In \bibinfo{booktitle}{{\em IEEE INFOCOM 2016 - The 35th Annual IEEE
+  International Conference on Computer Communications}}. \bibinfo{pages}{1--9}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Suchara, Xu, Doverspike, Johnson, and
+  Rexford}{Suchara et~al\mbox{.}}{2011}]%
+        {jointfailure}
+\bibfield{author}{\bibinfo{person}{Martin Suchara}, \bibinfo{person}{Dahai Xu},
+  \bibinfo{person}{Robert Doverspike}, \bibinfo{person}{David Johnson}, {and}
+  \bibinfo{person}{Jennifer Rexford}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Network Architecture for Joint Failure Recovery and
+  Traffic Engineering}. In \bibinfo{booktitle}{{\em Proceedings of the ACM
+  SIGMETRICS Joint International Conference on Measurement and Modeling of
+  Computer Systems}} {\em (\bibinfo{series}{SIGMETRICS '11})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{97--108}.
+\newblock
+\showISBNx{9781450308144}
+\showDOI{%
+\url{https://doi.org/10.1145/1993744.1993756}}
+
+
+\bibitem[\protect\citeauthoryear{Turner, Levchenko, Snoeren, and Savage}{Turner
+  et~al\mbox{.}}{2010}]%
+        {california}
+\bibfield{author}{\bibinfo{person}{Daniel Turner}, \bibinfo{person}{Kirill
+  Levchenko}, \bibinfo{person}{Alex~C. Snoeren}, {and} \bibinfo{person}{Stefan
+  Savage}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{California Fault Lines: Understanding the Causes
+  and Impact of Network Failures}. In \bibinfo{booktitle}{{\em Proceedings of
+  the ACM SIGCOMM 2010 Conference}} {\em (\bibinfo{series}{SIGCOMM '10})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{315--326}.
+\newblock
+\showISBNx{9781450302012}
+\showDOI{%
+\url{https://doi.org/10.1145/1851182.1851220}}
+
+
+\bibitem[\protect\citeauthoryear{Vamanan, Hasan, and Vijaykumar}{Vamanan
+  et~al\mbox{.}}{2012}]%
+        {D2TCP}
+\bibfield{author}{\bibinfo{person}{Balajee Vamanan}, \bibinfo{person}{Jahangir
+  Hasan}, {and} \bibinfo{person}{T.N. Vijaykumar}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Deadline-Aware Datacenter Tcp (D2TCP)}.
+\newblock \bibinfo{journal}{{\em SIGCOMM Comput. Commun. Rev.\/}}
+  \bibinfo{volume}{42}, \bibinfo{number}{4} (\bibinfo{date}{Aug.}
+  \bibinfo{year}{2012}), \bibinfo{pages}{115--126}.
+\newblock
+\showISSN{0146-4833}
+\showDOI{%
+\url{https://doi.org/10.1145/2377677.2377709}}
+
+
+\bibitem[\protect\citeauthoryear{Vidalenc, Noirie, Ciavaglia, and
+  RENAULT}{Vidalenc et~al\mbox{.}}{2013}]%
+        {Bruno2013Dynamic}
+\bibfield{author}{\bibinfo{person}{Bruno Vidalenc}, \bibinfo{person}{Ludovic
+  Noirie}, \bibinfo{person}{Laurent Ciavaglia}, {and} \bibinfo{person}{Eric
+  RENAULT}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Dynamic risk-aware routing for OSPF networks}. In
+  \bibinfo{booktitle}{{\em IEEE International Symposium on Integrated Network
+  Management}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Wang, Wang, Mahimkar, Alimi, Zhang, Qiu, and
+  Yang}{Wang et~al\mbox{.}}{2010}]%
+        {R3}
+\bibfield{author}{\bibinfo{person}{Ye Wang}, \bibinfo{person}{Hao Wang},
+  \bibinfo{person}{Ajay Mahimkar}, \bibinfo{person}{Richard Alimi},
+  \bibinfo{person}{Yin Zhang}, \bibinfo{person}{Lili Qiu}, {and}
+  \bibinfo{person}{Yang~Richard Yang}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{R3: Resilient Routing Reconfiguration}. In
+  \bibinfo{booktitle}{{\em Proceedings of the ACM SIGCOMM 2010 Conference}}
+  {\em (\bibinfo{series}{SIGCOMM '10})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{291--302}.
+\newblock
+\showISBNx{9781450302012}
+\showDOI{%
+\url{https://doi.org/10.1145/1851182.1851218}}
+
+
+\bibitem[\protect\citeauthoryear{Wilson, Ballani, Karagiannis, and
+  Rowtron}{Wilson et~al\mbox{.}}{2011}]%
+        {D3}
+\bibfield{author}{\bibinfo{person}{Christo Wilson}, \bibinfo{person}{Hitesh
+  Ballani}, \bibinfo{person}{Thomas Karagiannis}, {and} \bibinfo{person}{Ant
+  Rowtron}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Better Never than Late: Meeting Deadlines in
+  Datacenter Networks}. In \bibinfo{booktitle}{{\em Proceedings of the ACM
+  SIGCOMM 2011 Conference}} {\em (\bibinfo{series}{SIGCOMM '11})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{50--61}.
+\newblock
+\showISBNx{9781450307970}
+\showDOI{%
+\url{https://doi.org/10.1145/2018436.2018443}}
+
+
+\bibitem[\protect\citeauthoryear{Zhang, Chen, Bai, Han, Tian, Wang, Guan, and
+  Zhang}{Zhang et~al\mbox{.}}{2015}]%
+        {Guaranteeings}
+\bibfield{author}{\bibinfo{person}{Hong Zhang}, \bibinfo{person}{Kai Chen},
+  \bibinfo{person}{Wei Bai}, \bibinfo{person}{Dongsu Han},
+  \bibinfo{person}{Chen Tian}, \bibinfo{person}{Hao Wang},
+  \bibinfo{person}{Haibing Guan}, {and} \bibinfo{person}{Ming Zhang}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Guaranteeing Deadlines for Inter-Datacenter
+  Transfers}. In \bibinfo{booktitle}{{\em Proceedings of the Tenth European
+  Conference on Computer Systems}} {\em (\bibinfo{series}{EuroSys '15})}.
+  \bibinfo{publisher}{Association for Computing Machinery},
+  \bibinfo{address}{New York, NY, USA}, Article \bibinfo{articleno}{20},
+  \bibinfo{numpages}{14}~pages.
+\newblock
+\showISBNx{9781450332385}
+\showDOI{%
+\url{https://doi.org/10.1145/2741948.2741957}}
+
+
+\bibitem[\protect\citeauthoryear{{Zhang}, {Shi}, {Yin}, {Ren}, and
+  {Wang}}{{Zhang} et~al\mbox{.}}{2015}]%
+        {LPD}
+\bibfield{author}{\bibinfo{person}{H. {Zhang}}, \bibinfo{person}{X. {Shi}},
+  \bibinfo{person}{X. {Yin}}, \bibinfo{person}{F. {Ren}}, {and}
+  \bibinfo{person}{Z. {Wang}}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{More load, more differentiation-- A design
+  principle for deadline-aware congestion control}. In \bibinfo{booktitle}{{\em
+  2015 IEEE Conference on Computer Communications (INFOCOM)}}.
+  \bibinfo{pages}{127--135}.
+\newblock
+
+
+\end{thebibliography}

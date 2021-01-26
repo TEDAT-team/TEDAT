@@ -1606,9 +1606,9 @@ Flow table just maps the packet based on the destination and the group tables co
 %\end{equation}
 
 
- \begin{figure}
+ \begin{figure}[t]
 \begin{center}
-\includegraphics [width=0.8\columnwidth] {fig/testbed.pdf}
+\includegraphics [width=0.68\columnwidth] {fig/testbed.pdf}
 \caption{Testbed topology with failure probabilities}
 \label{testbed}
 \end{center}
@@ -1967,7 +1967,7 @@ On the contrary, $\mathsf{BATE}$ matches demands and links well, and does not us
 %%\includegraphics[width=0.24\textwidth]{fig/evaluation/time2.pdf}}
 %\subfigure[Events after L3 failure]{
 %\includegraphics[width=0.24\textwidth]{fig/evaluation/fake-failure.pdf}}
-\caption{A simple example with three parallel demands.}
+\caption{An example with three parallel demands.}
 \label{e1}
 \end{figure}
 
@@ -2075,10 +2075,10 @@ a national-level backbone&14&32\\
 
 
 
-\begin{figure}
+\begin{figure}[t]
 \centering
-\subfigure[\mathsf{BATE} v.s. other TE algorithms]{
-\includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-scheduling.pdf}}
+\subfigure[$\mathsf{BATE}$ v.s. other TE algorithms]{
+\includegraphics[width=0.45\textwidth]{fig/evaluation/no-fixed.pdf}}
 \subfigure[augmented with \textit{fixed} admission control]{
 \includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
 \caption{BA satisfaction results under simulations}
@@ -2373,9 +2373,9 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
 \textbf{Evaluation results.}
-\begin{figure}[h]
+\begin{figure}[t]
 \begin{center}
-\includegraphics [width=0.7\columnwidth] {fig/evaluation/sim-monney.pdf}
+\includegraphics [width=0.9\columnwidth] {fig/evaluation/sim-monney.pdf}
 \caption{Profit gain after failures}
 \label{sim-profit}
 \end{center}
@@ -2386,14 +2386,14 @@ the optimal strategy and the \textit{fixed} one, i.e., step (1) in $\mathsf{BATE
 Figure \ref{availability_fig1}(a) shows that, $\mathsf{BATE}$ falsely rejects at most 4\% demands (using the optimal solution as a baseline), but accepts up to 50\% more demands with a much smaller variance than Fixed. 
 It can also utilize at least 10\% higher bandwith than Fixed, as shown in Figure \ref{availability_fig1}(b). 
 We also qualify their efficiency by measuring the admission control delay, and Figure \ref{availability_fig1}(c) demonstrates that, $\mathsf{BATE}$ runs at least 30$\times$ faster than directly solving the MILP optimization problem, and always finishes within 1 second. 
-
-\begin{figure}[t]
-\begin{center}
-\includegraphics [width=0.8\columnwidth] {fig/evaluation/sim-monney.pdf}
-\caption{Profit gain after failures}
-\label{sim-profit}
-\end{center}
-\end{figure}
+%
+%\begin{figure}[t]
+%\begin{center}
+%\includegraphics [width=0.8\columnwidth] {fig/evaluation/sim-monney.pdf}
+%\caption{Profit gain after failures}
+%\label{sim-profit}
+%\end{center}
+%\end{figure}
 
 We then compare the traffic scheduling capability of $\mathsf{BATE}$ against FFC, TEAVAR, SWAN, SMORE and B4.
 The methodology is similar to the post-processing simulation in TEAVAR \cite{Teavar}, 

@@ -1381,9 +1381,9 @@ In addition, controller failures can be remedied by using multiple replications,
 where the master controller is elected by the Paxos \cite{lamport1998the} algorithm.
 %To handle controller failure, the controller also replicate controllers and places them in different data centers, then Paxos \cite{lamport1998the} is used to elect one controller as the master.
 
-\begin{figure}
+\begin{figure}[t]
 \begin{center}
-\includegraphics [width=0.9\columnwidth] {fig/inter-DC-WAN-V3.pdf}
+\includegraphics [width=0.8\columnwidth] {fig/inter-DC-WAN-V3.pdf}
 \caption{System architecture of $\mathsf{BATE}$.}
 \label{pic-overview}
 \end{center}
@@ -1476,9 +1476,9 @@ Flow table just maps the packet based on the destination and the group tables co
 %\end{equation}
 
 
- \begin{figure}
+ \begin{figure}[t]
 \begin{center}
-\includegraphics [width=0.8\columnwidth] {fig/testbed.pdf}
+\includegraphics [width=0.68\columnwidth] {fig/testbed.pdf}
 \caption{Testbed topology. Each link has the same capacity 1Gbps but  different failure probability.}
 \label{testbed}
 \end{center}
