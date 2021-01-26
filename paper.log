@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  26 JAN 2021 23:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  27 JAN 2021 00:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2228,7 +2228,7 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 Here is how much of TeX's memory you used:
  31251 strings out of 492985
  545403 string characters out of 6132585
- 645335 words of memory out of 5000000
+ 645333 words of memory out of 5000000
  33091 multiletter control sequences out of 15000+600000
  373617 words of font info for 770 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
@@ -2262,7 +2262,7 @@ xmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016/texmf-dist
 /type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
 ublic/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ne
 wtx/zxlzi.pfb>
-Output written on paper.pdf (17 pages, 1163700 bytes).
+Output written on paper.pdf (17 pages, 1163699 bytes).
 PDF statistics:
  1439 PDF objects out of 1440 (max. 8388607)
  1249 compressed objects within 13 object streams
