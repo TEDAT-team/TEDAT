@@ -3146,12 +3146,12 @@ A_d^{\mathbf{z}} \in\{0,1\},&{\forall d \in D, \mathbf{z} \in Z.} \\
 \begin{equation}
 \label{A-z2}
 \begin{array}{rll}
-q_d^{\mathbf{z}} \in &\!\!\{0,1\} &{\forall d \in \hat{D}, \mathbf{z} \in Z} \\
-R_{dk}^{\mathbf{z}} < &\!\! M\times q_d^{\mathbf{z}}+1-q_d^{\mathbf{z}} &{\forall d \in \hat{D},  k\in K} \\
+q_d^{\mathbf{z}} \in &\!\!\{0,1\}, &{\forall d \in \hat{D}, \mathbf{z} \in Z} \\
+R_{dk}^{\mathbf{z}} < &\!\! M\times q_d^{\mathbf{z}}+1-q_d^{\mathbf{z}}, &{\forall d \in \hat{D},  k\in K} \\
 R_{dk}^{\mathbf{z}} \ge &\!\!  q_d^{\mathbf{z}}, &{\forall d \in \hat{D},  k\in K}
 \end{array}
 \end{equation}
-where $M$ is an constant larger than the upper bound of $R_{dk}^{\mathbf{z}}$.
+where $M$ is a constant larger than the upper bound of $R_{dk}^{\mathbf{z}}$.
 %,\forall d \in D, k\in K,\mathbf{z} \in Z$.
 %It is easily to  prove  (\ref{A-z2}) equals to  (\ref{CA}).
 %Here, our consideration is tunnel $t$ might be unavailable (i.e., $v_t^{\mathbf{z}} =0$) under a network scenario, but if $R_{dk}^{\mathbf{z}} \ge 1$ holds, then this scenario is still \textit{qualified}, i.e., 
@@ -3309,10 +3309,11 @@ Where $y_i$ denotes whether commodity flow $i$ is routable.
 Consider a special case of the failure recovery problem, where $\mu_d=0$ for every $d$.
 This means, if the allocated bandwidth is no less than the demand, 
 then the profit is 1, or the profit is 0 otherwise.
-We transform the all-or-nothing multi-commodity flow problem to this case as follows:
-\textbf{TBD:
-We consider setting the admitted demand from tenants and their bandwidth target in 
-the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.}
+We can transform the all-or-nothing multi-commodity flow problem to a special of our failure recovery problem by 
+regarding the commodities as the BA demands.
+%\textbf{TBD:
+%We consider setting the admitted demand from tenants and their bandwidth target in 
+%the failure recovery as the multi-commodities and their bandwidth demand in the all-or-nothing multi-commodity flow problem.}
 %If we can solve the special case of the admission control problem with a polynomial time algorithm, we would obtain the routable multi-commodity flow set  in the all-or-nothing multi-commodity flow problem.  
 Therefore, the failure recovery problem is at least as hard as the all-or-nothing multi-commodity flow
 problem, which is known to be NP-hard. This completes the proof.
