@@ -2552,7 +2552,7 @@ Finally, we compute the approximation ratio of our greedy failure recovery algor
 which is defined as dividing the optimal profit by the profit achieved. 
 Figure \ref{approximation} shows that, 
 our 2-approximation algorithm achieves a ratio between 1 and 1.25 in real scenarios, 
-and the average profit loss is around 10\%.
+and the average profit loss is around 10\% and it can save at least 90\% time (more details can be seen in Appendix \ref{testbed-appendix}).
 %Satisfaction percentage. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %Figure \ref{availability_fig1}(b) shows 
 %$\mathsf{BATE}$ performs about 20\%, 25\%, 30\%,  40\% better than TEAVAR, SMORE, SWAN, FFC, respectively.
@@ -3402,7 +3402,7 @@ $h_d=1$;\\
 	release network resource allocated to demands in $F$;\\
      $F= \{d\}$;\\
     Update $\{f^t_{d}\},\forall d \in \hat{D}$;\\
-    Update z’ s remaining network capacity;\\
+    Update z's remaining network capacity;\\
 $\bm{break}$; \\
 }
 }
@@ -3541,8 +3541,23 @@ and achieves a lower satisfaction ratio than $\mathsf{BATE}$.
 %\textbf{TBD: This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.}
 
 Data loss due to failures is measured according to statistics reported by \textit{iperf} and switches.
-As shown in Figure \ref{e2}(d), there is almost no loss in FFC, since it keeps a low network utilization. 
-$\mathsf{BATE}$ has a slight loss caused by , while TEAVAR has the highest loss. 
+As shown in Figure  \ref{appendix-e1}(b),
+$\mathsf{BATE}$ and FFC have a slight loss caused by scheduling when failure occurs.
+ while TEAVAR has the highest loss, because it might have congestion when rescaling.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics [width=0.8\columnwidth] {fig/evaluation/time-consuming.pdf}
+\caption{Time ratio}
+\label{sim-time}
+\end{center}
+\end{figure}
+
+
+
+
+We compute the time ratio of the optimal solution and our greedy failure recovery algorithm for each scenario.
+Figure \ref{sim-time}  shows that the optimal solution which is derived by bruce force algorithm is at least 9 $\times$ larger than our greedy failure recovery algorithm.
 \end{appendices}
 
 
