@@ -1608,7 +1608,7 @@ Flow table just maps the packet based on the destination and the group tables co
 
  \begin{figure}
 \begin{center}
-\includegraphics [width=0.75\columnwidth] {fig/testbed.pdf}
+\includegraphics [width=0.8\columnwidth] {fig/testbed.pdf}
 \caption{Testbed topology with failure probabilities}
 \label{testbed}
 \end{center}
@@ -2078,10 +2078,10 @@ a national-level backbone&14&32\\
 \begin{figure}
 \centering
 \subfigure[\mathsf{BATE} v.s. other TE algorithms]{
-\includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
-\subfigure[augmented with \textit{fixed} admission control]{
 \includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-scheduling.pdf}}
-\caption{Traffic scheduling results under simulations}
+\subfigure[augmented with \textit{fixed} admission control]{
+\includegraphics[width=0.45\textwidth]{fig/evaluation/fixed-shuduling.pdf}}
+\caption{BA satisfaction results under simulations}
 \label{scheduling-benefit}
 \end{figure}
 
@@ -2401,9 +2401,11 @@ where we simulate different failure scenarios according to their probabilities,
 and in each scenario we record the demands that can be satisfied. 
 If the \textit{achieved availibility}, i.e., the total posterior probabilities of \textit{qualified} scenarios where a user's bandwidth target is met, is larger than the user's availability target, 
 then the BA demand is \textit{satisfied}. 
-We plot the overall percentage of satisfied BA demands under each arrival rate (averaged across all simulations) in Figure \ref{scheduling-benefit}(a). $\mathsf{BATE}$ nearly always achieves a satisfaction ratio around 100\%, with a leading margin of up to 40\%, especially under a high arrival rate. 
-This clearly demonstrates $\mathsf{BATE}$'s advantage by matching  stringent availability requirements  
-with reliable links. 
+We plot the overall percentage of satisfied BA demands under each arrival rate (averaged across all simulations) in Figure \ref{scheduling-benefit}(a). $\mathsf{BATE}$ nearly always achieves a satisfaction ratio around 100\%, with a leading margin of at least 20\% under a high arrival rate (rate=6 in the figure). 
+To further demonstrates $\mathsf{BATE}$'s advantage in matching stringent availability requirements  
+with reliable links, we further augment each TE algorithm with the \textit{fixed} admission control 
+scheme. The satisfaction ratios are plotted in Figure \ref{scheduling-benefit}(b), where $\mathsf{BATE}$
+still performs at least 10\% better than the others. 
 
 \iffalse
 %We write down the bandwidth loss of each scenario for each demand and each scenario's corresponding probability.
@@ -2415,10 +2417,10 @@ Figure \ref{scheduling-benefit}(a) demonstrates that $\mathsf{BATE}$ can even ma
 %The reason for this is that $\mathsf{BATE}$ adopts admission control and it considers the diverse availability targets of different bandwidth demands.
 $\mathsf{BATE}$ can make demands with stringent availability requirements pass links with high reliability, therefore, their availability targets can be guaranteed, but other schemes are unable differentiate demands.
 To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{scheduling-benefit}(b) shows $\mathsf{BATE}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
+\fi
 
 Figure \ref{sim-profit} shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
 We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algorithms when network fails.
-\fi
 
 
 
