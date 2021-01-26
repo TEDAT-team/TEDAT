@@ -103,7 +103,7 @@ aims for \textit{bandwidth availability} (BA) provision, where a service level a
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
 The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
 They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of only a xx\% false rejections. 
+Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of less than 4\% false rejections. 
 On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
 %.
 % $\mathsf{BATE}$ can 
@@ -294,7 +294,7 @@ we implement $\mathsf{BATE}$ as a real system, including a centralized controlle
  We conduct extensive experiments using a small testbed as well as trace driven large scale simulations (see $\S$\ref{evaluation}).
 We compare  $\mathsf{BATE}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
 Our evaluation demonstrates that $\mathsf{BATE}$ can 
-(1) speed up the online admission control by 30$\times $ at the expense of a false rejection ratio that is only around xx\%;
+(1) speed up the online admission control by 30$\times $ at the expense of a false rejection ratio that is less than 4\%;
 (2) meet the bandwidth availability SLAs for 40\% more demands;
 (3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
 To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
@@ -1688,12 +1688,13 @@ Our main results are as follows:
 (1) $\mathsf{BATE}$ consistently outperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, up to 40\% more bandwidth availability demands can be successfully fulfilled, and 30\% more profit can be retained when failures occur.
 
 (2) $\mathsf{BATE}$ achieves a good tradeoff between efficiency and optimality. 
-Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of only xx\% false rejections, 
+Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of less than 4\% false rejections, 
 (ii) our pruning-augmented scheduling algorithm runs xx$\times$ faster while wasting only 6\% total bandwidth and losing only 8\% overall availability, 
 and (iii) our greedy failure recovery algorithm can reduce the reaction time by xx$\times$, 
 where the profit loss is below 10\%.
 
-(3)  $\mathsf{BATE}$ has stable performance: it doesn't depend on specific network topology, routing schemes, etc.
+(3) $\mathsf{BATE}$ has a stable performance across differnet network topologies, link characteristics, 
+demand matrices and routing schemes. 
 
 % \begin{itemize}
 %  \item \textbf{What is the benefit of  $\mathsf{BATE}$ ?}
@@ -1803,13 +1804,13 @@ rejects least 10$\times$ more admissible demands.
 %In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
 
 \textit{Traffic scheduling.} We evaluate, once a user demand is admitted, 
-how often its bandwidth availability requirement can be guaranteed. 
+how often its bandwidth availability target can be met. 
 Since we emulate different link failures according to their probabilities in each second, 
 we can measure how the bandwidth a user actually uses deviates from its requirement. 
-If such a deviation is less than 1\%, we regard the bandwidth availability as \textit{satisfied in that second}. Figure \ref{e2}(b) shows the overall fraction of satisfaction, under  different levels of availability requirements (i.e., 95\%, 99\% and 99.99\%). 
+If such a downward deviation is less than 1\%, we regard the bandwidth availability as \textit{satisfied in that second}. Figure \ref{e2}(b) shows the overall fraction of satisfaction, under  different levels of availability requirements (i.e., 95\%, 99\% and 99.99\%). 
 We note that, FFC-fixed (or TEAVAR-fixed) in the figure represents applying FFC (or TEAVAR) 
 only to demands admitted by the fixed admission control strategy, 
-where the total bandwidth required for the admitted demands will be much lower. 
+where the total bandwidth required for the admitted demands is much lower. 
 $\mathsf{BATE}$ always achieves the highest availability, even compared with FFC-fixed and TEAVAR-fixed. 
 In particular, it has a clear advantage for high availability requirements (e.g., >99.99\%). 
 %To further illustrate the difference in their mechanisms, 
@@ -1819,15 +1820,18 @@ In particular, it has a clear advantage for high availability requirements (e.g.
 how profit loss can be mitigated by our failure recovery scheme.
 Figure \ref{e2}(c) depicts the fraction of profit loss caused by SLA violations under three different admission control strategies, i.e., fixed, BATE-AD (which is the strategy $\mathsf{BATE}$ uses) and optimal, where baseline for each algorithm is the profit it can achieve when no failures occur. 
 %\textbf{TBD: $\mathsf{BATE}$ can retain about 15\% more money ratio than FFC and TEAVAR when network fails.}
-Compared with TEAVAR, FFC has a lower profit loss ratio due to its conservative bandwidth allocation. 
-
-
+$\mathsf{BATE}$ always achieves the lowest loss ratio, while 
+FFC also has a lower profit loss ratio due to its conservative bandwidth allocation,
+and TEAVAR may cause around 5$\times$ higher profit loss.
 
 \textit{Overall Profit.}
-Figure \ref{e2}(d) plots the overall profit gain comparison among $\mathsf{BATE}$, FFC and TEAVAR  for all arrived demands.
-Thanks to the hard guarantee of bandwidth availability and optimization of profit gain after failures, $\mathsf{BATE}$ can maintain at least 15\% more profit than  FFC and TEAVAR.
+Figure \ref{e2}(d) plots the overall profit of $\mathsf{BATE}$, FFC and TEAVAR.
+Due to its hard guarantee on bandwidth availability and its  profit maximization, 
+$\mathsf{BATE}$ can achieve at least 15\% more profit than the other two.
 
-Due to space limitations, more details of the evaluations are shown in  Appendix \ref{testbed-appendix}.
+Due to space limitations, more details of the evaluations, including the the ratio of the
+allocated bandwidth to the demanded bandwidth, and the actual data loss ratio, 
+are put into  Appendix \ref{testbed-appendix}.
 
 %, where  FFC-1 and FFC-2 
 %denote FFC with and without Fixed admission control,  respectively.
@@ -1917,8 +1921,8 @@ Due to space limitations, more details of the evaluations are shown in  Appendix
 \end{table}
 
 \textbf{Evaluations on parallel demands.}
-Now we use another example with three user demands to illustrate more details of $\mathsf{BATE}$. 
-In our evaluation, we also compare with another scheme named BATE-TE, i.e, the traffic scheduling part of $\mathsf{BATE}$, with its fast failure recovery scheme abandoned. 
+Now we use another example with three parallel user demands to illustrate more details of $\mathsf{BATE}$. 
+In this evaluation, we also compare with another scheme named BATE-TE, i.e, the traffic scheduling part of $\mathsf{BATE}$, with its fast failure recovery scheme abandoned. 
 Demand-1 requires 1000Mbps from DC1 to DC3, demand-2 requires  500Mbps from DC1 to DC4, 
 and demand-3 requires 1500Mbps from DC1 to DC5, 
 with their availability target set as 99.5\%, 99.9\% and 95\%, respectively. 
@@ -2136,9 +2140,9 @@ They have not explicitly considered availability, but pay attention to
 total throughput, link utilization or user fairness. 
 These TE algorithms will be activated every 10 time slots.
 We assume at most one link failure (i.e., no concurrent failures) in FFC,  
-use 99.9\% (the maximum value in the user demands) as the default availability target in TEAVAR,
+use 99.9\% (which is the maximum value in the user demands) as the default availability target in TEAVAR,
 and let SWAN maximize the total throughput of all users. 
-With the above settings, each simulation lasts 150,000 slots (corresponding to 100 days if each slot represents 1 minute), and the results that achieved by each algorithm on each topology are calculated on 5 independent simulations with different workload traces. 
+With the above settings, each simulation lasts 150,000 slots (corresponding to 100 days if each slot represents 1 minute), and the results achieved by each algorithm on each topology are calculated on 5 independent simulations with different workload traces. 
 
 
 \iffalse
@@ -2271,7 +2275,7 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %\label{availability_fig2}
 %\end{figure*}
 
-\textbf{Evaluation results.}
+
 %From the comparison between the scheduled and testbed results, we can see that the scheduled results match the real testbed quite well,
 %so in the following part, we will use trace-driven simulation to evaluate the performance of $\mathsf{BATE}$.
 
@@ -2368,6 +2372,14 @@ B4 \cite{B4} aims to deliver max-min fair allocation manner to each demand.
 %(1) Availability satisfaction fraction. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %(2) Total availability profit.  The total availability profit presents the whole performance of the schemes.
 
+\textbf{Evaluation results.}
+\begin{figure}[h]
+\begin{center}
+\includegraphics [width=0.7\columnwidth] {fig/evaluation/sim-monney.pdf}
+\caption{Profit gain after failures}
+\label{sim-profit}
+\end{center}
+\end{figure}
 Figure \ref{availability_fig1}(a)  shows $\mathsf{BATE}$  rejects only about 3\% more demands than the optimal solution and can accept up to 50\% more demands than the \textit{Fixed} consistently.
 Figure \ref{availability_fig1}(b) demonstrates  $\mathsf{BATE}$ is able to maintain at least 10\% higher link utilization than \textit{Fixed} algorithm.
 We qualify the scalability by measuring the admission control time for each demand.
@@ -2660,7 +2672,7 @@ These work mainly consider aggregated traffic in a macro level, while $\mathsf{B
 
 As more applications are depolyed in cloud or datacenters, 
 many work study how to provide performance guarantee for intra-DC or inter-DC user traffic, 
-including flow deadline \cite{D2TCP, LPD, Guaranteeings} and flow rate \cite{appdriven, EyeQ}.
+including flow deadline \cite{D2TCP, LPD, Guaranteeings},  flow rate \cite{appdriven, EyeQ}, etc.
 However, they do not provide adquate mechanisms to deal with potential or actual failures. 
 
 Network failures (or uncertainties) have also been considered in various aspects for large scale network evnironments, including design datacenter networks \cite{evole} and optical networks \cite{Optical},  
@@ -3459,11 +3471,9 @@ and achieves a lower satisfaction ratio than $\mathsf{BATE}$.
 
 %\textbf{TBD: This is because $\mathsf{BATE}$ pre-computes backup allocation with maximal profit and they can be put into practice as far as failures are detected.}
 
-We measure total bytes loss according to \textit{iperf} server side reports and packet counters in the switches, then finally derive the data loss ratio.
-Figure \ref{e2}(d) demonstrates data loss ratio after network fails, where $\mathsf{BATE}$ performs about 8\% worse than FFC.
-FFC performs best since it keeps network utilization low and almost no congestion occurs when network fails, 
-while $\mathsf{BATE}$ focuses on Monetary gain rather than data loss.
-
+Data loss due to failures is measured according to statistics reported by \textit{iperf} and switches.
+As shown in Figure \ref{e2}(d), there is almost no loss in FFC, since it keeps a low network utilization. 
+$\mathsf{BATE}$ has a slight loss caused by , while TEAVAR has the highest loss. 
 \end{appendices}
 
 
