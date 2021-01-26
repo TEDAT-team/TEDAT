@@ -1727,7 +1727,7 @@ demand matrices and routing schemes.
 
 
 \subsection{Testbed evaluation}\label{testbed-evaluation}
-\textbf{Testbed setup}
+\textbf{Testbed setup.}
 We build a testbed with 6 servers to emulate a small inter-DC WAN connecting 6 DCs, as shown in Figure \ref{testbed}. 
 The inter-DC links run at 1Gbps, and we add 100ms delay on each link to emulate a WAN environment.
 Each server is equipped with 4 Intel Xeon E5-2620 CPUs, 64GB memory and 4 Ethernet NICs, 
@@ -1740,7 +1740,7 @@ and bring them online after 3 seconds.
 We also deploy our controller and brokers on extra VMs. 
 The network agent module in each broker uses Floodlight \cite{floodlight} to control the vSwitch, 
 while the latter monitors link status and reports any failure to the former.
-If not stated otherwise, we use 4 shortest paths between each source-destination pair as the tunnels in TE algorithms.
+If not stated otherwise, we use 4-shortest paths between each source-destination pair as the tunnels in TE algorithms.
 
 %Each VM has a demand and the it varies with a period of 3-minutes pattern just as \cite{swan}.  
 %The importance of services are randomly chosen from \{1,2,3,4,5\} 
