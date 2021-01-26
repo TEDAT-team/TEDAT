@@ -103,8 +103,8 @@ aims for \textit{bandwidth availability} (BA) provision, where a service level a
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
 The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
 They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluation demonstrates that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of less than 4\% false rejections. 
-On the other hand, compared with the latest TE schemes like FFC and TEAVAR,   $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 40\% more demands, and when network failure causes SLA violations, it can retain 25\% more profit  under a simple pricing and refunding model.
+Our evaluations on real network topologies and traces show that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of less than 4\% false rejections. 
+On the other hand, compared with the latest TE schemes like FFC and TEAVAR, $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 23\%$\sim$60\% more demands under normal loads, and when network failure causes SLA violations, it can retain 10\%$\sim$20\% more profit under a simple pricing and refunding model.
 %.
 % $\mathsf{BATE}$ can 
 %(1) achieve 30 $\times$ speedup in admission control time at the expense of sacrificing 8\% in performance compared to the optimal stragety;
@@ -293,10 +293,10 @@ Thirdly,
 we implement $\mathsf{BATE}$ as a real system, including a centralized controller and multiple brokers (one for each DC),  together with end-host clients (see $\S$\ref{system}).
  We conduct extensive experiments using a small testbed as well as trace driven large scale simulations (see $\S$\ref{evaluation}).
 We compare  $\mathsf{BATE}$ with state-of-the-art WAN TE schemes such as TEAVAR \cite{Teavar}, SMORE \cite{SMORE}, SWAN \cite{swan}, B4 \cite{B4} and FFC \cite{FFC}, across different topologies, traffic matrices and failure scenarios.
-Our evaluation demonstrates that $\mathsf{BATE}$ can 
+Our evaluations on real network topologies and traces demonstrate that, $\mathsf{BATE}$ can 
 (1) speed up the online admission control by 30$\times $ at the expense of a false rejection ratio that is less than 4\%;
-(2) meet the bandwidth availability SLAs for 40\% more demands;
-(3) retain 25\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
+(2) meet the bandwidth availability SLAs for 23\%$\sim$60\% more demands under normal loads;
+(3) retain 10\%$\sim$20\% more profit when network failure causes SLA violations, under a simple pricing and refunding model. 
 To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability provision over inter-DC WAN, where heterogeneities of demands and link failures are systematically taken into account for profit maximization.  
  %At last, we show the related works (see $\S$\ref{relate}).
 %Traditionally, links are heavily underutilized to achieve a more rigorous availability target. 
@@ -1355,7 +1355,8 @@ then there is no problem since the demanded availability is still satisfied.
 However, if any $R_{dk}$ falls below 1, then the corresponding SLA will be violated. 
 For simplicity, here we assume a simple pricing and refunding model, 
 where the charge for serving a user demand $d$ is $g_d$, and if the SLA is violated, 
-a fraction $\mu_d$ of $g_d$ will be refunded. 
+a fraction $\mu_d$ of $g_d$ will be refunded\footnote{There are also more complicated multi-stage SLAs, 
+where $\mu_d$ can even be set to 1 under low availability. Our preliminary results show $\mathsf{BATE}$ will perform even better than the others under such more complicated SLAs.}. 
 We use $r_d$ to denote the profit of demand $d$ with refunding, such that
 %If it is between $\beta_j^{k}$ and $\beta_j^{k+1}$, then the profit is $\alpha_j^k$, where $1>\alpha_j^1>\alpha_j^2>...>\alpha_j^k$.
 \begin{equation*}
@@ -1692,13 +1693,13 @@ Our main results are as follows:
 %We begin by describing the experimental framework ($\S$ \ref{setting}). 
 %We show the performance of $\mathsf{BATE}$ through answering the following specific questions:
 %compared with the latest TE schemes like FFC and TEAVAR, BATE can meet the availability SLAs of 40% more bandwidth demands, and when network failure causes SLA violations, it can retain 30% more profit under a simple pricing and refunding model.
-(1) $\mathsf{BATE}$ consistently outperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, up to 40\% more bandwidth availability demands can be successfully fulfilled, and 30\% more profit can be retained when failures occur.
+(1) $\mathsf{BATE}$ consistently outperforms latests TE algorithms under various topologies, traffic matrices and failure scenarios. With $\mathsf{BATE}$, 23\%$\sim$60\% more BA demands can be successfully fulfilled under normal loads, and 10\%$\sim$20\% more profit can be retained when failures occur.
 
 (2) $\mathsf{BATE}$ achieves a good tradeoff between efficiency and optimality. 
 Compared with the optimal solutions, (i) our admission control algorithm can speed up the admission procedure by 30$\times$ at the expense of less than 4\% false rejections, 
-(ii) our pruning-augmented scheduling algorithm runs xx$\times$ faster while wasting only 6\% total bandwidth and losing only 8\% overall availability, 
+(ii) our pruning-augmented scheduling algorithm runs $10^2 \sim 10^4 \times$ faster while wasting only 6\% total bandwidth, 
 and (iii) our greedy failure recovery algorithm can reduce the reaction time by xx$\times$, 
-where the profit loss is below 10\%.
+where the profit loss is only around 10\%.
 
 (3) $\mathsf{BATE}$ has a stable performance across differnet network topologies, link characteristics, 
 demand matrices and routing schemes. 
@@ -2139,7 +2140,7 @@ we simulate link failures according to a Weibull distribution with its shape $\l
 We generate the demand workload in a similar way to that in the testbed. 
 The arrivals of BA demands follow a Poisson process, where the mean arrival rate varies from 1 to 5 in each time slot. 
 The duration of each demand follows an exponential distribution, and the mean duration corresponds to 1000 time slots.
-The required bandwidth in each user demand is randomly drawn from the traffic metrices (we have collected 200 matrices for each topology) with a proper scale down factor (we use 5), so that between each source-destination pair, multiple users can be served simultaneously. 
+The required bandwidth in each user demand is randomly drawn from the traffic metrices (we have collected 200 matrices for each topology) with a proper scale down factor\footnote{We use a factor of 5, and a mean arrival rate of 5 in our simulation corresponds to the normal network load.}, so that between each source-destination pair, multiple users can be served simultaneously. 
 The required availability in each user demand is drawn from 10 different SLAs of Azure\cite{azure}.
 In our simulations, besides FFC and TEAVAR, we also compare against several other TE algorithms,  
 including SWAN \cite{swan}, SMORE \cite{SMORE} and B4 \cite{B4}. 
@@ -2408,7 +2409,7 @@ where we simulate different failure scenarios according to their probabilities,
 and in each scenario we record the demands that can be satisfied. 
 If the \textit{achieved availibility}, i.e., the total posterior probabilities of \textit{qualified} scenarios where a user's bandwidth target is met, is larger than the user's availability target, 
 then the BA demand is \textit{satisfied}. 
-We plot the overall percentage of satisfied BA demands under each arrival rate (averaged across all simulations) in Figure \ref{scheduling-benefit}(a). $\mathsf{BATE}$ nearly always achieves a satisfaction ratio around 100\%, with a leading margin of at least 20\% under a high arrival rate (rate=6 in the figure). 
+We plot the overall percentage of satisfied BA demands under each arrival rate (averaged across all simulations) in Figure \ref{scheduling-benefit}(a). $\mathsf{BATE}$ nearly always achieves a satisfaction ratio around 100\%, with a leading margin of at least 23\% (with respect to TEAVAR) under a high arrival rate (rate=6 in the figure)\footnote{$\mathsf{BATE}$ leads FFC by around 60\%, which is not shown in the figure.}. 
 To further demonstrates $\mathsf{BATE}$'s advantage in matching stringent availability requirements  
 with reliable links, we further augment each TE algorithm with the \textit{fixed} admission control 
 scheme. The satisfaction ratios are plotted in Figure \ref{scheduling-benefit}(b), where $\mathsf{BATE}$
@@ -2426,19 +2427,23 @@ $\mathsf{BATE}$ can make demands with stringent availability requirements pass l
 To show this benefit, we adopt \textit{Fixed} admission control for each traffic scheduling algorithm, then Figure \ref{scheduling-benefit}(b) shows $\mathsf{BATE}$ performs at least 10\% better than other algorithms under the \textit{Fixed} admission control method.
 \fi
 
-Figure \ref{sim-profit} shows the average monetary gain percentage for the scenario in which one failure could occur in the network.
-We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algorithms when network fails.
+Figure \ref{sim-profit} shows the average profit after failures occur in the network.
+Due to its considration of pricing and refunding,  
+$\mathsf{BATE}$ is able to retain 10\%$\sim$20\% more profit than the other algorithms.
+\footnote{Our preliminary results show $\mathsf{BATE}$ will perform even better than the others under more complicated multi-stage SLAs, especially when the refunding ratio $\mu=1$ under low satisfaction.}
 
-
+Remeber that our scaling down factor is 5, so these summarized results are all collected under normal network load, where the mean arrival rate in each slot is between 1 and 6. 
+We note that, under heavier loads, $\mathsf{BATE}$ performs even better than its competitors, 
+but we regard that as less possible in reality.  
 
 
 \begin{figure}
 \centering
-\subfigure[Cutoff error]{
+\subfigure[Bandwidth loss in pruning]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/error.pdf}}
-\subfigure[Optimization time]{
+\subfigure[Computation time]{
 \includegraphics[width=0.23\textwidth]{fig/evaluation/optimization_time.pdf}}
-\caption{Impact of pruning for traffic scheduling.}
+\caption{Impact of pruning on traffic scheduling}
 \label{availability_fig3}
 \end{figure}
 
@@ -2463,13 +2468,13 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
    \begin{minipage}[t]{0.5\linewidth} 
     \centering 
     \includegraphics[width=1.6 in]{fig/evaluation/routing.pdf}
-    \caption{Routings.} 
+    \caption{Routing} 
     \label{routing-version} 
   \end{minipage}% 
    \begin{minipage}[t]{0.5\linewidth} 
     \centering 
     \includegraphics[width=1.6 in]{fig/evaluation/approximation.pdf}
-    \caption{Approximation.} 
+    \caption{Approx ratio} 
     \label{approximation} 
   \end{minipage}
   
@@ -2505,8 +2510,8 @@ We can see $\mathsf{BATE}$  is able to retain 30\% more profit than other algori
 %  
 %\end{figure*}
 
-
-Traffic scheduling algorithm cuts off the scenarios that can hardly happen.
+\textbf{Optimality and Robustness.}
+In traffic scheduling, $\mathsf{BATE}$ prune scenarios that are unlikely to happen.
 %Algorithm \ref{pruning} runs in depth-first manner and when the current network state is smaller than the threshold, the remaining state of the search tree can be ignored.
 %Figure \ref{purning_fig2} (a) shows the percentage of network state coverage.
 %We can see that even with small cutoff threshold, more than 97\% probability are included.
@@ -2514,29 +2519,39 @@ Traffic scheduling algorithm cuts off the scenarios that can hardly happen.
 % The errors mainly comes from two parts, i.e., ILP approximate algorithm and pruning.
 %In Appendix \ref{B}, we analyze the approximation of the greedy heuristic is 2 in an ideal case.
 %Algorithm \ref{greedy} proposes a greedy algorithm to solve $\mathsf{BATE}$ problem.
-Let $\mathsf{BATE}$ denote the overall allocated bandwidth of all admitted demands with scenario pruning  and $OPT$ denote the allocated bandwidth of optimal solution without scenario pruning. 
-Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
-Figure \ref{availability_fig3} (a) shows the error of pruning algorithm with different current link failure numbers.
-We can see the error is less than 8\% even the current link failure number is 1.
-Traditionally, TE should update the network state every 5-10 minutes.
+We compare the bandwidth allocated by $\mathsf{BATE}$ with that allocated by the optimal stragety, i.e., not pruning any scenarios. 
+We calculate the bandwidth loss ratio, as well as the running time of $\mathsf{BATE}$, due to such an optimization, under each topology.
+%Let $\mathsf{BATE}$ denote the overall allocated bandwidth of all admitted demands with scenario pruning  and $OPT$ denote the allocated bandwidth of optimal solution without scenario pruning. 
+%Then the error can be defined as $\frac{|\mathsf{BATE} -OPT|}{|OPT|}$.
+Figure \ref{availability_fig3}(a) plots the relative bandwidth loss ratio,  
+where the highest number of concurrent link failures varies from 1 to 4. 
+This indicates to what extend $\mathsf{BATE}$ will trade accuracy for efficiency. 
+We can see the loss ratio is less than 8\% even when no current link failures are considered.
+%Traditionally, TE should update the network state every 5-10 minutes.
 % and though the powerful mathematical optimization solver such as Gurobi \cite{gurobi} can solve $\mathsf{BATE}$ problem, it might be too slow.
-Figure \ref{availability_fig3} (b) shows the time when solving it with Gurobi \cite{gurobi} on the server (4-core, 2.60GHz processor with 32GB ).
-We can see that even on a large network (e.g., ATT topology), at most  15 seconds are needed when current link failure numbers are 2, which is fast enough in reality.
+The corresponding computation time is plotted in Figure \ref{availability_fig3}(b), 
+where we use Gurobi \cite{gurobi} to solve the pruned LP problem. 
+%on the server (4-core, 2.60GHz processor with 32GB ).
+We can see that even on a large network (e.g., ATT), 
+at most 15 seconds are needed when we consider at most 2 current failures.
 %We can see that for large network (e.g., ATT topology) , Gurobi is too slow to converge and the greedy algorithm is necessary.
 %While the bruce force algorithm is more than 1000 minutes for each topology and we don't paint them in the picture.
 %We can see the result is fast enough to deploy in practice.
 
-So far, we use K-shortest path as the default tunnel selection scheme.
-There are also other tunnel selection schemes, e.g., edge disjoint paths\cite{Bruno2013Dynamic}, oblivious routing\cite{SMORE}.
-Figure \ref{routing-version} shows the comparison with different tunnel selection methods.
-We can see that (1) $\mathsf{BATE}$ performs well regardless the tunnel selection algorithm.
-This indicates that the success of $\mathsf{BATE}$ doesn't reply on the particular routing scheme;
-(2)  Oblivious routing is still slighter better than KSP and edge disjoint paths.
-This is because it is intended to avoid link over-utilization through diverse and low-stretch path selection.
+By default, we use the K-shortest paths in the network as tunnels for transmission. 
+To test the robustness of $\mathsf{BATE}$'s scheduling algorithm,
+we further replace K-shortest path routing with oblivious routing\cite{SMORE} and  
+edge disjoint path routing\cite{Bruno2013Dynamic}, which have been used by other TE algorithms.  
+The BA demand satisfaction ratios are plotted in Figure \ref{routing-version}, 
+where there are only minor difference between different tunnel selection algorithms.
+Scheduling based on oblivious routing works slightly better than the other two, 
+because it finds diverse and low-stretch paths and avoids link over-utilization.
 
-We propose a greedy for failure recovery optimization problem.
-Figure \ref{approximation} shows the approximation of the greedy algorithm, where the approximation can be defined as the profit ratio of optimal solution and greedy solution.
-We can see that the profit loss of greedy algorithm is less than 10\%.
+Finally, we compute the approximation ratio of our greedy failure recovery algorithm, 
+which is defined as dividing the optimal profit by the profit achieved. 
+Figure \ref{approximation} shows that, 
+our 2-approximation algorithm achieves a ratio between 1 and 1.25 in real scenarios, 
+and the average profit loss is around 10\%.
 %Satisfaction percentage. It denotes the percentages of applications whose achieved availability is larger than the corresponding target.
 %Figure \ref{availability_fig1}(b) shows 
 %$\mathsf{BATE}$ performs about 20\%, 25\%, 30\%,  40\% better than TEAVAR, SMORE, SWAN, FFC, respectively.
