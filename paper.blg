@@ -56,43 +56,43 @@ Warning--empty publisher in LPD
 Warning--empty address in LPD
 You've used 52 entries,
             5795 wiz_defined-function locations,
-            1687 strings with 28192 characters,
-and the built_in function-call counts, 68907 in all, are:
-= -- 7582
+            1687 strings with 28190 characters,
+and the built_in function-call counts, 68888 in all, are:
+= -- 7578
 > -- 3066
 < -- 0
 + -- 1030
 - -- 1259
-* -- 5556
-:= -- 7404
+* -- 5563
+:= -- 7407
 add.period$ -- 258
 call.type$ -- 52
 change.case$ -- 444
 chr.to.int$ -- 49
 cite$ -- 96
-duplicate$ -- 5721
-empty$ -- 3990
+duplicate$ -- 5714
+empty$ -- 3993
 format.name$ -- 1195
-if$ -- 15555
+if$ -- 15545
 int.to.chr$ -- 5
 int.to.str$ -- 1
 missing$ -- 192
 newline$ -- 512
 num.names$ -- 413
-pop$ -- 2105
+pop$ -- 2104
 preamble$ -- 1
 purify$ -- 906
 quote$ -- 0
-skip$ -- 2051
+skip$ -- 2037
 stack$ -- 0
-substring$ -- 5525
-swap$ -- 583
+substring$ -- 5538
+swap$ -- 573
 text.length$ -- 441
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 1444
 warning$ -- 44
-while$ -- 361
+while$ -- 362
 width$ -- 0
 write$ -- 1066
 (There were 44 warnings)

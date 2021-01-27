@@ -95,7 +95,7 @@ Due to the limited bandwidth resources and inevitable link failures, it is highl
 We present $\mathsf{BATE}$,
 a novel Traffic Engineering (TE)  framework that 
 %contains admission control, online scheduling and failure recovery.
-aims for \textit{bandwidth availability} (BA) provision, where a service level agreement (SLA) defines that a demand on certain bandwidth should be satisfied with a stipulated probability,  when subjected to the network capacity and possible failures of the inter-DC WAN.
+aims for \textit{bandwidth availability} (BA) provision, where a Service Level Agreement (SLA) defines that a demand on certain bandwidth should be satisfied with a stipulated probability,  when subjected to the network capacity and possible failures of the inter-DC WAN.
 %Also, $\mathsf{BATE}$ is able to maximize revenue when network fails.
 %$\mathsf{BATE}$ tries to guarantee the bandwidth-based availability of demands . 
 %$\mathsf{BATE}$ generates a probabilistic failure model from empirical data and maximizes the profit that can be achieved under certain constrains on  bandwidth-based availability. 
@@ -103,8 +103,8 @@ aims for \textit{bandwidth availability} (BA) provision, where a service level a
 %For the optimization problem, we prove it is NP-hard and  propose a greedy algorithm to efficiently solve it with only minor profit loss. 
 %We design and implement an SDN-based system named $\mathsf{Dionysus}$ to deploy $\mathsf{BATE}$ over inter-DC WAN.
 The three core components of  $\mathsf{BATE}$, i.e., admission control, traffic scheduling and failure recovery, are built on different mathematical models and theoretically analyzed. 
-They are also extensively compared against state-of-the-art TE schemes, using testbed as well as trace driven simulations across different topologies, traffic matrices and failure scenarios. 
-Our evaluations on real network topologies and traces show that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of less than 4\% false rejections. 
+They are also extensively compared against state-of-the-art TE schemes, using a testbed as well as real trace driven simulations across different topologies, traffic matrices and failure scenarios. 
+Our evaluations show that, compared with the optimal admission strategy, $\mathsf{BATE}$ can speed up the online admission control by 30$\times$ at the expense of less than 4\% false rejections. 
 On the other hand, compared with the latest TE schemes like FFC and TEAVAR, $\mathsf{BATE}$ can meet the bandwidth availability SLAs for 23\%$\sim$60\% more demands under normal loads, and when network failure causes SLA violations, it can retain 10\%$\sim$20\% more profit under a simple pricing and refunding model.
 %.
 % $\mathsf{BATE}$ can 
@@ -117,9 +117,9 @@ On the other hand, compared with the latest TE schemes like FFC and TEAVAR, $\ma
 \maketitle
 
 \section{Introduction}
-Nowadays, large scale online services such as finance trading, web search, online shopping, online game and video streaming are posing stringent requirements on the availability and agility of the underlying network infrastructure, where Inter-DataCenter Wide Area Network (Inter-DC WAN) that
+Nowadays, large scale online services such as finance trading, web search, online shopping, online game and video streaming are posing stringent requirements on the availability and flexibility of the network infrastructures, where Inter-DataCenter Wide Area Network (Inter-DC WAN) that
 connects geographically distributed data centers has been playing a critical role. 
-Many service providers, including Amazon, Google, Microsoft, etc., are providing various  optimizations for their global WAN, especially with the help of the emerging software-defined networking techniques \cite{swan,hong2018b4,evole,Teavar,calendaring,FFC,bwe,dynamic,SMORE,B4,OWAN}.  
+Many service providers, including Amazon, Google, Microsoft, etc., are providing various optimizations for their global WAN, especially with the help of the emerging software-defined networking techniques \cite{swan,hong2018b4,evole,Teavar,calendaring,FFC,bwe,dynamic,SMORE,B4,OWAN}.  
 
 
 %In modern data centers, the delay-sensitive interactive services, elastic services and background services share WAN networks\cite{swan}.
@@ -196,9 +196,9 @@ If the availability agreement is violated, a 10\% or 25\% refund will be returne
 A \textit{one-size-fit-all} approach (e.g., TEAVAR \cite{Teavar})  ignoring these heterogeneities cannot support such SLAs well, and may even hurt critical and uninterruptible applications when there are competitions on bandwidth. 
 %For example, the availability demand of search index copies is 99\%, while DNS service is 99.99\% over B4\cite{hong2018b4}.
 %TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
-% that are oblivious of such diverse availability requirements can be either too expensive or insufficient for different services.
+% that are oblivious of such diverse asailability requirements can be either too expensive or insufficient for different services.
 \textit{Third}, 
-such heterogeneities and competitions are also not considered by current failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}, since they may run into congestions when traffic is rerouted under network failures. 
+such heterogeneities and competitions are either not considered by their failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}, therefore, services may run into congestions when traffic is rerouted under network failures. 
 Such violations of SLAs will inevitably cause revenue loss, which should be kept as small as possible. 
 
 %their failure recovery schemes might cause much monetary loss when network fails.
@@ -224,7 +224,7 @@ Firstly, we advocate traffic engineering with \textit{bandwidth availability} (\
  a BA demand $d=(b_d, \beta_d, t_d^s, t_d^e)$ means that  $d$ requests bandwidth $b_d$ for a life duration between $ t_d^s$ and $t_d^e$, and should be guaranteed at least $\beta_d\%$ of the duration, subjected to the network capacity and possible failures. Such a demand is typically represented by a Service Level Agreement (see Table \ref{target} for real world examples), and different users or applications may pose different demands. 
 %a tenant's \textit{promised bandwidth of service $j$ should be available at least $\beta_j\%$ time}.  
 %It tries to guarantee the bandwidth demands from tenants under network uncertainty.
-We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{hong2018b4,bwe, B4}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., a high ratio of the allocated bandwidth to the negotiated one, while we will provide a hard guarantee, i.e., the negotiated bandwidth must be met.
+We show that state-of-the-art traffic engineering schemes fail to meet the heterogeneous bandwidth  availability demands, especially under diverse link failure probabilities that may vary by several orders of magnitude (see $\S$\ref{background}). We note that, although the general concept of bandwidth-based availability has been recognized in some recent TE works \cite{hong2018b4,bwe, B4}, their methodologies and evaluations are actually achieving only a soft guarantee, i.e., a high ratio of the allocated bandwidth to the negotiated one, while we will provide a \textit{hard guarantee}, i.e., the negotiated bandwidth must be met.
 
 
 %meet services' bandwidth-based availability targets under arbitrarily link failures (see $\S$\ref{background}).
@@ -240,14 +240,14 @@ $\mathsf{BATE}$ is composed of three core components, i.e., admission control, t
 %The admission control scheme 
 %i.e., intent  "service $j$ is able to gain $d_j$ network bandwidth at least $\beta_j\%$ of the time" can be realized , where $\beta_j\%$ is the availability target promised in the SLA of service $j$.
 %$\mathsf{BATE}$ framework contains three parts, i.e., admission control, online scheduling and failure recovery.
-The admission control step strikes a balance between efficiency and optimality, so that new demands can be admitted and guaranteed as much as possible with negligible delay.
+The admission control procedure strikes a balance between efficiency and optimality, so that new demands can be admitted and guaranteed as much as possible with negligible delay.
 %and our algorithm strikes a good tradeoff between efficiency and optimality.
 %After a tenant submits a demand, the admission control will check whether the request can be admitted or not in near real time fashion. 
 %We prove that for demands already admitted by our algorithm, there must exist an allocation scheme to satisfy their bandwidth-based availability targets.
 %If the demand is admitted, the system will pre-allocate resource to the tenant and pass it to Online Sched- uler module, while the rejected demands can be resubmitted by the tenants latter. The Online Scheduler module performs traffic
 %After a tenant's demand arriving at the system, it is firstly checked by the admission control part .
 %Tenants' demands can arrive at any time and the  is able to admit as many demands as possible while replying tenants  by a fast rescheduling algorithm.
-Then based on a Linear Programming (LP) model, our traffic scheduling algorithm allocates bandwidth for the admitted demands over tunnels.
+Then based on a Linear Programming (LP) model, our traffic scheduling algorithm allocates bandwidth for the admitted demands over tunnels to guarantee bandwidth availability.
 To cope with the complexity which increases exponentially with the network size,  we also propose a pruning method by ignoring certain failure scenarios that hardly happen.
 At last, based on a Mixed-Integer Linear Programming (MILP) model, the failure recovery procedure pre-computes backup bandwidth allocations and reroutes traffic to minimize the revenue loss due to SLA violations, which is proved to be 2-optimal. 
 %Our online scheduling algorithm is able to guarantee diverse availability targets of services even when network resource is inadequate.
@@ -376,7 +376,7 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 %This section first shows the background.
 %We then demonstrate the deficiencies of state-of-the-art traffic engineering schemes.
 
-\subsection{Network failures and availability requirements}
+\subsection{Network failures and availability}
 
 %How to maintain high performance is a big problem for network operators.
 %Frequent network failures can result in SLA violations and eventually loss of revenue to service providers \cite{riskbased,analysis-osdi,amazon,azure}.
@@ -1808,7 +1808,7 @@ comparing with both the optimal admission strategy,
 and a strategy that assumes a \textit{fixed} bandwith allocation for demands that have already been admitted, which is effectively step (1) in $\mathsf{BATE}$.
 Figure \ref{e2}(a) demonstrates that $\mathsf{BATE}$ performs closely to the optimal strategy, 
 i.e., the false rejection ratio is at most 1\%, while the \textit{fixed} algorithm 
-rejects least 10$\times$ more admissible demands. 
+rejects at least 10$\times$ more admissible demands. 
 %This is because $\mathsf{BATE}$ fully considers the availability diversity of tenants.
 %In contrast, \textit{Fixed} admission control can't change tenants' routing during runtime and such inflexibility leads to higher rejection rate. 
 
@@ -3063,7 +3063,7 @@ month = may,
  
  @article{sentinel, author = {Zheng, Jiaqi and Xu, Hong and Zhu, Xiaojun and Chen, Guihai and Geng, Yanhui}, title = {Sentinel: Failure Recovery in Centralized Traffic Engineering}, year = {2019}, issue_date = {October 2019}, publisher = {IEEE Press}, volume = {27}, number = {5}, issn = {1063-6692}, url = {https://doi.org/10.1109/TNET.2019.2931473}, doi = {10.1109/TNET.2019.2931473}, journal = {IEEE/ACM Trans. Netw.}, month = oct, pages = {1859-1872}, numpages = {14} }
  
- @inproceedings{publicore, author = {Harchol, Yotam and Bergemann, Dirk and Feamster, Nick and Friedman, Eric and Krishnamurthy, Arvind and Panda, Aurojit and Ratnasamy, Sylvia and Schapira, Michael and Shenker, Scott}, title = {A Public Option for the Core}, year = {2020}, isbn = {9781450379557}, publisher = {Association for Computing Machinery}, address = {New York, NY, USA}, url = {https://doi.org/10.1145/3387514.3405875}, doi = {10.1145/3387514.3405875}, booktitle = {Proceedings of the Annual Conference of the ACM Special Interest Group on Data Communication on the Applications, Technologies, Architectures, and Protocols for Computer Communication}, pages = {377–389}, numpages = {13}, keywords = {Network neutrality, Internet infrastructure, Internet transit}, location = {Virtual Event, USA}, series = {SIGCOMM' 20} }
+ @inproceedings{publicore, author = {Harchol, Yotam and Bergemann, Dirk and Feamster, Nick and Friedman, Eric and Krishnamurthy, Arvind and Panda, Aurojit and Ratnasamy, Sylvia and Schapira, Michael and Shenker, Scott}, title = {A Public Option for the Core}, year = {2020}, isbn = {9781450379557}, publisher = {Association for Computing Machinery}, address = {New York, NY, USA}, url = {https://doi.org/10.1145/3387514.3405875}, doi = {10.1145/3387514.3405875}, booktitle = {Proceedings of the Annual Conference of the ACM Special Interest Group on Data Communication on the Applications, Technologies, Architectures, and Protocols for Computer Communication}, pages = {377-389}, numpages = {13}, keywords = {Network neutrality, Internet infrastructure, Internet transit}, location = {Virtual Event, USA}, series = {SIGCOMM' 20} }
 
 @INPROCEEDINGS{Online-deadline,
   author={L. {Luo} and H. {Yu} and Z. {Ye} and X. {Du}},
