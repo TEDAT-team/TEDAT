@@ -802,7 +802,7 @@ For each source-destination node pair $k\in K$ of the inter-DC WAN, we pre-compu
 Each tunnel $t\in T_{k}$ contains a sequence of links and $u_t^e$ denotes whether tunnel $t$ passes a specific link $e \in E$ or not.
 %The network scenario set is $\mathbf{z}$ and the corresponding probability is $p_{\mathbf{z}}, \forall \mathbf{z}\in Z $.
 Let $D$ and $\hat{D}$ represent \textit{arrived} demands and \textit{admitted} demands, respectively.
-Given a new demand, the admission control scheme (see $\S$ \ref{admission_control}) will decide whether to admit it. 
+Given a new demand, the admission control scheme (see $\S$ \ref{admission_control}) will decide whether to admit it and makes a first-time bandwidth allocation for it.
 Then the traffic scheduling scheme (see $\S$ \ref{TE}) will allocate bandwidth $f_d^t$ for each admitted demand $d \in \hat{D}$ over tunnel $t$ periodically.
 %The bandwidth that will be allocated for an admitted demand $d \in \hat{D}$ 
 %over tunnel $t$ is denoted by $f_d^t$.
@@ -960,8 +960,8 @@ and tries to allocate bandwidth for each of its s-d pairs one by one.
 If the remaining network capacity cannot satisfy this demand, we will give up (line 4-5). 
 Otherwise, it allocates tunnel bandwidth for this demand, where a tunnel with a smaller product of 
 remaining capacity and availability has a higher priority (line 7-13). 
-After this, if the availability target cannot be roughly satisfied, we will give up  (line 14-15), 
-otherwise, we go for the next iteration.
+After this, if the availability target cannot be roughly satisfied, it will give up  (line 14-15), 
+otherwise, it will go for the next iteration.
 
 The time complexity of Algorithm \ref{greedy-1} is $O(|D|*|K|*max(|T_k|))$. 
 \textit{It is also worth to note that, there is no false positive in conjectures made by Algorithm \ref{greedy-1}}, 
