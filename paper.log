@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  27 JAN 2021 10:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.29)  27 JAN 2021 10:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2081,7 +2081,7 @@ es.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 <fig/evaluation/sim-monney.pdf, id=884, 768.8725pt x 384.43625pt>
 File: fig/evaluation/sim-monney.pdf Graphic file (type pdf)
 <use fig/evaluation/sim-monney.pdf>
-Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 2426
+Package pdftex.def Info: fig/evaluation/sim-monney.pdf  used on input line 2425
 .
 (pdftex.def)             Requested size: 192.91872pt x 96.45491pt.
  [11.11 <./fig/evaluation/sim-admit.pdf> <./fig/evaluation/link-utilization.pdf
@@ -2112,24 +2112,24 @@ pdf): PDF inclusion: multiple pdfs with page group included in a single page
 <fig/evaluation/error.pdf, id=987, 704.6325pt x 487.8225pt>
 File: fig/evaluation/error.pdf Graphic file (type pdf)
 <use fig/evaluation/error.pdf>
-Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2444.
+Package pdftex.def Info: fig/evaluation/error.pdf  used on input line 2443.
 (pdftex.def)             Requested size: 116.44568pt x 80.61377pt.
 <fig/evaluation/optimization_time.pdf, id=988, 703.62875pt x 486.81876pt>
 File: fig/evaluation/optimization_time.pdf Graphic file (type pdf)
 <use fig/evaluation/optimization_time.pdf>
 Package pdftex.def Info: fig/evaluation/optimization_time.pdf  used on input li
-ne 2446.
+ne 2445.
 (pdftex.def)             Requested size: 116.44568pt x 80.55933pt.
 <fig/evaluation/routing.pdf, id=989, 703.62875pt x 486.81876pt>
 File: fig/evaluation/routing.pdf Graphic file (type pdf)
 <use fig/evaluation/routing.pdf>
-Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2471.
+Package pdftex.def Info: fig/evaluation/routing.pdf  used on input line 2470.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 <fig/evaluation/approximation.pdf, id=990, 703.62875pt x 486.81876pt>
 File: fig/evaluation/approximation.pdf Graphic file (type pdf)
 <use fig/evaluation/approximation.pdf>
 Package pdftex.def Info: fig/evaluation/approximation.pdf  used on input line 2
-477.
+476.
 (pdftex.def)             Requested size: 115.63243pt x 80.00221pt.
 
 
@@ -2139,7 +2139,7 @@ LaTeX Warning: Overwriting file `./paper.bib'.
 
 
 LaTeX Warning: Writing text ` ' before \end{filecontents}
-               as last line of paper.bib on input line 3081.
+               as last line of paper.bib on input line 3080.
 
 
 (./paper.bbl
@@ -2179,7 +2179,7 @@ N. Vi-jayku-mar. 2012.
 
 ) [14.14]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 3254.
+LaTeX Font Warning: Command \small invalid in math mode on input line 3253.
 
 
 Underfull \vbox (badness 1442) has occurred while \output is active []
@@ -2193,19 +2193,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: fig/evaluation/testbed-public-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-public-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-public-2.pdf  used on input lin
-e 3517.
+e 3516.
 (pdftex.def)             Requested size: 116.44568pt x 81.11943pt.
 <fig/evaluation/testbed-data-loss-2.pdf, id=1219, 757.83125pt x 507.8975pt>
 File: fig/evaluation/testbed-data-loss-2.pdf Graphic file (type pdf)
 <use fig/evaluation/testbed-data-loss-2.pdf>
 Package pdftex.def Info: fig/evaluation/testbed-data-loss-2.pdf  used on input 
-line 3519.
+line 3518.
 (pdftex.def)             Requested size: 116.44568pt x 78.0413pt.
 <fig/evaluation/time-consuming.pdf, id=1222, 703.62875pt x 483.8075pt>
 File: fig/evaluation/time-consuming.pdf Graphic file (type pdf)
 <use fig/evaluation/time-consuming.pdf>
 Package pdftex.def Info: fig/evaluation/time-consuming.pdf  used on input line 
-3553.
+3552.
 (pdftex.def)             Requested size: 192.91872pt x 132.64513pt.
  [16.16 <./fig/evaluation/testbed-public-2.pdf> <./fig/evaluation/testbed-data-
 loss-2.pdf
@@ -2216,11 +2216,11 @@ e page
 >] [17.17
 
  <./fig/evaluation/time-consuming.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3575.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3575.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3574.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3574.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3575.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3575.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3574.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3574.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: A258F3B24F3A80060EE9217A8E715617;3777.
@@ -2228,7 +2228,7 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 Here is how much of TeX's memory you used:
  31260 strings out of 492985
  545628 string characters out of 6132585
- 645335 words of memory out of 5000000
+ 644335 words of memory out of 5000000
  33091 multiletter control sequences out of 15000+600000
  374632 words of font info for 776 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
@@ -2262,7 +2262,7 @@ xmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2016/texmf-dist
 /type1/public/newtx/txsys.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
 ublic/newtx/zxlri.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ne
 wtx/zxlzi.pfb>
-Output written on paper.pdf (17 pages, 1163247 bytes).
+Output written on paper.pdf (17 pages, 1163269 bytes).
 PDF statistics:
  1439 PDF objects out of 1440 (max. 8388607)
  1249 compressed objects within 13 object streams
