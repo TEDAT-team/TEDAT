@@ -70,7 +70,7 @@
 %\titlenote{Produces the permission block, and copyright information}
 %\subtitle{Extended Abstract}
 
-\author{Paper \# 56, 17 pages}
+\author{Paper \# 56, 12 pages body, 17 pages total}
 % \author{Firstname Lastname}
 % \authornote{Note}
 % \orcid{1234-5678-9012}
@@ -198,7 +198,8 @@ A \textit{one-size-fit-all} approach (e.g., TEAVAR \cite{Teavar})  ignoring thes
 %TEAVAR \cite{Teavar} can't guarantee the availability of high priority traffic when resource is inadequate.
 % that are oblivious of such diverse asailability requirements can be either too expensive or insufficient for different services.
 \textit{Third}, 
-such heterogeneities and competitions are either not considered by their failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}, therefore, services may run into congestions when traffic is rerouted under network failures. 
+such heterogeneities and competitions are either not considered by their failure recovery approaches, especially those who allocate bandwidth aggressively \cite{Teavar,swan}.
+Therefore, services may run into congestions when traffic is rerouted under network failures. 
 Such violations of SLAs will inevitably cause revenue loss, which should be kept as small as possible. 
 
 %their failure recovery schemes might cause much monetary loss when network fails.
@@ -371,8 +372,8 @@ To our knowledge, $\mathsf{BATE}$ is the first to tackle bandwidth availability 
 % \end{figure}
 
 \section{Background and Motivation}\label{background}
-In this section, we first briefly introduce network and common availability requirements in inter-DC WAN, then 
-we use an example to demonstrate the limitations of state-of-the-art traffic engineering schemes in fulfilling such requirements.
+In this section, we first briefly introduce network failures and common availability requirements in inter-DC WAN, then 
+we use an example to show state-of-the-art traffic engineering schemes' limitations in fulfilling such requirements.
 %This section first shows the background.
 %We then demonstrate the deficiencies of state-of-the-art traffic engineering schemes.
 
@@ -391,7 +392,7 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 \includegraphics[width=0.24\textwidth]{fig/motivation-teavar.pdf}}
 \subfigure[ $\mathsf{BATE}$]{
 \includegraphics[width=0.24\textwidth]{fig/motivation-hate.pdf}}
-\caption{A simple example where user1 (red) requires 6Gbps bandwidth for at least 99\% time and user2 (blue) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. }%Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{BATE}$. }
+\caption{A simple example where user1 (solid) requires 6Gbps bandwidth for at least 99\% time and user2 (dash) requires 12Gbps bandwidth for at least 90\% time, both from DC1 to DC4. }%Link capacity is 10Gbps everywhere. Neither user gets enough bandwidth or availability guarantees under FFC or TEAVAR.  Both users are in line with their SLAs under $\mathsf{BATE}$. }
 \label{motivatio_fig}
 \end{figure*}
 
@@ -404,28 +405,28 @@ we use an example to demonstrate the limitations of state-of-the-art traffic eng
 \setlength{\tabcolsep}{10pt}
 \textbf{Service}&\multicolumn{2}{|c|}{\textbf{Availability}}&\multicolumn{2}{|c|}{\textbf{Refund}}\\
 \hline
-{Traffic Manager \cite{azure}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
+{Azure Traffic Manager \cite{azure}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
 \hline
-{VPN Gateway \cite{azure}}&\multicolumn{2}{|c|}{$< 99.95\%$}&\multicolumn{2}{|c|}{$10\%$} \\
+{Azure VPN Gateway \cite{azure}}&\multicolumn{2}{|c|}{$< 99.95\%$}&\multicolumn{2}{|c|}{$10\%$} \\
 \hline
-{VM Instances \cite{amazon}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$} \\
+{Amazon VM Instances \cite{amazon}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$} \\
 \hline
-{Cosmos DB \cite{azure}}&\multicolumn{2}{|c|}{$< 99.999\%$}&\multicolumn{2}{|c|}{$10\%$}\\
-(Azure)&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%} \\
+{Azure Cosmos DB \cite{azure}}&\multicolumn{2}{|c|}{$< 99.999\%$}&\multicolumn{2}{|c|}{$10\%$}\\
+&\multicolumn{2}{|c|}{$< 99\%$}&\multicolumn{2}{|c|}{25\%} \\
 \hline
-{DMS \cite{amazon2}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
-(AWS)&\multicolumn{2}{|c|}{$< 99.0\%$}&\multicolumn{2}{|c|}{30\%}\\
+{AWS DMS \cite{amazon2}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
+&\multicolumn{2}{|c|}{$< 99.0\%$}&\multicolumn{2}{|c|}{30\%}\\
 &\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%}\\
 \hline
-{AppFlow\cite{amazon3}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
-(Amazon)&\multicolumn{2}{|c|}{$< 99.95\%$}&\multicolumn{2}{|c|}{25\%} \\
+{Amazon AppFlow \cite{amazon3}}&\multicolumn{2}{|c|}{$< 99.99\%$}&\multicolumn{2}{|c|}{$10\%$}\\
+&\multicolumn{2}{|c|}{$< 99.95\%$}&\multicolumn{2}{|c|}{25\%} \\
 &\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%} \\
 \hline
-{SMS\cite{alibaba3}}&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{$10\%$}\\
-(Alibaba)&\multicolumn{2}{|c|}{$< 90\%$}&\multicolumn{2}{|c|}{30\%}\\
+{Alibaba SMS \cite{alibaba3}}&\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{$10\%$}\\
+&\multicolumn{2}{|c|}{$< 90\%$}&\multicolumn{2}{|c|}{30\%}\\
 \hline
-{Data Transmission\cite{alibaba2}}&\multicolumn{2}{|c|}{$< 99.9\%$}&\multicolumn{2}{|c|}{$15\%$}\\
-(Alibaba) &\multicolumn{2}{|c|}{$< 99.0\%$}&\multicolumn{2}{|c|}{30\%} \\
+{Alibaba Data Transmission \cite{alibaba2}}&\multicolumn{2}{|c|}{$< 99.9\%$}&\multicolumn{2}{|c|}{$15\%$}\\
+ &\multicolumn{2}{|c|}{$< 99.0\%$}&\multicolumn{2}{|c|}{30\%} \\
 &\multicolumn{2}{|c|}{$< 95\%$}&\multicolumn{2}{|c|}{100\%} \\
 \hline
 \end{tabular}
@@ -443,7 +444,8 @@ leading to severe performance degradation and revenue loss.
 %Therefore, \textit{when planning for resource allocation, network risks should proactively be taken into consideration}.
 On the other hand, 
 according to the earlier measurements \cite{california,understanding}, failures often follow a \textit{heavy-tailed distribution},
-where a small portion of links contribute to most of the failures, while most links experience only few failures, and the failure rate of
+where a small portion of links contribute to most of the failures, while most links experience only few failures.
+The failure rate of
 %Failure probability of 
 a single link can differ by even more than three orders of magnitude \cite{failureslarge,Teavar}.
 Therefore, \textit{network failures, especially their uneven distribution, should be explicitly taken into account by network operators}. 
@@ -451,13 +453,13 @@ Therefore, \textit{network failures, especially their uneven distribution, shoul
 
 \textbf{High availability directly translates into profit.}
 Nowadays, high availability is nearly always one of the main items in SLAs  \cite{amazon,azure,amazon2}, and customers are eligible for a credit refund  if there are SLA violations. 
-We conduct a survey on the SLA claims of different cloud providers, and Table \ref{target} shows their declared availability targets and  corresponding refunding policies,
+We conduct a survey on the SLA claims of different cloud providers, and Table \ref{target} demonstrates their declared availability targets and  corresponding refunding policies.
 %when violated.
 %We can see that service providers often use a progressive piecewise function to derive refunding credits for violating availability targets. 
-where the refunding credit is typically represented by a simple step function. 
+The credit to be refunded is typically represented by a simple step function. 
 For example, Microsoft Azure provides 10\% refund if its Traffic Manager service availability falls between 99.99\% and
-99.0\%, and provides 30\% refund for anything below 99.0\% availability \cite{azure}. As more realtime and mission-critical applications (financial trading, online game, video streaming,
-instant messaging, live broadcast, etc.) are deployed on the Internet, \textit{providing hard guarantee of high service availability under network failures to retain a good profit is a big challenge}.
+99.0\%, and provides 30\% refund for any availability  below 99.0\% \cite{azure}. As more realtime and mission-critical applications (financial trading, online game, video streaming,
+instant messaging, live broadcast, etc.) are deployed on the Internet, \textit{providing hard guarantee of high availability under network failures to retain a good profit is a big challenge}.
 
 %Maximizing network utilization and improving application availability are often contradictory.
 %In tunnel-based TE mechanisms, when a failure occurs in a tunnel, the remaining available tunnels can be used to redistribute the traffic.
@@ -513,13 +515,13 @@ instant messaging, live broadcast, etc.) are deployed on the Internet, \textit{p
 
 
 
-\textbf{A one-size-fit-all network availability target is not enough.}
+\textbf{Providing a one-size-fit-all network availability is not enough.}
 %Availability has attracted major attention both in the industry and research community.
 %Firstly, most of them only consider \textit{connectivity-based} availability\cite{hong2018b4}, which is conservative.
 %The connectivity-based availability\cite{hong2018b4} is defined as the service uptime percentage, where a given minute is considered up if the connection is reachable and  it tries to quickly detour failed network devices, but \textit{they only focus on the reachability of networks and do not provide performance guarantees}.
 %as a result, user experience might be influenced.
 %Bandwidth on InterDC-WAN is a valuable resource and Microsoft \cite{swan} even spends millions of dollars on WAN investment.
-In recent years, there has been a rapid increase in rapid and agile deployment of services over clouds.
+In recent years, there has been a surging increase in rapid and agile deployment of services over clouds.
 Many studies have shown that users will quickly abandon sessions if the qualify of service is not guaranteed, leading to significant losses in revenue for content providers \cite{video1,video2,video3}.
 Multiple services might be simultaneously launched over the global infrastructure operated by the same content provider or cloud provider. 
 They might also pose different availability requirements, and  will contend for the  
@@ -563,15 +565,19 @@ As shown in  Table \ref{target}, the minimal availability demands of the Data Tr
 
 \subsection{A motivating example for $\mathsf{BATE}$}
 Now we use a simple example to illustrate why existing traffic engineering algorithms cannot 
-meet the heterogeneous bandwidth availability demands well. The toy topology we use is depicted 
-in Figure \ref{motivatio_fig}(a), where there are 4 data centers and the links connecting them 
-are annotated with their corresponding capacities and failure probabilities. Suppose we have two 
-bandwidth demands for inter-DC transmission from DC1 to DC4, i.e., user1 (red) requires 6Gbps bandwidth 
-with at least 99\% availability, and user2 (blue) requires 12Gbps bandwidth with at least 90\% availability. 
+meet the heterogeneous bandwidth availability demands. 
+The toy topology we use is depicted 
+in Figure \ref{motivatio_fig}(a), where there are 4 data centers.
+The links connecting them are annotated with their corresponding capacities as well as failure probabilities. 
+Suppose we have two 
+bandwidth demands for inter-DC transmission from DC1 to DC4, i.e., user1 (solid) requires 6Gbps bandwidth 
+with at least 99\% availability, and user2 (dash) requires 12Gbps bandwidth with at least 90\% availability. 
 There are two paths from DC1 to DC4, i.e., DC1$\to$ DC2 $\to$ DC4, and DC1 $\to$ DC3 $\to$ DC4, whose available probabilities are $(1-4\%) \times (1-0.0001\%)=95.999904\%$ and $(1-0.1\%) \times (1-0.0001\%) = 99.8999001\%$, respectively. We apply FFC \cite{FFC} and TEAVAR \cite{Teavar}, two latest WAN traffic engineering schemes that take network failures into account, to this scenario. 
 
-FFC \cite{FFC} guarantees a total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. Figure \ref{motivatio_fig}(b) shows FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904\%) \times (1-99.8999001\%) = 0.004004092096\%$. Since user1 and user2 can get respectively 3.34Gbps and 6.66Gbps, which are evenly distributed on the two paths from DC1 to DC4, 
-and neither of their bandwidth demands can be satisfied. This shows \textit{FFC does not differentiate between paths with different availabilities.} The lower path has a much smaller failure probability, and it is wasteful without utilizing it as much as possible. 
+FFC \cite{FFC} guarantees a total bandwidth from DC1 to DC4 under at most $l$ concurrent node/link failures, and here we simply use $l=1$. 
+Figure \ref{motivatio_fig}(b) shows FFC can support 10Gbps bandwidth from DC1 to DC4 in 99.996\% time even with one failure (the probability that the two paths fail simultaneously is $(1-95.999904\%) \times (1-99.8999001\%) = 0.004004092096\%$). 
+User1 and user2 can respectively get 3.34Gbps and 6.66Gbps, which are evenly distributed on the two paths from DC1 to DC4, 
+and neither of their bandwidth demands can be satisfied. This shows \textit{FFC makes a conservative allocation and does not differentiate between paths with different availabilities.} The lower path has a much smaller failure probability, and it is wasteful without utilizing it as much as possible. 
 
 On the other hand, TEAVAR \cite{Teavar} exploits the different link failure probabilities and maximizes the network utilization, subject to meeting a \textit{single} desired availability. Figure \ref{motivatio_fig}(c) illustrates the bandwidth allocation result of TEAVAR, where user1 and user2 can get their demanded 6Gbps and 12Gbps bandwidth, both in about 95.9\% time. However, this falls below 
 user1's availability demand, i.e., 99\%, and will cause a SLA violation. 
@@ -619,9 +625,9 @@ As a result, it can't meet service1's availability demand.
 \textbf{Our approach:}
 %$\mathsf{BATE}$ exploits network failure probability and attempts to satisfy applications'  bandwidth-based availability demands.
 Taking into account the diverse link failure probabilities and user bandwidth availability demands, 
-Figure \ref{motivatio_fig}(d) shows a better bandwidth allocation, 
-where user1 can get 6Gbps over 99.8999001\% time (via the lower path that has a lower failure probability) and user2 can get 12Gbps over 95.999904\% time (via both the upper and the lower path), 
-satisfying both of their bandwidth demands. 
+Figure \ref{motivatio_fig}(d) shows a better  allocation, 
+where user1 can get 6Gbps over 99.8999001\% time (via the path that has a lower failure probability) and user2 can get 12Gbps over 95.999904\% time (via both paths), 
+satisfying both of their bandwidth availability demands. 
 
 %The minimal bandwidth demands of applications are able to be met with high probability under $\mathsf{BATE}$.
 %Low failure probability links are fully utilized to satisfy the high availability demands of applications.
@@ -639,6 +645,10 @@ satisfying both of their bandwidth demands.
 &\textbf{Input Variables}\\
 \hline
 $G(V,E)$ &\multicolumn{6}{|l}{inter-DC WAN with nodes $V$ and Links $E$}\\
+\hline
+$\mathbf{z}\in Z$ &\multicolumn{6}{|l}{a network failure scenario in the scenario set}\\
+\hline
+$p_{\mathbf{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\mathbf{z}$ occurs}\\
 \hline
 $k\in K$ &\multicolumn{6}{|l}{a s(ource)-d(est) pair in the set of all s-d pairs}\\
 \hline
@@ -670,21 +680,18 @@ $u_t^e$ &\multicolumn{6}{|l}{whether tunnel $t$ passes link $e \in E$}\\
 \hline
 $c_e, c_t$ &\multicolumn{6}{|l}{the remaining capacity on link $e$ or a tunnel $t$}\\
 \hline
-$\mathbf{z}\in Z$ &\multicolumn{6}{|l}{a network failure scenario in the scenario set}\\
-\hline
-$p_{\mathbf{z}}$ &\multicolumn{6}{|l}{the probability that a failure scenario $\mathbf{z}$ occurs}\\
-\hline
 $v_t^{\mathbf{z}}$ &\multicolumn{6}{|l}{whether tunnel $t$ is available under scenario $\mathbf{z}$}\\
  \hline
 $w_e^{ \mathbf{z}}$ &\multicolumn{6}{|l}{whether link $e$ is available under scenario $ \mathbf{z}$}\\
+\hline
+$g_d$& \multicolumn{6}{|l}{the charge for serving demand $d$}\\
+
 % $\{1,\beta_j^1,\beta_j^2....\}$ &\multicolumn{6}{|l}{The availability target list for service $j$}\\
 %  \hline
 % $\{1,\alpha_j^1,\alpha_j^2...\}$ &\multicolumn{6}{|l}{The profit list for service $j$}\\
 \hline
 
 &\textbf{Output Variables}\\
-\hline
-$g_d$& \multicolumn{6}{|l}{whether demand $d$ is admitted}\\
 \hline
 %$f_{d}^t$& \multicolumn{6}{|l}{bandwidth allocated for the $i$-th demand over tunnel $t \in T_{k}$ }\\
 $f_d^t$& \multicolumn{6}{|l}{bandwidth allocated for demand $d$ over tunnel $t$}\\
@@ -705,20 +712,22 @@ $r_d$& \multicolumn{6}{|l}{profit (after refunding)  for demand $d$}\\
 \end{table}
 
 \section{$\mathsf{BATE}$ framework}\label{HATE}
-In this section, we discuss the details of $\mathsf{BATE}$, which contains three parts, i.e., admission control, traffic scheduling and failure recovery, using notations summarized in Table \ref{Notation}. 
+In this section, we discuss the details of $\mathsf{BATE}$, which contains three parts, i.e., admission control, traffic scheduling and failure recovery.
+Main notations are summarized in Table \ref{Notation}. 
 The framework intends to achieve the following objectives: 
  \begin{itemize}
 \item \textbf{High admission ratio and low admission latency:}  
   Bandwidth availability demands might arrive at anytime. 
   The system should be able to efficiently accommodate as many BA demands as possible under the constraint of network capacity and failure probabilities, as this would increase service agility and bring more revenue. %availability and bandwidth targets.
-\item \textbf{High availability for allocated bandwidth:}
-The system should be able to optimize its achieved availability in a probabilistic manner, 
-as this would, in the long term, reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation. This can be achieved by making a good match between demands on higher availability and paths with lower failure probability.
+\item \textbf{Guarantee availability for allocated bandwidth:}
+The system should be able to guarantee the availability of demands according to link failure probabilities, 
+as this would reduce potential penalties (i.e., refund due to SLA violations) and retain a good reputation in the long term. This can be achieved by making a good match between demands on higher availability and paths which fail less probably.
 %make services with stringent availability requirements (e.g., 99.999\%) pass links with high reliability.
 %Therefore, their bandwidth demands can be guaranteed with high probability.
 \item \textbf{Automatic and economical failure recovery:}
 If any link failure really happens, the system should reroute traffic away from that link, 
-while minimizing any possible collateral damage to normal traffic, i.e., congestion and lower bandwidth availability due to contention from the rerouted traffic.
+while minimizing minimizing any possible collateral damage and revenue loss, i.e.,  congestion and  SLA violation due to contention caused by the rerouted traffic.
+%any possible collateral damage to normal traffic, i.e., congestion and lower bandwidth availability due to contention from the rerouted traffic.
 %\item \textbf{ \& scalability:}
 %
 \end{itemize}
@@ -726,13 +735,13 @@ while minimizing any possible collateral damage to normal traffic, i.e., congest
 \subsection{Abstraction of bandwidth availability}
 %Recently, deploying multiple virtual private clouds over public clouds (e.g., Amazon AWS) or deploying multiple services over private clouds (e.g., Google internal DCs) is becoming  a common practice for content providers.
 %Tenants could deploy diverse service instances over Inter-DC WAN.
-In reality, a customer demanding inter-DC WAN bandwidth resources could be any application or tenant  spanning multiple data centers, in either a public or a private cloud. 
+In reality, a customer asking for inter-DC WAN bandwidth resources could be any application or tenant  spanning multiple data centers, in either a private or a public cloud. 
 %a tenant of a public cloud (e.g., Amazon AWS), who uses this substrate to build his own virtual private cloud over multiple DCs, or could be a service team who launches multiple VM instances in a private cloud (e.g., Google internal DCs).
 %The cloud providers are providing many services and each service contains numerous instances across geo-distributed data centers.
 %For example, a common practice is running MapReduce operations across geo-distributed data centers and many connections from mappers to reducers are maintained.
 %Services have different bandwidth demands as well as availability targets.
 %Currently, there is no interface for tenants to specify bandwidth availability.
-Our abstractions on network failure scenarios and bandwidth availability demands in $\mathsf{BATE}$ are as follows.
+Our abstractions on network failure scenarios and bandwidth availability demands are as follows.
 
 \textbf{Network failure scenario model:} 
 %$\mathsf{BATE}$ relies on network operators to provide link failure probabilities.
@@ -753,17 +762,17 @@ We assume network operators can use historical data to estimate the failure prob
 Let $Z$ denote the network scenario set, %and $p_{\mathbf{z}}$ is the probability that a scenario $\mathbf{z}\in Z$ may happen.
 %Each link is up with the probability of $p_i$. \cite{Teavar}
 %Let $z_i'$ denote the value of $z_i$, and assume link failures are independent.
-then the expected probability that a network scenario  $\mathbf{z} \in Z$ will happen is given by \cite{Teavar} 
+then the expected probability that a network scenario  $\mathbf{z} \in Z$ will happen is given by \cite{Teavar}, i.e., 
 \begin{eqnarray*} \label{state}
 %p_{\mathbf{z}}&=&p\left( z_1=z_1',z_2=z_2',z_3=z_3',...,z_{e}=z_{e}'\right)\nonumber \\
 p_{\mathbf{z}}&=&\prod_{i=1}^{|E|}\big(\mathbf{z}_i \times (1-x_i)+ (1-\mathbf{z}_i) \times x_i\big)
 \end{eqnarray*}
 
 %\textbf{To be updated, follow Fig.1 }
-Use the simple Inter-DC WAN topology in Figure \ref{motivatio_fig} as an example, where $E=\{e_1,e_2,e_3,e_4\}$.
+Take the simple inter-DC WAN topology in Figure \ref{motivatio_fig} as an example, where $E=\{e_1,e_2,e_3,e_4\}$.
 Network scenario $\mathbf{z}=\{1,1,0,1\}$ means $e_1$ ,$e_2$, $e_4$ are working fine and  $e_3$ is down.
 The expected availabilities of $e_1,e_2,e_3,e_4$ are 96\%, 99.9999\%, 99.9\%, 99.9999\%, respectively.
-Then the probability that $\mathbf{z}$ happens is $p_\mathbf{z}=p_{\{1,1,0,1\}} =0.96\times0.999999\times0.001\times0.999999\simeq 0.000959998$.
+Then the probability of $\mathbf{z}$ is $p_\mathbf{z}=p_{\{1,1,0,1\}} =0.96\times0.999999\times0.001\times0.999999\simeq 0.000959998$.
 
 \textbf{BA demand model:}
 %We model the inter-DC WAN as a  graph $G=(V,E)$,  where $V$ and $E$ are nodes and link sets.
@@ -775,7 +784,7 @@ Let $K$ denote the set of all source-destination (s-d) DC pairs.
 %&\multicolumn{6}{|l}{of bandwidth demands over all s-d pairs\footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}} \\
 %A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d,t_d^s,t_d^e)$,
 A bandwidth availability demand $d$ is in the form of $(\mathbf{b}_d, \beta_d)$,
-where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, ..., \mathbf{b}_d^k, ...>$ of bandwidth demands on each s-d pair $k \in K$ \footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.}.
+where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, ..., \mathbf{b}_d^k, ...>$ of bandwidth demands on each s-d pair $k \in K$ \footnote{Here we omit the start and end time of this demand, but they will be implicitly considered in our online admission and traffic scheduling.} and $\beta_d$ is its bandwidth availability target.
 %where $\alpha$ and $\delta$ are the arrival and departure of the demand, $\gamma$ denotes the service type and $\theta =\{d_{1}, d_{2}, ...,d_{K} \}$ presents bandwidth over each node pair.
 %We assume one tenant can only start one service and if a tenant wants to boot multiple services, we can use multiple tuples to describe it.
 %The system should reserve enough bandwidth to guarantee all \textit{admitted} requests' availability demands.
@@ -784,21 +793,21 @@ where $\mathbf{b}_d$ is a vector $<\mathbf{b}_d^1, ..., \mathbf{b}_d^k, ...>$ of
 %If the achieved availability (i.e., $S_j$) is larger than the highest desired availability target (i.e., $\beta_j^1$), the profit is 1.
 
 
-\textbf{Traffic engineering model:}
-Our Traffic Engineering uses tunnel-based forwarding \cite{FFC,swan,Teavar}.
+\textbf{BA provision model:}
+Similar to \cite{FFC,swan,Teavar}, $\mathsf{BATE}$ also adopts tunnel-based forwarding .
 %where traffic is carried over a set of tunnels.
 %Consider an undirected graph $G = (V,E)$ and a set of $k$ pairs: $s_1t_1, s_2t_2,..., s_kt_k$,
 For each source-destination node pair $k\in K$ of the inter-DC WAN, we pre-compute a set of tunnels $T_{k}$ with different routing schemes (e.g., k-shortest paths, edge disjoint paths \cite{Bruno2013Dynamic}, oblivious routing \cite{SMORE}, etc.). 
 %In Section \ref{evaluation}, we evaluate the impact of routing schemes  on performance.
 Each tunnel $t\in T_{k}$ contains a sequence of links and $u_t^e$ denotes whether tunnel $t$ passes a specific link $e \in E$ or not.
 %The network scenario set is $\mathbf{z}$ and the corresponding probability is $p_{\mathbf{z}}, \forall \mathbf{z}\in Z $.
-We use $D$ and $\hat{D}$ to represent \textit{arrived} demands and \textit{admitted} demands, respectively.
-Given a new demand $d$, our admission control scheme will decide whether to admit it. 
-The bandwidth that will be allocated for an admitted demand $d \in \hat{D}$ 
-over tunnel $t$ is denoted by $f_d^t$.
+Let $D$ and $\hat{D}$ represent \textit{arrived} demands and \textit{admitted} demands, respectively.
+Given a new demand, the admission control scheme (see $\S$ \ref{admission_control}) will decide whether to admit it. 
+Then the traffic scheduling scheme (see $\S$ \ref{TE}) will allocate bandwidth $f_d^t$ for each admitted demand $d \in \hat{D}$ over tunnel $t$ periodically.
+%The bandwidth that will be allocated for an admitted demand $d \in \hat{D}$ 
+%over tunnel $t$ is denoted by $f_d^t$.
 
-With the above network failure scenario model, we also use 
-$v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under network scenario $\mathbf{z}$. 
+We use $v_t^{\mathbf{z}}$ to denote whether tunnel $t$ is available (i.e., $v_t^{\mathbf{z}}=1$)  or not  (i.e., $v_t^{\mathbf{z}}=0$) under network scenario $\mathbf{z}$. 
 Given a BA demand $d\!=\!(\mathbf{b}_d, \beta_d)$, an allocation result $\{f_d^t\}$ and a network scenario $\mathbf{z}$, 
 for \textit{every} s-d pair $k$, 
 if the total allocated bandwidth on available tunnels under $\mathbf{z}$, 
@@ -823,8 +832,8 @@ is not smaller than demand $\mathbf{b}_d^k$ for that pair under under scenario $
 is no less than the availability demand $\beta_d$, then we say this BA demand is \textbf{satisfied} by this exact allocation result. 
 \fi
 
-If a failure indeed occurs, our failure recovery scheme will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer %(see $\S$\ref{background}) 
-according to the achieved availability, and we use $h_d$ to denote the profit (after refunding) for serving demand $d$.
+If a failure indeed occurs, our failure recovery scheme (see $\S$ \ref{backup}) will try to reroute traffic that is affected by this failure. If any availability target is violated, a refund will be given back to the customer %(see $\S$\ref{background}) 
+according to the achieved availability, and we use $r_d$ to denote the profit (after refunding) for serving demand $d$.
 
 
 %\begin{enumerate}
@@ -911,13 +920,11 @@ User demands are served in a first-come-first-service (FCFS) manner without pree
 When a new demand $d$ arrives, we have $D= \hat{D} \cup {d}$.
 %The Admission control  \textit{determines whether availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model}.
 %If this is true, the new arrival demand can be admitted, otherwise, it is rejected.
-To accommodate as many demands as possible, the optimal admission strategy would be that, 
-if every demand in $D$ can meet its availability target, then $d$ should be admitted. 
-Otherwise, it should be rejected.
-This can be modeled by a 0-1 Mixed-Integer Linear Programming (MILP) problem which  
+The optimal admission strategy would try to accommodate as many demands as possible:
+if every demand in $D$ can meet its availability target, then $d$ should be admitted, otherwise, it should be rejected.
+This can be modeled as a 0-1 Mixed-Integer Linear Programming (MILP) problem which  
 maximizes the number of demands whose availability targets can be satisfied.
-Appendix \ref{admission_problem} shows the formulation of this problem, 
-which can be proved to be NP-hard by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
+Appendix \ref{admission_problem} shows the formulation of this problem and it can be proved to be NP-hard by reducing the all-or-nothing multi-commodity flow problem \cite{inproceedings2} to a special case of it.
 %The details are omitted for brevity.
 %If availability target of $\forall d \in D$ can be supported simultaneously subject to network failure model, the new arrival demand can be admitted, otherwise, it is rejected.
 %If , we can model the 
